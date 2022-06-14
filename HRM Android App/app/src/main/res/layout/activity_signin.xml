@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rely"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@color/grey_3"
+    tools:context=".UI.SignIn">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_mxlarge">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="100dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/khazanalogo" />
+
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:layout_marginTop="@dimen/spacing_medium"-->
+        <!--            android:text="HRM"-->
+        <!--            android:textSize="40sp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"-->
+        <!--            android:textColor="@android:color/white" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:fontFamily="sans-serif-light"
+            android:text="Hope you enjoy the stay"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:text="SignIn"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorPrimary" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/EditText.MainColor">
+
+            <EditText
+                android:id="@+id/etemail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:background="@drawable/edit_text_round"
+                android:hint="mail@someone.com"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:paddingLeft="15dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/grey_60" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/EditText.MainColor">
+
+            <EditText
+                android:id="@+id/etpassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxlarge"
+                android:background="@drawable/edit_text_round"
+                android:hint="@string/Passward"
+                android:inputType="textPassword"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:paddingLeft="15dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/grey_60" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_mxlarge" />
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/signmic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxlarge"
+            android:height="60dp"
+            android:visibility="gone"
+            android:background="@drawable/miclogoo"
+            android:drawablePadding="60dp"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_mlarge" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:textStyle="bold"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="normal"
+                app:rippleColor="@color/colorApp"
+                app:srcCompat="@drawable/ic_chevron_right_black_24dp"
+                tools:ignore="VectorDrawableCompat" />
+
+
+            <!--            <ProgressBar-->
+            <!--                android:id="@+id/progress_bar"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_centerInParent="true"-->
+            <!--                android:theme="@style/ProgressBar.White"-->
+            <!--                android:visibility="gone" />-->
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.7" />
+
+    </LinearLayout>
+
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="#fff"-->
+    <!--        android:gravity="center_horizontal">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/ll_lay"-->
+    <!--            android:layout_width="250dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_centerInParent="true"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:gravity="center"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:paddingBottom="200dp">-->
+
+    <!--            <View-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="15dp" />-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="login"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
+    <!--                android:textColor="#000" />-->
+
+    <!--            <View-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="@dimen/spacing_middle" />-->
+
+    <!--            <ImageView-->
+    <!--                android:layout_width="100dp"-->
+    <!--                android:layout_height="50dp"-->
+    <!--                android:src="@drawable/ic_launcher_background" />-->
+
+    <!--            <View-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="@dimen/spacing_xxlarge" />-->
+
+    <!--            <EditText-->
+    <!--                android:id="@+id/etemail"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="@dimen/spacing_xmlarge"-->
+    <!--                android:background="@drawable/edit_text_round"-->
+    <!--                android:hint="@string/hint_email"-->
+    <!--                android:inputType="textEmailAddress"-->
+    <!--                android:maxLength="50"-->
+    <!--                android:maxLines="1"-->
+    <!--                android:paddingLeft="15dp"-->
+    <!--                android:singleLine="true"-->
+    <!--                android:textColor="@android:color/black"-->
+    <!--                android:textColorHint="@color/grey_60" />-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:id="@+id/rl_pwd"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="@dimen/spacing_smlarge">-->
+
+    <!--                <EditText-->
+    <!--                    android:id="@+id/etpassword"-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="@dimen/spacing_xmlarge"-->
+    <!--                    android:background="@drawable/edit_text_round"-->
+    <!--                    android:hint="@string/hint_password"-->
+    <!--                    android:imeActionId="6"-->
+    <!--                    android:imeOptions="actionUnspecified"-->
+    <!--                    android:inputType="textPassword"-->
+    <!--                    android:maxLines="1"-->
+    <!--                    android:paddingLeft="15dp"-->
+    <!--                    android:paddingEnd="@dimen/spacing_xmlarge"-->
+    <!--                    android:paddingRight="@dimen/spacing_xmlarge"-->
+    <!--                    android:singleLine="true"-->
+    <!--                    android:textColor="@android:color/black"-->
+    <!--                    android:textColorHint="@color/grey_60" />-->
+
+    <!--                &lt;!&ndash;                <ImageButton&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:id="@+id/show_pass"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:layout_width="@dimen/spacing_xmlarge"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:layout_height="@dimen/spacing_xmlarge"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:layout_alignParentEnd="true"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:layout_alignParentRight="true"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:background="?attr/selectableItemBackground"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:src="@drawable/toggle_password_view"&ndash;&gt;-->
+    <!--                &lt;!&ndash;                    android:tint="@color/grey_40" />&ndash;&gt;-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="@dimen/spacing_large">-->
+
+    <!--                <Button-->
+    <!--                    android:id="@+id/btn"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerInParent="true"-->
+    <!--                    android:background="#000"-->
+    <!--                    android:text="@string/text_bt_login"-->
+    <!--                    android:textColor="#fff" />-->
+
+    <!--                <ProgressBar-->
+    <!--                    android:id="@+id/progress_bar"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_centerInParent="true"-->
+    <!--                    android:visibility="invisible" />-->
+
+    <!--            </RelativeLayout>-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/forgot_password"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="@dimen/spacing_medium"-->
+    <!--                android:background="?attr/selectableItemBackground"-->
+    <!--                android:clickable="true"-->
+    <!--                android:padding="@dimen/spacing_medium"-->
+    <!--                android:text="@string/forgot_password"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                android:textColor="@color/colorTextAction" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/skip_txt"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="@dimen/spacing_medium"-->
+    <!--                android:background="?attr/selectableItemBackground"-->
+    <!--                android:clickable="true"-->
+    <!--                android:padding="@dimen/spacing_medium"-->
+    <!--                android:text="@string/skip"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                android:textColor="@color/colorTextAction" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentBottom="true"-->
+    <!--            android:gravity="center"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:padding="@dimen/spacing_large">-->
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:gravity="center"-->
+    <!--                android:orientation="horizontal">-->
+
+    <!--                <TextView-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="@string/dont_have_account"-->
+    <!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                    android:textColor="@color/grey_60" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/tvreg"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:background="?attr/selectableItemBackground"-->
+    <!--                    android:clickable="true"-->
+    <!--                    android:padding="@dimen/spacing_medium"-->
+    <!--                    android:text="@string/title_activity_register"-->
+    <!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                    android:textColor="@color/colorTextAction"-->
+    <!--                    android:textStyle="bold" />-->
+
+    <!--            </LinearLayout>-->
+
+    <!--        </LinearLayout>-->
+
+    <!--    </RelativeLayout>-->
+
+</RelativeLayout>

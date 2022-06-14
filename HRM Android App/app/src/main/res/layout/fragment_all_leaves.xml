@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.Leaves.AllLeavesFragment">
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/txt_no"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/leaves"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        android:textSize="16sp"-->
+<!--        android:textStyle="bold">-->
+
+<!--    </TextView>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allleaves_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:scrollbars="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>

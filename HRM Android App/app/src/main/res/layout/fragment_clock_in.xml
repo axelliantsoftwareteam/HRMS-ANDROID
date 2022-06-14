@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Fragment.AttendanceReport.ClockInFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_checkin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_margin="@dimen/spacing_middle"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:padding="@dimen/spacing_large"
+                    android:text="Clock In"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/colorApp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorApp">
+
+            </View>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <TextView
+                    android:id="@+id/txt_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="Today:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_900"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_reqtodayin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_toRightOf="@+id/txt_today"
+                    android:background="@drawable/button_bg"
+                    android:padding="10dp"
+                    android:text="@string/RequestIn"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:scrollbars="vertical">
+            </androidx.recyclerview.widget.RecyclerView>
+
+<!--<LinearLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="@dimen/spacing_small"-->
+<!--    >-->
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/spacing_small"-->
+<!--                android:layout_marginTop="@dimen/spacing_medium">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_frtin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Monday"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_600"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_reqfrtin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="@string/RequestIn"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/colorApp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/grey_5"-->
+<!--        android:layout_marginTop="5dp">-->
+
+<!--    </View>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/spacing_small"-->
+<!--                android:layout_marginTop="@dimen/spacing_medium">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_twoin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Sunday"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_600"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_reqtwoin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="Weekend"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/blue_800"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/grey_5"-->
+<!--        android:layout_marginTop="5dp">-->
+
+<!--    </View>-->
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/spacing_small"-->
+<!--                android:layout_marginTop="@dimen/spacing_medium">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_threein"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Saturday"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_600"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_reqthreein"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="Weekend"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/blue_800"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/grey_5"-->
+<!--        android:layout_marginTop="5dp">-->
+
+<!--    </View>-->
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/spacing_small"-->
+<!--                android:layout_marginTop="@dimen/spacing_medium">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_forin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Friday"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_600"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_reqforin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="@string/RequestIn"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/colorApp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/grey_5"-->
+<!--        android:layout_marginTop="5dp">-->
+
+<!--    </View>-->
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/spacing_small"-->
+<!--                android:layout_marginTop="@dimen/spacing_medium">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_fivein"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Thursday"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_600"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_reqfivein"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="@string/RequestIn"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/colorApp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="2dp"-->
+<!--        android:background="@color/grey_5"-->
+<!--        android:layout_marginTop="5dp">-->
+
+<!--    </View>-->
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="@dimen/spacing_small"-->
+<!--                android:layout_marginTop="@dimen/spacing_medium"-->
+<!--                android:paddingBottom="@dimen/spacing_large"-->
+<!--                >-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_sixin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Wednesday"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_600"-->
+<!--                    android:textSize="16sp" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_reqsixin"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:text="@string/RequestIn"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/colorApp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textStyle="bold" />-->
+<!--            </RelativeLayout>-->
+<!--</LinearLayout>-->
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_middle"
+        android:visibility="visible"
+        android:layout_below="@+id/card_checkin"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:padding="@dimen/spacing_large"
+                    android:text="Clock Out"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/colorApp"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorApp">
+
+            </View>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <TextView
+                    android:id="@+id/txt_todayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="Today:"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_900"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btn_reqtodayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_toRightOf="@+id/txt_todayout"
+                    android:background="@drawable/button_bg"
+                    android:padding="10dp"
+                    android:text="@string/RequestOut"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                >-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    android:layout_marginTop="@dimen/spacing_small">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_frtout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Monday"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/grey_600"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_reqfrtout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="@string/RequestOut"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/colorApp"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:background="@color/grey_5"-->
+<!--                    android:layout_marginTop="5dp">-->
+
+<!--                </View>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    android:layout_marginTop="@dimen/spacing_small">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_twoout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Sunday"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/grey_600"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_reptwoout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="Weekend"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/blue_800"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:background="@color/grey_5"-->
+<!--                    android:layout_marginTop="5dp">-->
+
+<!--                </View>-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    android:layout_marginTop="@dimen/spacing_small">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_threeout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Saturday"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/grey_600"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_reqthreeout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="Weekend"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/blue_800"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:background="@color/grey_5"-->
+<!--                    android:layout_marginTop="5dp">-->
+
+<!--                </View>-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    android:layout_marginTop="@dimen/spacing_small">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_forout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Friday"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/grey_600"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_reqforout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="@string/RequestOut"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/colorApp"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:background="@color/grey_5"-->
+<!--                    android:layout_marginTop="5dp">-->
+
+<!--                </View>-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    android:layout_marginTop="@dimen/spacing_small">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_fivout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Thursday"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/grey_600"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_reqfiveout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="@string/RequestOut"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/colorApp"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:background="@color/grey_5"-->
+<!--                    android:layout_marginTop="5dp">-->
+
+<!--                </View>-->
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="@dimen/spacing_small"-->
+<!--                    android:layout_marginTop="@dimen/spacing_small"-->
+<!--                    >-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_sixout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Wednesday"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/grey_600"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/txt_repsixout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="@string/RequestOut"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                        android:textColor="@color/colorApp"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </RelativeLayout>-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:scrollbars="vertical">
+                </androidx.recyclerview.widget.RecyclerView>
+<!--            </LinearLayout>-->
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>
