@@ -71,27 +71,23 @@
         </LinearLayout>
     </LinearLayout>
 
-<!--    <com.sickmartian.calendarview.MonthView xmlns:calendar_view="http://schemas.android.com/apk/res-auto"-->
-<!--        android:id="@+id/monthView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/control_container"-->
-<!--        calendar_view:activeBackgroundColor="@color/colorCalendarDayBackground"-->
-<!--        calendar_view:activeTextColor="@color/colorPrimaryText"-->
-<!--        calendar_view:currentDayDecorationDrawable="@drawable/current_day_drawable"-->
-<!--        calendar_view:currentDayDecorationSize="24dp"-->
-<!--        calendar_view:currentDayTextColor="@color/colorInvertedText"-->
-<!--        calendar_view:inactiveBackgroundColor="@color/notThisMonthDayBackground"-->
-<!--        calendar_view:inactiveTextColor="@color/colorSecondaryText"-->
-<!--        calendar_view:overflowColor="@color/colorPrimary"-->
-<!--        calendar_view:overflowHeight="2dp"-->
-<!--        calendar_view:selectedBackgroundColor="@color/selectedDayBackground"-->
-<!--        calendar_view:separatorColor="@color/colorCalendarDivider"-->
-<!--        calendar_view:showOverflow="false"-->
-<!--        calendar_view:textSize="12sp" />-->
-
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/calendarView"
+    <com.sickmartian.calendarview.MonthView xmlns:calendar_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/monthView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/control_container"
+        calendar_view:activeBackgroundColor="@color/colorCalendarDayBackground"
+        calendar_view:activeTextColor="@color/colorPrimaryText"
+        calendar_view:currentDayDecorationDrawable="@drawable/current_day_drawable"
+        calendar_view:currentDayDecorationSize="24dp"
+        calendar_view:currentDayTextColor="@color/colorInvertedText"
+        calendar_view:inactiveBackgroundColor="@color/notThisMonthDayBackground"
+        calendar_view:inactiveTextColor="@color/colorSecondaryText"
+        calendar_view:overflowColor="@color/colorPrimary"
+        calendar_view:overflowHeight="2dp"
+        calendar_view:selectedBackgroundColor="@color/selectedDayBackground"
+        calendar_view:separatorColor="@color/colorCalendarDivider"
+        calendar_view:showOverflow="false"
+        calendar_view:textSize="12sp" />
+
 </RelativeLayout>
