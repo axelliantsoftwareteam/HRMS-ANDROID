@@ -97,5 +97,6 @@
 
     <string name="my_node">Node</string>
     <string name="pedding">Pending</string>
+    <string name="RequestLeave">Leave Request</string>
 
 </resources>

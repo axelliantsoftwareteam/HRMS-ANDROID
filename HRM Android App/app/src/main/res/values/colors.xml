@@ -3,8 +3,8 @@
 
 
     <color name="colorApp">#b38e34</color>
-<!--    <color name="colorPrimary">#b38e34</color>-->
-<!--    <color name="colorPrimaryDark">#b38e34</color>-->
+    <color name="colorPrimary">#b38e34</color>
+    <color name="colorPrimaryDark">#b38e34</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
@@ -387,8 +387,8 @@
         <item type="color">#ff9800</item>
     </array>
 
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1976D2</color>
+<!--    <color name="colorPrimary">#2196F3</color>-->
+<!--    <color name="colorPrimaryDark">#1976D2</color>-->
     <color name="colorPrimaryLight">#BBDEFB</color>
     <color name="colorAccent">#CDDC39</color>
 

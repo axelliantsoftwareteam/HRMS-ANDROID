@@ -46,8 +46,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/linear"
         android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="10dp"
-        >
+        android:layout_marginBottom="10dp">
 
         <!--    <View-->
         <!--        android:id="@+id/view"-->
@@ -77,7 +76,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="@dimen/spacing_middle"
-                    android:text="Add New Leave"
+                    android:text="@string/RequestLeave"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorApp"
                     android:textSize="25sp"
@@ -164,63 +163,63 @@
                     android:textStyle="bold">
 
                 </EditText>
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="From"-->
+                <!--                    android:textAlignment="center"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+                <!--                    android:textColor="@color/grey_40" />-->
+
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etTimeFrom"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:backgroundTint="@color/colorApp"-->
+                <!--                    android:textColor="@color/colorApp"-->
+                <!--                    android:singleLine="true"-->
+                <!--                    android:clickable="true"-->
+                <!--                    android:maxLength="50"-->
+                <!--                    android:focusable="false"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:textStyle="bold">-->
+
+                <!--                </EditText>-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="To"-->
+                <!--                    android:textAlignment="center"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+                <!--                    android:textColor="@color/grey_40" />-->
+
+                <!--                <EditText-->
+                <!--                    android:id="@+id/etTimeEnd"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:backgroundTint="@color/colorApp"-->
+                <!--                    android:textColor="@color/colorApp"-->
+                <!--                    android:singleLine="true"-->
+                <!--                    android:clickable="true"-->
+                <!--                    android:maxLength="50"-->
+                <!--                    android:focusable="false"-->
+                <!--                    android:layout_marginTop="5dp"-->
+                <!--                    android:textStyle="bold">-->
+
+                <!--                </EditText>-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="From"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                    android:textColor="@color/grey_40" />
-
-                <EditText
-                    android:id="@+id/etTimeFrom"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorApp"
-                    android:textColor="@color/colorApp"
-                    android:singleLine="true"
-                    android:clickable="true"
-                    android:maxLength="50"
-                    android:focusable="false"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold">
-
-                </EditText>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="To"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                    android:textColor="@color/grey_40" />
-
-                <EditText
-                    android:id="@+id/etTimeEnd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorApp"
-                    android:textColor="@color/colorApp"
-                    android:singleLine="true"
-                    android:clickable="true"
-                    android:maxLength="50"
-                    android:focusable="false"
-                    android:layout_marginTop="5dp"
-                    android:textStyle="bold">
-
-                </EditText>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reason"
+                    android:text="Comment"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/et_reason"
+                    android:id="@+id/etreason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -232,7 +231,7 @@
                 </EditText>
 
                 <Button
-                    android:id="@+id/btn_update"
+                    android:id="@+id/btnAddleave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -301,9 +300,9 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/colorApp"
                     app:srcCompat="@drawable/ic_more_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat"
+                    app:tint="@color/colorApp" />
 
             </LinearLayout>
 
