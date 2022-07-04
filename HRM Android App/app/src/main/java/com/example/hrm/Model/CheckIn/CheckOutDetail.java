@@ -19,7 +19,7 @@ public class CheckOutDetail {
     private String hours;
     @SerializedName("type")
     @Expose
-    private Integer type;
+    private String type;
 
     public String getDate() {
         return date;
@@ -45,12 +45,11 @@ public class CheckOutDetail {
         this.hours = hours;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
-
 }

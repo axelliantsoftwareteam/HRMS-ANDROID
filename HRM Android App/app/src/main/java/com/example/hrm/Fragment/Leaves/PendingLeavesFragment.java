@@ -1,66 +1,168 @@
 package com.example.hrm.Fragment.Leaves;
 
+import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.hrm.Adapter.Leaves.ApprovLeavesAdapter;
+import com.example.hrm.Adapter.Leaves.PendingLeavesAdapter;
+import com.example.hrm.Adapter.Leaves.RejectLeavesAdapter;
+import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.LeavesModel.AllLeavesModel;
+import com.example.hrm.Model.LeavesModel.Leaves;
 import com.example.hrm.R;
+import com.example.hrm.Utility.SessionManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PendingLeavesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class PendingLeavesFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    PendingLeavesAdapter pendingLeavesAdapter;
 
-    public PendingLeavesFragment() {
-        // Required empty public constructor
-    }
+    SessionManager sessionManager;
+    String token;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PendingLeavesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PendingLeavesFragment newInstance(String param1, String param2) {
-        PendingLeavesFragment fragment = new PendingLeavesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    TextView noleave;
+
+    List<Leaves> leaves= new ArrayList<>();
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pending_leaves, container, false);
+        View view= inflater.inflate(R.layout.fragment_pending_leaves, container, false);
+        noleave = view.findViewById(R.id.txt_no);
+
+        mRecyclerView = view.findViewById(R.id.pend_recycler);
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        sessionManager = new SessionManager(getActivity());
+        token = sessionManager.getToken();
+
+        GetPendingLeaves(token);
+
+
+        return view;
+
     }
+    private void GetPendingLeaves(final String access_token) {
+        try {
+
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+
+
+
+//            Call<Leaf> leafCall = ApiHandler.getApiInterface().getClock("Bearer " + access_token);
+
+//            Map<String, String> params = new HashMap<String, String>();
+//            params.put("start", "0");
+//            params.put("limit", "5");
+//            params.put("sort", " ");
+//            params.put("order", "Desc");
+//            params.put("search", "nullli");
+
+            Call<AllLeavesModel> allleaves = ApiHandler.getApiInterface().getpend("Bearer " + access_token);
+            allleaves.enqueue(new Callback<AllLeavesModel>() {
+                @Override
+                public void onResponse(Call<AllLeavesModel> allLeavesModelCall, Response<AllLeavesModel> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200)
+                            {
+
+                                leaves = response.body().getData().getLeaves();
+                                if (leaves.size()==0)
+                                {
+                                    dialog.dismiss();
+                                    mRecyclerView.setVisibility(View.GONE);
+                                }
+                                else if (leaves!=null){
+
+                                    pendingLeavesAdapter = new PendingLeavesAdapter(getActivity(), leaves);
+                                    mRecyclerView.setAdapter(pendingLeavesAdapter);
+                                    mRecyclerView.setVisibility(View.VISIBLE);
+                                    noleave.setVisibility(View.GONE);
+                                    dialog.dismiss();
+                                }
+
+                            }
+
+                        } else {
+                            noleave.setVisibility(View.VISIBLE);
+                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AllLeavesModel> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

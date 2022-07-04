@@ -1,7 +1,13 @@
 package com.example.hrm.Fragment.AttendanceReport;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,8 +19,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,23 +36,35 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.Attendance.ClockInAdapter;
 import com.example.hrm.Adapter.Attendance.ClockOutAdapter;
 import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.AddAttendReq.AttenReqResponse;
 import com.example.hrm.Model.CheckIn.CheckInDetail;
 import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.CheckIn.CheckOutDetail;
 import com.example.hrm.R;
+import com.example.hrm.UI.CheckRequest;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogEventBinding;
 import com.example.hrm.databinding.FragmentClockInBinding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -55,6 +75,8 @@ import retrofit2.Response;
 
 public class ClockInFragment extends Fragment {
 
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    String currentPhotoPath;
 
     private static final String IMAGE_DIRECTORY = "/YourDirectName";
     private Context mContext;
@@ -62,6 +84,8 @@ public class ClockInFragment extends Fragment {
     private int GALLERY = 1, CAMERA = 2;
 
     private Button button;
+    String msg;
+    String satttype,sdate,stime;
 
     ClockInAdapter clockInAdapter;
     ClockOutAdapter clockOutAdapter;
@@ -85,8 +109,11 @@ public class ClockInFragment extends Fragment {
     private FragmentClockInBinding binding;
     private DialogEventBinding dialogEventBinding;
 
+    NestedScrollView nestedScrollView;
+
     SessionManager sessionManager;
     String token;
+    TextView nodata;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,6 +130,9 @@ public class ClockInFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
+        nodata = view.findViewById(R.id.txt_no);
+        nestedScrollView = view.findViewById(R.id.nested);
+
 
 
         binding.btnReqtodayin.setOnClickListener(new View.OnClickListener() {
@@ -131,12 +161,20 @@ public class ClockInFragment extends Fragment {
            // end clockout
 
         GetCheckIn(token);
+//        setAdapter();
 
         return view;
     }
 
     private void GetCheckIn(final String access_token) {
         try {
+
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
 
             Call<CheckInModel> checkInModelCall = ApiHandler.getApiInterface().getClock("Bearer " + access_token);
 
@@ -148,22 +186,98 @@ public class ClockInFragment extends Fragment {
                     try {
                         if (response.isSuccessful()) {
                             int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
+                            if (status == 200)
+
+                            {
+
 
                                 checkInDetails = response.body().getData().getResponse().getCheckInDetails();
+
+                                if (checkInDetails.size()==0)
+                                {
+                                    dialog.dismiss();
+                                    nestedScrollView.setVisibility(View.GONE);
+
+                                }
+                              else
+                              {
+
+                                  nestedScrollView.setVisibility(View.VISIBLE);
+                                  nodata.setVisibility(View.GONE);
+
+                                  String clockin=response.body().getData().getResponse().getCheckIn();
+                                  if (clockin.equals(""))
+                                  {
+                                      binding.rely.setVisibility(View.VISIBLE);
+                                      binding.txtOnday.setVisibility(View.GONE);
+                                  }
+                                  else
+                                  {
+                                      binding.rely.setVisibility(View.GONE);
+                                      binding.txtOnday.setVisibility(View.VISIBLE);
+                                      binding.txtOnday.setText(clockin);
+                                  }
+
+                                  clockInAdapter = new ClockInAdapter(getActivity(), checkInDetails);
+                                  mRecyclerView.setAdapter(clockInAdapter);
+
+                                  dialog.dismiss();
+
+                                  // on item list clicked
+                                  clockInAdapter.setOnItemClickListener(new ClockInAdapter.OnItemClickListener() {
+                                      @Override
+                                      public void onItemClick(View view, CheckInDetail obj, int position)
+                                      {
+                                          showCustomDialog();
+
+                                      }
+                                  });
+
+                              }
                                 checkOutDetails = response.body().getData().getResponse().getCheckOutDetails();
 
-                                clockInAdapter = new ClockInAdapter(getActivity(), checkInDetails);
-                                mRecyclerView.setAdapter(clockInAdapter);
+                                if (checkOutDetails.size()==0)
+                                {
+                                    dialog.dismiss();
+                                    nestedScrollView.setVisibility(View.GONE);
 
-                                clockOutAdapter = new ClockOutAdapter(getActivity(), checkOutDetails);
-                                RecyclerView.setAdapter(clockOutAdapter);
+                                }
+
+                                else
+                                {
+                                    nestedScrollView.setVisibility(View.VISIBLE);
+                                    nodata.setVisibility(View.GONE);
+                                    String clockout=response.body().getData().getResponse().getCheckOut();
+
+                                    if (clockout.equals(""))
+                                    {
+                                        binding.relyout.setVisibility(View.VISIBLE);
+                                        binding.colckout.setVisibility(View.GONE);
+                                    }
+                                    else
+                                    {
+                                        binding.relyout.setVisibility(View.GONE);
+                                        binding.colckout.setVisibility(View.VISIBLE);
+                                        binding.colckout.setText(clockout);
+                                    }
+
+
+                                    clockOutAdapter = new ClockOutAdapter(getActivity(), checkOutDetails);
+                                    RecyclerView.setAdapter(clockOutAdapter);
+                                    dialog.dismiss();
+
+
+                                }
+
+
+
 
                             }
 
                         } else {
 
                             Toast.makeText(getActivity(), "" + response.errorBody(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
 
                         }
 
@@ -172,6 +286,8 @@ public class ClockInFragment extends Fragment {
                         e.printStackTrace();
                         try {
                             Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), "" + response.errorBody(), Toast.LENGTH_SHORT).show();
+
 
 
                         } catch (Resources.NotFoundException e1) {
@@ -185,6 +301,8 @@ public class ClockInFragment extends Fragment {
                 public void onFailure(Call<CheckInModel> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        Toast.makeText(getActivity(), "" + t.toString(), Toast.LENGTH_SHORT).show();
+
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();
@@ -199,10 +317,26 @@ public class ClockInFragment extends Fragment {
             e.printStackTrace();
         }
     }
+//
+//    private void setAdapter() {
+//        //set data and list adapter
+//        clockInAdapter = new ClockInAdapter(getActivity(), checkInDetails);
+//        mRecyclerView.setAdapter(clockInAdapter);
+//        // on item list clicked
+//        clockInAdapter.setOnItemClickListener(new ClockInAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, CheckInDetail obj, int position)
+//            {
+//                showCustomDialog();
+//
+//            }
+//        });
+//
+//
+//    }
 
-
-
-    private void showCustomDialog() {
+    private void showCustomDialog()
+    {
 
         dialogEventBinding = DialogEventBinding.inflate(getLayoutInflater());
 
@@ -217,35 +351,86 @@ public class ClockInFragment extends Fragment {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        dialogEventBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Out", Toast.LENGTH_SHORT).show();
+
+        dialogEventBinding.leavetype.setText("Check In");
 
 
-            }
-        });
 
-        dialogEventBinding.profileImage.setOnClickListener(new View.OnClickListener() {
+
+        dialogEventBinding.primage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int requestCode = 200;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(permissions, requestCode);
+                    //  showPictureDialog();
+//                    takePhotoFromCamera();
+//                    dispatchTakePictureIntent();
                     showPictureDialog();
+
                 }
 
 
             }
         });
 
-        dialogEventBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = format.format(calendar.getTime());
+        dialogEventBinding.etStartdate.setText(dateString);
+        sdate = dialogEventBinding.etStartdate.getText().toString().trim();
+
+
+
+
+        dialogEventBinding.etTimeFrom.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Save", Toast.LENGTH_SHORT).show();
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+                    {
+                        Date dt = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+                        String time1 = sdf.format(dt);
+                        dialogEventBinding.etTimeFrom.setText(time1);
+
+                        stime = dialogEventBinding.etTimeFrom.getText().toString().trim();
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
+
+        dialogEventBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                Toast.makeText(getActivity(), "No Thanks", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
 
             }
         });
+        dialogEventBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                msg=dialogEventBinding.msg.getText().toString();
+                AddReq(token);
+                dialog.dismiss();
+
+            }
+        });
+
+
 
 
 //        final Button spn_from_date = (Button) dialog.findViewById(R.id.spn_from_date);
@@ -282,7 +467,7 @@ public class ClockInFragment extends Fragment {
 //                event.is_allday = cb_allday.isChecked();
 //                event.timezone = spn_timezone.getSelectedItem().toString();
 //                displayDataResult(event);
-//
+
 //                dialog.dismiss();
 //            }
 //        });
@@ -291,20 +476,196 @@ public class ClockInFragment extends Fragment {
         dialog.getWindow().setAttributes(lp);
     }
 
+    private void AddReq(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<AttenReqResponse> attenReqResponseCall = ApiHandler.getApiInterface().AddAttendReq("Bearer " + token,ApiMap());
+
+            attenReqResponseCall.enqueue(new Callback<AttenReqResponse>() {
+                @Override
+                public void onResponse(Call<AttenReqResponse> attenReqResponseCall, Response<AttenReqResponse> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AttenReqResponse> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiMap() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("type", "1");
+            jsonObj_.put("date", sdate);
+            jsonObj_.put("time", stime);
+            jsonObj_.put("reason", msg);
+            jsonObj_.put("image", "asdsdsdsd");
+
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
+
+//    private void dispatchTakePictureIntent() {
+//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        try {
+//            getActivity().startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//        } catch (ActivityNotFoundException e) {
+//            // display error state to the user
+//        }
+//    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//            dialogEventBinding.primage.setImageBitmap(imageBitmap);
+//            try {
+//                createImageFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//    private File createImageFile() throws IOException {
+//        // Create an image file name
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageFileName = "JPEG_" + timeStamp + "_";
+//
+//       // File storageDir = g(Environment.DIRECTORY_PICTURES);
+//        File path = Environment.getExternalStoragePublicDirectory(
+//                Environment.DIRECTORY_PICTURES);
+//
+//        File image = File.createTempFile(
+//                imageFileName,  /* prefix */
+//                ".jpg",         /* suffix */
+//                path      /* directory */
+//        );
+//
+//        // Save a file: path for use with ACTION_VIEW intents
+//        currentPhotoPath = image.getAbsolutePath();
+//        return image;
+//
+//    }
+
+
+
+
+
+
+
+
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
         pictureDialog.setTitle("Select Action");
-        String[] pictureDialogItems = {"Select photo from gallery", "Capture photo from camera"};
+        String[] pictureDialogItems = {"Capture photo from camera"};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                choosePhotoFromGallary();
-                                break;
-                            case 1:
-                                takePhotoFromCamera();
+
                                 break;
                         }
                     }
@@ -312,10 +673,6 @@ public class ClockInFragment extends Fragment {
         pictureDialog.show();
     }
 
-    public void choosePhotoFromGallary() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(galleryIntent, GALLERY);
-    }
 
     private void takePhotoFromCamera() {
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -335,8 +692,8 @@ public class ClockInFragment extends Fragment {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), contentURI);
                     //     String path = saveImageBitmap(bitmap);
-                    Toast.makeText(getActivity(), "Image Saved !", Toast.LENGTH_SHORT).show();
-                    circleImageView.setImageBitmap(bitmap);
+                    Toast.makeText(getActivity(), "Image Saved !"+bitmap, Toast.LENGTH_SHORT).show();
+                    dialogEventBinding.primage.setImageBitmap(bitmap);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -346,10 +703,10 @@ public class ClockInFragment extends Fragment {
 
         } else if (requestCode == CAMERA) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            circleImageView.setImageBitmap(thumbnail);
+            dialogEventBinding.primage.setImageBitmap(thumbnail);
 
-            //  String image = saveImageBitmap(thumbnail);
-            Toast.makeText(getActivity(), "Image Saved", Toast.LENGTH_SHORT).show();
+           //   String image = saveImageBitmap(thumbnail);
+            Toast.makeText(getActivity(), "Image Saved"+thumbnail, Toast.LENGTH_SHORT).show();
         }
     }
 

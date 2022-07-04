@@ -6,9 +6,24 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Fragment.AttendanceReport.ClockInFragment">
+
+
+    <TextView
+        android:id="@+id/txt_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/noattend"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold">
+    </TextView>
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="@color/white">
 
 
@@ -62,12 +77,30 @@
 
             </View>
 
+            <TextView
+                android:id="@+id/txt_onday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium"
+                android:text="Today:"
+                android:visibility="gone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                android:textColor="@color/colorApp"
+                android:textSize="22sp" />
 
             <RelativeLayout
+                android:id="@+id/rely"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:gravity="center"
+                android:visibility="gone"
                 android:padding="@dimen/spacing_medium">
 
                 <TextView
@@ -339,6 +372,7 @@
                     android:layout_marginRight="4dp"
                     android:padding="@dimen/spacing_large"
                     android:text="Clock Out"
+
                     android:textAllCaps="true"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/colorApp"
@@ -356,11 +390,28 @@
             </View>
 
 
+            <TextView
+                android:id="@+id/colckout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="Today:"
+                android:visibility="gone"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                android:textColor="@color/colorApp"
+                android:textSize="22sp" />
             <RelativeLayout
+                android:id="@+id/relyout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:gravity="center"
+                android:visibility="gone"
                 android:padding="@dimen/spacing_medium">
 
                 <TextView

@@ -59,48 +59,26 @@ public class ClockOutAdapter extends RecyclerView.Adapter<ClockOutAdapter.MyView
         //binding the data with the viewholder views
         holder.day.setText(checkOutDetail.getDay());
 
-//        if(checkOutDetail.getType()==1)
-//        {
-//            holder.date.setTextColor(Color.parseColor("#b38e34"));
-//            holder.date.setText(checkOutDetail.getDate());
-//        }
-        if(checkOutDetail.getType()==2)
+        if(checkOutDetail.getType().equals("1"))
         {
-            holder.date.setText("Request CheckIn");
+            holder.date.setTextColor(Color.parseColor("#b38e34"));
+            holder.date.setText(checkOutDetail.getHours());
         }
-        if(checkOutDetail.getType()==4)
+        if(checkOutDetail.getType().equals("2"))
+        {
+            holder.date.setTextColor(Color.parseColor("#1565C0"));
+            holder.date.setText("Request Check-In");
+        }
+        if(checkOutDetail.getType().equals("4"))
         {
             holder.date.setTextColor(Color.parseColor("#b38e34"));
             holder.date.setText("Weekend");
         }
-//        if(checkOutDetail.getType()==5)
-//        {
-//            holder.date.setText("Early Out");
-//        }
-//        if(checkOutDetail.getType()==6)
-//        {
-//            holder.date.setText("Late");
-//        }
-        if(checkOutDetail.getType()==7)
+        if(checkOutDetail.getType().equals("10"))
         {
-            holder.date.setText("Weekend");
+            holder.date.setTextColor(Color.parseColor("#b38e34"));
+            holder.date.setText("Request Pending");
         }
-
-
-//        if(checkOutDetail.getType()==4)
-//        {
-//            holder.date.setTextColor(Color.parseColor("#b38e34"));
-//            holder.date.setText("Weekend");
-//
-//        }
-//
-//        if(checkOutDetail.getType()==2)
-//        {
-//
-//            holder.date.setText("Request CheckIn");
-//
-//        }
-
 
 
     }

@@ -60,6 +60,7 @@
             android:textSize="16sp"></TextView>
 
         <TextView
+            android:id="@+id/txtedit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -73,17 +74,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="About Application"
+            android:text="About Leaves"
             android:textColor="@color/colorApp"
             android:textSize="16sp"></TextView>
 
+        <TextView
+            android:id="@+id/leaveBalnce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_view_carousel_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Leave Balance"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:drawableLeft="@drawable/ic_view_carousel_black_24dp"
             android:drawablePadding="10dp"
-            android:text="Uses of Application"
+            android:text="Leave Status"
             android:textColor="@color/grey_60"
             android:textSize="14sp" />
 
