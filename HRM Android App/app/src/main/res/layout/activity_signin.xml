@@ -293,7 +293,6 @@
                 android:inputType="textEmailAddress"
                 android:maxLength="50"
                 android:maxLines="1"
-
                 android:paddingLeft="15dp"
                 android:singleLine="true"
                 android:textColor="@android:color/black"
@@ -324,24 +323,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_mxlarge" />
 
-        <Button
-            android:id="@+id/btn_signIn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_xxlarge"
-            android:height="60dp"
-            android:background="@drawable/miclogoo"
-            android:drawablePadding="60dp"
-            android:gravity="center"
-            android:textColor="#000"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/spacing_mlarge" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -370,6 +352,24 @@
             <!--                android:visibility="gone" />-->
 
         </RelativeLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_mxlarge" />
+
+        <Button
+            android:id="@+id/btn_signIn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxlarge"
+            android:height="60dp"
+            android:background="@drawable/miclogoo"
+            android:drawablePadding="60dp"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_mlarge" />
 
         <View
             android:layout_width="0dp"

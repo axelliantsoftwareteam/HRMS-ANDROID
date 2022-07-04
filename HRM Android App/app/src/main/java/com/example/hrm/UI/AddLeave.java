@@ -1,14 +1,20 @@
 package com.example.hrm.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -45,9 +52,9 @@ public class AddLeave extends AppCompatActivity {
 
     private ActivityAddLeaveBinding binding;
     SessionManager sessionManager;
-    String token;
-    String ssdate, senddate,stype,scomments;
-
+    String token, reason;
+    String ssdate, senddate,stype;
+    EditText editText;
     DatePickerDialog picker;
     Spinner spinner;
 
@@ -66,6 +73,12 @@ public class AddLeave extends AppCompatActivity {
         setContentView(view);
         transparentStatusAndNavigation();
         //  setContentView(R.layout.activity_add_leave);
+
+
+        isNetworkConnectionAvailable();
+
+        editText = findViewById(R.id.etreason);
+
 
         binding.me.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +156,11 @@ public class AddLeave extends AppCompatActivity {
 //        });
 
 
-        binding.etreason.getText().toString().trim();
+
+//        scomments =.getText().toString();
+
+
+
         binding.etStartdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +220,7 @@ public class AddLeave extends AppCompatActivity {
         });
 
 
+
         sessionManager = new SessionManager(AddLeave.this);
         token = sessionManager.getToken();
       getspiner(token);
@@ -222,6 +240,8 @@ public class AddLeave extends AppCompatActivity {
         binding.btnAddleave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                reason = editText.getText().toString();
+              //  Toast.makeText(AddLeave.this, ""+reason, Toast.LENGTH_SHORT).show();
                 postleave(token);
             }
         });
@@ -229,8 +249,17 @@ public class AddLeave extends AppCompatActivity {
 
     }
 
+
+
     private void getspiner(final String access_token) {
         try {
+
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(AddLeave.this);
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
 
             Call<SpinerLeaves> spinerLeavesCall = ApiHandler.getApiInterface().getspiner("Bearer " + access_token);
             spinerLeavesCall.enqueue(new Callback<SpinerLeaves>() {
@@ -259,15 +288,17 @@ public class AddLeave extends AppCompatActivity {
                                 adapter = new ArrayAdapter<String>(AddLeave.this, android.R.layout.simple_list_item_1, items);
                                 //setting adapter to spinner
                                 spinner.setAdapter(adapter);
+                                dialog.dismiss();
                                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
                                         stype = parent.getItemAtPosition(position).toString();
-                                        Toast.makeText(parent.getContext(),
-                                                "" +stype,
-                                                Toast.LENGTH_SHORT).show();
+
+//                                        Toast.makeText(parent.getContext(),
+//                                                "" +stype,
+//                                                Toast.LENGTH_SHORT).show();
 
 
                                     }
@@ -346,19 +377,26 @@ public class AddLeave extends AppCompatActivity {
                                 String msg = response.body().getMeta().getMessage();
                                 Toast.makeText(AddLeave.this, ""+msg, Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
+                                Intent intent =new Intent(AddLeave.this,LeavesActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                             else if(status==400)
                             {
-                                String msg = response.body().getMeta().getMessage();
-                                Toast.makeText(AddLeave.this, ""+msg, Toast.LENGTH_SHORT).show();
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(AddLeave.this, ""+b, Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
-
+                                Intent intent =new Intent(AddLeave.this,LeavesActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
-                            else if(status==500)
+                            else if (status==500)
                             {
-                                String msg = response.body().getMeta().getMessage();
-                                Toast.makeText(AddLeave.this, ""+msg, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddLeave.this, "Internal Server Error!", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
+                                Intent intent =new Intent(AddLeave.this,LeavesActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                             else {
 
@@ -378,11 +416,12 @@ public class AddLeave extends AppCompatActivity {
                         }
 
 
-                    } catch (Exception e) {
+                    }
+                    catch (Exception e) {
                         e.printStackTrace();
                         try {
                             Log.e("Tag", "error=" + e.toString());
-
+                            Toast.makeText(AddLeave.this, ""+e.toString(), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         } catch (Resources.NotFoundException e1) {
                             e1.printStackTrace();
@@ -422,7 +461,7 @@ public class AddLeave extends AppCompatActivity {
             jsonObj_.put("type", stype);
             jsonObj_.put("date", ssdate);
             jsonObj_.put("end_date", senddate);
-            jsonObj_.put("comment", scomments);
+            jsonObj_.put("comment", reason);
 
 
             JsonParser jsonParser = new JsonParser();
@@ -488,6 +527,38 @@ public class AddLeave extends AppCompatActivity {
         Intent i = new Intent(AddLeave.this, LeavesActivity.class);
         startActivity(i);
         finish();
+    }
+    public boolean isNetworkConnectionAvailable(){
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnected();
+        if(isConnected) {
+            Log.d("Network", "Connected");
+            return true;
+        }
+        else{
+            checkNetworkConnection();
+            Log.d("Network","Not Connected");
+            return false;
+        }
+    }
+    public void checkNetworkConnection(){
+        AlertDialog.Builder builder =new AlertDialog.Builder(this);
+        builder.setTitle("No internet Connection");
+        builder.setMessage("Please turn on internet connection to continue");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    <item android:state_pressed="true" >-->
+    <!--        <shape android:shape="rectangle"  >-->
+    <!--            <corners android:radius="3dip" />-->
+    <!--            <stroke android:width="1dip" android:color="#8dbab3" />-->
+    <!--            <gradient android:angle="-90" android:startColor="#48608F" android:endColor="#48608F"  />-->
+    <!--        </shape>-->
+
+    <!--        &lt;!&ndash;#284682;&ndash;&gt;-->
+    <!--        &lt;!&ndash;border-color: #223b6f;&ndash;&gt;-->
+    <!--    </item>-->
+    <!--    <item android:state_focused="true">-->
+    <!--        <shape android:shape="rectangle"  >-->
+    <!--            <corners android:radius="3dip" />-->
+    <!--            <stroke android:width="1dip" android:color="#284682" />-->
+    <!--            <solid android:color="#284682"/>-->
+    <!--        </shape>-->
+    <!--    </item>-->
+    <item>
+        <shape android:shape="rectangle">
+            <!-- gradient for the stroke is set below -->
+            <gradient
+                android:angle="180"
+                android:startColor="@color/grey_50"
+                android:endColor="@color/grey_50"
+                android:type="linear" />
+            <corners android:radius="30dp"></corners>
+        </shape>
+
+    </item>
+    <!-- stroke width has to be adjusted by setting left, right , top and bottom -->
+    <item android:left="40dp" android:right="40dp"
+        android:top="40dp" android:bottom="40dp">
+        <shape
+            android:shape="rectangle">
+            <solid android:color="@color/colorApp"/>
+        </shape>
+    </item>
+
+</selector>

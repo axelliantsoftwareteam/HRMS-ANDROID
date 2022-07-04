@@ -13,7 +13,7 @@ public class LeaveGraphInfo {
     private String name;
     @SerializedName("value")
     @Expose
-    private Integer value;
+    private String value;
 
     public String getName() {
         return name;
@@ -23,12 +23,11 @@ public class LeaveGraphInfo {
         this.name = name;
     }
 
-    public Integer getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(String value) {
         this.value = value;
     }
-
 }

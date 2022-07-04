@@ -224,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:backgroundTint="@color/colorApp"
-                    android:maxLength="200"
+                    android:inputType="text"
                     android:textColor="@color/colorApp"
                     android:textStyle="bold">
 
@@ -278,9 +278,9 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/colorApp"
                     app:srcCompat="@drawable/ic_person_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat"
+                    app:tint="@color/colorApp" />
 
             </LinearLayout>
 

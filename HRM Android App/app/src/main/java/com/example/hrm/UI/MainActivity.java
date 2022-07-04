@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         session = new SessionManager(MainActivity.this);
         name = session.getFirstName();
         binding.txtName.setText(name);
-       // profimage = session.getProfimg();
+        profimage = session.getProfimg();
 
      //   Glide.with(this).load(Base64.decode(profimage, Base64.DEFAULT)).placeholder(R.drawable.ic_baseline_account_circle_24).dontAnimate().into(binding.profileimage);;
-      //  Glide.with(this).load(Base64.decode(profimage,Base64.DEFAULT)).placeholder(R.drawable.ic_baseline_account_circle_24).error(R.drawable.ic_baseline_account_circle_24).into(binding.profileimage);
+        Glide.with(this).load(Base64.decode(profimage,Base64.DEFAULT)).placeholder(R.drawable.ic_baseline_account_circle_24).error(R.drawable.ic_baseline_account_circle_24).into(binding.profileimage);
 
         binding.me.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +94,23 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
             }
         });
+
+        binding.lyattendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AttendanceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        binding.lyAward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         binding.lyLeave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -101,6 +118,19 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 Intent intent = new Intent(MainActivity.this, LeavesActivity.class);
                 startActivity(intent);
                 finish();
+
+
+            }
+        });
+
+        binding.lyrequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, RequestActivity.class);
+                startActivity(intent);
+                finish();
+                // Toast.makeText(MainActivity.this, "Getting Attendance Report", Toast.LENGTH_SHORT).show();
 
 
             }

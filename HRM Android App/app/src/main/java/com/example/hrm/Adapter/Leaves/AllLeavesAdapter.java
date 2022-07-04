@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hrm.Model.LeavesModel.Leaves;
+import com.example.hrm.Model.LeavesModel.WorkFlow;
 import com.example.hrm.R;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class AllLeavesAdapter extends RecyclerView.Adapter<AllLeavesAdapter.MyVi
     Leaves leaves;
 
     private List<Leaves> leavesList;
+
 
     public AllLeavesAdapter(Context context, List<Leaves> leaves) {
         this.context = context;
@@ -34,7 +37,7 @@ public class AllLeavesAdapter extends RecyclerView.Adapter<AllLeavesAdapter.MyVi
         public TextView end;
         public TextView comment;
         public TextView approved;
-        public TextView pending;
+        public LinearLayout status,await,approv,reject,pend;
 //        public TextView imageView;
 
         public MyViewHolder(View v) {
@@ -45,7 +48,12 @@ public class AllLeavesAdapter extends RecyclerView.Adapter<AllLeavesAdapter.MyVi
             end = v.findViewById(R.id.txt_end);
             comment = v.findViewById(R.id.txt_comment);
             approved =v.findViewById(R.id.txt_approved);
-            pending =v.findViewById(R.id.txt_pending);
+
+            await =v.findViewById(R.id.ly_await);
+            approv =v.findViewById(R.id.ly_appr);
+            reject =v.findViewById(R.id.ly_reject);
+            pend =v.findViewById(R.id.ly_pend);
+
 
 
 //            imageView = v.findViewById(R.id.approved);
@@ -72,14 +80,22 @@ public class AllLeavesAdapter extends RecyclerView.Adapter<AllLeavesAdapter.MyVi
 
 
 
-
         //binding the data with the viewholder views
         holder.type.setText(leaves.getLeaveType());
+        int staus = leaves.getStatus();
+
 //        String types= leaf.getLeaveType();
-//        if (types== "Casual")
-//        {
-//            holder.type.setTextColor(Color.parseColor("#b38e34"));
-//        }
+
+        if (staus==1)
+        {
+            holder.approv.setVisibility(View.VISIBLE);
+        }
+        if (staus==5)
+        {
+            holder.await.setVisibility(View.VISIBLE);
+        }
+
+
         holder.name.setText(leaves.getName());
         holder.start.setText(leaves.getDate());
         holder.end.setText(leaves.getEndDate());

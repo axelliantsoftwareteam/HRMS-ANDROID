@@ -1,15 +1,19 @@
 package com.example.hrm.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
@@ -93,6 +97,8 @@ public class SignIn extends AppCompatActivity  {
         View view = binding.getRoot();
         setContentView(view);
 //        setContentView(R.layout.activity_signin);
+
+        isNetworkConnectionAvailable();
 
 
         initializeUI();
@@ -262,8 +268,6 @@ public class SignIn extends AppCompatActivity  {
                 Log.d(TAG, "ID  "+authenticationResult.getAccount().getIdToken());
                 gettoken();
 
-               Toast.makeText(SignIn.this, ""+access_token, Toast.LENGTH_SHORT).show();
-
 
 //                Intent intent =new Intent(SignIn.this,Main.class);
 //                startActivity(intent);
@@ -402,10 +406,11 @@ public class SignIn extends AppCompatActivity  {
                                    session.createLoginSession(access_token);
                                    session.saveToken(access_token);
                                     GetProfile(access_token);
+                                    String msg = response.body().getMeta().getMessage();
+                                    Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
+
                                 }
 
-                                String msg = response.body().getMeta().getMessage();
-                                Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
 
                             }
 
@@ -477,8 +482,8 @@ public class SignIn extends AppCompatActivity  {
 
                             }
 
-                            String msg = response.body().getMeta().getMessage();
-                            Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
+//                            String msg = response.body().getMeta().getMessage();
+//                            Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -568,10 +573,10 @@ public class SignIn extends AppCompatActivity  {
                               //  i.putExtra("bundle", userDataModel.getData().getResponse().getName());
                                 startActivity(i);
                                 finish();
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
 
                             }
-
-
 
 
                         } else {
@@ -701,7 +706,7 @@ public class SignIn extends AppCompatActivity  {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String hashKey = new String(Base64.encode(md.digest(), 0));
-                Toast.makeText(pContext, ""+hashKey, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(pContext, ""+hashKey, Toast.LENGTH_SHORT).show();
                 Log.d("key", "printHashKey() Hash Key: " + hashKey);
             }
         } catch (NoSuchAlgorithmException e) {
@@ -805,4 +810,38 @@ public class SignIn extends AppCompatActivity  {
 ////    public void onFailure(Call<UserModel> call, Throwable t) {
 ////        Toast.makeText(this, "nononono", Toast.LENGTH_SHORT).show();
 ////    }
+
+    public boolean isNetworkConnectionAvailable(){
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnected();
+        if(isConnected) {
+            Log.d("Network", "Connected");
+            return true;
+        }
+        else{
+            checkNetworkConnection();
+            Log.d("Network","Not Connected");
+            return false;
+        }
+    }
+    public void checkNetworkConnection(){
+        AlertDialog.Builder builder =new AlertDialog.Builder(this);
+        builder.setTitle("No internet Connection");
+        builder.setMessage("Please turn on internet connection to continue");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }
