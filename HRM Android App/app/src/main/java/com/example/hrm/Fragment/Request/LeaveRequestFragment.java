@@ -4,6 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+
+import android.app.ProgressDialog;
+
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -15,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -41,6 +45,20 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.hrm.Adapter.Leaves.AllLeavesAdapter;
+import com.example.hrm.Adapter.Request.RequestLeavesAdapter;
+import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.LeavesModel.AllLeavesModel;
+import com.example.hrm.Model.LeavesModel.Leaves;
+import com.example.hrm.R;
+import com.example.hrm.Utility.SessionManager;
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -53,6 +71,7 @@ public class LeaveRequestFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     RequestLeavesAdapter requestLeavesAdapter;
+
 
     private FragmentRequestBinding binding;
     private DialogAttendBinding dialogAttendBinding;
@@ -68,6 +87,8 @@ public class LeaveRequestFragment extends Fragment {
 
     List<Leaves> leaves= new ArrayList<>();
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,21 +99,24 @@ public class LeaveRequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+ 
         // Inflate the layout for this fragment
         binding = FragmentRequestBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
 
 
-        binding.allreqleavesrecycler.setHasFixedSize(true);
+        binding.allreqleavesRecycler.setHasFixedSize(true);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
-        binding.allreqleavesrecycler.setLayoutManager(mLayoutManager);
+        binding.allreqleavesRecycler.setLayoutManager(mLayoutManager);
+
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
 
+ 
         binding.btnaddleave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,11 +125,14 @@ public class LeaveRequestFragment extends Fragment {
             }
         });
 
+  
+   
         GetAllLeaves(token);
 
         return view;
 
     }
+ 
 
 
     private void showCustomDialog()
@@ -315,14 +342,16 @@ public class LeaveRequestFragment extends Fragment {
     }
 
 
+  
+   
     private void GetAllLeaves(final String access_token) {
         try {
 
-            final ProgressDialog dialog;
-            dialog = new ProgressDialog(getActivity());
-            dialog.setMessage("Loading...");
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+            final ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
             Call<AllLeavesModel> allleaves = ApiHandler.getApiInterface().getAllleaves("Bearer " + access_token);
             allleaves.enqueue(new Callback<AllLeavesModel>() {
                 @Override
@@ -337,24 +366,32 @@ public class LeaveRequestFragment extends Fragment {
                                 leaves = response.body().getData().getLeaves();
                                 if (leaves.size()==0)
                                 {
-                                    dialog.dismiss();
-                                    binding.allreqleavesrecycler.setVisibility(View.GONE);
+                                    progressDialog.dismiss();
+ 
+                                    binding.allreqleavesRecycler.setVisibility(View.GONE);
+
                                 }
                                 else if (leaves!=null){
 
                                     requestLeavesAdapter = new RequestLeavesAdapter(getActivity(), leaves);
-                                    binding.allreqleavesrecycler.setAdapter(requestLeavesAdapter);
-                                    binding.allreqleavesrecycler.setVisibility(View.VISIBLE);
+ 
+                                    binding.allreqleavesRecycler.setAdapter(requestLeavesAdapter);
+                                    binding.allreqleavesRecycler.setVisibility(View.VISIBLE);
                                     binding.txtNo.setVisibility(View.GONE);
-                                    dialog.dismiss();
+
+
+                                    progressDialog.dismiss();
                                 }
 
                             }
 
                         } else {
+ 
                             binding.txtNo.setVisibility(View.VISIBLE);
+
                             Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
 
+                            progressDialog.dismiss();
                         }
 
 
@@ -362,6 +399,8 @@ public class LeaveRequestFragment extends Fragment {
                         e.printStackTrace();
                         try {
                             Log.e("Tag", "error=" + e.toString());
+                            progressDialog.dismiss();
+
 
 
                         } catch (Resources.NotFoundException e1) {
@@ -389,6 +428,7 @@ public class LeaveRequestFragment extends Fragment {
             e.printStackTrace();
         }
     }
+ 
 
     private void AddReq(final String access_token) {
         try {
@@ -517,11 +557,13 @@ public class LeaveRequestFragment extends Fragment {
         return gsonObject;
     }
 
-    @Override
-    public void onResume(){
-        GetAllLeaves(token);
-        super.onResume();
-
-    }
+  
+   
+//    @Override
+//    public void onResume(){
+//        GetAllLeaves(token);
+//        super.onResume();
+//
+//    }
 
 }

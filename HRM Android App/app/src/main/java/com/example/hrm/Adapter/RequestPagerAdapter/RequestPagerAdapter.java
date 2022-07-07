@@ -39,11 +39,8 @@ public class RequestPagerAdapter extends FragmentStatePagerAdapter {
                 EquipmentsFragment tab3 = new EquipmentsFragment();
                 return tab3;
             case 3:
-                RejectLeavesFragment tab4 = new RejectLeavesFragment();
+                GeneralRequestFragment tab4 = new GeneralRequestFragment();
                 return tab4;
-            case 4:
-                GeneralRequestFragment tab5 = new GeneralRequestFragment();
-                return tab5;
 
 
             default:

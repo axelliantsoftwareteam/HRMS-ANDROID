@@ -1,15 +1,21 @@
 package com.example.hrm.Interface;
 
-import com.example.hrm.Model.CheckIn.AddAttendReq.AttenReqResponse;
+import com.example.hrm.Model.AddAttendReq.AttenReqResponse;
+import com.example.hrm.Model.AddEuipmentReq.AddEquipmentModel;
+import com.example.hrm.Model.AddGeneralReq.AddGeneralModel;
 import com.example.hrm.Model.AddLeaveRequestModel.AddLeaveReq;
 import com.example.hrm.Model.Attendance.AttendanceResponse;
 import com.example.hrm.Model.CheckIn.CheckInModel;
+import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
+import com.example.hrm.Model.GeneralRequestModel.GeneralListModel;
+import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
 import com.example.hrm.Model.LeaveBalanceModel.Leavebalance;
 import com.example.hrm.Model.LeaveRequestModel.LeavesRequest;
 import com.example.hrm.Model.LeavesModel.AllLeavesModel;
 import com.example.hrm.Model.LoginModel.UserModel;
 import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Model.MicLogin.TokenModel;
+import com.example.hrm.Model.ReqAttendList.RequestListModel;
 import com.example.hrm.Model.SpinerModel.SpinerLeaves;
 import com.example.hrm.Model.UserProfileModel.UserDataModel;
 import com.google.gson.JsonObject;
@@ -57,10 +63,22 @@ public interface ApiInterface
 
 //    Call<Leaf> getAllleaves(@QueryMap Map<String, String> params, Callback<String> callback);
 
-// Add Attendance
+    // Add Attendance
     @Headers("Content-Type: application/json")
     @POST("admin/addAttendanceRequest")
     Call<AttenReqResponse>AddAttendReq(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+    // Add Equipment request
+    @Headers("Content-Type: application/json")
+    @POST("admin/equipmentAddRequest")
+    Call<AddEquipmentModel>AddEquiptReq(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+
+    // Add General request
+    @Headers("Content-Type: application/json")
+    @POST("admin/generalAddRequest")
+    Call<AddGeneralModel>AddGeneralReq(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
 
     // Add leave Request
     @Headers("Content-Type: application/json")
@@ -80,6 +98,23 @@ public interface ApiInterface
     Call<AttendanceResponse> getattenday(@Header("Authorization") String auth, @Body JsonObject jsonBody);
 
 
+    // All Tags List
+    @GET("admin/getAllTask?tag=null&status=null&employee_id=undefined")
+    Call<GetAllTaskModel>getAllTagsList(@Header("Authorization") String auth);
+
+
+
+    // All Attendance List
+    @GET("admin/getAttendanceRequestOfEmployee?start=0&limit=5&sort=&order=Desc&search=null")
+    Call<RequestListModel>getAllAttendList(@Header("Authorization") String auth);
+
+    // All Equipments List
+    @GET("admin/equipmentGetRequest?start=0&limit=5&sort=&order=Desc&search=null")
+    Call<EquipmentListModel>getAllEquiptList(@Header("Authorization") String auth);
+    // All Genaral List
+    @GET("admin/generalGetRequest?start=0&limit=5&sort=&order=Desc&search=null")
+    Call<GeneralListModel>getAllGeneralList(@Header("Authorization") String auth);
+
 
     // All Leaves
     @GET("admin/getLeaveRequest?start=0&limit=5&sort=&order=Desc&search=nullli")
@@ -90,7 +125,7 @@ public interface ApiInterface
     @GET("admin/getLeaveRequest?start=0&limit=5&sort=&order=Desc&search=nullli")
     Call<AllLeavesModel> getAllAttend(@Header("Authorization") String auth);
 
-// Approved leaves
+    // Approved leaves
     @GET("admin/getLeaveRequest?start=0&limit=5&sort=&order=Desc&search=nullli&status=1")
     Call<AllLeavesModel>getapprov(@Header("Authorization") String auth);
 
@@ -125,3 +160,4 @@ public interface ApiInterface
 
 
 }
+

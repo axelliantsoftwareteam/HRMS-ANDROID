@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera.any"
@@ -36,6 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".UI.BasicSetupActivity"
+            android:exported="false" />
         <activity
             android:name=".UI.RequestActivity"
             android:exported="false" />

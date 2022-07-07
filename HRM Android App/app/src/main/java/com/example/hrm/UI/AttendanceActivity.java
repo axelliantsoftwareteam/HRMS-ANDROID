@@ -75,6 +75,7 @@ public class AttendanceActivity extends AppCompatActivity {
     String ssdate,sedate,sname,username;
     DatePickerDialog picker;
     Spinner spinner;
+
     SessionManager sessionManager;
     String token;
     List<MemberResponse> memberResponses= new ArrayList<>();

@@ -73,6 +73,19 @@ public class More extends AppCompatActivity {
             }
         });
 
+        binding.txtbasicsetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(More.this, BasicSetupActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+
+
         binding.txtedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)

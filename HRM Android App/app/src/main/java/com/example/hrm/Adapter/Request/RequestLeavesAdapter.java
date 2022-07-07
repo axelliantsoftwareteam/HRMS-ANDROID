@@ -17,8 +17,9 @@ import java.util.List;
 
 public class RequestLeavesAdapter extends RecyclerView.Adapter<RequestLeavesAdapter.MyViewHolder> {
     Context context;
-    Leaves leaves;
 
+
+    Leaves leaves;
     private List<Leaves> leavesList;
 
 

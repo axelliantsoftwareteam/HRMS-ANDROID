@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.BasicSetupActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorApp"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/spacing_large">
+
+            <ImageView
+                android:id="@+id/imgback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="50dp"
+                android:text="Basic Setup"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/flt_home"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:padding="10dp"
+
+        >
+
+
+        <TextView
+            android:id="@+id/txtedit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/more_edprofile"
+            android:drawablePadding="10dp"
+            android:text="Static Data"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/leaveBalnce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_view_carousel_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="System Holidays"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txt_resume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_view_carousel_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Resume"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/txtskill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_help_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Skills"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/txt_shift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_feedback_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Shifts"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtdesignat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_contact_phone_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Designation"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/txt_buliding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_feedback_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Building"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtroles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_feedback_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Roles"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtdept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_feedback_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Department"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtgroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/ic_feedback_black_24dp"
+            android:drawablePadding="10dp"
+            android:text="Groups"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:ignore="DuplicateIds">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/bg_gradient_soft" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageButton
+                    android:id="@+id/me"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_person_black_24dp"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageButton
+                    android:id="@+id/more"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_more_black_24dp"
+                    tools:ignore="VectorDrawableCompat" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/flt_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="15dp"
+        android:tint="@android:color/white"
+        android:backgroundTint="@color/colorApp"
+        app:elevation="2dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_home"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>

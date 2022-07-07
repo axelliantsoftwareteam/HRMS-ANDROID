@@ -88,6 +88,7 @@
             android:text="Leave Balance"
             android:textColor="@color/grey_60"
             android:textSize="14sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,12 +114,13 @@
 
 
         <TextView
+            android:id="@+id/txtbasicsetup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:drawableLeft="@drawable/ic_help_black_24dp"
             android:drawablePadding="10dp"
-            android:text="Help"
+            android:text="Basic Setup"
             android:textColor="@color/grey_60"
             android:textSize="14sp" />
 

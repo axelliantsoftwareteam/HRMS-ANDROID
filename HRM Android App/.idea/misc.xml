@@ -5,64 +5,52 @@
       <map>
         <entry key="..\:/Users/Dev2/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.13796296296296295" />
         <entry key="..\:/Users/Dev2/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_accepted.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_declined.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/edit_text_round.xml" value="0.123" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button.xml" value="0.1325" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_nothanks_bg.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_pend.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_pending.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_rejected.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/current_date_bg.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/currentdate.xml" value="0.1165" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/editdrawable.xml" value="0.122" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/event_date.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_pending.xml" value="0.1105" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ly_start.xml" value="0.123" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_accepted.xml" value="0.219" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_declined.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_low.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_normal.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/background_layout.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/bg_gradient_soft.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button.xml" value="0.219" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_bg.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_nothanks_bg.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_pend.xml" value="0.219" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_rejected.xml" value="0.219" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_message_black_24dp.xml" value="0.16" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/tag_count.xml" value="0.1095" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_add_leave.xml" value="0.20925925925925926" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_attendance.xml" value="0.21688888888888888" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_calendar.xml" value="0.11396396396396397" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_check_request.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_editprof.xml" value="0.152" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_leave_balance.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_leaves.xml" value="0.1436936936936937" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_more.xml" value="0.2111111111111111" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_request.xml" value="0.16296296296296298" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_attendance.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_editprof.xml" value="0.1824074074074074" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_leaves.xml" value="0.10462962962962963" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_main.xml" value="0.11396396396396397" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_signin.xml" value="0.20925925925925926" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_user_editactivity.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_user_prof.xml" value="0.21688888888888888" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/calendar_layout.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/calendar_single_cell_layout.xml" value="0.11396396396396397" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/clockin_layout.xml" value="0.14814814814814814" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/content_user_editactivity.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attend.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_event.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/events_items_listview.xml" value="0.17407407407407408" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_LeaveRequestFragment.xml" value="0.1712962962962963" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_all_leaves.xml" value="0.128" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_approvedleaves.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_attendance.xml" value="0.16296296296296298" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_clock_in.xml" value="0.21688888888888888" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_clock_out.xml" value="0.16" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_equipments.xml" value="0.16296296296296298" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_general_request.xml" value="0.16296296296296298" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_pending_leaves.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_reject_leaves.xml" value="0.1722689075630252" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_request.xml" value="0.16296296296296298" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_request_in.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_allleaves.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_apprleaves.xml" value="0.1900900900900901" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_leavesreq.xml" value="0.2" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_pendleaves.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_rejectleaves.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_tasks.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_user_prof.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/clockin_layout.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_CreatTask.xml" value="0.140990990990991" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attend.xml" value="0.1391111111111111" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_event.xml" value="0.1391111111111111" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_reqattend.xml" value="0.1824074074074074" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_reqgeneral.xml" value="0.1824074074074074" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_taskcreate.xml" value="0.2" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_taskdetails.xml" value="0.1" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_alltask.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_attendance.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_clock_out.xml" value="0.1" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_completed.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_equipments.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_pending.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_sevendays.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_today.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_allleaves.xml" value="0.21688888888888888" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_attendreq.xml" value="0.21688888888888888" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_leavesreq.xml" value="0.21688888888888888" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_spinner.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/leavebal_layout.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_days.xml" value="0.10462962962962963" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_leave.xml" value="0.264" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/monthheader.xml" value="0.21981981981981982" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/test_view1.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/test_view2.xml" value="0.21981981981981982" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_tags.xml" value="0.20277777777777778" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_gettasks.xml" value="0.1" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_leave.xml" value="0.21688888888888888" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_tasks.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/TestApp/app/src/main/res/drawable-v24/back_to_home_button.xml" value="0.126" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/TestApp/app/src/main/res/drawable-v24/button_accepted.xml" value="0.1425" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/TestApp/app/src/main/res/drawable-v24/button_declined.xml" value="0.179" />

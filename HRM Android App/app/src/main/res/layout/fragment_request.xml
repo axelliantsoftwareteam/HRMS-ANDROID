@@ -13,10 +13,8 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:text="@string/noreqt"
-        android:visibility="gone"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        android:textStyle="bold">
+
+        android:visibility="gone">
 
     </TextView>
 
@@ -39,14 +37,14 @@
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/allreqleavesrecycler"
+        android:id="@+id/allreqleaves_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnaddleave"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:visibility="gone"
+
         android:layout_marginBottom="10dp"
         android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
 

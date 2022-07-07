@@ -70,14 +70,14 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_first_fragment">Hello first todayFragment</string>
+    <string name="hello_second_fragment">Hello second todayFragment. Arg: %1$s</string>
 
     <string name="start">GOT IT</string>
     <string name="addtasks">Add New Tasks</string>
     <string name="title_activity_task">Tasks</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank todayFragment</string>
     <string name="title_activity_leaves">Leaves</string>
     <string name="addleaves">Add Leaves</string>
     <string name="title_activity_tasks">TasksActivity</string>
@@ -137,5 +137,11 @@
     <string name="Request">Request</string>
     <string name="noreqt">No Request Found</string>
     <string name="create">Create New</string>
+    <string name="shortcuts">Shortcuts</string>
+    <string name="tag">Tags</string>
+    <string name="high">High</string>
+    <string name="normal">Normal</string>
+    <string name="low">Low</string>
+    <string name="viewdetails">View Details</string>
 
 </resources>
