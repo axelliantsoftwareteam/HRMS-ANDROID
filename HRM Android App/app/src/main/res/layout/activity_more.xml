@@ -108,30 +108,31 @@
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:text="Suggesstion or Help"
+            android:text="@string/Request"
             android:textColor="@color/colorApp"
             android:textSize="16sp"></TextView>
 
 
         <TextView
-            android:id="@+id/txtbasicsetup"
+            android:id="@+id/txtapproval"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:drawableLeft="@drawable/ic_help_black_24dp"
             android:drawablePadding="10dp"
-            android:text="Basic Setup"
+            android:text="@string/approval"
             android:textColor="@color/grey_60"
             android:textSize="14sp" />
 
 
         <TextView
+            android:id="@+id/basicsetup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:drawableLeft="@drawable/ic_feedback_black_24dp"
             android:drawablePadding="10dp"
-            android:text="Feedback"
+            android:text="@string/basicsetup"
             android:textColor="@color/grey_60"
             android:textSize="14sp" />
 

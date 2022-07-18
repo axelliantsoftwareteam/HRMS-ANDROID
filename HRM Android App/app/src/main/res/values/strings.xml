@@ -143,5 +143,11 @@
     <string name="normal">Normal</string>
     <string name="low">Low</string>
     <string name="viewdetails">View Details</string>
+    <string name="title_activity_approval">ApprovalActivity</string>
+    <string name="approval">Approval</string>
+    <string name="approve">Approve</string>
+    <string name="approved">Approved</string>
+    <string name="basicsetup">Basic Setup</string>
+    <string name="action">Action</string>
 
 </resources>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--    <View-->
+        <!--        android:id="@+id/view"-->
+        <!--        android:layout_width="0dp"-->
+        <!--        android:layout_height="@dimen/spacing_xlarge"-->
+        <!--        android:layout_below="@+id/toolbar" />-->
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+            <ImageView
+                android:id="@+id/imgclose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_baseline_close_24"
+                android:layout_margin="@dimen/spacing_middle"
+                ></ImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="10dp">
+
+
+
+                <TextView
+                    android:id="@+id/et_leave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="@dimen/spacing_middle"
+                    android:padding="@dimen/spacing_small"
+                    android:text="Process Flow"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ly_start"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/apprtask"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/spacing_middle"
+                        android:text="muhammad arslan"
+                        android:gravity="center"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/grey_3" />
+                    <TextView
+                        android:id="@+id/apprproname"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/spacing_middle"
+                        android:text="muhammad arslan"
+                        android:gravity="center"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/grey_3" />
+
+                    <TextView
+                        android:id="@+id/apprdisplyname"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/spacing_middle"
+                        android:text="muhammad arslan"
+                        android:gravity="center"
+                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/grey_3" />
+
+
+                    <TextView
+                        android:id="@+id/apprdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_middle"
+                        android:text="complcompletedcompletedcomplet"
+                        android:textSize="@dimen/spacing_large"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/ly_start"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/grey_3" />
+
+                    <LinearLayout
+                        android:id="@+id/lybtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/spacing_large">
+
+                        <Button
+                            android:id="@+id/approved"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/button_normal"
+                            android:padding="10dp"
+                            android:visibility="gone"
+                            android:text="@string/approved"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                        <Button
+                            android:id="@+id/approve"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/button_normal"
+                            android:padding="10dp"
+                            android:visibility="gone"
+                            android:text="@string/approve"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/reject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/button_accepted"
+                            android:padding="10dp"
+                            android:visibility="gone"
+                            android:text="@string/rejected"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

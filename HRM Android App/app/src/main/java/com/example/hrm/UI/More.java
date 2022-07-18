@@ -73,17 +73,6 @@ public class More extends AppCompatActivity {
             }
         });
 
-        binding.txtbasicsetup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(More.this, BasicSetupActivity.class);
-                startActivity(intent);
-                finish();
-
-
-            }
-        });
 
 
         binding.txtedit.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +87,18 @@ public class More extends AppCompatActivity {
         });
 
 
+
+        binding.basicsetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(More.this, BasicSetupActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
         binding.me.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -170,6 +171,15 @@ public class More extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(More.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        binding.txtapproval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(More.this, ApprovalActivity.class);
                 startActivity(i);
                 finish();
             }

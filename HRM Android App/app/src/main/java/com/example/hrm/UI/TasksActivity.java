@@ -62,6 +62,7 @@ public class TasksActivity extends AppCompatActivity {
     private ActivityTasksBinding binding;
     String sname,sdate,snote;
     SessionManager sessionManager;
+
     String token,alltask,today,nextseven,pendtask,complt,high,low,normal,sstartdate;
     List<MemberResponse> memberResponses= new ArrayList<>();
     DatePickerDialog picker;
@@ -80,6 +81,7 @@ public class TasksActivity extends AppCompatActivity {
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
         transparentStatusAndNavigation();
         isNetworkConnectionAvailable();
 

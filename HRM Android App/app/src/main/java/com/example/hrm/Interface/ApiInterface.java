@@ -4,6 +4,8 @@ import com.example.hrm.Model.AddAttendReq.AttenReqResponse;
 import com.example.hrm.Model.AddEuipmentReq.AddEquipmentModel;
 import com.example.hrm.Model.AddGeneralReq.AddGeneralModel;
 import com.example.hrm.Model.AddLeaveRequestModel.AddLeaveReq;
+import com.example.hrm.Model.Approval.AttendApproval.GetAttendApprolModel;
+import com.example.hrm.Model.Approval.LeavesApproval.GetLeaveApprolModel;
 import com.example.hrm.Model.Attendance.AttendanceResponse;
 import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
@@ -17,6 +19,8 @@ import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Model.MicLogin.TokenModel;
 import com.example.hrm.Model.ReqAttendList.RequestListModel;
 import com.example.hrm.Model.SpinerModel.SpinerLeaves;
+import com.example.hrm.Model.StaticDataModel.GetDataMember.GetStDataMemberModel;
+import com.example.hrm.Model.StaticDataModel.GetStaticDataModel;
 import com.example.hrm.Model.UserProfileModel.UserDataModel;
 import com.google.gson.JsonObject;
 
@@ -27,6 +31,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiInterface
 {
@@ -46,6 +51,71 @@ public interface ApiInterface
 //    @Headers({ "Content-Type: application/json"})
 //    @GET("admin/getProfile")
 //    Call<UserDataModel> getUserDetail(@Header("Authorization") String auth);
+
+
+    // Get all Static Data Member
+    @GET("admin/getAllDisplayMember")
+    Call<GetStaticDataModel> getstaticdata(@Header("Authorization") String auth);
+
+
+
+    // Get Member Selected Member
+    @GET("admin/getStaticDataByDisplayMember")
+    Call<GetStDataMemberModel>getSelectMember(@Header("Authorization") String auth,
+                                              @Query("displayMember") String member);
+
+
+
+
+    // Get all Holiday
+    @GET("admin/getHoliday")
+    Call<GetStaticDataModel> getHoliday(@Header("Authorization") String auth);
+
+
+
+    // Approval Attendance List
+    @GET("admin/getAttendanceRequestOfEmployeeByAdmin")
+    Call<GetAttendApprolModel>getAttendApp(@Header("Authorization") String auth,
+                                           @Query("employee_id") Integer emp ,
+                                           @Query("start") Integer date,
+                                           @Query("limit") Integer limit,
+                                           @Query("sort") String sort,
+                                           @Query("order") String order,
+                                           @Query("search") String search);
+
+
+    // Approval Leave List
+    @GET("admin/getEmployeeLeaveRequest")
+    Call<GetLeaveApprolModel>getLeaveApp(@Header("Authorization") String auth,
+                                         @Query("employee_id") Integer emp ,
+                                         @Query("start") Integer date,
+                                         @Query("limit") Integer limit,
+                                         @Query("sort") String sort,
+                                         @Query("order") String order,
+                                         @Query("search") String search);
+
+
+    // Approval General List
+    @GET("admin/getEmployeeLeaveRequest")
+    Call<GetLeaveApprolModel>getGeneralApp(@Header("Authorization") String auth,
+                                         @Query("employee_id") Integer emp ,
+                                         @Query("start") Integer date,
+                                         @Query("limit") Integer limit,
+                                         @Query("sort") String sort,
+                                         @Query("order") String order,
+                                         @Query("search") String search);
+
+
+    // Approval Equipment List
+    @GET("admin/getEmployeeLeaveRequest")
+    Call<GetLeaveApprolModel>getEquiptApp(@Header("Authorization") String auth,
+                                         @Query("employee_id") Integer emp ,
+                                         @Query("start") Integer date,
+                                         @Query("limit") Integer limit,
+                                         @Query("sort") String sort,
+                                         @Query("order") String order,
+                                         @Query("search") String search);
+
 
 
     @Headers({ "Content-Type: application/json"})
