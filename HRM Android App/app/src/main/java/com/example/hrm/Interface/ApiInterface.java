@@ -11,6 +11,8 @@ import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
 import com.example.hrm.Model.GeneralRequestModel.GeneralListModel;
 import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
+import com.example.hrm.Model.HolidayModel.GetHolidayData;
+import com.example.hrm.Model.HolidayModel.GetHolidayModel;
 import com.example.hrm.Model.LeaveBalanceModel.Leavebalance;
 import com.example.hrm.Model.LeaveRequestModel.LeavesRequest;
 import com.example.hrm.Model.LeavesModel.AllLeavesModel;
@@ -69,7 +71,7 @@ public interface ApiInterface
 
     // Get all Holiday
     @GET("admin/getHoliday")
-    Call<GetStaticDataModel> getHoliday(@Header("Authorization") String auth);
+    Call<GetHolidayModel> getHoliday(@Header("Authorization") String auth);
 
 
 

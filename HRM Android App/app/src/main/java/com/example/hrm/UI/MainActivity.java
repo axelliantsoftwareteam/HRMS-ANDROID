@@ -95,6 +95,18 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
+        binding.lyOrgano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, OrganoActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+
         binding.lyattendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

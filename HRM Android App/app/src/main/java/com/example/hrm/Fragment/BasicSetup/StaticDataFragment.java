@@ -65,7 +65,6 @@ public class StaticDataFragment extends Fragment {
 
     List<String> data = new ArrayList<>();
     List<GetMemberList> getMemberLists = new ArrayList<>();
-    GetMemberList getMemberList= new GetMemberList();
 
     SessionManager sessionManager;
     String token, sname;
@@ -174,18 +173,18 @@ public class StaticDataFragment extends Fragment {
                             binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    if (iCurrentSelection == position) {
-                                        return;
-                                    } else {
+//                                    if (iCurrentSelection == position) {
+//                                        return;
+//                                    } else {
 
                                         sname = parent.getItemAtPosition(position).toString();
                                         Log.e("Tag", "member=" + sname.toString());
                                         GetAllAttendByID(token, sname);
                                         iCurrentSelection = 0;
 
-                                    }
+                                   // }
                                     // Your code here
-                                    iCurrentSelection = position;
+                                  //  iCurrentSelection = position;
 
 
                                 }
@@ -428,7 +427,7 @@ public class StaticDataFragment extends Fragment {
         dialog.getWindow().setAttributes(lp);
     }
 
-    private void showAddnewDialog()
+  private void showAddnewDialog()
     {
 
         dialogAdddispmemberstdtBinding = DialogAdddispmemberstdtBinding.inflate(getLayoutInflater());
@@ -473,6 +472,7 @@ public class StaticDataFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
+
 
 
 

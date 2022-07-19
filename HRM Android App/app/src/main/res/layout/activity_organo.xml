@@ -4,8 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_5"
     tools:context=".UI.OrganoActivity">
     <!--Below is the code for tree view-->
 
-
+    <WebView
+        android:id="@+id/webview"
+        android:layout_centerVertical="true"
+        android:backgroundTint="@color/grey_5"
+       android:background="@color/grey_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></WebView>
 </RelativeLayout>

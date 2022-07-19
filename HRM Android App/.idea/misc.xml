@@ -27,6 +27,7 @@
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_leaves.xml" value="0.10462962962962963" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_main.xml" value="0.11396396396396397" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_more.xml" value="0.2" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_organo.xml" value="0.1" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_request.xml" value="0.21688888888888888" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_signin.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_tasks.xml" value="0.21981981981981982" />
@@ -36,10 +37,12 @@
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_AttApprdetails.xml" value="0.12882882882882882" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_CreatTask.xml" value="0.140990990990991" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_adddispmemberstdt.xml" value="0.128" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_addholiday.xml" value="0.21688888888888888" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_addnewvaluestdt.xml" value="0.1" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_apprdetails.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attend.xml" value="0.1391111111111111" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attendapprov.xml" value="0.1" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_editholiday.xml" value="0.1" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_editstaticdata.xml" value="0.176" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_event.xml" value="0.1391111111111111" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_leaveapprov.xml" value="0.1" />
@@ -69,7 +72,7 @@
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_sevendays.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_shifts.xml" value="0.1" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_skills.xml" value="0.1" />
-        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_static_data.xml" value="0.152" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_static_data.xml" value="0.10400000000000001" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_system_holidays.xml" value="0.1" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_today.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_allleaves.xml" value="0.21688888888888888" />
@@ -83,9 +86,11 @@
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_tags.xml" value="0.20277777777777778" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_attendappr.xml" value="0.264" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_gettasks.xml" value="0.1" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_holiday.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_leave.xml" value="0.21688888888888888" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_leaveappr.xml" value="0.125" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_member.xml" value="0.2" />
+        <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_staticdata.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/HRM Android/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_tasks.xml" value="0.21981981981981982" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/TestApp/app/src/main/res/drawable-v24/back_to_home_button.xml" value="0.126" />
         <entry key="..\:/Users/Dev2/Desktop/khazana/TestApp/app/src/main/res/drawable-v24/button_accepted.xml" value="0.1425" />

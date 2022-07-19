@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey_5"
     tools:context=".Fragment.BasicSetup.StaticDataFragment">
 
@@ -80,22 +81,6 @@
     android:orientation="vertical"
     android:layout_marginTop="@dimen/spacing_medium"
     >
-        <Button
-            android:id="@+id/btnadd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-             android:layout_marginBottom="3dp"
-            android:layout_marginRight="@dimen/spacing_medium"
-            android:background="@drawable/button_bg"
-            android:drawablePadding="2dp"
-            android:padding="10dp"
-            android:layout_gravity="end"
-            android:text="Add New Value"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/spacing_middle"
-            android:textStyle="bold" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -121,5 +106,23 @@
         android:textStyle="bold">
 
     </TextView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="15dp"
+        app:backgroundTint="@color/colorApp"
+        app:elevation="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:background="@drawable/button_bg"
+        android:padding="10dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
 
 </RelativeLayout>

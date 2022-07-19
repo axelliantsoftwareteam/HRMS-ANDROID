@@ -10,22 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hrm.Model.HolidayModel.GetHolidayData;
 import com.example.hrm.Model.StaticDataModel.GetDataMember.GetMemberList;
 import com.example.hrm.R;
 
 import java.util.List;
 
-public class StaticDataAdapter extends RecyclerView.Adapter<StaticDataAdapter.MyViewHolder> {
+public class HolidayAdapter extends RecyclerView.Adapter<HolidayAdapter.MyViewHolder> {
     Context context;
 
-    GetMemberList getMemberList;
-    private List<GetMemberList> getMemberLists;
+    GetHolidayData getHolidayData;
+    private List<GetHolidayData> getHolidayDataList;
     private OnItemClickListener mOnItemClickListener;
 
 
-
     public interface OnItemClickListener {
-        void onItemClick(View view, GetMemberList obj, int position);
+        void onItemClick(View view, GetHolidayData obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -33,23 +33,24 @@ public class StaticDataAdapter extends RecyclerView.Adapter<StaticDataAdapter.My
     }
 
 
-    public StaticDataAdapter(Context context, List<GetMemberList> respons) {
+    public HolidayAdapter(Context context, List<GetHolidayData> respons) {
         this.context = context;
-        this.getMemberLists = respons;
+        this.getHolidayDataList = respons;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView date,displayname,action;
+        public TextView type, stdate, eddate, descpt, action;
 
 
         public MyViewHolder(View v) {
             super(v);
-            displayname = v.findViewById(R.id.txt_name);
-            date = v.findViewById(R.id.txt_value);
-            action = v.findViewById(R.id.txt_details);
-
+            type = v.findViewById(R.id.txt_type);
+            stdate = v.findViewById(R.id.txt_stdate);
+            eddate = v.findViewById(R.id.txt_enddate);
+            descpt = v.findViewById(R.id.txt_value);
+            action = v.findViewById(R.id.txt_action);
 
 
         }
@@ -60,7 +61,7 @@ public class StaticDataAdapter extends RecyclerView.Adapter<StaticDataAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.ly_staticdata, parent, false);
+                .inflate(R.layout.ly_holiday, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
 
@@ -71,17 +72,16 @@ public class StaticDataAdapter extends RecyclerView.Adapter<StaticDataAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        getMemberList = getMemberLists.get(position);
+        getHolidayData = getHolidayDataList.get(position);
 
         holder.action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = holder.getAdapterPosition();
                 // check if item still exists
-                if (pos != RecyclerView.NO_POSITION)
-                {
+                if (pos != RecyclerView.NO_POSITION) {
                     if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(v, getMemberLists.get(position), position);
+                        mOnItemClickListener.onItemClick(v, getHolidayDataList.get(position), position);
 
                         // showCustomDialog();
                     }
@@ -90,8 +90,10 @@ public class StaticDataAdapter extends RecyclerView.Adapter<StaticDataAdapter.My
             }
         });
 
-        holder.displayname.setText(getMemberList.getDisplayMember());
-        holder.date.setText(getMemberList.getValue());
+        holder.type.setText(getHolidayData.getType());
+        holder.stdate.setText(getHolidayData.getStartDate());
+        holder.eddate.setText(getHolidayData.getEndDate());
+        holder.descpt.setText(getHolidayData.getDescription());
 
 
     }
@@ -103,10 +105,9 @@ public class StaticDataAdapter extends RecyclerView.Adapter<StaticDataAdapter.My
 
     @Override
     public int getItemCount() {
-        return getMemberLists.size();
-       // return leavesList.size();
+        return getHolidayDataList.size();
+        // return leavesList.size();
     }
-
 
 
     @Override
