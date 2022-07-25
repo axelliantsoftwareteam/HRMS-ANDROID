@@ -2,6 +2,7 @@ package com.example.hrm.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,6 +34,15 @@ public class EditprofActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // do something on back.
+        Intent i = new Intent(EditprofActivity.this, More.class);
+        startActivity(i);
+        finish();
 
     }
 }

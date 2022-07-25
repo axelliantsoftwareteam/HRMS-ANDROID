@@ -77,17 +77,21 @@ public class TasksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_tasks);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // setContentView(R.layout.activity_tasks);
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        transparentStatusAndNavigation();
+       // transparentStatusAndNavigation();
         isNetworkConnectionAvailable();
 
         sessionManager = new SessionManager(TasksActivity.this);
         token = sessionManager.getToken();
         getmember(token);
+        getdialogmember(token);
 
         GetAllTags(token);
 
@@ -272,6 +276,8 @@ public class TasksActivity extends AppCompatActivity {
         });
 
 
+
+
         dialogTaskcreateBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -398,9 +404,113 @@ public class TasksActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            });
 
 
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void getdialogmember(final String access_token)
+    {
+        try
+        {
 
+            final ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(TasksActivity.this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+
+            Call<Members> membersCall = ApiHandler.getApiInterface().getlistMember("Bearer " + access_token);
+            Log.e("Tag", "response" + membersCall.toString());
+
+            membersCall.enqueue(new Callback<Members>() {
+                @Override
+                public void onResponse(Call<Members> membersCall1, Response<Members> response) {
+
+                    try {
+                        if (response.isSuccessful())
+                        {
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                memberResponses = response.body().getData().getResponse();
+
+                                Log.e("Tag", "respone" +memberResponses.toString());
+
+                                // setspiner(memberResponses);
+                                //String array to store all the book names
+                                String[] items = new String[memberResponses.size()];
+
+                                //Traversing through the whole list to get all the names
+                                for(int i=0; i<memberResponses.size(); i++){
+                                    //Storing names to string array
+                                    items[i] = memberResponses.get(i).getName();
+                                }
+
+                                //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+                                ArrayAdapter<String> adapter;
+                                adapter = new ArrayAdapter<String>(TasksActivity.this, android.R.layout.simple_list_item_1, items);
+                                //setting adapter to spinner
+                                dialogTaskcreateBinding.dialogspinnerlist.setAdapter(adapter);
+
+
+                                progressDialog.dismiss();
+
+                                dialogTaskcreateBinding.dialogspinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                        Integer idd = memberResponses.get(position).getId();
+                                        sname = parent.getItemAtPosition(position).toString();
+                                        Log.e("Tag", "member=" + sname.toString());
+                                        Log.e("Tag", "idd=" + idd.toString());
+
+
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                        // sometimes you need nothing here
+                                    }
+                                });
+                                //   Toast.makeText(AddLeave.this, ""+memberResponses, Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                        else {
+
+                            Toast.makeText(TasksActivity.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            progressDialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Members> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
             });
 
 

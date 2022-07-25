@@ -57,6 +57,7 @@ public class StaticDataFragment extends Fragment {
     private DialogEditstaticdataBinding dialogEditstaticdataBinding;
 
     private DialogAddnewvaluestdtBinding dialogAddnewvaluestdtBinding;
+
     private DialogAdddispmemberstdtBinding dialogAdddispmemberstdtBinding;
 
     private RecyclerView.LayoutManager mLayoutManager;

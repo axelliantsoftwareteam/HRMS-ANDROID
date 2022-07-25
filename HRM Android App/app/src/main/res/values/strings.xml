@@ -150,5 +150,11 @@
     <string name="basicsetup">Basic Setup</string>
     <string name="action">Action</string>
     <string name="holiday">Holiday</string>
+    <string name="resume">Resume</string>
+    <string name="building">Building</string>
+    <string name="createbuild">Create Building</string>
+    <string name="skill">Skills</string>
+    <string name="shift">Shift</string>
+    <string name="close">Close</string>
 
 </resources>

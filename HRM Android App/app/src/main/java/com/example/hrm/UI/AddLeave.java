@@ -68,10 +68,13 @@ public class AddLeave extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        transparentStatusAndNavigation();
+     //   transparentStatusAndNavigation();
         //  setContentView(R.layout.activity_add_leave);
 
 
@@ -111,6 +114,16 @@ public class AddLeave extends AppCompatActivity {
 
             }
         });
+
+        binding.imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddLeave.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
 
 //        binding.etTimeFrom.setOnClickListener(new View.OnClickListener() {
 //
@@ -352,6 +365,9 @@ public class AddLeave extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
     private void postleave(final String access_token) {
         try {
             final ProgressDialog dialog;

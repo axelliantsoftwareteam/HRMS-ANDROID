@@ -34,13 +34,13 @@ public class LeavesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        transparentStatusAndNavigation();
+      //  transparentStatusAndNavigation();
 //        setContentView(R.layout.activity_tasks);
         isNetworkConnectionAvailable();
 

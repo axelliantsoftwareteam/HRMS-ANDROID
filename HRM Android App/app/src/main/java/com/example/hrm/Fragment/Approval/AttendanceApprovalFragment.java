@@ -2,6 +2,7 @@ package com.example.hrm.Fragment.Approval;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -26,6 +27,8 @@ import com.example.hrm.Model.Approval.AttendApproval.GetAttendApprolModel;
 import com.example.hrm.Model.Approval.AttendApproval.WorkFlow;
 import com.example.hrm.Model.Memberlist.MemberResponse;
 import com.example.hrm.Model.Memberlist.Members;
+import com.example.hrm.UI.ApprovalActivity;
+import com.example.hrm.UI.MainActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAttendapprovBinding;
 import com.example.hrm.databinding.FragmentAttendanceApprovalBinding;
@@ -489,6 +492,7 @@ public class AttendanceApprovalFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
+
 
 
 }

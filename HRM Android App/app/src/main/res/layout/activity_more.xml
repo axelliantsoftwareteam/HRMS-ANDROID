@@ -71,6 +71,17 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/txtresume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:drawableLeft="@drawable/more_edprofile"
+            android:drawablePadding="10dp"
+            android:text="@string/resume"
+            android:textColor="@color/grey_60"
+            android:textSize="14sp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

@@ -106,20 +106,22 @@
         android:textStyle="bold">
 
     </TextView>
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="15dp"
-        app:backgroundTint="@color/colorApp"
-        app:elevation="2dp"
-        android:layout_alignParentRight="true"
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/spacing_medium"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/button_bg"
         android:padding="10dp"
+        app:backgroundTint="@color/colorApp"
+        app:elevation="2dp"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_add_black_24dp"
         tools:ignore="VectorDrawableCompat" />

@@ -247,6 +247,8 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.core.widget.NestedScrollView>
+
+
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"

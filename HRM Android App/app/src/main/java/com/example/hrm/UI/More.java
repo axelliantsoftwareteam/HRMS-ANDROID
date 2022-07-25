@@ -38,10 +38,13 @@ public class More extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        transparentStatusAndNavigation();
+      //  transparentStatusAndNavigation();
 
         isNetworkConnectionAvailable();
 
@@ -57,7 +60,7 @@ public class More extends AppCompatActivity {
                     }
                     @Override
                     public void onError(MsalException exception) {
-                        displayError(exception);
+                      //  displayError(exception);
                     }
                 });
 
@@ -151,7 +154,7 @@ public class More extends AppCompatActivity {
                     }
                     @Override
                     public void onError(@NonNull MsalException exception){
-//                        displayError(exception);
+                        displayError(exception);
                         session.logoutUser();
 
                         Intent intent = new Intent(More.this, SignIn.class);
@@ -211,12 +214,12 @@ public class More extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull MsalException exception) {
-                displayError(exception);
+                //displayError(exception);
             }
         });
     }
     private void displayError(@NonNull final Exception exception) {
-        Toast.makeText(this, "Something Wrong Happend", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
     }
 
     //Navigation transparent

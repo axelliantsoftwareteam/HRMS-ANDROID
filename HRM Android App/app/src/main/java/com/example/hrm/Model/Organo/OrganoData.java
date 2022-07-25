@@ -8,15 +8,25 @@ import com.google.gson.annotations.SerializedName;
 @Generated("jsonschema2pojo")
 public class OrganoData {
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("pid")
     @Expose
-    private Integer pid;
+    private String pid;
     @SerializedName("txt")
     @Expose
     private String txt;
@@ -27,13 +37,7 @@ public class OrganoData {
     @Expose
     private Boolean isCollapsed;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -41,14 +45,6 @@ public class OrganoData {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
     }
 
     public String getTxt() {
@@ -75,4 +71,11 @@ public class OrganoData {
         this.isCollapsed = isCollapsed;
     }
 
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 }

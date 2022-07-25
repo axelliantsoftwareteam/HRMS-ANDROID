@@ -45,6 +45,7 @@ import com.example.hrm.Model.Memberlist.MemberResponse;
 import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
+import com.example.hrm.databinding.ActivityAttendanceBinding;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -71,6 +72,8 @@ public class AttendanceActivity extends AppCompatActivity {
 
   //   implements OnCalenderDayClickListener
 
+
+    private ActivityAttendanceBinding binding;
     TextView startdate, enddate,name;
     String ssdate,sedate,sname,username;
     DatePickerDialog picker;
@@ -128,10 +131,13 @@ public class AttendanceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_attendance);
 
 
-        transparentStatusAndNavigation();
+//        transparentStatusAndNavigation();
 
 
         noleave = findViewById(R.id.txt_no);
@@ -241,7 +247,51 @@ public class AttendanceActivity extends AppCompatActivity {
         token = sessionManager.getToken();
         getmember(token);
 
+
+
+        binding.me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AttendanceActivity.this, UserProfActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.fltHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(AttendanceActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AttendanceActivity.this, More.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AttendanceActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
     }
+
+
 
     private void downloadfile(final String access_token)
     {

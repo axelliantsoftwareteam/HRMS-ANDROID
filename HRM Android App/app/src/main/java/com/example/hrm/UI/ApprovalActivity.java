@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivityApprovalBinding;
 import com.google.android.material.tabs.TabLayout;
+import com.sun.jersey.core.impl.provider.entity.XMLRootElementProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,9 @@ public class ApprovalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -82,7 +88,69 @@ public class ApprovalActivity extends AppCompatActivity {
 
             }
         });
+        binding.me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ApprovalActivity.this, UserProfActivity.class);
+                startActivity(intent);
+                finish();
 
+
+            }
+        });
+        binding.fltHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Toast.makeText(ApprovalActivity.this, "Home", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+
+
+            }
+        });
+        binding.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(ApprovalActivity.this, More.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ApprovalActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
+    }
+
+
+//    @Override
+//    public void onBackPressed() {
+//        if (getFragmentManager().getBackStackEntryCount() > 0) {
+//            getFragmentManager().popBackStack();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
+
+
+    @Override
+    public void onBackPressed() {
+        // do something on back.
+        Intent i = new Intent(ApprovalActivity.this, MainActivity.class);
+        startActivity(i);
+        finish();
 
     }
 

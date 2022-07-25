@@ -21,13 +21,17 @@ public class OrganizationChart
     public void addChildToParent(String Child,String Parent){
         htmlCode += "['"+Child+"', '"+Parent+"', ''],";
     }
+
     public void addChildToParent(String Child,String ChildFunction,String Parent){
         htmlCode += "[{'v':'"+Child+"', 'f':'Child"+ChildFunction+"'}, '"+Parent+"', ''],";
     }
     public void clearData(String Parent,String Child){
         htmlCode = "";
     }
-    public String getChart(){
+
+
+    public String getChart()
+    {
         Log.d("OrganizationChart","HTML: "+ htmlCode);
         Log.d("OrganizationChart","HTML1: "+ removeLastChar(htmlCode));
         return getTopCode() + removeLastChar(htmlCode) +getBottomCode();

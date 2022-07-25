@@ -7,8 +7,10 @@ import com.example.hrm.Model.AddLeaveRequestModel.AddLeaveReq;
 import com.example.hrm.Model.Approval.AttendApproval.GetAttendApprolModel;
 import com.example.hrm.Model.Approval.LeavesApproval.GetLeaveApprolModel;
 import com.example.hrm.Model.Attendance.AttendanceResponse;
+import com.example.hrm.Model.Building.GetBuilding;
 import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
+import com.example.hrm.Model.Evalution.GetEvalution;
 import com.example.hrm.Model.GeneralRequestModel.GeneralListModel;
 import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
 import com.example.hrm.Model.HolidayModel.GetHolidayData;
@@ -19,7 +21,10 @@ import com.example.hrm.Model.LeavesModel.AllLeavesModel;
 import com.example.hrm.Model.LoginModel.UserModel;
 import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Model.MicLogin.TokenModel;
+import com.example.hrm.Model.Organo.OrganoModel;
 import com.example.hrm.Model.ReqAttendList.RequestListModel;
+import com.example.hrm.Model.Shifts.GetShift;
+import com.example.hrm.Model.Skills.GetSkills;
 import com.example.hrm.Model.SpinerModel.SpinerLeaves;
 import com.example.hrm.Model.StaticDataModel.GetDataMember.GetStDataMemberModel;
 import com.example.hrm.Model.StaticDataModel.GetStaticDataModel;
@@ -73,6 +78,23 @@ public interface ApiInterface
     @GET("admin/getHoliday")
     Call<GetHolidayModel> getHoliday(@Header("Authorization") String auth);
 
+
+    // Get all Building
+    @GET("admin/getallbuildings")
+    Call<GetBuilding> getBuilding(@Header("Authorization") String auth);
+
+    // Get all Evaluation
+    @GET("admin/getEvaluations?status=false")
+    Call<GetEvalution> getEvalution(@Header("Authorization") String auth);
+
+
+    // Get all Skills
+    @GET("admin/getAllSkills")
+    Call<GetSkills> getSkill(@Header("Authorization") String auth);
+
+    // Get all
+    @GET("admin/getAllSkills")
+    Call<GetShift> getShift(@Header("Authorization") String auth);
 
 
     // Approval Attendance List
@@ -228,8 +250,12 @@ public interface ApiInterface
 
     // Get all user to find leaves
     @GET("admin/getEmployeeReportedUsers")
-    Call<Members> getlistMember(@Header("Authorization") String auth);
+    Call<Members>getlistMember(@Header("Authorization") String auth);
 
+
+    // Get organo
+    @GET("admin/getOrganogramOfCompany")
+    Call<OrganoModel>getorgano(@Header("Authorization") String auth);
 
 }
 

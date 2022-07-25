@@ -31,11 +31,13 @@ public class UserProfActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_user_prof);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        transparentStatusAndNavigation();
+      //  transparentStatusAndNavigation();
         isNetworkConnectionAvailable();
 
         // setting the session
