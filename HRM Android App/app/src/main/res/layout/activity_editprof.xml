@@ -59,7 +59,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image"
+                android:id="@+id/proimage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/thumbnail"
@@ -83,6 +83,7 @@
                     android:textColor="@color/grey_90" />
 
                 <TextView
+                    android:id="@+id/empcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_medium"
@@ -265,6 +266,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:backgroundTint="@color/colorApp" />
+
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
@@ -285,7 +287,7 @@
                     android:background="@drawable/editdrawable"
                     android:inputType="textPassword"
                     android:padding="@dimen/spacing_middle"
-                    android:text=""
+                    android:text="12345678"
                     android:textColor="@color/colorApp"></EditText>
 
                 <TextView
@@ -408,6 +410,7 @@
                         android:background="@color/colorApp">
 
                         <TextView
+                            android:id="@+id/report"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_medium"
@@ -443,6 +446,7 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 
 
 </RelativeLayout>

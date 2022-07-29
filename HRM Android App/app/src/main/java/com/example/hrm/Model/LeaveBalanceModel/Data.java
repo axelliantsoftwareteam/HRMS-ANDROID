@@ -12,14 +12,14 @@ public class Data {
 
     @SerializedName("Response")
     @Expose
-    private List<Response> response = null;
+    private List<LeaveBalanceData> leaveBalanceData = null;
 
-    public List<Response> getResponse() {
-        return response;
+    public List<LeaveBalanceData> getResponse() {
+        return leaveBalanceData;
     }
 
-    public void setResponse(List<Response> response) {
-        this.response = response;
+    public void setResponse(List<LeaveBalanceData> leaveBalanceData) {
+        this.leaveBalanceData = leaveBalanceData;
     }
 
 }

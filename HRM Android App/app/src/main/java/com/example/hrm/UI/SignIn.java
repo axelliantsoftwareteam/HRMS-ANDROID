@@ -27,8 +27,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
 import com.example.hrm.Model.LoginModel.UserModel;
 import com.example.hrm.Model.MicLogin.TokenModel;
+import com.example.hrm.Model.UserProfileModel.ReportingTo;
 import com.example.hrm.Model.UserProfileModel.UserDataModel;
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
@@ -41,6 +43,10 @@ import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import retrofit2.Call;
@@ -73,6 +79,9 @@ public class SignIn extends AppCompatActivity  {
     String semail, spassword;
     SessionManager session;
     private ActivitySigninBinding binding;
+
+    ReportingTo reportingTo;
+
     Pattern pattern_pwd = Pattern.compile("^[a-zA-Z0-9]+$");
     String mictoken;
     private final static String[] SCOPES = {"Files.Read"};
@@ -550,7 +559,7 @@ public class SignIn extends AppCompatActivity  {
                             if (status==200)
                             {
 
-
+                                reportingTo=response.body().getData().getResponse().getReportingTo();
                                 String name = response.body().getData().getResponse().getName();
                                 String cnic = response.body().getData().getResponse().getCnic();
                                 String email = response.body().getData().getResponse().getEmail();
@@ -559,6 +568,8 @@ public class SignIn extends AppCompatActivity  {
                                 String department = response.body().getData().getResponse().getDepartment();
                                 String reportto = response.body().getData().getResponse().getReportingTo().getName();
                                 String profimg = response.body().getData().getResponse().getProfilePicture();
+                                String empcode = response.body().getData().getResponse().getEmployeeCode();
+
 
                                 session.saveFirstName(name);
                                 session.saveCnicNumber(cnic);
@@ -568,6 +579,9 @@ public class SignIn extends AppCompatActivity  {
                                 session.saveDepartment(department);
                                 session.saveReprtTo(reportto);
                                 session.saveProfImage(profimg);
+                                session.saveEmpcode(empcode);
+
+
 
                                 Intent i = new Intent(SignIn.this, MainActivity.class);
                               //  i.putExtra("bundle", userDataModel.getData().getResponse().getName());

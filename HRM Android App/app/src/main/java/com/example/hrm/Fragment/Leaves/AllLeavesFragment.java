@@ -123,7 +123,7 @@ public class AllLeavesFragment extends Fragment {
                         } else {
                             noleave.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-
+                            dialog.dismiss();
                         }
 
 
@@ -144,6 +144,7 @@ public class AllLeavesFragment extends Fragment {
                 public void onFailure(Call<AllLeavesModel> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();

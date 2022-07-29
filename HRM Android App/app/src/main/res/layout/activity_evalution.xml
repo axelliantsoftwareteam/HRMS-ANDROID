@@ -42,16 +42,32 @@
     </RelativeLayout>
 
 
+    <LinearLayout
+        android:id="@+id/lineara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/flt_home"
+        android:layout_below="@+id/toolbar">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/evalrecycler"
-                android:layout_below="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_above="@+id/linear"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_small">
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/evalrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear"
+        android:layout_below="@+id/toolbar"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_small">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 
@@ -62,6 +78,7 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:text="@string/noreqt"
+        android:visibility="gone"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold">

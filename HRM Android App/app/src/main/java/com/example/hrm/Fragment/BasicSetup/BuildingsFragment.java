@@ -18,22 +18,13 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.BuildingAdapter;
-import com.example.hrm.Adapter.StaticData.HolidayAdapter;
-import com.example.hrm.Adapter.StaticData.StaticDataAdapter;
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Model.Building.GetBuilding;
 import com.example.hrm.Model.Building.GetBuildingData;
-import com.example.hrm.Model.HolidayModel.GetHolidayData;
-import com.example.hrm.Model.HolidayModel.GetHolidayModel;
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetMemberList;
-import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAddbuildBinding;
-import com.example.hrm.databinding.DialogAdddispmemberstdtBinding;
 import com.example.hrm.databinding.DialogEditbuildBinding;
-import com.example.hrm.databinding.DialogEditholidayBinding;
 import com.example.hrm.databinding.FragmentBuildingsBinding;
-import com.example.hrm.databinding.FragmentStaticDataBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -183,6 +174,7 @@ public class BuildingsFragment extends Fragment {
                 public void onFailure(Call<GetBuilding> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();

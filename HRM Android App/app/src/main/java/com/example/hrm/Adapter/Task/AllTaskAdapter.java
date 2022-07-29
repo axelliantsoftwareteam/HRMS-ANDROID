@@ -11,29 +11,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Adapter.Attendance.ClockInAdapter;
-import com.example.hrm.Model.CheckIn.CheckInDetail;
-import com.example.hrm.Model.GetAllTask.Response;
+import com.example.hrm.Model.GetAllTask.GetAllTaskData;
 import com.example.hrm.R;
 
 import java.util.List;
 
 public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHolder> {
     Context context;
-    Response response;
-    private List<Response> responseList;
+    GetAllTaskData getAllTaskData;
+    private List<GetAllTaskData> getAllTaskDataList;
     private AllTaskAdapter.OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, Response obj, int position);
+        void onItemClick(View view, GetAllTaskData obj, int position);
     }
 
     public void setOnItemClickListener(final AllTaskAdapter.OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = (AllTaskAdapter.OnItemClickListener) mItemClickListener;
     }
-    public AllTaskAdapter(Context context, List<Response> responses) {
+    public AllTaskAdapter(Context context, List<GetAllTaskData> respons) {
         this.context = context;
-        this.responseList= responses;
+        this.getAllTaskDataList = respons;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -80,13 +78,13 @@ public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        response = responseList.get(position);
+        getAllTaskData = getAllTaskDataList.get(position);
 
 
 
         //binding the data with the viewholder views
 
-        int type =response.getTag();
+        int type = getAllTaskData.getTag();
         if (type==1)
         {
             holder.normal.setVisibility(View.VISIBLE);
@@ -105,7 +103,7 @@ public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHo
 
 
 
-        int status = response.getStatus();
+        int status = getAllTaskData.getStatus();
 
 //        String types= leaf.getLeaveType();
 
@@ -119,9 +117,9 @@ public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHo
             holder.pend.setVisibility(View.VISIBLE);
         }
 
-        holder.name.setText(response.getName());
-        holder.reason.setText(response.getNotes());
-        holder.duedate.setText(response.getDueDate());
+        holder.name.setText(getAllTaskData.getName());
+        holder.reason.setText(getAllTaskData.getNotes());
+        holder.duedate.setText(getAllTaskData.getDueDate());
 
         holder.details.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +129,7 @@ public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHo
                 if (pos != RecyclerView.NO_POSITION)
                 {
                     if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(v, responseList.get(position), position);
+                        mOnItemClickListener.onItemClick(v, getAllTaskDataList.get(position), position);
 
                        // showCustomDialog();
                     }
@@ -174,7 +172,7 @@ public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return responseList.size();
+        return getAllTaskDataList.size();
        // return leavesList.size();
     }
 

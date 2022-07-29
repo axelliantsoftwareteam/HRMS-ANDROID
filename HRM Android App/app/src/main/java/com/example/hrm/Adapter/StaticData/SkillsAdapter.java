@@ -10,8 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.Building.GetBuildingData;
-import com.example.hrm.Model.Skills.GetSkillsData;
+import com.example.hrm.Model.BasicSetup.Skills.GetSkillsData;
 import com.example.hrm.R;
 
 import java.util.List;

@@ -2,15 +2,13 @@ package com.example.hrm.UI;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,29 +16,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.example.hrm.Adapter.Evaluation.EvalutionAdapter;
-import com.example.hrm.Adapter.StaticData.BuildingAdapter;
-import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.Building.GetBuilding;
-import com.example.hrm.Model.Building.GetBuildingData;
-import com.example.hrm.Model.Evalution.GetEvalution;
-import com.example.hrm.Model.Evalution.GetEvalutionData;
+import com.example.hrm.Fragment.Evaluation.EvaluationFragment;
+import com.example.hrm.Model.Evalution.GetEvaluationData;
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivityEvalutionBinding;
-import com.example.hrm.databinding.ActivityTasksBinding;
-import com.example.hrm.databinding.DialogEditbuildBinding;
 import com.example.hrm.databinding.DialogEditevalutionBinding;
 import com.example.hrm.databinding.DialogSavedBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EvalutionActivity extends AppCompatActivity {
 
@@ -55,7 +42,7 @@ public class EvalutionActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     EvalutionAdapter evalutionAdapter;
 
-    List<GetEvalutionData> getEvalutionDataList = new ArrayList<>();
+    List<GetEvaluationData> getEvalutionDataList = new ArrayList<>();
 
 
 
@@ -73,16 +60,25 @@ public class EvalutionActivity extends AppCompatActivity {
 
         isNetworkConnectionAvailable();
 
-        sessionManager = new SessionManager(EvalutionActivity.this);
-        token = sessionManager.getToken();
-        getEvaluation(token);
+//        sessionManager = new SessionManager(EvalutionActivity.this);
+//        token = sessionManager.getToken();
+    //    getEvaluation(token);
 
 
-        binding.evalrecycler.setHasFixedSize(true);
+//        binding.evalrecycler.setHasFixedSize(true);
+//
+//        // use a linear layout manager
+//        mLayoutManager = new LinearLayoutManager(EvalutionActivity.this);
+//        binding.evalrecycler.setLayoutManager(mLayoutManager);
+//
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(EvalutionActivity.this);
-        binding.evalrecycler.setLayoutManager(mLayoutManager);
+
+        EvaluationFragment evaluationFragment =new EvaluationFragment();
+        moveToFragment(evaluationFragment);
+
+
+
+
 
         binding.me.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,104 +122,106 @@ public class EvalutionActivity extends AppCompatActivity {
 
 
     }
-    private void getEvaluation(final String access_token)
-    {
-        try {
-
-            final ProgressDialog dialog;
-            dialog = new ProgressDialog(EvalutionActivity.this);
-            dialog.setMessage("Loading...");
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-            Call<GetEvalution> getEvalutionCall = ApiHandler.getApiInterface().getEvalution("Bearer " + access_token);
-            getEvalutionCall.enqueue(new Callback<GetEvalution>() {
-                @Override
-                public void onResponse(Call<GetEvalution> getEvalutionCall1, Response<GetEvalution> response) {
-
-                    try {
-                        if (response.isSuccessful()) {
-                            int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
-
-                                getEvalutionDataList = response.body().getData().getResponse();
-                                Log.e("Tag", "response" + getEvalutionDataList.toString());
-
-                                if (getEvalutionDataList.size() == 0) {
-                                    dialog.dismiss();
-                                    binding.txtno.setVisibility(View.VISIBLE);
-                                    binding.evalrecycler.setVisibility(View.GONE);
-
-                                } else if (getEvalutionDataList != null) {
-
-                                    evalutionAdapter = new EvalutionAdapter(EvalutionActivity.this, getEvalutionDataList);
-                                    binding.evalrecycler.setAdapter(evalutionAdapter);
-                                    binding.txtno.setVisibility(View.GONE);
-                                    binding.evalrecycler.setVisibility(View.VISIBLE);
-                                    dialog.dismiss();
-
-                                    evalutionAdapter.setOnItemClickListener(new EvalutionAdapter.OnItemClickListener() {
-                                        @Override
-                                        public void onItemClick(View view, GetEvalutionData obj, int position) {
-                                            GetEvalutionData getEvalutionData = getEvalutionDataList.get(position);
-//                                            String name =getHolidayData.getType();
-//                                            String val=getHolidayData.getStartDate();
-
-
-
 //
-//                                             Log.e("Tag", "work" + name.toString());
+//    private void getEvaluation(final String access_token) {
+//        try {
+//
+//            final ProgressDialog dialog;
+//            dialog = new ProgressDialog(EvalutionActivity.this);
+//            dialog.setMessage("Loading...");
+//            dialog.setCanceledOnTouchOutside(false);
+//            dialog.show();
+//            Call<GetEvalution> getEvalutionCall = ApiHandler.getApiInterface().getEvalution("Bearer " + access_token);
+//            getEvalutionCall.enqueue(new Callback<GetEvalution>() {
+//                @Override
+//                public void onResponse(Call<GetEvalution> getEvalutionCall1, Response<GetEvalution> response) {
+//
+//                    try {
+//                        if (response.isSuccessful()) {
+//                            int status = response.body().getMeta().getStatus();
+//                            if (status == 200) {
+//
+//                                getEvalutionDataList = response.body().getData().getResponse();
+//
+//
+//                                if (attendApprovalList.size() == 0) {
+//                                    dialog.dismiss();
+//                                    binding.genapprrecycler.setVisibility(View.GONE);
+//                                } else if (attendApprovalList != null) {
+//
+//                                    approvalAttendanceAdapter = new ApprovalAttendanceAdapter(EvalutionActivity.thi, attendApprovalList);
+//                                    binding.genapprrecycler.setAdapter(approvalAttendanceAdapter);
+//                                    binding.genapprrecycler.setVisibility(View.VISIBLE);
+//                                    binding.txtno.setVisibility(View.GONE);
+//                                    dialog.dismiss();
+//
+//                                    approvalAttendanceAdapter.setOnItemClickListener(new ApprovalAttendanceAdapter.OnItemClickListener() {
+//                                        @Override
+//                                        public void onItemClick(View view, AttendApproval obj, int position) {
+//                                            AttendApproval attendApproval1 = new AttendApproval();
+//                                            WorkFlow workFlow = new WorkFlow();
+//                                            attendApproval1 = attendApprovalList.get(position);
+//                                            //  Log.e("Tag", "work" + response1.toString());
+//
+//                                            workFlowList = attendApproval1.getWorkFlow();
+//
+//
+//
+//                                            workFlow = workFlowList.get(0);
+//
+//                                            showCustomDialog(workFlow);
+//
+//                                        }
+//                                    });
+//                                }
+//
+//                            }
+//
+//                        } else {
+//                            binding.txtno.setVisibility(View.VISIBLE);
+//                            Toast.makeText(EvalutionActivity.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                        }
+//
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        try {
+//                            Log.e("Tag", "error=" + e.toString());
+//
+//
+//                        } catch (Resources.NotFoundException e1) {
+//                            e1.printStackTrace();
+//                        }
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<GetEvalution> call, Throwable t) {
+//                    try {
+//                        Log.e("Tag", "error" + t.toString());
+//
+//                    } catch (Resources.NotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//
+//            });
+//
+//
+//        } catch (Resources.NotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-                                            showEditDialog();
-                                        }
-                                    });
-
-
-
-                                }
-
-                            }
-
-                        } else {
-                            binding.txtno.setVisibility(View.VISIBLE);
-                            Toast.makeText(EvalutionActivity.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-
-                        }
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        try {
-                            Log.e("Tag", "error=" + e.toString());
-
-
-                        } catch (Resources.NotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<GetEvalution> call, Throwable t) {
-                    try {
-
-                        Log.e("Tag", "error" + t.toString());
-                        dialog.dismiss();
-
-                    } catch (Resources.NotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            });
-
-
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-        }
+    private void moveToFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout, fragment, fragment.getClass().getSimpleName()).addToBackStack(null).commit();
 
     }
+
 
     private void showEditDialog()
     {

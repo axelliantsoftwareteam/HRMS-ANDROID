@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.hrm.R;
+import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivityEditprofBinding;
 import com.example.hrm.databinding.ActivityMoreBinding;
 
@@ -15,6 +16,11 @@ public class EditprofActivity extends AppCompatActivity {
 
 
     private ActivityEditprofBinding binding;
+    SessionManager sessionManage;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +30,6 @@ public class EditprofActivity extends AppCompatActivity {
         binding = binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-
-//        setContentView(R.layout.activity_editprof);
-
-
-
-
-
 
 
 

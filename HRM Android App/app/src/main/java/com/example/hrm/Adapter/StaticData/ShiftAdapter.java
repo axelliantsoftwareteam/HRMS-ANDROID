@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.Shifts.GetShift;
-import com.example.hrm.Model.Shifts.GetShiftData;
-import com.example.hrm.Model.Skills.GetSkillsData;
+import com.example.hrm.Model.BasicSetup.Shifts.GetShiftData;
 import com.example.hrm.R;
 
 import java.util.List;
@@ -50,7 +48,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.MyViewHolder
             super(v);
             name = v.findViewById(R.id.txtname);
             descript = v.findViewById(R.id.txtdescrpt);
-            sttime = v.findViewById(R.id.txtaddr);
+            sttime = v.findViewById(R.id.txt_start);
             endtime = v.findViewById(R.id.txt_enddate);
             action = v.findViewById(R.id.txtaction);
 

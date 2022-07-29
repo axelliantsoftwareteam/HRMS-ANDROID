@@ -1,7 +1,6 @@
 package com.example.hrm.Adapter.LeaveBalance;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,26 +9,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.CheckIn.CheckOutDetail;
-import com.example.hrm.Model.LeaveBalanceModel.Response;
+import com.example.hrm.Model.LeaveBalanceModel.LeaveBalanceData;
 import com.example.hrm.R;
+
+import org.eazegraph.lib.charts.PieChart;
 
 import java.util.List;
 
 public class LeavebalanceAdapter extends RecyclerView.Adapter<LeavebalanceAdapter.MyViewHolder> {
     Context context;
-    Response response;
-    private List<Response> responseList;
+    LeaveBalanceData leaveBalanceData;
+    private List<LeaveBalanceData> leaveBalanceDataList;
 
-    public LeavebalanceAdapter(Context context, List<Response> responses) {
+    public LeavebalanceAdapter(Context context, List<LeaveBalanceData> respons) {
         this.context = context;
-        this.responseList = responses;
+        this.leaveBalanceDataList = respons;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView leavetype;
         public TextView remainday,usedday;
+        PieChart pieChart;
 
 
         public MyViewHolder(View v) {
@@ -37,6 +38,7 @@ public class LeavebalanceAdapter extends RecyclerView.Adapter<LeavebalanceAdapte
             leavetype = v.findViewById(R.id.txt_leavetype);
             usedday = v.findViewById(R.id.txt_usedleave);
             remainday = v.findViewById(R.id.txt_total);
+
 
         }
     }
@@ -56,12 +58,12 @@ public class LeavebalanceAdapter extends RecyclerView.Adapter<LeavebalanceAdapte
     @Override
     public void onBindViewHolder(@NonNull final LeavebalanceAdapter.MyViewHolder holder, int position) {
 
-        response = responseList.get(position);
+        leaveBalanceData = leaveBalanceDataList.get(position);
 
         //binding the data with the viewholder views
-        holder.leavetype.setText(response.getName());
-        holder.usedday.setText(response.getUsed());
-        holder.remainday.setText(response.getTotal());
+        holder.leavetype.setText(leaveBalanceData.getName());
+        holder.usedday.setText(leaveBalanceData.getUsed());
+        holder.remainday.setText(leaveBalanceData.getTotal());
 
     }
 
@@ -72,7 +74,7 @@ public class LeavebalanceAdapter extends RecyclerView.Adapter<LeavebalanceAdapte
 
     @Override
     public int getItemCount() {
-        return responseList.size();
+        return leaveBalanceDataList.size();
     }
 
 

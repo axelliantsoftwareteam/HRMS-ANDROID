@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiHandler
 {
-   // public static final String PRODUCTION_URL = "https://devhris.khazanapk.com/api/";
+  //public static final String PRODUCTION_URL = "https://devhris.khazanapk.com/api/";
    public static final String LIVE_URL = "https://hris.khazanapk.com/api/";
     private static ApiInterface apiInterface;
 

@@ -7,14 +7,15 @@ import com.example.hrm.Model.AddLeaveRequestModel.AddLeaveReq;
 import com.example.hrm.Model.Approval.AttendApproval.GetAttendApprolModel;
 import com.example.hrm.Model.Approval.LeavesApproval.GetLeaveApprolModel;
 import com.example.hrm.Model.Attendance.AttendanceResponse;
+import com.example.hrm.Model.BasicSetup.Designation.GetDesignation;
 import com.example.hrm.Model.Building.GetBuilding;
 import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
-import com.example.hrm.Model.Evalution.GetEvalution;
+import com.example.hrm.Model.Evalution.GetEvaluation;
+import com.example.hrm.Model.Evalution.Questions.GetEvalQuestion;
 import com.example.hrm.Model.GeneralRequestModel.GeneralListModel;
 import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
-import com.example.hrm.Model.HolidayModel.GetHolidayData;
-import com.example.hrm.Model.HolidayModel.GetHolidayModel;
+import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayModel;
 import com.example.hrm.Model.LeaveBalanceModel.Leavebalance;
 import com.example.hrm.Model.LeaveRequestModel.LeavesRequest;
 import com.example.hrm.Model.LeavesModel.AllLeavesModel;
@@ -23,11 +24,11 @@ import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Model.MicLogin.TokenModel;
 import com.example.hrm.Model.Organo.OrganoModel;
 import com.example.hrm.Model.ReqAttendList.RequestListModel;
-import com.example.hrm.Model.Shifts.GetShift;
-import com.example.hrm.Model.Skills.GetSkills;
+import com.example.hrm.Model.BasicSetup.Shifts.GetShift;
+import com.example.hrm.Model.BasicSetup.Skills.GetSkills;
 import com.example.hrm.Model.SpinerModel.SpinerLeaves;
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetStDataMemberModel;
-import com.example.hrm.Model.StaticDataModel.GetStaticDataModel;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetStDataMemberModel;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetStaticDataModel;
 import com.example.hrm.Model.UserProfileModel.UserDataModel;
 import com.google.gson.JsonObject;
 
@@ -84,9 +85,17 @@ public interface ApiInterface
     Call<GetBuilding> getBuilding(@Header("Authorization") String auth);
 
     // Get all Evaluation
-    @GET("admin/getEvaluations?status=false")
-    Call<GetEvalution> getEvalution(@Header("Authorization") String auth);
+    @GET("admin/getEvaluations")
+    Call<GetEvaluation>getEvalution(@Header("Authorization") String auth, @Query("status") boolean status);
 
+
+    // Get all Evaluation Questions
+    @GET("admin/getEvaluationQuestions")
+    Call<GetEvalQuestion>getEvalQuest(@Header("Authorization") String auth);
+
+    // Get all Designation
+    @GET("admin/getAllDesignation")
+    Call<GetDesignation> getDesignation(@Header("Authorization") String auth);
 
     // Get all Skills
     @GET("admin/getAllSkills")
@@ -192,9 +201,41 @@ public interface ApiInterface
     Call<AttendanceResponse> getattenday(@Header("Authorization") String auth, @Body JsonObject jsonBody);
 
 
+
+
     // All Tags List
-    @GET("admin/getAllTask?tag=null&status=null&employee_id=undefined")
-    Call<GetAllTaskModel>getAllTagsList(@Header("Authorization") String auth);
+    @GET("admin/getAllTask/getAllTask?tag=null&status=null&employee_id=undefined")
+    Call<GetAllTaskModel>getAllList(@Header("Authorization") String auth);
+
+    // Today List
+    @GET("admin/getAllTask/getAllTask?tag=null&status=1&employee_id=undefined")
+    Call<GetAllTaskModel>getAllTodayList(@Header("Authorization") String auth);
+
+
+    // sevenday List
+    @GET("admin/getAllTask/getAllTask?tag=null&status=2&employee_id=undefined")
+    Call<GetAllTaskModel>getSevenList(@Header("Authorization") String auth);
+    // pending List
+    @GET("admin/getAllTask/getAllTask?tag=null&status=4&employee_id=undefined")
+    Call<GetAllTaskModel>getpendingList(@Header("Authorization") String auth);
+    // Completed List
+    @GET("admin/getAllTask/getAllTask?tag=null&status=5&employee_id=undefined")
+    Call<GetAllTaskModel>getcompletList(@Header("Authorization") String auth);
+    // High List
+    @GET("admin/getAllTask/getAllTask?tag=2&status=5&employee_id=undefined")
+    Call<GetAllTaskModel>gethighList(@Header("Authorization") String auth);
+    // Normal List
+    @GET("admin/getAllTask/getAllTask?tag=1&status=5&employee_id=undefined")
+    Call<GetAllTaskModel>getnormalList(@Header("Authorization") String auth);
+    // low List
+    @GET("admin/getAllTask/getAllTask?tag=0&status=5&employee_id=undefined")
+    Call<GetAllTaskModel>getlowList(@Header("Authorization") String auth);
+
+
+
+    // Approval Equipment List
+    @GET("admin/getEmployeeLeaveRequest")
+    Call<GetAllTaskModel>gettaglist(@Header("Authorization") String auth);
 
 
 

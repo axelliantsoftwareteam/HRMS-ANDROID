@@ -134,8 +134,9 @@ public class AttendanceActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_attendance);
-
+        binding = binding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
 //        transparentStatusAndNavigation();
 
@@ -166,6 +167,17 @@ public class AttendanceActivity extends AppCompatActivity {
         token = sessionManager.getToken();
 
         GetAlldate(token);
+
+
+        binding.btnAddleave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Toast.makeText(AttendanceActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
 
         download.setOnClickListener(new View.OnClickListener() {

@@ -18,18 +18,13 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.ShiftAdapter;
-import com.example.hrm.Adapter.StaticData.SkillsAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.Shifts.GetShift;
-import com.example.hrm.Model.Shifts.GetShiftData;
-import com.example.hrm.Model.Skills.GetSkills;
-import com.example.hrm.Model.Skills.GetSkillsData;
-import com.example.hrm.R;
+import com.example.hrm.Model.BasicSetup.Shifts.GetShift;
+import com.example.hrm.Model.BasicSetup.Shifts.GetShiftData;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAddskillBinding;
 import com.example.hrm.databinding.DialogEditskillBinding;
 import com.example.hrm.databinding.FragmentShiftsBinding;
-import com.example.hrm.databinding.FragmentSkillsBinding;
 
 import java.util.ArrayList;
 import java.util.List;

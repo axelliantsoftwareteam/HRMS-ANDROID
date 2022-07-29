@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +18,14 @@ import android.widget.Toast;
 import com.example.hrm.Adapter.LeaveBalance.LeavebalanceAdapter;
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Model.LeaveBalanceModel.Leavebalance;
-import com.example.hrm.Model.LeaveBalanceModel.Response;
+import com.example.hrm.Model.LeaveBalanceModel.LeaveBalanceData;
 
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
+import com.example.hrm.databinding.ActivityLeaveBalanceBinding;
+
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +35,7 @@ import retrofit2.Callback;
 
 public class LeaveBalanceActivity extends AppCompatActivity {
 
-
+    private ActivityLeaveBalanceBinding binding;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     LeavebalanceAdapter leavebalanceAdapter;
@@ -40,7 +45,12 @@ public class LeaveBalanceActivity extends AppCompatActivity {
 
     TextView noleave;
 
-    List<Response> responseList= new ArrayList<>();
+    List<LeaveBalanceData> leaveBalanceDataList = new ArrayList<>();
+
+
+    TextView tvR, tvPython, tvCPP, tvJava;
+    PieChart pieChart;
+
 
 
     @Override
@@ -49,9 +59,12 @@ public class LeaveBalanceActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_leave_balance);
+        binding = binding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         noleave = findViewById(R.id.txt_no);
+        pieChart = findViewById(R.id.piechart);
 
         mRecyclerView = findViewById(R.id.leavesbalnce_recycler);
         mRecyclerView.setHasFixedSize(true);
@@ -63,8 +76,72 @@ public class LeaveBalanceActivity extends AppCompatActivity {
         sessionManager = new SessionManager(LeaveBalanceActivity.this);
         token = sessionManager.getToken();
 
-        GetleaveBalance(token);
+       GetleaveBalance(token);
+
+
+        binding.me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LeaveBalanceActivity.this, UserProfActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.fltHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LeaveBalanceActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LeaveBalanceActivity.this, More.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+
+        binding.imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LeaveBalanceActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
     }
+    private void setData(List<LeaveBalanceData> leavebalance)
+    {
+
+        String[] items = new String[leavebalance.size()];
+
+
+//        // Set the data and color to the pie chart
+//        pieChart.addPieSlice(new PieModel("All leaves", Integer.parseInt("40"), Color.parseColor("#FFA726")));
+//        pieChart.addPieSlice(
+//                new PieModel(
+//                        "Python", Integer.parseInt("12"), Color.parseColor("#66BB6A")));
+//        pieChart.addPieSlice(
+//                new PieModel(
+//                        "C++", Integer.parseInt("12"), Color.parseColor("#EF5350")));
+//        pieChart.addPieSlice(
+//                new PieModel("Java", Integer.parseInt("12"), Color.parseColor("#29B6F6")));
+
+        // To animate the pie chart
+        pieChart.startAnimation();
+    }
+
+
     private void GetleaveBalance(final String access_token) {
         try {
 
@@ -76,7 +153,8 @@ public class LeaveBalanceActivity extends AppCompatActivity {
             Call<Leavebalance> leaves = ApiHandler.getApiInterface().getleavebalance("Bearer " + access_token);
             leaves.enqueue(new Callback<Leavebalance>() {
                 @Override
-                public void onResponse(Call<Leavebalance> leavebalanceCall, retrofit2.Response<Leavebalance> response) {
+                public void onResponse(Call<Leavebalance> leavebalanceCall, retrofit2.Response<Leavebalance> response)
+                {
 
                     try {
                         if (response.isSuccessful()) {
@@ -84,16 +162,30 @@ public class LeaveBalanceActivity extends AppCompatActivity {
                             if (status == 200)
                             {
 
-                                responseList = response.body().getData().getResponse();
-                                if (responseList.size()==0)
+                                leaveBalanceDataList = response.body().getData().getResponse();
+//                                setData(leaveBalanceDataList);
+                                //Traversing through the whole list to get all the names
+                                for(int i=0; i<leaveBalanceDataList.size(); i++){
+                                    //Storing names to string array
+                                    String name = leaveBalanceDataList.get(i).getName();
+                                    String used = leaveBalanceDataList.get(i).getTotal();
+
+
+                                    pieChart.addPieSlice(new PieModel(name,Integer.parseInt(used.toString()) , Color.parseColor("#FFA726")));
+
+                                }
+
+                                if (leaveBalanceDataList.size()==0)
                                 {
                                     dialog.dismiss();
                                     mRecyclerView.setVisibility(View.GONE);
                                 }
-                                else if (responseList!=null){
+                                else if (leaveBalanceDataList !=null){
 
-                                    leavebalanceAdapter = new LeavebalanceAdapter(LeaveBalanceActivity.this, responseList);
+                                    leavebalanceAdapter = new LeavebalanceAdapter(LeaveBalanceActivity.this, leaveBalanceDataList);
                                     mRecyclerView.setAdapter(leavebalanceAdapter);
+
+
                                     mRecyclerView.setVisibility(View.VISIBLE);
                                     noleave.setVisibility(View.GONE);
                                     dialog.dismiss();

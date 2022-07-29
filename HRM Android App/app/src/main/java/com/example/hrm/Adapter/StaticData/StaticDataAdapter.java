@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetMemberList;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
 import com.example.hrm.R;
 
 import java.util.List;

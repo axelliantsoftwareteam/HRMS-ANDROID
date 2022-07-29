@@ -27,7 +27,7 @@ public class SessionManager {
     public static final String KEY_FNAME = "firstname";
     public static final String KEY_LNAME = "lastname";
     public static final String KEY_USERNAME = "username";
-
+    public static final String KEY_EMPCODE = "empcode";
     public static final String KEY_USERID = "userid";
     public static final String KEY_USERDATEJOINED = "userdatejoined";
     public static final String KEY_USERIMAGE = "userimage";
@@ -146,6 +146,13 @@ public class SessionManager {
         editor.commit();
 
     }
+    public void saveEmpcode(String empcode) {
+        editor.putString(KEY_EMPCODE, empcode);
+        editor.commit();
+
+    }
+
+
     public void saveLastName(String lname) {
         editor.putString(KEY_LNAME, lname);
         editor.commit();
@@ -260,6 +267,7 @@ public class SessionManager {
     public String getCinic()    { return pref.getString(KEY_CNIC, null); }
     public String getFirstName() {return pref.getString(KEY_FNAME, null);}
     public String getLastName() {return pref.getString(KEY_LNAME, null);}
+    public String getEmpcode() {return pref.getString(KEY_EMPCODE, null);}
 
     public String getDepartment() {return pref.getString(KEY_DEPARTMENT, null);}
 

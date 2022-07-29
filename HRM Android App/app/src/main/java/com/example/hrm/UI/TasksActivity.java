@@ -33,6 +33,13 @@ import android.widget.Toast;
 import com.example.hrm.Adapter.Request.RequestAttendanceAdapter;
 import com.example.hrm.Fragment.Leaves.AllLeavesFragment;
 import com.example.hrm.Fragment.Tasks.AlltaskFragment;
+import com.example.hrm.Fragment.Tasks.CompletedFragment;
+import com.example.hrm.Fragment.Tasks.HighFragment;
+import com.example.hrm.Fragment.Tasks.LowFragment;
+import com.example.hrm.Fragment.Tasks.NormalFragment;
+import com.example.hrm.Fragment.Tasks.PendingFragment;
+import com.example.hrm.Fragment.Tasks.SevendaysFragment;
+import com.example.hrm.Fragment.Tasks.TodayFragment;
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Model.GetAllTask.CountsInfo;
 import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
@@ -73,6 +80,8 @@ public class TasksActivity extends AppCompatActivity {
     private static final String[] paths = {"All Task", "Today", "Next 7 Days", "Pending Task","Completed"};
 
 
+    private static final String[] tagpaths = {"High", "Normal", "Low"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +100,9 @@ public class TasksActivity extends AppCompatActivity {
         sessionManager = new SessionManager(TasksActivity.this);
         token = sessionManager.getToken();
         getmember(token);
-        getdialogmember(token);
+     //   getdialogmember(token);
 
-        GetAllTags(token);
+     //   GetAllTags(token);
 
 
         binding.me.setOnClickListener(new View.OnClickListener() {
@@ -153,8 +162,14 @@ public class TasksActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        ArrayAdapter<String> tagadapter = new ArrayAdapter<String>(TasksActivity.this,
+                android.R.layout.simple_spinner_item, tagpaths);
+        tagadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         binding.spinnerlisttask.setAdapter(adapter);
+        binding.spinnerlisttag.setAdapter(tagadapter);
+
         binding.spinnerlisttask.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
@@ -173,10 +188,11 @@ public class TasksActivity extends AppCompatActivity {
                 }
                 else if (selected_val.equals("Today"))
                 {
-                    int status = 1;
+                 //
+                      int status = 1;
 
-                    AllLeavesFragment allLeavesFragment =new AllLeavesFragment();
-                    moveToFragment(allLeavesFragment);
+                    TodayFragment todayFragment =new TodayFragment();
+                    moveToFragment(todayFragment);
 
 //                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
 //
@@ -185,28 +201,83 @@ public class TasksActivity extends AppCompatActivity {
                 if (selected_val.equals("Next 7 Days"))
                 {
                     int status = 2;
-                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
+
+                    SevendaysFragment sevendaysFragment =new SevendaysFragment();
+                    moveToFragment(sevendaysFragment);
+
+
+//                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
 
 
                 }
                 if (selected_val.equals("Pending Task"))
                 {
                     int status = 4;
-                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
+                    PendingFragment pendingFragment =new PendingFragment();
+                    moveToFragment(pendingFragment);
+
+
+//                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
 
 
                 }
                 if (selected_val.equals("Completed"))
                 {
                     int status = 5;
-                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
+                    CompletedFragment completedFragment =new CompletedFragment();
+                    moveToFragment(completedFragment);
+
+
+//                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
 
 
                 }
 
+            }
 
-                Toast.makeText(TasksActivity.this, selected_val ,
-                        Toast.LENGTH_SHORT).show();
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        binding.spinnerlisttag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
+
+                String selected_val=binding.spinnerlisttag.getSelectedItem().toString();
+
+                if (selected_val.equals("High"))
+                {
+                    HighFragment highFragment =new HighFragment();
+                    moveToFragment(highFragment);
+
+//                    String alltask =null;
+//                    Toast.makeText(TasksActivity.this, ""+alltask, Toast.LENGTH_SHORT).show();
+
+
+                }
+                else if (selected_val.equals("Normal"))
+                {
+                  //  int status = 1;
+
+                    NormalFragment normalFragment=new NormalFragment();
+                    moveToFragment(normalFragment);
+
+//                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
+//
+
+                }
+                if (selected_val.equals("Low"))
+                {
+                    LowFragment lowFragment=new LowFragment();
+                    moveToFragment(lowFragment);
+
+//                    int status = 2;
+//                    Toast.makeText(TasksActivity.this, ""+status, Toast.LENGTH_SHORT).show();
+
+
+                }
             }
 
             @Override
@@ -528,7 +599,7 @@ public class TasksActivity extends AppCompatActivity {
             dialog.setMessage("Loading...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getAllTagsList("Bearer " + access_token);
+            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getAllList("Bearer " + access_token);
             getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>() {
                 @Override
                 public void onResponse(Call<GetAllTaskModel> getAllTaskModelCall1, Response<GetAllTaskModel> response) {

@@ -97,27 +97,7 @@
             android:layout_marginBottom="5dp"
             android:backgroundTint="@color/colorApp" />
 </LinearLayout>
-        <TextView
-            style="@style/viewParent.headerText"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/alltask"
-            android:textSize="@dimen/spacing_mlarge" />
-        <LinearLayout
-            android:layout_marginTop="@dimen/spacing_large"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/editdrawable"
-            >
-        <Spinner
-            android:id="@+id/spinnerlisttask"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="@color/colorApp"
-            />
-        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -147,8 +127,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/flt_home"
         android:layout_below="@+id/line1"
-        android:paddingLeft="@dimen/spacing_large"
-        android:paddingRight="@dimen/spacing_large"
+        android:paddingLeft="@dimen/spacing_middle"
+        android:paddingRight="@dimen/spacing_middle"
 
         >
 
@@ -556,13 +536,15 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:text="@string/tag"
-                    android:textSize="@dimen/spacing_mlarge" />
+                    android:textSize="@dimen/spacing_mlarge"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:weightSum="2">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -573,9 +555,32 @@
 
                         >
 
+                        <TextView
+                            style="@style/viewParent.headerText"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/alltask"
+                            android:textSize="@dimen/spacing_mlarge" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@drawable/editdrawable">
+
+                            <Spinner
+                                android:id="@+id/spinnerlisttask"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:backgroundTint="@color/colorApp" />
+                        </LinearLayout>
+
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
@@ -646,9 +651,32 @@
 
                         >
 
+                        <TextView
+                            style="@style/viewParent.headerText"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/tag"
+                            android:textSize="@dimen/spacing_mlarge" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@drawable/editdrawable">
+
+                            <Spinner
+                                android:id="@+id/spinnerlisttag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:backgroundTint="@color/colorApp" />
+                        </LinearLayout>
+
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
@@ -716,6 +744,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing_small"
+                        android:visibility="gone"
 
                         >
 
@@ -790,9 +819,9 @@
 
             <LinearLayout
                 android:id="@+id/lineara"
-                android:layout_below="@+id/linarr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linarr">
 
                 <FrameLayout
                     android:id="@+id/frameLayout"

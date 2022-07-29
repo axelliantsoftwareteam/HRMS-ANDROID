@@ -17,20 +17,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.hrm.Adapter.StaticData.BuildingAdapter;
 import com.example.hrm.Adapter.StaticData.SkillsAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.Building.GetBuilding;
-import com.example.hrm.Model.Building.GetBuildingData;
-import com.example.hrm.Model.Skills.GetSkills;
-import com.example.hrm.Model.Skills.GetSkillsData;
-import com.example.hrm.R;
+import com.example.hrm.Model.BasicSetup.Skills.GetSkills;
+import com.example.hrm.Model.BasicSetup.Skills.GetSkillsData;
 import com.example.hrm.Utility.SessionManager;
-import com.example.hrm.databinding.DialogAddbuildBinding;
 import com.example.hrm.databinding.DialogAddskillBinding;
-import com.example.hrm.databinding.DialogEditbuildBinding;
 import com.example.hrm.databinding.DialogEditskillBinding;
-import com.example.hrm.databinding.FragmentBuildingsBinding;
 import com.example.hrm.databinding.FragmentSkillsBinding;
 
 import java.util.ArrayList;

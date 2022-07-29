@@ -10,14 +10,13 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/appbar_padding_top_tolbar"
+        android:layout_height="wrap_content"
         android:background="@color/colorApp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
         <!--        android:layout_height="?attr/actionBarSize"-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imgback"

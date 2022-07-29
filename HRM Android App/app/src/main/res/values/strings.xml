@@ -156,5 +156,15 @@
     <string name="skill">Skills</string>
     <string name="shift">Shift</string>
     <string name="close">Close</string>
+    <string name="calender">Calender</string>
+    <string name="more">More</string>
+    <string name="designation">Designation</string>
+    <string name="logo">Logo</string>
+    <string name="location">Location</string>
+    <string name="stadium">Stadium</string>
+    <string name="league">League</string>
+    <string name="coach">test</string>
+    <string name="star">Star</string>
+    <string name="myevaluation">My Evaluation</string>
 
 </resources>

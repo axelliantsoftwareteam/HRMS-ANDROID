@@ -19,7 +19,16 @@ public class ClockOutAdapter extends RecyclerView.Adapter<ClockOutAdapter.MyView
     Context context;
     CheckOutDetail checkOutDetail;
     private List<CheckOutDetail> checkOutDetailList;
+    private ClockOutAdapter.OnItemClickListener mOnItemClickListener;
 
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, CheckOutDetail obj, int position);
+    }
+
+    public void setOnItemClickListener(final ClockOutAdapter.OnItemClickListener mItemClickListener) {
+        this.mOnItemClickListener = (ClockOutAdapter.OnItemClickListener) mItemClickListener;
+    }
     public ClockOutAdapter(Context context, List<CheckOutDetail> checkOutDetailList) {
         this.context = context;
         this.checkOutDetailList = checkOutDetailList;
@@ -68,6 +77,21 @@ public class ClockOutAdapter extends RecyclerView.Adapter<ClockOutAdapter.MyView
         {
             holder.date.setTextColor(Color.parseColor("#1565C0"));
             holder.date.setText("Request Check-In");
+
+            holder.date.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getAdapterPosition();
+                    // check if item still exists
+                    if (pos != RecyclerView.NO_POSITION)
+                    {
+                        if (mOnItemClickListener != null) {
+                            mOnItemClickListener.onItemClick(v, checkOutDetailList.get(position), position);
+                        }
+                        //showCustomDialog();
+                    }
+                }
+            });
         }
         if(checkOutDetail.getType().equals("4"))
         {

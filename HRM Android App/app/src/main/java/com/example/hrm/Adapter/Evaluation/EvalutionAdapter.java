@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.Building.GetBuildingData;
-import com.example.hrm.Model.Evalution.GetEvalution;
-import com.example.hrm.Model.Evalution.GetEvalutionData;
+import com.example.hrm.Model.Evalution.GetEvaluationData;
 import com.example.hrm.R;
 
 import java.util.List;
@@ -21,14 +19,16 @@ public class EvalutionAdapter extends RecyclerView.Adapter<EvalutionAdapter.MyVi
     Context context;
 
     boolean status;
-    GetEvalutionData getEvalutionData;
-    private List<GetEvalutionData> getEvalutionDataList;
+
+
+    GetEvaluationData getEvalutionData;
+    private List<GetEvaluationData> getEvalutionDataList;
     private OnItemClickListener mOnItemClickListener;
 
 
 
     public interface OnItemClickListener {
-        void onItemClick(View view, GetEvalutionData obj, int position);
+        void onItemClick(View view, GetEvaluationData obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -36,7 +36,7 @@ public class EvalutionAdapter extends RecyclerView.Adapter<EvalutionAdapter.MyVi
     }
 
 
-    public EvalutionAdapter(Context context, List<GetEvalutionData> respons) {
+    public EvalutionAdapter(Context context, List<GetEvaluationData> respons) {
         this.context = context;
         this.getEvalutionDataList = respons;
     }
@@ -94,18 +94,26 @@ public class EvalutionAdapter extends RecyclerView.Adapter<EvalutionAdapter.MyVi
             }
         });
 
+
+
         holder.employ.setText(getEvalutionData.getEmployeeName());
         holder.generate.setText(getEvalutionData.getGeneratedBy());
+
       status = getEvalutionData.getIsCompleted();
       if (status==false)
       {
           holder.status.setText("In progress");
+          holder.status.setBackgroundResource(R.color.red_500);
+          holder.action.setText("Action");
+          holder.action.setBackgroundResource(R.color.colorApp);
 
       }
       else
       {
           holder.status.setText("Completed");
-
+          holder.status.setBackgroundResource(R.color.green_900);
+          holder.action.setText("View Detail");
+          holder.action.setBackgroundResource(R.color.yellow_400);
       }
 
 

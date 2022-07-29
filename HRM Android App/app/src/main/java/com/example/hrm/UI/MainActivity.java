@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 finish();
             }
         });
-        binding.lyLeave.setOnClickListener(new View.OnClickListener() {
+        binding.lyleave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {

@@ -2,7 +2,6 @@ package com.example.hrm.Fragment.BasicSetup;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -20,23 +19,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.example.hrm.Adapter.Approval.ApprovalAttendanceAdapter;
 import com.example.hrm.Adapter.StaticData.StaticDataAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.Approval.AttendApproval.AttendApproval;
-import com.example.hrm.Model.Approval.AttendApproval.GetAttendApprolModel;
-import com.example.hrm.Model.Approval.AttendApproval.WorkFlow;
-import com.example.hrm.Model.StaticDataModel.Data;
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetMemberList;
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetStDataMemberModel;
-import com.example.hrm.Model.StaticDataModel.GetStaticDataModel;
-import com.example.hrm.R;
-import com.example.hrm.UI.EditprofActivity;
-import com.example.hrm.UI.More;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetStDataMemberModel;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetStaticDataModel;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAdddispmemberstdtBinding;
 import com.example.hrm.databinding.DialogAddnewvaluestdtBinding;
-import com.example.hrm.databinding.DialogAttendapprovBinding;
 import com.example.hrm.databinding.DialogEditstaticdataBinding;
 import com.example.hrm.databinding.FragmentStaticDataBinding;
 
@@ -318,6 +308,7 @@ public class StaticDataFragment extends Fragment {
                 public void onFailure(Call<GetStDataMemberModel> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();

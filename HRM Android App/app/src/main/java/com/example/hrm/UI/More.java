@@ -139,34 +139,34 @@ public class More extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                if (mSingleAccountApp == null){
-                    return;
-                }
-                mSingleAccountApp.signOut(new ISingleAccountPublicClientApplication.SignOutCallback() {
-                    @Override
-                    public void onSignOut() {
+//                if (mSingleAccountApp == null){
+//                    return;
+//                }
+//                mSingleAccountApp.signOut(new ISingleAccountPublicClientApplication.SignOutCallback() {
+//                    @Override
+//                    public void onSignOut() {
                         session.logoutUser();
 
                         Intent intent = new Intent(More.this, SignIn.class);
                         startActivity(intent);
                         finish();
 
-                    }
-                    @Override
-                    public void onError(@NonNull MsalException exception){
-                        displayError(exception);
-                        session.logoutUser();
-
-                        Intent intent = new Intent(More.this, SignIn.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                session.logoutUser();
-
-                Intent intent = new Intent(More.this, SignIn.class);
-                startActivity(intent);
-                finish();
+                 //   }
+//                    @Override
+//                    public void onError(@NonNull MsalException exception){
+//                        displayError(exception);
+//                        session.logoutUser();
+//
+//                        Intent intent = new Intent(More.this, SignIn.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+            //    });
+              //  session.logoutUser();
+//
+//                Intent intent = new Intent(More.this, SignIn.class);
+//                startActivity(intent);
+//                finish();
             }
         });
 
@@ -176,6 +176,17 @@ public class More extends AppCompatActivity {
                 Intent i = new Intent(More.this, MainActivity.class);
                 startActivity(i);
                 finish();
+            }
+        });
+        binding.txtresume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(More.this, TableActivity.class);
+                startActivity(intent);
+                finish();
+
+
             }
         });
 

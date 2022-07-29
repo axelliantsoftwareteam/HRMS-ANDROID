@@ -1,11 +1,8 @@
 package com.example.hrm.Fragment.Tasks;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,29 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.hrm.Adapter.Attendance.ClockInAdapter;
-import com.example.hrm.Adapter.Request.RequestAttendanceAdapter;
 import com.example.hrm.Adapter.Task.AllTaskAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.CheckIn.CheckInDetail;
-import com.example.hrm.Model.GetAllTask.CountsInfo;
+import com.example.hrm.Model.GetAllTask.GetAllTaskData;
 import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
-import com.example.hrm.Model.ReqAttendList.RequestListModel;
-import com.example.hrm.R;
-import com.example.hrm.UI.AttendanceActivity;
-import com.example.hrm.UI.TasksActivity;
 import com.example.hrm.Utility.SessionManager;
-import com.example.hrm.databinding.DialogEventBinding;
 import com.example.hrm.databinding.DialogTaskdetailsBinding;
 import com.example.hrm.databinding.FragmentAlltaskBinding;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -57,7 +42,7 @@ public class AlltaskFragment extends Fragment {
     AllTaskAdapter allTaskAdapter;
 
 
-    List<com.example.hrm.Model.GetAllTask.Response> responseList= new ArrayList<>();
+    List<GetAllTaskData> getAllTaskDataList = new ArrayList<>();
 
     private FragmentAlltaskBinding binding;
     private DialogTaskdetailsBinding dialogTaskdetailsBinding;
@@ -101,8 +86,9 @@ public class AlltaskFragment extends Fragment {
             dialog.setMessage("Loading...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getAllTagsList("Bearer " + access_token);
-            getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>() {
+            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getAllList("Bearer " + access_token);
+            getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>()
+            {
                 @Override
                 public void onResponse(Call<GetAllTaskModel> getAllTaskModelCall1, Response<GetAllTaskModel> response) {
 
@@ -111,17 +97,17 @@ public class AlltaskFragment extends Fragment {
                             int status = response.body().getMeta().getStatus();
                             if (status == 200)
                             {
-                                responseList= response.body().getData().getResponse();
-                                if (responseList.size()==0)
+                                getAllTaskDataList = response.body().getData().getResponse();
+                                if (getAllTaskDataList.size()==0)
                                 {
                                     dialog.dismiss();
                                     binding.alltaskrecycler.setVisibility(View.GONE);
                                 }
-                                else if (responseList!=null)
+                                else if (getAllTaskDataList !=null)
                                 {
 
 
-                                    allTaskAdapter = new AllTaskAdapter(getActivity(), responseList);
+                                    allTaskAdapter = new AllTaskAdapter(getActivity(), getAllTaskDataList);
                                     binding.alltaskrecycler.setAdapter(allTaskAdapter);
                                     binding.alltaskrecycler.setVisibility(View.VISIBLE);
                                     binding.txtno.setVisibility(View.GONE);
@@ -130,11 +116,11 @@ public class AlltaskFragment extends Fragment {
                                     // on item list clicked
                                     allTaskAdapter.setOnItemClickListener(new AllTaskAdapter.OnItemClickListener() {
                                         @Override
-                                        public void onItemClick(View view, com.example.hrm.Model.GetAllTask.Response obj, int position)
+                                        public void onItemClick(View view, GetAllTaskData obj, int position)
                                         {
-                                            com.example.hrm.Model.GetAllTask.Response response1 =new com.example.hrm.Model.GetAllTask.Response();
-                                           response1 = responseList.get(position);
-                                            showCustomDialog(response1);
+                                            GetAllTaskData getAllTaskData1 =new GetAllTaskData();
+                                           getAllTaskData1 = getAllTaskDataList.get(position);
+                                            showCustomDialog(getAllTaskData1);
 
                                             Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
 
@@ -171,6 +157,7 @@ public class AlltaskFragment extends Fragment {
                 public void onFailure(Call<GetAllTaskModel> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();
@@ -186,7 +173,7 @@ public class AlltaskFragment extends Fragment {
         }
     }
 
-    private void showCustomDialog(com.example.hrm.Model.GetAllTask.Response response)
+    private void showCustomDialog(GetAllTaskData getAllTaskData)
     {
 
         dialogTaskdetailsBinding = DialogTaskdetailsBinding.inflate(getLayoutInflater());
@@ -202,11 +189,11 @@ public class AlltaskFragment extends Fragment {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        String name=response.getName();
-        String notes=response.getNotes();
-        String duedate=response.getDueDate();
+        String name= getAllTaskData.getName();
+        String notes= getAllTaskData.getNotes();
+        String duedate= getAllTaskData.getDueDate();
 
-        int status=response.getStatus();
+        int status= getAllTaskData.getStatus();
         if (status==1)
         {
 
@@ -216,7 +203,7 @@ public class AlltaskFragment extends Fragment {
             dialogTaskdetailsBinding.btnPend.setVisibility(View.VISIBLE);
         }
 
-        int tag=response.getTag();
+        int tag= getAllTaskData.getTag();
         if (tag==1)
         {
 

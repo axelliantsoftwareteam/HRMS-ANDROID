@@ -12,17 +12,17 @@ public class Data {
 
     @SerializedName("Response")
     @Expose
-    private List<Response> response = null;
+    private List<GetAllTaskData> getAllTaskData = null;
     @SerializedName("counts_info")
     @Expose
     private CountsInfo countsInfo;
 
-    public List<Response> getResponse() {
-        return response;
+    public List<GetAllTaskData> getResponse() {
+        return getAllTaskData;
     }
 
-    public void setResponse(List<Response> response) {
-        this.response = response;
+    public void setResponse(List<GetAllTaskData> getAllTaskData) {
+        this.getAllTaskData = getAllTaskData;
     }
 
     public CountsInfo getCountsInfo() {

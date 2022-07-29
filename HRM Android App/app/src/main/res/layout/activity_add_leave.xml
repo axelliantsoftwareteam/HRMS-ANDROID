@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/appbar_padding_top_tolbar"
+        android:layout_height="wrap_content"
         android:background="@color/colorApp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -32,9 +32,8 @@
                 android:layout_marginLeft="50dp"
                 android:text="Leaves"
                 android:textColor="@color/white"
-                android:textSize="18sp"
 
-                />
+                android:textSize="18sp" />
 
         </RelativeLayout>
 

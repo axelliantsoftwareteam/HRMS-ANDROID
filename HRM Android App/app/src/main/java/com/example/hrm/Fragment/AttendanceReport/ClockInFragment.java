@@ -130,10 +130,17 @@ public class ClockInFragment extends Fragment {
 
 
 
+        binding.btnreqtodayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCustomDialogout();
+                //Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+            }
+        });
         binding.btnReqtodayin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //showCustomDialog();
+                showCustomDialog();
                 //Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
             }
         });
@@ -261,6 +268,15 @@ public class ClockInFragment extends Fragment {
                                     RecyclerView.setAdapter(clockOutAdapter);
                                     dialog.dismiss();
 
+                                    // on item list clicked
+                                    clockOutAdapter.setOnItemClickListener(new ClockOutAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(View view, CheckOutDetail obj, int position) {
+                                            showoutDialog();
+                                        }
+
+                                    });
+
 
                                 }
 
@@ -330,6 +346,245 @@ public class ClockInFragment extends Fragment {
 //
 //    }
 
+
+    //checkut request open call
+
+    private void showCustomDialogout()
+    {
+
+        dialogEventBinding = DialogEventBinding.inflate(getLayoutInflater());
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(dialogEventBinding.getRoot());
+        dialog.setCancelable(true);
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+        dialogEventBinding.leavetype.setText("Check Out");
+
+
+
+
+        dialogEventBinding.primage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int requestCode = 200;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(permissions, requestCode);
+                    //  showPictureDialog();
+//                    takePhotoFromCamera();
+//                    dispatchTakePictureIntent();
+                    showPictureDialog();
+
+                }
+
+
+            }
+        });
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = format.format(calendar.getTime());
+        dialogEventBinding.etStartdate.setText(dateString);
+        sdate = dialogEventBinding.etStartdate.getText().toString().trim();
+
+
+
+
+        dialogEventBinding.etTimeFrom.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+                    {
+                        Date dt = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+                        String time1 = sdf.format(dt);
+                        dialogEventBinding.etTimeFrom.setText(time1);
+
+                        stime = dialogEventBinding.etTimeFrom.getText().toString().trim();
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
+
+        dialogEventBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                Toast.makeText(getActivity(), "No Thanks", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+        });
+        dialogEventBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                msg=dialogEventBinding.msg.getText().toString();
+                AddReqout(token);
+                dialog.dismiss();
+
+            }
+        });
+
+
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    private void AddReqout(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<AttenReqResponse> attenReqResponseCall = ApiHandler.getApiInterface().AddAttendReq("Bearer " + token,ApiMapout());
+
+            attenReqResponseCall.enqueue(new Callback<AttenReqResponse>() {
+                @Override
+                public void onResponse(Call<AttenReqResponse> attenReqResponseCall, Response<AttenReqResponse> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AttenReqResponse> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiMapout() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("type", "2");
+            jsonObj_.put("date", sdate);
+            jsonObj_.put("time", stime);
+            jsonObj_.put("reason", msg);
+            jsonObj_.put("image", "asdsdsdsd");
+
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
+
+//close the check request call
+
+
+
+    // check in request call
     private void showCustomDialog()
     {
 
@@ -599,6 +854,241 @@ public class ClockInFragment extends Fragment {
 
         return gsonObject;
     }
+
+
+    // check in request call
+
+    private void showoutDialog()
+    {
+
+        dialogEventBinding = DialogEventBinding.inflate(getLayoutInflater());
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(dialogEventBinding.getRoot());
+        dialog.setCancelable(true);
+
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+        dialogEventBinding.leavetype.setText("Check In");
+
+
+
+
+        dialogEventBinding.primage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int requestCode = 200;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(permissions, requestCode);
+                    //  showPictureDialog();
+//                    takePhotoFromCamera();
+//                    dispatchTakePictureIntent();
+                    showPictureDialog();
+
+                }
+
+
+            }
+        });
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = format.format(calendar.getTime());
+        dialogEventBinding.etStartdate.setText(dateString);
+        sdate = dialogEventBinding.etStartdate.getText().toString().trim();
+
+
+
+
+        dialogEventBinding.etTimeFrom.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+                    {
+                        Date dt = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+                        String time1 = sdf.format(dt);
+                        dialogEventBinding.etTimeFrom.setText(time1);
+
+                        stime = dialogEventBinding.etTimeFrom.getText().toString().trim();
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+
+            }
+        });
+
+
+        dialogEventBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                Toast.makeText(getActivity(), "No Thanks", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+        });
+        dialogEventBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                msg=dialogEventBinding.msg.getText().toString();
+                AddReqs(token);
+                dialog.dismiss();
+
+            }
+        });
+
+
+
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    private void AddReqs(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<AttenReqResponse> attenReqResponseCall = ApiHandler.getApiInterface().AddAttendReq("Bearer " + token,ApiMapp());
+
+            attenReqResponseCall.enqueue(new Callback<AttenReqResponse>() {
+                @Override
+                public void onResponse(Call<AttenReqResponse> attenReqResponseCall, Response<AttenReqResponse> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),CheckRequest.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AttenReqResponse> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiMapp() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("type", "2");
+            jsonObj_.put("date", sdate);
+            jsonObj_.put("time", stime);
+            jsonObj_.put("reason", msg);
+            jsonObj_.put("image", "asdsdsdsd");
+
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
 
 
 //    private void dispatchTakePictureIntent() {

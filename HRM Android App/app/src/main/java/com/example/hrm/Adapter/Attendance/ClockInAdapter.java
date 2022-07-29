@@ -221,9 +221,11 @@ public class ClockInAdapter extends RecyclerView.Adapter<ClockInAdapter.MyViewHo
 
 
 
-        nothank.setOnClickListener(new View.OnClickListener() {
+        nothank.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
+
                 dialog.dismiss();
             }
         });

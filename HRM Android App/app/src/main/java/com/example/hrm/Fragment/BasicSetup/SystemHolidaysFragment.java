@@ -19,19 +19,12 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.HolidayAdapter;
-import com.example.hrm.Adapter.StaticData.StaticDataAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.HolidayModel.GetHolidayData;
-import com.example.hrm.Model.HolidayModel.GetHolidayModel;
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetMemberList;
-import com.example.hrm.Model.StaticDataModel.GetDataMember.GetStDataMemberModel;
-import com.example.hrm.Model.StaticDataModel.GetStaticDataModel;
-import com.example.hrm.R;
+import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayData;
+import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayModel;
 import com.example.hrm.Utility.SessionManager;
-import com.example.hrm.databinding.DialogAdddispmemberstdtBinding;
 import com.example.hrm.databinding.DialogAddholidayBinding;
 import com.example.hrm.databinding.DialogEditholidayBinding;
-import com.example.hrm.databinding.FragmentStaticDataBinding;
 import com.example.hrm.databinding.FragmentSystemHolidaysBinding;
 
 import java.util.ArrayList;

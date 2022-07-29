@@ -25,9 +25,9 @@ public class AttendancPagerAdapter extends FragmentStatePagerAdapter {
                 ClockInFragment tab1 = new ClockInFragment();
                 return tab1;
 
-            case 1:
-                ClockOutFragment tab2 = new ClockOutFragment();
-                return tab2;
+//            case 1:
+//                ClockOutFragment tab2 = new ClockOutFragment();
+//                return tab2;
 
             default:
                 return null;

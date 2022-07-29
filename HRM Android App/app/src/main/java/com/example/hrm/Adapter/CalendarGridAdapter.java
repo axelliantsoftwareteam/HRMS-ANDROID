@@ -53,7 +53,8 @@ public class CalendarGridAdapter extends ArrayAdapter {
         int currentMonth = currentDate.get(Calendar.MONTH) + 1;
         int currentYear = currentDate.get(Calendar.YEAR);
         View view = convertView;
-        if (view == null) {
+        if (view == null)
+        {
             view = mInflater.inflate(R.layout.calendar_single_cell_layout, parent, false);
         }
         //Add day to calendar
@@ -70,8 +71,8 @@ public class CalendarGridAdapter extends ArrayAdapter {
 
         Calendar currentData = Calendar.getInstance();
         if (dayValue == currentData.get(Calendar.DAY_OF_MONTH) && displayMonth == currentData.get(Calendar.MONTH) + 1 && displayYear == currentData.get(Calendar.YEAR)) {
-            cellNumber.setBackgroundResource(R.drawable.current_date_bg);
-            cellNumber.setTextColor(Color.parseColor("#FF0000"));
+            cellNumber.setBackgroundResource(R.drawable.button_nothanks_bg);
+            cellNumber.setTextColor(Color.parseColor("#000000"));
         }
         //Add events to the calendar
         TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
@@ -82,8 +83,8 @@ public class CalendarGridAdapter extends ArrayAdapter {
             if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
                     && displayYear == eventCalendar.get(Calendar.YEAR)) {
                 eventIndicator.setBackgroundColor(Color.parseColor("#FF4081"));
-                cellNumber.setTextColor(Color.parseColor("#303F9F"));
-                cellNumber.setBackgroundResource(R.drawable.event_date);
+                cellNumber.setTextColor(Color.parseColor("#FFFFFF"));
+                cellNumber.setBackgroundResource(R.drawable.button_bg);
                 eventObjects = allEvents.get(i);
             }
         }
