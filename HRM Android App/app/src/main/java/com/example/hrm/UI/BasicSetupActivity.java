@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.hrm.Adapter.RequestPagerAdapter.StaticDataPagerAdapter;
 import com.example.hrm.R;
@@ -39,7 +40,6 @@ public class BasicSetupActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.basictab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Static Data"));
         tabLayout.addTab(tabLayout.newTab().setText("System Holiday"));
-        tabLayout.addTab(tabLayout.newTab().setText("Resume"));
         tabLayout.addTab(tabLayout.newTab().setText("Skills"));
         tabLayout.addTab(tabLayout.newTab().setText("Shifts"));
         tabLayout.addTab(tabLayout.newTab().setText("Designation"));
@@ -73,6 +73,44 @@ public class BasicSetupActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+        binding.imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BasicSetupActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        binding.me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BasicSetupActivity.this, UserProfActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.fltHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(BasicSetupActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(BasicSetupActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BasicSetupActivity.this, More.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -121,4 +159,6 @@ public class BasicSetupActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
+
 }

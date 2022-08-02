@@ -2,6 +2,7 @@ package com.example.hrm.Fragment.BasicSetup;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -19,12 +20,20 @@ import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.SkillsAdapter;
 import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.BasicSetup.Skills.AddSkill.Addskill;
 import com.example.hrm.Model.BasicSetup.Skills.GetSkills;
 import com.example.hrm.Model.BasicSetup.Skills.GetSkillsData;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.AddStatic.Addstatic;
+import com.example.hrm.UI.BasicSetupActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAddskillBinding;
 import com.example.hrm.databinding.DialogEditskillBinding;
 import com.example.hrm.databinding.FragmentSkillsBinding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +60,10 @@ public class SkillsFragment extends Fragment {
     List<GetSkillsData> getSkillsDataList = new ArrayList<>();
 
 
-
+    String stskill,stdecrpt;
     SessionManager sessionManager;
-    String token, sname;
+    String token, sname,sdisply;
+    Integer sidd;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,15 +142,18 @@ public class SkillsFragment extends Fragment {
                                         @Override
                                         public void onItemClick(View view, GetSkillsData obj, int position) {
                                             GetSkillsData getSkillsData = getSkillsDataList.get(position);
-//                                            String name =getHolidayData.getType();
-//                                            String val=getHolidayData.getStartDate();
+                                            String name =getSkillsData.getName();
+                                            String val=getSkillsData.getDescription();
+                                            Integer sid=getSkillsData.getId();
+                                            showEditDialog(name,val,sid);
+
 
 
 
 
                                             // Log.e("Tag", "work" + name.toString());
 
-                                            showEditDialog();
+
                                         }
                                     });
 
@@ -151,6 +164,7 @@ public class SkillsFragment extends Fragment {
                         } else {
                             binding.txtno.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
 
                         }
 
@@ -172,6 +186,7 @@ public class SkillsFragment extends Fragment {
                 public void onFailure(Call<GetSkills> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();
@@ -187,6 +202,8 @@ public class SkillsFragment extends Fragment {
         }
 
     }
+
+
     private void Addskill()
     {
         dialogAddskillBinding = DialogAddskillBinding.inflate(getLayoutInflater());
@@ -208,6 +225,9 @@ public class SkillsFragment extends Fragment {
             public void onClick(View v)
             {
                 //  AddReq(token);
+                stskill=dialogAddskillBinding.etname.getText().toString();
+                stdecrpt=dialogAddskillBinding.etdescrpt.getText().toString();
+                Addskill(token);
                 dialog.dismiss();
 
             }
@@ -231,7 +251,132 @@ public class SkillsFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
-    private void showEditDialog()
+
+    private void Addskill(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<Addskill> addskillCall = ApiHandler.getApiInterface().addskills("Bearer " + token,Apimember());
+
+            addskillCall.enqueue(new Callback<Addskill>() {
+                @Override
+                public void onResponse(Call<Addskill> addskillCall1, Response<Addskill> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Addskill> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject Apimember() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("name", stskill);
+            jsonObj_.put("description", stdecrpt);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
+    private void showEditDialog(String name, String decrpt,Integer id)
     {
 
         dialogEditskillBinding = DialogEditskillBinding.inflate(getLayoutInflater());
@@ -240,7 +385,8 @@ public class SkillsFragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(dialogEditskillBinding.getRoot());
         dialog.setCancelable(true);
-
+        dialogEditskillBinding.etname.setText(name);
+        dialogEditskillBinding.etdescript.setText(decrpt);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
@@ -252,7 +398,11 @@ public class SkillsFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //  AddReq(token);
+                sidd = id;
+                sname=dialogEditskillBinding.etname.getText().toString().trim();
+                sdisply=dialogEditskillBinding.etdescript.getText().toString().trim();
+                Log.e("value", "" + sdisply.toString());
+                ActionMembr(token);
                 dialog.dismiss();
 
             }
@@ -276,5 +426,132 @@ public class SkillsFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
+
+    private void ActionMembr(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<Addskill> addskillCall = ApiHandler.getApiInterface().addskills("Bearer " + token,ApiAction());
+
+            addskillCall.enqueue(new Callback<Addskill>() {
+                @Override
+                public void onResponse(Call<Addskill> addskillCall1, Response<Addskill> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+//                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+//                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+//                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+//                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+//                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+//                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Addskill> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiAction() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("id", sidd);
+            jsonObj_.put("name", sname);
+            jsonObj_.put("description", sdisply);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
+
 
 }

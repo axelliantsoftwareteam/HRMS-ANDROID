@@ -165,10 +165,10 @@ public class TasksActivity extends AppCompatActivity {
         ArrayAdapter<String> tagadapter = new ArrayAdapter<String>(TasksActivity.this,
                 android.R.layout.simple_spinner_item, tagpaths);
         tagadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+        binding.spinnerlisttag.setAdapter(tagadapter);
 
         binding.spinnerlisttask.setAdapter(adapter);
-        binding.spinnerlisttag.setAdapter(tagadapter);
+
 
         binding.spinnerlisttask.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

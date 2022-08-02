@@ -2,6 +2,7 @@ package com.example.hrm.Fragment.BasicSetup;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -19,12 +20,20 @@ import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.BuildingAdapter;
 import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.BasicSetup.Skills.AddSkill.Addskill;
+import com.example.hrm.Model.Building.AddBuild.AddBuild;
 import com.example.hrm.Model.Building.GetBuilding;
 import com.example.hrm.Model.Building.GetBuildingData;
+import com.example.hrm.UI.BasicSetupActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAddbuildBinding;
 import com.example.hrm.databinding.DialogEditbuildBinding;
 import com.example.hrm.databinding.FragmentBuildingsBinding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,22 +46,19 @@ import retrofit2.Response;
 public class BuildingsFragment extends Fragment {
 
 
-
     private FragmentBuildingsBinding binding;
     private DialogAddbuildBinding dialogAddbuildBinding;
     private DialogEditbuildBinding dialogEditbuildBinding;
-
-
 
 
     private RecyclerView.LayoutManager mLayoutManager;
     BuildingAdapter buildingAdapter;
 
     SessionManager sessionManager;
-    String token, sname;
+    String token, sname, sdescrpt, saddr,namebulid,sdescrptbuild,saddrbuild;
+    Integer sbulidid;
 
     List<GetBuildingData> getBuildingDataList = new ArrayList<>();
-
 
 
     @Override
@@ -75,7 +81,6 @@ public class BuildingsFragment extends Fragment {
         binding.buildrecycler.setLayoutManager(mLayoutManager);
 
 
-
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
 
@@ -83,10 +88,9 @@ public class BuildingsFragment extends Fragment {
 
         binding.btnaddstdt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
-                Addbuild();
+                Addbuild(token);
 
             }
         });
@@ -95,8 +99,7 @@ public class BuildingsFragment extends Fragment {
         return view;
     }
 
-    private void getbuild(final String access_token)
-    {
+    private void getbuild(final String access_token) {
         try {
 
             final ProgressDialog dialog;
@@ -132,16 +135,16 @@ public class BuildingsFragment extends Fragment {
                                     buildingAdapter.setOnItemClickListener(new BuildingAdapter.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(View view, GetBuildingData obj, int position) {
-                                            GetBuildingData getHolidayData = getBuildingDataList.get(position);
-//                                            String name =getHolidayData.getType();
-//                                            String val=getHolidayData.getStartDate();
-
-
+                                            GetBuildingData getBuildingData = getBuildingDataList.get(position);
+                                             namebulid =getBuildingData.getName();
+                                             sdescrptbuild=getBuildingData.getDescription();
+                                             saddrbuild=getBuildingData.getAddress();
+                                            sbulidid=getBuildingData.getId();
 
 
                                             // Log.e("Tag", "work" + name.toString());
 
-                                            showEditDialog();
+                                            showEditDialog(token,namebulid,sdescrptbuild,saddrbuild,sbulidid);
                                         }
                                     });
 
@@ -191,8 +194,7 @@ public class BuildingsFragment extends Fragment {
 
     }
 
-    private void Addbuild()
-    {
+    private void Addbuild(String token) {
         dialogAddbuildBinding = DialogAddbuildBinding.inflate(getLayoutInflater());
 
         final Dialog dialog = new Dialog(getActivity());
@@ -209,9 +211,13 @@ public class BuildingsFragment extends Fragment {
 
         dialogAddbuildBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                //  AddReq(token);
+            public void onClick(View v) {
+                sname = dialogAddbuildBinding.etname.getText().toString().trim();
+                sdescrpt = dialogAddbuildBinding.etdescrpt.getText().toString().trim();
+                saddr = dialogAddbuildBinding.etaddr.getText().toString().trim();
+
+                AddBuild(token);
+
                 dialog.dismiss();
 
             }
@@ -219,8 +225,7 @@ public class BuildingsFragment extends Fragment {
 
         dialogAddbuildBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  AddReq(token);
                 dialog.dismiss();
 
@@ -228,15 +233,11 @@ public class BuildingsFragment extends Fragment {
         });
 
 
-
-
-
-
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
-    private void showEditDialog()
-    {
+
+    private void showEditDialog(String token, String snamebul,String sdescrt,String sbuildaddr,Integer iid) {
 
         dialogEditbuildBinding = DialogEditbuildBinding.inflate(getLayoutInflater());
 
@@ -244,6 +245,10 @@ public class BuildingsFragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(dialogEditbuildBinding.getRoot());
         dialog.setCancelable(true);
+
+        dialogEditbuildBinding.etname.setText(snamebul);
+        dialogEditbuildBinding.etdescript.setText(sdescrt);
+        dialogEditbuildBinding.etaddr.setText(sbuildaddr);
 
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -256,7 +261,11 @@ public class BuildingsFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //  AddReq(token);
+                sbulidid=iid;
+                namebulid=dialogEditbuildBinding.etname.getText().toString().trim();
+                sdescrptbuild=dialogEditbuildBinding.etdescript.getText().toString().trim();
+                saddrbuild=dialogEditbuildBinding.etaddr.getText().toString().trim();
+                ActionMembr(token);
                 dialog.dismiss();
 
             }
@@ -264,8 +273,7 @@ public class BuildingsFragment extends Fragment {
 
         dialogEditbuildBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  AddReq(token);
                 dialog.dismiss();
 
@@ -273,12 +281,260 @@ public class BuildingsFragment extends Fragment {
         });
 
 
-
-
-
-
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
+
+
+    private void AddBuild(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<AddBuild> addBuildCall = ApiHandler.getApiInterface().addbuild("Bearer " + token,Apimember());
+
+            addBuildCall.enqueue(new Callback<AddBuild>() {
+                @Override
+                public void onResponse(Call<AddBuild> addBuildCall1, Response<AddBuild> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AddBuild> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject Apimember() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("name", sname);
+            jsonObj_.put("description", sdescrpt);
+            jsonObj_.put("address", saddr);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+    private void ActionMembr(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<AddBuild> addBuildCall = ApiHandler.getApiInterface().addbuild("Bearer " + token,ApiAction());
+
+            addBuildCall.enqueue(new Callback<AddBuild>() {
+                @Override
+                public void onResponse(Call<AddBuild> addBuildCall1, Response<AddBuild> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+//                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+//                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+//                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+//                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AddBuild> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiAction() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("id", sbulidid);
+            jsonObj_.put("name", namebulid);
+            jsonObj_.put("description", sdescrptbuild);
+            jsonObj_.put("address", saddrbuild);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
 
 }

@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,18 +21,27 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.hrm.Adapter.Calender.CalenderEventAdapter;
 import com.example.hrm.Adapter.CustomAdapter;
+import com.example.hrm.Adapter.Leaves.ApprovLeavesAdapter;
 import com.example.hrm.Fragment.Tasks.AlltaskFragment;
 import com.example.hrm.Fragment.Tasks.CompletedFragment;
 import com.example.hrm.Fragment.Tasks.PendingFragment;
 import com.example.hrm.Fragment.Tasks.SevendaysFragment;
 import com.example.hrm.Fragment.Tasks.TodayFragment;
+import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Interface.OnCalenderDayClickListener;
+import com.example.hrm.Model.Calender.GetCalender;
+import com.example.hrm.Model.Calender.GetCalenderData;
 import com.example.hrm.Model.CalenderEventObjects;
+import com.example.hrm.Model.LeavesModel.AllLeavesModel;
+import com.example.hrm.Model.LeavesModel.Leaves;
 import com.example.hrm.R;
+import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivityCalendarBinding;
 import com.example.hrm.databinding.DialogAdddispmemberstdtBinding;
 import com.example.hrm.databinding.DialogAddnewvaluestdtBinding;
@@ -44,12 +55,27 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CalendarActivity extends AppCompatActivity implements OnCalenderDayClickListener {
 
 
     List<CalenderEventObjects> mEvents;
     RecyclerView eventsView;
     CustomAdapter mAdapter;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    CalenderEventAdapter calenderEventAdapter;
+
+    SessionManager sessionManager;
+    String token;
+
+    TextView noleave;
+
+    List<GetCalenderData> getCalenderDataList= new ArrayList<>();
 
 
     private static final String[] eventtype = {"Task", "Event"};
@@ -74,6 +100,16 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
 
         isNetworkConnectionAvailable();
 
+//        binding.eventsView.setHasFixedSize(true);
+//
+//        // use a linear layout manager
+//        mLayoutManager = new LinearLayoutManager(CalendarActivity.this);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        sessionManager = new SessionManager(CalendarActivity.this);
+//        token = sessionManager.getToken();
+//
+//        getcalender(token);
 
 
         CalendarCustomView mView = (CalendarCustomView) findViewById(R.id.custom_calendar);
@@ -85,31 +121,33 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
         eventsView.setLayoutManager(new LinearLayoutManager(this));
         eventsView.setAdapter(mAdapter);
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
+       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+       try {
             String dtStart = "2022-07-15";
             String dtStart1 = "2022-07-17";
-            String dtStart2 = "2022-06-17";
-            String dtStart3 = "2022-07-1";
-            String dtStart4 = "2022-08-4";
-            Date date = format.parse(dtStart);
-            Date date1 = format.parse(dtStart1);
-            Date date2 = format.parse(dtStart2);
-            Date date3 = format.parse(dtStart3);
+           String dtStart2 = "2022-06-17";
+           String dtStart3 = "2022-07-1";
+           String dtStart4 = "2022-08-4";
+           Date date = format.parse(dtStart);
+           Date date1 = format.parse(dtStart1);
+          Date date2 = format.parse(dtStart2);
+           Date date3 = format.parse(dtStart3);
             Date date4 = format.parse(dtStart4);
 
-            CalenderEventObjects event1 = new CalenderEventObjects("Test", "test", date);
-            CalenderEventObjects event2 = new CalenderEventObjects("Meeting", "test", date1);
-            CalenderEventObjects event3 = new CalenderEventObjects("Meeting", "test", date2);
-            CalenderEventObjects event4 = new CalenderEventObjects("Meeting", "test", date3);
-            CalenderEventObjects event5 = new CalenderEventObjects("Meeting", "test", date4);
+           CalenderEventObjects event1 = new CalenderEventObjects("Test", "test", date);
+           CalenderEventObjects event2 = new CalenderEventObjects("Meeting", "test", date1);
+           CalenderEventObjects event3 = new CalenderEventObjects("Meeting", "test", date2);
+           CalenderEventObjects event4 = new CalenderEventObjects("Meeting", "test", date3);
+           CalenderEventObjects event5 = new CalenderEventObjects("Meeting", "test", date4);
             mEvents.add(event1);
-            mEvents.add(event2);
-            mEvents.add(event3);
-            mEvents.add(event4);
-            mEvents.add(event5);
+           mEvents.add(event2);
+           mEvents.add(event3);
+           mEvents.add(event4);
+           mEvents.add(event5);
 
-        } catch (ParseException e) {
+        }
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
 
@@ -160,7 +198,7 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
     }
     @Override
     public void onDayClick(int position, String date, CalenderEventObjects eventObjects) {
-        mAdapter.clearItem();
+//        mAdapter.clearItem();
         if (eventObjects != null)
         {
             Log.e("eventObjects",""+eventObjects);
@@ -172,6 +210,83 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
             Toast.makeText(this, "" + date, Toast.LENGTH_SHORT).show();
         }
     }
+    private void getcalender(final String access_token) {
+        try {
+
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(CalendarActivity.this);
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<GetCalender> getCalenderCall = ApiHandler.getApiInterface().getCalenderinfo("Bearer " + access_token);
+            getCalenderCall.enqueue(new Callback<GetCalender>() {
+                @Override
+                public void onResponse(Call<GetCalender> getCalenderCall1, Response<GetCalender> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200)
+                            {
+
+                                getCalenderDataList = response.body().getData().getResponse();
+                                if (getCalenderDataList.size()==0)
+                                {
+                                    dialog.dismiss();
+                                    mRecyclerView.setVisibility(View.GONE);
+                                }
+                                else if (getCalenderDataList!=null){
+
+                                    calenderEventAdapter = new CalenderEventAdapter(CalendarActivity.this, getCalenderDataList);
+                                    mRecyclerView.setAdapter(calenderEventAdapter);
+                                    mRecyclerView.setVisibility(View.VISIBLE);
+                                    noleave.setVisibility(View.GONE);
+                                    dialog.dismiss();
+                                }
+
+                            }
+
+                        } else {
+                            noleave.setVisibility(View.VISIBLE);
+                            Toast.makeText(CalendarActivity.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetCalender> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     private void addevent()

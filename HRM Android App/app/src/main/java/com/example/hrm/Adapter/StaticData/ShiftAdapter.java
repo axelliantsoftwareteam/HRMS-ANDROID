@@ -2,10 +2,12 @@ package com.example.hrm.Adapter.StaticData;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -96,7 +98,6 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.MyViewHolder
         holder.descript.setText(getShiftData.getDescription());
         holder.sttime.setText(getShiftData.getStartTime());
         holder.endtime.setText(getShiftData.getEndTime());
-
     }
 
     @Override

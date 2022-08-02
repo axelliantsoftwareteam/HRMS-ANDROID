@@ -42,37 +42,26 @@ public class StaticDataPagerAdapter extends FragmentStatePagerAdapter {
                 SystemHolidaysFragment tab2 = new SystemHolidaysFragment();
                 return tab2;
             case 2:
-                ResumeFragment tab3 = new ResumeFragment();
+                SkillsFragment tab3 = new SkillsFragment();
                 return tab3;
             case 3:
-                SkillsFragment tab4 = new SkillsFragment();
+                ShiftsFragment tab4 = new ShiftsFragment();
                 return tab4;
             case 4:
-                ShiftsFragment tab5 = new ShiftsFragment();
+                DesignationFragment tab5 = new DesignationFragment();
                 return tab5;
             case 5:
-                DesignationFragment tab6 = new DesignationFragment();
+                BuildingsFragment tab6 = new BuildingsFragment();
                 return tab6;
             case 6:
-                BuildingsFragment tab7 = new BuildingsFragment();
+                RolesFragment tab7 = new RolesFragment();
                 return tab7;
             case 7:
-                RolesFragment tab8 = new RolesFragment();
+                DepartmentFragment tab8 = new DepartmentFragment();
                 return tab8;
             case 8:
-                DepartmentFragment tab9 = new DepartmentFragment();
+                GroupsFragment tab9 = new GroupsFragment();
                 return tab9;
-            case 9:
-                GroupsFragment tab10 = new GroupsFragment();
-                return tab10;
-
-
-
-
-
-
-
-
             default:
                 return null;
         }

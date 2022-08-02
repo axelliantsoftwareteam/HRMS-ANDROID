@@ -61,7 +61,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.ly_build, parent, false);
+                .inflate(R.layout.ly_skills, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
 

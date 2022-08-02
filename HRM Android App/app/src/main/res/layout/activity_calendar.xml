@@ -31,7 +31,6 @@
                 android:layout_marginLeft="50dp"
                 android:text="@string/calender"
                 android:textColor="@color/white"
-
                 android:textSize="18sp" />
 
         </RelativeLayout>
@@ -58,13 +57,17 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/eventsView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@+id/linear"
         android:layout_below="@+id/et_leave"
-        android:layout_margin="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
         android:layout_weight="1"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout

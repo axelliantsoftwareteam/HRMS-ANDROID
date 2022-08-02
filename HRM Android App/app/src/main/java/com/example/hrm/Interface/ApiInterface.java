@@ -7,8 +7,17 @@ import com.example.hrm.Model.AddLeaveRequestModel.AddLeaveReq;
 import com.example.hrm.Model.Approval.AttendApproval.GetAttendApprolModel;
 import com.example.hrm.Model.Approval.LeavesApproval.GetLeaveApprolModel;
 import com.example.hrm.Model.Attendance.AttendanceResponse;
-import com.example.hrm.Model.BasicSetup.Designation.GetDesignation;
+import com.example.hrm.Model.BasicSetup.Department.GetDepartment;
+import com.example.hrm.Model.BasicSetup.Designation.GetAllDesign.GetAllDesignation;
+import com.example.hrm.Model.BasicSetup.Designation.GetDesig;
+import com.example.hrm.Model.BasicSetup.Group.GetGroup;
+import com.example.hrm.Model.BasicSetup.Roles.GetRoles;
+import com.example.hrm.Model.BasicSetup.Shifts.GetShift;
+import com.example.hrm.Model.BasicSetup.Skills.AddSkill.Addskill;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.AddStatic.Addstatic;
+import com.example.hrm.Model.Building.AddBuild.AddBuild;
 import com.example.hrm.Model.Building.GetBuilding;
+import com.example.hrm.Model.Calender.GetCalender;
 import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
 import com.example.hrm.Model.Evalution.GetEvaluation;
@@ -24,7 +33,6 @@ import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Model.MicLogin.TokenModel;
 import com.example.hrm.Model.Organo.OrganoModel;
 import com.example.hrm.Model.ReqAttendList.RequestListModel;
-import com.example.hrm.Model.BasicSetup.Shifts.GetShift;
 import com.example.hrm.Model.BasicSetup.Skills.GetSkills;
 import com.example.hrm.Model.SpinerModel.SpinerLeaves;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetStDataMemberModel;
@@ -60,6 +68,30 @@ public interface ApiInterface
 //    @GET("admin/getProfile")
 //    Call<UserDataModel> getUserDetail(@Header("Authorization") String auth);
 
+    @Headers("Content-Type: application/json")
+    @POST("admin/addStaticDataInfo")
+    Call<Addstatic>addstatic(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+//add Skills
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditSkill")
+    Call<Addskill>addskills(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+    //add Building
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditBuilding")
+    Call<AddBuild>addbuild(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+    //add holiday
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditHoliday")
+    Call<GetHolidayModel>addhoilday(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+
+    //add Shift
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditSkill")
+    Call<Addskill>addshifts(@Header("Authorization") String auth, @Body JsonObject jsonBody);
 
     // Get all Static Data Member
     @GET("admin/getAllDisplayMember")
@@ -72,7 +104,12 @@ public interface ApiInterface
     Call<GetStDataMemberModel>getSelectMember(@Header("Authorization") String auth,
                                               @Query("displayMember") String member);
 
+    // https://devhris.khazanapk.com/api/admin/?displayMember=Holiday
+    // Get all Static Data Member Hoilday data
 
+    @GET("admin/getStaticDataByDisplayMember")
+    Call<GetStDataMemberModel>getHoliday(@Header("Authorization") String auth,
+                                              @Query("displayMember") String member);
 
 
     // Get all Holiday
@@ -93,17 +130,51 @@ public interface ApiInterface
     @GET("admin/getEvaluationQuestions")
     Call<GetEvalQuestion>getEvalQuest(@Header("Authorization") String auth);
 
+
+    // Get all Designation
+    @GET("admin/get_calendar_info")
+    Call<GetCalender> getCalenderinfo(@Header("Authorization") String auth);
+
+
     // Get all Designation
     @GET("admin/getAllDesignation")
-    Call<GetDesignation> getDesignation(@Header("Authorization") String auth);
+    Call<GetAllDesignation> getDesignation(@Header("Authorization") String auth);
+    //add Designation
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditDesignation")
+    Call<GetDesig>addDesignation(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+    // Get all Department
+    @GET("admin/getalldepartments")
+    Call<GetDepartment> getDepart(@Header("Authorization") String auth);
+    //add Department
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditDepartment")
+    Call<AddBuild>addDepart(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+    // Get all Roles
+    @GET("admin/getallroles")
+    Call<GetRoles>getroles(@Header("Authorization") String auth);
+
+    // Get all Groups
+    @GET("admin/getAllGroup")
+    Call<GetGroup> getgroups(@Header("Authorization") String auth);
+
+
+    //add Groups
+    @Headers("Content-Type: application/json")
+    @POST("admin/addEditGroup")
+    Call<GetGroup>addgroups(@Header("Authorization") String auth, @Body JsonObject jsonBody);
+
+
 
     // Get all Skills
     @GET("admin/getAllSkills")
     Call<GetSkills> getSkill(@Header("Authorization") String auth);
 
     // Get all
-    @GET("admin/getAllSkills")
-    Call<GetShift> getShift(@Header("Authorization") String auth);
+    @GET("admin/getallshifts")
+    Call<GetShift>getShift(@Header("Authorization") String auth);
 
 
     // Approval Attendance List

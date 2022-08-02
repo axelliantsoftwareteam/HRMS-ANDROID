@@ -2,6 +2,7 @@ package com.example.hrm.Fragment.BasicSetup;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -21,14 +22,23 @@ import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.StaticDataAdapter;
 import com.example.hrm.Hundler.ApiHandler;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.AddStatic.Addstatic;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetStDataMemberModel;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetStaticDataModel;
+import com.example.hrm.Model.LeaveRequestModel.LeavesRequest;
+import com.example.hrm.UI.AddLeave;
+import com.example.hrm.UI.BasicSetupActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAdddispmemberstdtBinding;
 import com.example.hrm.databinding.DialogAddnewvaluestdtBinding;
 import com.example.hrm.databinding.DialogEditstaticdataBinding;
 import com.example.hrm.databinding.FragmentStaticDataBinding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +62,10 @@ public class StaticDataFragment extends Fragment {
 
     private RecyclerView.LayoutManager mLayoutManager;
     StaticDataAdapter staticDataAdapter;
+
+    String etvalue ,stmember, addvalue,addmember;
+    String sdisply,svalue;
+    Integer sidd;
 
 
     List<String> data = new ArrayList<>();
@@ -136,6 +150,7 @@ public class StaticDataFragment extends Fragment {
                             if (status == 200) {
                                 data = response.body().getData().getResponse();
 
+
                                 Log.e("Tag", "respone" + data.toString());
 
                                 // setspiner(data);
@@ -158,7 +173,7 @@ public class StaticDataFragment extends Fragment {
                                 dialog.dismiss();
 
 
-                                //   Toast.makeText(AddLeave.this, ""+data, Toast.LENGTH_SHORT).show();
+                                //   Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
                             }
 
                             binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -270,13 +285,14 @@ public class StaticDataFragment extends Fragment {
 
 
                                             GetMemberList getMemberList = getMemberLists.get(position);
-                                            String name =getMemberList.getDisplayMember();
-                                            String val=getMemberList.getValue();
+                                            String displayMember  =getMemberList.getDisplayMember();
+                                            String value =getMemberList.getValue();
+                                            Integer idd =getMemberList.getId();
 
 
-                                            // Log.e("Tag", "work" + name.toString());
+                                             Log.e("Tag", "work" + displayMember.toString());
 
-                                            showCustomDialog(name,val);
+                                            showCustomDialog(displayMember,value,idd);
 
                                         }
                                     });
@@ -325,7 +341,7 @@ public class StaticDataFragment extends Fragment {
 
     }
 
-    private void showCustomDialog(String name,String val) {
+    private void showCustomDialog(String name,String val,Integer id) {
 
         dialogEditstaticdataBinding = DialogEditstaticdataBinding.inflate(getLayoutInflater());
 
@@ -346,7 +362,12 @@ public class StaticDataFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //  AddReq(token);
+
+                sidd = id;
+                sdisply=name;
+                svalue=dialogEditstaticdataBinding.etvalue.getText().toString().trim();;
+                Log.e("value", "" + svalue.toString());
+                ActionMembr(token);
                 dialog.dismiss();
 
             }
@@ -388,13 +409,15 @@ public class StaticDataFragment extends Fragment {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         dialogAddnewvaluestdtBinding.txtDisplayname.setText(name);
-     //   dialogAddnewvaluestdtBinding.etvalue.setText(name);
 
         dialogAddnewvaluestdtBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                //  AddReq(token);
+
+                etvalue = dialogAddnewvaluestdtBinding.etvalue.getText().toString().trim();
+                stmember =name;
+                Addstaticvalue(token);
                 dialog.dismiss();
 
             }
@@ -440,7 +463,11 @@ public class StaticDataFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //  AddReq(token);
+
+
+                addmember=dialogAdddispmemberstdtBinding.etmember.getText().toString();
+                addvalue=dialogAdddispmemberstdtBinding.etvalue.getText().toString();
+                Addmemberstatic(token);
                 dialog.dismiss();
 
             }
@@ -463,6 +490,379 @@ public class StaticDataFragment extends Fragment {
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
+    }
+
+    private void Addmemberstatic(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<Addstatic> addstaticCall = ApiHandler.getApiInterface().addstatic("Bearer " + token,Apimember());
+
+            addstaticCall.enqueue(new Callback<Addstatic>() {
+                @Override
+                public void onResponse(Call<Addstatic> addstaticCall1, Response<Addstatic> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Addstatic> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject Apimember() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("displayMember", addvalue);
+            jsonObj_.put("value", addmember);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
+
+    private void Addstaticvalue(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<Addstatic> addstaticCall = ApiHandler.getApiInterface().addstatic("Bearer " + token,ApiMapJson());
+
+            addstaticCall.enqueue(new Callback<Addstatic>() {
+                @Override
+                public void onResponse(Call<Addstatic> addstaticCall1, Response<Addstatic> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Addstatic> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiMapJson() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("displayMember", stmember);
+            jsonObj_.put("value", etvalue);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+    private void ActionMembr(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<Addstatic> addstaticCall = ApiHandler.getApiInterface().addstatic("Bearer " + token,ApiAction());
+
+            addstaticCall.enqueue(new Callback<Addstatic>() {
+                @Override
+                public void onResponse(Call<Addstatic> addstaticCall1, Response<Addstatic> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Addstatic> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject ApiAction() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("id", sidd);
+            jsonObj_.put("displayMember", sdisply);
+            jsonObj_.put("value", svalue);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
     }
 
 

@@ -166,5 +166,11 @@
     <string name="coach">test</string>
     <string name="star">Star</string>
     <string name="myevaluation">My Evaluation</string>
+    <string name="department">Departments</string>
+    <string name="group">Group</string>
+    <string name="workflow">Work Flow</string>
+    <string name="tier">Tier</string>
+    <string name="role">Roles</string>
+    <string name="associate">Associate Screen Role</string>
 
 </resources>

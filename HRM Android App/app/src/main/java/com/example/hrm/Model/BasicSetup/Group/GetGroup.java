@@ -1,13 +1,12 @@
 
-package com.example.hrm.Model.BasicSetup.Designation;
+package com.example.hrm.Model.BasicSetup.Group;
 
 import javax.annotation.Generated;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
-public class GetDesignation {
+public class GetGroup {
 
     @SerializedName("data")
     @Expose

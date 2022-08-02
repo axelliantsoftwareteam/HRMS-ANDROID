@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.EmployeeManagment.WorkFlowFragment">
+
+
+    <TextView
+
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_medium"
+        android:text="@string/workflow"
+        android:textColor="@color/colorApp"
+        android:textSize="@dimen/spacing_mlarge"
+        android:textStyle="bold">
+
+    </TextView>
+
+
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:paddingLeft="@dimen/spacing_middle"
+        android:paddingRight="@dimen/spacing_middle">
+
+
+        <LinearLayout
+            android:id="@+id/lymember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_medium"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:padding="@dimen/spacing_small"
+
+                    >
+
+                    <TextView
+                        style="@style/viewParent.headerText"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/alltask"
+
+                        android:textSize="@dimen/spacing_mlarge" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:background="@drawable/editdrawable">
+
+                        <Spinner
+                            android:id="@+id/spinnerlisttask"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:backgroundTint="@color/colorApp" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:minHeight="60dp"
+                            app:cardBackgroundColor="@color/whiteBodyColor"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="2dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/spacing_middle"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_large">
+
+                                <TextView
+                                    style="@style/viewParent.headerText"
+                                    android:text="@string/high"
+                                    android:textColor="@color/red_800"
+                                    android:textSize="@dimen/spacing_large" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="200+ Skilled Testing ready to work"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/tag_count"
+                            android:backgroundTint="@color/red_800"
+                            android:elevation="13dp"
+                            android:gravity="center"
+                            android:padding="@dimen/spacing_middle">
+
+                            <TextView
+                                android:id="@+id/txthightag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/spacing_large" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_small"
+
+                    >
+
+                    <TextView
+                        style="@style/viewParent.headerText"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/tier"
+                        android:textSize="@dimen/spacing_mlarge" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:background="@drawable/editdrawable">
+
+                        <Spinner
+                            android:id="@+id/spinnerlisttag"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:backgroundTint="@color/colorApp" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:minHeight="60dp"
+                            app:cardBackgroundColor="@color/whiteBodyColor"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="2dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/spacing_middle"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_middle">
+
+                                <TextView
+                                    style="@style/viewParent.headerText"
+                                    android:text="@string/normal"
+                                    android:textColor="@color/blue_700"
+                                    android:textSize="@dimen/spacing_large" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="200+ Skilled Testing ready to work"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/tag_count"
+                            android:backgroundTint="@color/blue_700"
+                            android:elevation="13dp"
+                            android:gravity="center"
+                            android:padding="@dimen/spacing_middle">
+
+                            <TextView
+                                android:id="@+id/txtnormltag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/spacing_large" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_small"
+                    android:visibility="gone"
+
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginBottom="5dp"
+                            android:minHeight="60dp"
+                            app:cardBackgroundColor="@color/whiteBodyColor"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="2dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/spacing_large"
+                                android:orientation="vertical"
+                                android:padding="@dimen/spacing_large">
+
+                                <TextView
+                                    style="@style/viewParent.headerText"
+                                    android:text="@string/low"
+                                    android:textColor="@color/grey_60"
+                                    android:textSize="@dimen/spacing_large" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="200+ Skilled Testing ready to work"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/tag_count"
+                            android:backgroundTint="@color/grey_60"
+                            android:elevation="13dp"
+                            android:gravity="center"
+                            android:padding="@dimen/spacing_middle">
+
+                            <TextView
+                                android:id="@+id/txtlowtag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/spacing_large" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/skillsrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_small">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="@string/noreqt"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnbuild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_bg"
+        android:padding="10dp"
+        app:backgroundTint="@color/colorApp"
+        app:elevation="2dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>

@@ -1,8 +1,10 @@
 
 package com.example.hrm.Fragment.BasicSetup;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -16,19 +18,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.StaticData.HolidayAdapter;
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayData;
 import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayModel;
+import com.example.hrm.Model.BasicSetup.Skills.AddSkill.Addskill;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetStDataMemberModel;
+import com.example.hrm.Model.BasicSetup.StaticDataModel.GetStaticDataModel;
+import com.example.hrm.UI.AddLeave;
+import com.example.hrm.UI.BasicSetupActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAddholidayBinding;
 import com.example.hrm.databinding.DialogEditholidayBinding;
 import com.example.hrm.databinding.FragmentSystemHolidaysBinding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,23 +57,21 @@ import retrofit2.Response;
 public class SystemHolidaysFragment extends Fragment {
 
 
-
-
     private FragmentSystemHolidaysBinding binding;
     private DialogAddholidayBinding dialogAddholidayBinding;
     private DialogEditholidayBinding dialogEditholidayBinding;
 
 
-
     private RecyclerView.LayoutManager mLayoutManager;
     HolidayAdapter holidayAdapter;
-
+    DatePickerDialog picker;
     SessionManager sessionManager;
-    String token, sname;
+    String token;
+    String ssdate, senddate,stype,sdecrpt;
+    List<GetMemberList> data = new ArrayList<>();
     int iCurrentSelection = 0;
 
     List<GetHolidayData> getHolidayDataList = new ArrayList<>();
-
 
 
     @Override
@@ -78,7 +95,6 @@ public class SystemHolidaysFragment extends Fragment {
         binding.holidayrecycler.setLayoutManager(mLayoutManager);
 
 
-
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
 
@@ -86,19 +102,15 @@ public class SystemHolidaysFragment extends Fragment {
 
         binding.btnaddstdt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
-                showAddnewDialog();
+                showAddnewDialog(token);
 
             }
         });
 
 
-        
         return view;
-
-
 
 
     }
@@ -117,18 +129,22 @@ public class SystemHolidaysFragment extends Fragment {
                 public void onResponse(Call<GetHolidayModel> getHolidayModelCall1, Response<GetHolidayModel> response) {
 
                     try {
-                        if (response.isSuccessful()) {
+                        if (response.isSuccessful())
+                        {
                             int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
+                            if (status == 200)
+                            {
 
                                 getHolidayDataList = response.body().getData().getResponse();
 
-                                if (getHolidayDataList.size() == 0) {
+                                if (getHolidayDataList.size() == 0)
+                                {
                                     dialog.dismiss();
                                     binding.txtno.setVisibility(View.VISIBLE);
                                     binding.holidayrecycler.setVisibility(View.GONE);
 
-                                } else if (getHolidayDataList != null) {
+                                }
+                                else if (getHolidayDataList != null) {
 
                                     holidayAdapter = new HolidayAdapter(getActivity(), getHolidayDataList);
                                     binding.holidayrecycler.setAdapter(holidayAdapter);
@@ -140,10 +156,8 @@ public class SystemHolidaysFragment extends Fragment {
                                         @Override
                                         public void onItemClick(View view, GetHolidayData obj, int position) {
                                             GetHolidayData getHolidayData = getHolidayDataList.get(position);
-                                            String name =getHolidayData.getType();
-                                            String val=getHolidayData.getStartDate();
-
-
+                                            String name = getHolidayData.getType();
+                                            String val = getHolidayData.getStartDate();
 
 
                                             // Log.e("Tag", "work" + name.toString());
@@ -159,10 +173,12 @@ public class SystemHolidaysFragment extends Fragment {
 
                             }
 
-                        } else {
+                        }
+                        else
+                        {
                             binding.txtno.setVisibility(View.VISIBLE);
-                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getActivity(), "Internal Server Error" , Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
 
 
@@ -183,6 +199,7 @@ public class SystemHolidaysFragment extends Fragment {
                 public void onFailure(Call<GetHolidayModel> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();
@@ -200,8 +217,10 @@ public class SystemHolidaysFragment extends Fragment {
     }
 
 
-    private void showAddnewDialog()
+    private void showAddnewDialog(String token)
     {
+
+
 
         dialogAddholidayBinding = DialogAddholidayBinding.inflate(getLayoutInflater());
 
@@ -216,12 +235,74 @@ public class SystemHolidaysFragment extends Fragment {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
+        getmember(token);
 
+
+        dialogAddholidayBinding.etstrtdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+                            {
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(year, monthOfYear, dayOfMonth);
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                String dateString = format.format(calendar.getTime());
+                                dialogAddholidayBinding.etstrtdate.setText(dateString);
+
+
+                                ssdate = dialogAddholidayBinding.etstrtdate.getText().toString().trim();
+                            }
+                        }, year, month, day);
+
+
+                picker.show();
+
+
+            }
+        });
+        dialogAddholidayBinding.etenddate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+                            {
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(year, monthOfYear, dayOfMonth);
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                String dateString = format.format(calendar.getTime());
+                                dialogAddholidayBinding.etenddate.setText(dateString);
+
+
+                                senddate = dialogAddholidayBinding.etenddate.getText().toString().trim();
+                            }
+                        }, year, month, day);
+
+
+                picker.show();
+
+
+            }
+        });
         dialogAddholidayBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                //  AddReq(token);
+            public void onClick(View v) {
+
+                AddHoliday(token);
                 dialog.dismiss();
 
             }
@@ -229,8 +310,7 @@ public class SystemHolidaysFragment extends Fragment {
 
         dialogAddholidayBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  AddReq(token);
                 dialog.dismiss();
 
@@ -238,15 +318,129 @@ public class SystemHolidaysFragment extends Fragment {
         });
 
 
-
-
-
-
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
-    private void showEditDialog()
-    {
+    public void getmember(final String access_token) {
+        try {
+
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<GetStDataMemberModel> getStDataMemberModelCall = ApiHandler.getApiInterface().getHoliday("Bearer " + access_token,"Holiday");
+            Log.e("Tag", "response" + getStDataMemberModelCall.toString());
+
+            getStDataMemberModelCall.enqueue(new Callback<GetStDataMemberModel>() {
+                @Override
+                public void onResponse(Call<GetStDataMemberModel> getStDataMemberModelCall1, Response<GetStDataMemberModel> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200) {
+                                data = response.body().getData().getResponse();
+
+
+                                Log.e("Tag", "respone" + data.toString());
+
+                                // setspiner(data);
+                                //String array to store all the book names
+                                String[] items = new String[data.size()];
+
+                                //Traversing through the whole list to get all the names
+                                for (int i = 0; i < data.size(); i++) {
+                                    //Storing names to string array
+                                    items[i] = data.get(i).toString();
+                                }
+
+                                //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+                                ArrayAdapter<String> adapter;
+                                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
+                                //setting adapter to spinner
+                                dialogAddholidayBinding.spinner.setAdapter(adapter);
+
+
+                                dialog.dismiss();
+
+
+                                //   Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
+                            }
+
+                            dialogAddholidayBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                    if (iCurrentSelection == position) {
+//                                        return;
+//                                    } else {
+
+                                    stype = parent.getItemAtPosition(position).toString();
+                                    Log.e("Tag", "member=" + stype.toString());
+                                   // GetAllAttendByID(token, sname);
+                                    iCurrentSelection = 0;
+
+                                    // }
+                                    // Your code here
+                                    //  iCurrentSelection = position;
+
+
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+//                                        Toast.makeText(getActivity(), "no selected", Toast.LENGTH_SHORT).show();
+//                                        Log.e("Tag", "memberno=" + sname.toString());
+                                    // sometimes you need nothing here
+                                }
+                            });
+
+
+                        } else {
+
+                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            dialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<GetStDataMemberModel> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showEditDialog() {
 
         dialogEditholidayBinding = DialogEditholidayBinding.inflate(getLayoutInflater());
 
@@ -264,8 +458,7 @@ public class SystemHolidaysFragment extends Fragment {
 
         dialogEditholidayBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  AddReq(token);
                 dialog.dismiss();
 
@@ -274,8 +467,7 @@ public class SystemHolidaysFragment extends Fragment {
 
         dialogEditholidayBinding.btnNothank.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  AddReq(token);
                 dialog.dismiss();
 
@@ -283,12 +475,134 @@ public class SystemHolidaysFragment extends Fragment {
         });
 
 
-
-
-
-
         dialog.show();
         dialog.getWindow().setAttributes(lp);
+    }
+
+    private void AddHoliday(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<GetHolidayModel> getHolidayModelCall = ApiHandler.getApiInterface().addhoilday("Bearer " + token,Apimember());
+
+            getHolidayModelCall.enqueue(new Callback<GetHolidayModel>() {
+                @Override
+                public void onResponse(Call<GetHolidayModel> getHolidayModelCall1, Response<GetHolidayModel> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),BasicSetupActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetHolidayModel> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject Apimember() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("type", stype);
+            jsonObj_.put("start_date", ssdate);
+            jsonObj_.put("end_date", senddate);
+            jsonObj_.put("description", sdecrpt);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
     }
 
 }

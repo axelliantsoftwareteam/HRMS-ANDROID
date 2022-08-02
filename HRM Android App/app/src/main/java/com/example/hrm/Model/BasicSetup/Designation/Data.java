@@ -1,7 +1,6 @@
 
 package com.example.hrm.Model.BasicSetup.Designation;
 
-import java.util.List;
 import javax.annotation.Generated;
 
 import com.google.gson.annotations.Expose;
@@ -12,14 +11,14 @@ public class Data {
 
     @SerializedName("Response")
     @Expose
-    private List<GetDesignationData> getDesignationData = null;
+    private GetDesigData getDesigData;
 
-    public List<GetDesignationData> getResponse() {
-        return getDesignationData;
+    public GetDesigData getResponse() {
+        return getDesigData;
     }
 
-    public void setResponse(List<GetDesignationData> getDesignationData) {
-        this.getDesignationData = getDesignationData;
+    public void setResponse(GetDesigData getDesigData) {
+        this.getDesigData = getDesigData;
     }
 
 }

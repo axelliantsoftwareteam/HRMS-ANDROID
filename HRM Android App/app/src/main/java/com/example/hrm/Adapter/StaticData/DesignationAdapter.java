@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.BasicSetup.Designation.GetDesignationData;
-import com.example.hrm.Model.BasicSetup.Skills.GetSkillsData;
+import com.example.hrm.Model.BasicSetup.Designation.GetAllDesign.GetAllDesignationData;
+import com.example.hrm.Model.BasicSetup.Designation.GetDesigData;
 import com.example.hrm.R;
 
 import java.util.List;
@@ -19,14 +19,14 @@ import java.util.List;
 public class DesignationAdapter extends RecyclerView.Adapter<DesignationAdapter.MyViewHolder> {
     Context context;
 
-    GetDesignationData getDesignationData;
-    private List<GetDesignationData> getDesignationDataList;
+    GetAllDesignationData getAllDesignationData;
+    private List<GetAllDesignationData> getAllDesignationDataList;
     private OnItemClickListener mOnItemClickListener;
 
 
 
     public interface OnItemClickListener {
-        void onItemClick(View view, GetDesignationData obj, int position);
+        void onItemClick(View view, GetAllDesignationData obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -34,9 +34,9 @@ public class DesignationAdapter extends RecyclerView.Adapter<DesignationAdapter.
     }
 
 
-    public DesignationAdapter(Context context, List<GetDesignationData> respons) {
+    public DesignationAdapter(Context context, List<GetAllDesignationData> respons) {
         this.context = context;
-        this.getDesignationDataList = respons;
+        this.getAllDesignationDataList = respons;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -72,7 +72,7 @@ public class DesignationAdapter extends RecyclerView.Adapter<DesignationAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        getDesignationData = getDesignationDataList.get(position);
+        getAllDesignationData = getAllDesignationDataList.get(position);
 
         holder.action.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class DesignationAdapter extends RecyclerView.Adapter<DesignationAdapter.
                 if (pos != RecyclerView.NO_POSITION)
                 {
                     if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(v, getDesignationDataList.get(position), position);
+                        mOnItemClickListener.onItemClick(v, getAllDesignationDataList.get(position), position);
 
                         // showCustomDialog();
                     }
@@ -91,8 +91,8 @@ public class DesignationAdapter extends RecyclerView.Adapter<DesignationAdapter.
             }
         });
 
-        holder.name.setText(getDesignationData.getName());
-        holder.descript.setText(getDesignationData.getDescription());
+        holder.name.setText(getAllDesignationData.getName());
+        holder.descript.setText(getAllDesignationData.getDescription());
 
     }
 
@@ -103,7 +103,7 @@ public class DesignationAdapter extends RecyclerView.Adapter<DesignationAdapter.
 
     @Override
     public int getItemCount() {
-        return getDesignationDataList.size();
+        return getAllDesignationDataList.size();
        // return leavesList.size();
     }
 
