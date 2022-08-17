@@ -2,6 +2,7 @@ package com.example.hrm.Fragment.Tasks;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -19,11 +20,18 @@ import android.widget.Toast;
 
 import com.example.hrm.Adapter.Task.AllTaskAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.GetAllTask.GetAllTaskData;
-import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltask;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltaskData;
+import com.example.hrm.Model.GetAllTask.Alltask.MarkComplet.MarkComplet;
+import com.example.hrm.UI.TasksActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogTaskdetailsBinding;
 import com.example.hrm.databinding.FragmentAlltaskBinding;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +50,13 @@ public class AlltaskFragment extends Fragment {
     AllTaskAdapter allTaskAdapter;
 
 
-    List<GetAllTaskData> getAllTaskDataList = new ArrayList<>();
+    List<GetAlltaskData> getAllTaskDataList = new ArrayList<>();
 
     private FragmentAlltaskBinding binding;
     private DialogTaskdetailsBinding dialogTaskdetailsBinding;
     SessionManager sessionManager;
     String token;
-
+    Integer idd;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +81,7 @@ public class AlltaskFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
-
+     //   Toast.makeText(getActivity(), "All task", Toast.LENGTH_SHORT).show();
         GetAllTask(token);
         return view;
     }
@@ -86,11 +94,11 @@ public class AlltaskFragment extends Fragment {
             dialog.setMessage("Loading...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getAllList("Bearer " + access_token);
-            getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>()
+            Call<GetAlltask> getAlltaskCall = ApiHandler.getApiInterface().getAllList("Bearer " + access_token);
+            getAlltaskCall.enqueue(new Callback<GetAlltask>()
             {
                 @Override
-                public void onResponse(Call<GetAllTaskModel> getAllTaskModelCall1, Response<GetAllTaskModel> response) {
+                public void onResponse(Call<GetAlltask> getAlltaskCall1, Response<GetAlltask> response) {
 
                     try {
                         if (response.isSuccessful()) {
@@ -110,19 +118,23 @@ public class AlltaskFragment extends Fragment {
                                     allTaskAdapter = new AllTaskAdapter(getActivity(), getAllTaskDataList);
                                     binding.alltaskrecycler.setAdapter(allTaskAdapter);
                                     binding.alltaskrecycler.setVisibility(View.VISIBLE);
-                                    binding.txtno.setVisibility(View.GONE);
+//                                    binding.txtno.setVisibility(View.GONE);
                                     dialog.dismiss();
 
                                     // on item list clicked
                                     allTaskAdapter.setOnItemClickListener(new AllTaskAdapter.OnItemClickListener() {
                                         @Override
-                                        public void onItemClick(View view, GetAllTaskData obj, int position)
+                                        public void onItemClick(View view, GetAlltaskData obj, int position)
                                         {
-                                            GetAllTaskData getAllTaskData1 =new GetAllTaskData();
-                                           getAllTaskData1 = getAllTaskDataList.get(position);
-                                            showCustomDialog(getAllTaskData1);
+                                            GetAlltaskData getAlltaskData =new GetAlltaskData();
+                                            getAlltaskData = getAllTaskDataList.get(position);
 
-                                            Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
+
+
+
+                                            showCustomDialog(getAlltaskData);
+
+                                         //   Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -134,7 +146,7 @@ public class AlltaskFragment extends Fragment {
                             }
 
                         } else {
-                            binding.txtno.setVisibility(View.VISIBLE);
+//                            binding.txtno.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
@@ -154,7 +166,7 @@ public class AlltaskFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<GetAllTaskModel> call, Throwable t) {
+                public void onFailure(Call<GetAlltask> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
                         dialog.dismiss();
@@ -173,7 +185,7 @@ public class AlltaskFragment extends Fragment {
         }
     }
 
-    private void showCustomDialog(GetAllTaskData getAllTaskData)
+    private void showCustomDialog(GetAlltaskData getAllTaskData)
     {
 
         dialogTaskdetailsBinding = DialogTaskdetailsBinding.inflate(getLayoutInflater());
@@ -192,14 +204,18 @@ public class AlltaskFragment extends Fragment {
         String name= getAllTaskData.getName();
         String notes= getAllTaskData.getNotes();
         String duedate= getAllTaskData.getDueDate();
+        idd = getAllTaskData.getId();
 
         int status= getAllTaskData.getStatus();
         if (status==1)
         {
 
+            dialogTaskdetailsBinding.txtMark.setVisibility(View.GONE);
+
             dialogTaskdetailsBinding.btnComplet.setVisibility(View.VISIBLE);
         }
         else {
+            dialogTaskdetailsBinding.txtMark.setVisibility(View.VISIBLE);
             dialogTaskdetailsBinding.btnPend.setVisibility(View.VISIBLE);
         }
 
@@ -225,92 +241,147 @@ public class AlltaskFragment extends Fragment {
         dialogTaskdetailsBinding.tasknotes.setText(notes);
         dialogTaskdetailsBinding.txtdate.setText(duedate);
 
+        dialogTaskdetailsBinding.txtMark.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                markdetails(token);
+            }
+
+        });
 
 
-
-//        dialogEventBinding.primage.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                int requestCode = 200;
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    requestPermissions(permissions, requestCode);
-//                    //  showPictureDialog();
-////                    takePhotoFromCamera();
-////                    dispatchTakePictureIntent();
-//                    showPictureDialog();
-//
-//                }
-//
-//
-//            }
-//        });
-
-//        Calendar calendar = Calendar.getInstance();
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//        String dateString = format.format(calendar.getTime());
-//        dialogEventBinding.etStartdate.setText(dateString);
-//        sdate = dialogEventBinding.etStartdate.getText().toString().trim();
-//
-
-
-
-
-
-//        dialogEventBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                msg=dialogEventBinding.msg.getText().toString();
-//                AddReq(token);
-//                dialog.dismiss();
-//
-//            }
-//        });
-
-
-
-
-//        final Button spn_from_date = (Button) dialog.findViewById(R.id.spn_from_date);
-//        final Button spn_from_time = (Button) dialog.findViewById(R.id.spn_from_time);
-//        final Button spn_to_date = (Button) dialog.findViewById(R.id.spn_to_date);
-//        final Button spn_to_time = (Button) dialog.findViewById(R.id.spn_to_time);
-//        final TextView tv_email = (TextView) dialog.findViewById(R.id.tv_email);
-//        final EditText et_name = (EditText) dialog.findViewById(R.id.et_name);
-//        final EditText et_location = (EditText) dialog.findViewById(R.id.et_location);
-//        final AppCompatCheckBox cb_allday = (AppCompatCheckBox) dialog.findViewById(R.id.cb_allday);
-//        final AppCompatSpinner spn_timezone = (AppCompatSpinner) dialog.findViewById(R.id.spn_timezone);
-//
-//        String[] timezones = getResources().getStringArray(R.array.timezone);
-//        ArrayAdapter<String> array = new ArrayAdapter<>(this, R.layout.simple_spinner_item, timezones);
-//        array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-//        spn_timezone.setAdapter(array);
-//        spn_timezone.setSelection(0);
-//
-//        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//        ((Button) dialog.findViewById(R.id.bt_save)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Event event = new Event();
-//                event.email = tv_email.getText().toString();
-//                event.name = et_name.getText().toString();
-//                event.location = et_location.getText().toString();
-//                event.from = spn_from_date.getText().toString() + " (" + spn_from_time.getText().toString() + ")";
-//                event.to = spn_to_date.getText().toString() + " (" + spn_to_time.getText().toString() + ")";
-//                event.is_allday = cb_allday.isChecked();
-//                event.timezone = spn_timezone.getSelectedItem().toString();
-//                displayDataResult(event);
-
-//                dialog.dismiss();
-//            }
-//        });
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
+
+
+    private void markdetails(final String access_token) {
+        try {
+            final ProgressDialog dialog;
+            dialog = new ProgressDialog(getActivity());
+            dialog.setMessage("Loading...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            Call<MarkComplet> markCompletCall = ApiHandler.getApiInterface().addmark("Bearer " + token,Apimember());
+
+            markCompletCall.enqueue(new Callback<MarkComplet>() {
+                @Override
+                public void onResponse(Call<MarkComplet> markCompletCall1, Response<MarkComplet> response ) {
+
+                    try {
+
+                        if (response.isSuccessful())
+                        {
+
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(), TasksActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(status==400)
+                            {
+                                String b = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), ""+b, Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),TasksActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if (status==500)
+                            {
+                                Toast.makeText(getActivity(), "Internal Server Error!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                Intent intent =new Intent(getActivity(),TasksActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else {
+
+                                String msg = response.body().getMeta().getMessage();
+                                Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        else
+                        {
+                            String msg = response.body().getMeta().getMessage();
+                            Toast.makeText(getActivity(), ""+msg, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+
+
+                        }
+
+
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+                            Toast.makeText(getActivity(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MarkComplet> call, Throwable t)
+                {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+                        dialog.dismiss();
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JsonObject Apimember() {
+
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("task_id", idd);
+
+
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
+
+            //print parameter
+            Log.e("MY gson.JSON:  ", "AS PARAMETER  " + gsonObject);
+
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        return gsonObject;
+    }
+
+
 
 
 

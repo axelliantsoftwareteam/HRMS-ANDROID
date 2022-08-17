@@ -1,8 +1,13 @@
 package com.example.hrm.Fragment.Approval;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import static com.microsoft.identity.common.internal.cache.SharedPreferencesFileManager.getSharedPreferences;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -28,11 +33,15 @@ import com.example.hrm.Model.Approval.AttendApproval.WorkFlow;
 import com.example.hrm.Model.Memberlist.MemberResponse;
 import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.UI.ApprovalActivity;
+import com.example.hrm.UI.EditprofActivity;
 import com.example.hrm.UI.MainActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAttendapprovBinding;
 import com.example.hrm.databinding.FragmentAttendanceApprovalBinding;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +55,8 @@ public class AttendanceApprovalFragment extends Fragment {
 
     private RecyclerView.LayoutManager mLayoutManager;
     ApprovalAttendanceAdapter approvalAttendanceAdapter;
-
+//
+//    List<MemberResponse> memberResponseList = new ArrayList<>();
 
     SessionManager sessionManager;
     String token, sname;
@@ -86,130 +96,201 @@ public class AttendanceApprovalFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
-        getmember(token);
+      //  getmember(token);
         GetAllAttend(token);
-
+        loadmemberlist();
 
         return view;
 
     }
 
+    public void loadmemberlist()
+    {
 
-    public void getmember(final String access_token) {
-        try {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("shared preferences",MODE_PRIVATE);
 
-            final ProgressDialog dialog;
-            dialog = new ProgressDialog(getActivity());
-            dialog.setMessage("Loading...");
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("member", null);
+    //    Log.e("Tag", "" + json.toString());
+//        Toast.makeText(getActivity(), ""+json, Toast.LENGTH_SHORT).show();
+        Type type = new TypeToken<ArrayList<MemberResponse>>() {}.getType();
+        memberResponses = gson.fromJson(json, type);
 
-            Call<Members> membersCall = ApiHandler.getApiInterface().getlistMember("Bearer " + access_token);
-            Log.e("Tag", "response" + membersCall.toString());
+        if (memberResponses == null)
+        {
 
-            membersCall.enqueue(new Callback<Members>() {
-                @Override
-                public void onResponse(Call<Members> membersCall1, Response<Members> response) {
-
-                    try {
-                        if (response.isSuccessful()) {
-                            int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
-                                memberResponses = response.body().getData().getResponse();
-
-                                Log.e("Tag", "respone" + memberResponses.toString());
-
-                                // setspiner(memberResponses);
-                                //String array to store all the book names
-                                String[] items = new String[memberResponses.size()];
-
-                                //Traversing through the whole list to get all the names
-                                for (int i = 0; i < memberResponses.size(); i++) {
-                                    //Storing names to string array
-                                    items[i] = memberResponses.get(i).getName();
-                                }
-
-                                //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-                                ArrayAdapter<String> adapter;
-                                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
-                                //setting adapter to spinner
-                                binding.spinnerlist.setAdapter(adapter);
-
-
-                                dialog.dismiss();
-
-
-                                //   Toast.makeText(AddLeave.this, ""+memberResponses, Toast.LENGTH_SHORT).show();
-                            }
-
-                            binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    if (iCurrentSelection == position) {
-                                        return;
-                                    } else {
-                                        Integer idd = memberResponses.get(position).getId();
-                                        Log.e("Tag", "idd=" + idd.toString());
-                                        sname = parent.getItemAtPosition(position).toString();
-                                        Log.e("Tag", "member=" + sname.toString());
-                                        GetAllAttendByID(token, idd);
-                                        iCurrentSelection = 0;
-
-                                    }
-                                    // Your code here
-                                    iCurrentSelection = position;
-
-
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-//                                        Toast.makeText(getActivity(), "no selected", Toast.LENGTH_SHORT).show();
-//                                        Log.e("Tag", "memberno=" + sname.toString());
-                                    // sometimes you need nothing here
-                                }
-                            });
-
-
-                        } else {
-
-                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-
-                            dialog.dismiss();
-                        }
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        try {
-                            Log.e("Tag", "error=" + e.toString());
-
-
-                        } catch (Resources.NotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Members> call, Throwable t) {
-                    try {
-                        Log.e("Tag", "error" + t.toString());
-
-                    } catch (Resources.NotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            });
-
-
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
+            memberResponses = new ArrayList<>();
         }
+        // setspiner(memberResponses);
+        //String array to store all the book names
+        String[] items = new String[memberResponses.size()];
+
+        //Traversing through the whole list to get all the names
+        for(int i=0; i<memberResponses.size(); i++){
+            //Storing names to string array
+            items[i] = memberResponses.get(i).getName();
+        }
+
+        //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
+        //setting adapter to spinner
+        binding.spinnerlist.setAdapter(adapter);
+
+        binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (iCurrentSelection == position) {
+                    return;
+                } else {
+                    Integer idd = memberResponses.get(position).getId();
+                    Log.e("Tag", "idd=" + idd.toString());
+                    sname = parent.getItemAtPosition(position).toString();
+                    Log.e("Tag", "member=" + sname.toString());
+                    GetAllAttendByID(token, idd);
+                    iCurrentSelection = 0;
+
+                }
+                // Your code here
+                iCurrentSelection = position;
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+                // sometimes you need nothing here
+            }
+        });
+
+//        for (int i = 0; i<memberResponseList.size(); i++ )
+//        {
+//            memberResponse = memberResponseList.get(i);
+//            String name = memberResponse.getName();
+//            Toast.makeText(EditprofActivity.this, ""+name, Toast.LENGTH_SHORT).show();
+//
+//        }
     }
+
+
+//
+//    public void getmember(final String access_token) {
+//        try {
+//
+//            final ProgressDialog dialog;
+//            dialog = new ProgressDialog(getActivity());
+//            dialog.setMessage("Loading...");
+//            dialog.setCanceledOnTouchOutside(false);
+//            dialog.show();
+//
+//            Call<Members> membersCall = ApiHandler.getApiInterface().getlistMember("Bearer " + access_token);
+//            Log.e("Tag", "response" + membersCall.toString());
+//
+//            membersCall.enqueue(new Callback<Members>() {
+//                @Override
+//                public void onResponse(Call<Members> membersCall1, Response<Members> response) {
+//
+//                    try {
+//                        if (response.isSuccessful()) {
+//                            int status = response.body().getMeta().getStatus();
+//                            if (status == 200) {
+//                                memberResponses = response.body().getData().getResponse();
+//
+//                                Log.e("Tag", "respone" + memberResponses.toString());
+//
+//                                // setspiner(memberResponses);
+//                                //String array to store all the book names
+//                                String[] items = new String[memberResponses.size()];
+//
+//                                //Traversing through the whole list to get all the names
+//                                for (int i = 0; i < memberResponses.size(); i++) {
+//                                    //Storing names to string array
+//                                    items[i] = memberResponses.get(i).getName();
+//                                }
+//
+//                                //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+//                                ArrayAdapter<String> adapter;
+//                                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
+//                                //setting adapter to spinner
+//                                binding.spinnerlist.setAdapter(adapter);
+//
+//
+//                                dialog.dismiss();
+//
+//
+//                                //   Toast.makeText(AddLeave.this, ""+memberResponses, Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                            binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                @Override
+//                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                    if (iCurrentSelection == position) {
+//                                        return;
+//                                    } else {
+//                                        Integer idd = memberResponses.get(position).getId();
+//                                        Log.e("Tag", "idd=" + idd.toString());
+//                                        sname = parent.getItemAtPosition(position).toString();
+//                                        Log.e("Tag", "member=" + sname.toString());
+//                                        GetAllAttendByID(token, idd);
+//                                        iCurrentSelection = 0;
+//
+//                                    }
+//                                    // Your code here
+//                                    iCurrentSelection = position;
+//
+//
+//                                }
+//
+//                                @Override
+//                                public void onNothingSelected(AdapterView<?> parent) {
+////                                        Toast.makeText(getActivity(), "no selected", Toast.LENGTH_SHORT).show();
+////                                        Log.e("Tag", "memberno=" + sname.toString());
+//                                    // sometimes you need nothing here
+//                                }
+//                            });
+//
+//
+//                        } else {
+//
+//                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                            dialog.dismiss();
+//                        }
+//
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        try {
+//                            Log.e("Tag", "error=" + e.toString());
+//
+//
+//                        } catch (Resources.NotFoundException e1) {
+//                            e1.printStackTrace();
+//                        }
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Members> call, Throwable t) {
+//                    try {
+//                        Log.e("Tag", "error" + t.toString());
+//
+//                    } catch (Resources.NotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//
+//            });
+//
+//
+//        } catch (Resources.NotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // Get all Attendacne Approval
 

@@ -113,7 +113,7 @@ public class EvalutionAdapter extends RecyclerView.Adapter<EvalutionAdapter.MyVi
           holder.status.setText("Completed");
           holder.status.setBackgroundResource(R.color.green_900);
           holder.action.setText("View Detail");
-          holder.action.setBackgroundResource(R.color.yellow_400);
+          holder.action.setBackgroundResource(R.color.colorApp);
       }
 
 

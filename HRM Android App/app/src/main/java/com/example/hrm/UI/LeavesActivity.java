@@ -136,8 +136,6 @@ public class LeavesActivity extends AppCompatActivity {
 // end Display the the leaves tabs
     }
 
-
-
     public boolean isNetworkConnectionAvailable(){
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);

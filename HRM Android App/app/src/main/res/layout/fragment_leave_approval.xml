@@ -60,6 +60,7 @@
 
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/txtno"
         android:layout_width="match_parent"

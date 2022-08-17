@@ -1,7 +1,10 @@
 package com.example.hrm.Fragment.Approval;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -29,7 +32,10 @@ import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogLeaveapprovBinding;
 import com.example.hrm.databinding.FragmentLeaveApprovalBinding;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +66,7 @@ public class LeaveApprovalFragment extends Fragment {
 
     private FragmentLeaveApprovalBinding binding;
 
-    private  DialogLeaveapprovBinding dialogLeaveapprovBinding;
+    private DialogLeaveapprovBinding dialogLeaveapprovBinding;
 
     List<MemberResponse> memberResponses = new ArrayList<>();
     int iCurrentSelection = 0;
@@ -82,131 +88,201 @@ public class LeaveApprovalFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
-        getmember(token);
+        //    getmember(token);
         GetAllAttend(token);
 
-
+        loadmemberlist();
 
         return view;
 
     }
 
+    public void loadmemberlist()
+    {
 
-    public void getmember(final String access_token) {
-        try {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("shared preferences",MODE_PRIVATE);
 
-            final ProgressDialog dialog;
-            dialog = new ProgressDialog(getActivity());
-            dialog.setMessage("Loading...");
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("member", null);
+        //    Log.e("Tag", "" + json.toString());
+//        Toast.makeText(getActivity(), ""+json, Toast.LENGTH_SHORT).show();
+        Type type = new TypeToken<ArrayList<MemberResponse>>() {}.getType();
+        memberResponses = gson.fromJson(json, type);
 
-            Call<Members> membersCall = ApiHandler.getApiInterface().getlistMember("Bearer " + access_token);
-            Log.e("Tag", "response" + membersCall.toString());
+        if (memberResponses == null)
+        {
 
-            membersCall.enqueue(new Callback<Members>() {
-                @Override
-                public void onResponse(Call<Members> membersCall1, Response<Members> response) {
-
-                    try {
-                        if (response.isSuccessful()) {
-                            int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
-                                memberResponses = response.body().getData().getResponse();
-
-                                Log.e("Tag", "respone" + memberResponses.toString());
-
-                                // setspiner(memberResponses);
-                                //String array to store all the book names
-                                String[] items = new String[memberResponses.size()];
-
-                                //Traversing through the whole list to get all the names
-                                for (int i = 0; i < memberResponses.size(); i++) {
-                                    //Storing names to string array
-                                    items[i] = memberResponses.get(i).getName();
-                                }
-
-                                //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-                                ArrayAdapter<String> adapter;
-                                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
-                                //setting adapter to spinner
-                                binding.spinnerlist.setAdapter(adapter);
-
-
-                                dialog.dismiss();
-
-
-                                //   Toast.makeText(AddLeave.this, ""+memberResponses, Toast.LENGTH_SHORT).show();
-                            }
-
-                            binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    if (iCurrentSelection == position) {
-                                        return;
-                                    } else {
-                                        Integer idd = memberResponses.get(position).getId();
-                                        Log.e("Tag", "idd=" + idd.toString());
-                                        sname = parent.getItemAtPosition(position).toString();
-                                        Log.e("Tag", "member=" + sname.toString());
-                                        GetAllAttendByID(token, idd);
-                                        iCurrentSelection = 0;
-
-                                    }
-                                    // Your code here
-                                    iCurrentSelection = position;
-
-
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-//                                        Toast.makeText(getActivity(), "no selected", Toast.LENGTH_SHORT).show();
-//                                        Log.e("Tag", "memberno=" + sname.toString());
-                                    // sometimes you need nothing here
-                                }
-                            });
-
-
-                        } else {
-
-                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
-
-                            dialog.dismiss();
-                        }
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        try {
-                            Log.e("Tag", "error=" + e.toString());
-
-
-                        } catch (Resources.NotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Members> call, Throwable t) {
-                    try {
-                        Log.e("Tag", "error" + t.toString());
-
-                    } catch (Resources.NotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            });
-
-
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
+            memberResponses = new ArrayList<>();
         }
+        // setspiner(memberResponses);
+        //String array to store all the book names
+        String[] items = new String[memberResponses.size()];
+
+        //Traversing through the whole list to get all the names
+        for(int i=0; i<memberResponses.size(); i++){
+            //Storing names to string array
+            items[i] = memberResponses.get(i).getName();
+        }
+
+        //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
+        //setting adapter to spinner
+        binding.spinnerlist.setAdapter(adapter);
+
+        binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (iCurrentSelection == position) {
+                    return;
+                } else {
+                    Integer idd = memberResponses.get(position).getId();
+                    Log.e("Tag", "idd=" + idd.toString());
+                    sname = parent.getItemAtPosition(position).toString();
+                    Log.e("Tag", "member=" + sname.toString());
+                    GetAllAttendByID(token, idd);
+                    iCurrentSelection = 0;
+
+                }
+                // Your code here
+                iCurrentSelection = position;
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+                // sometimes you need nothing here
+            }
+        });
+
+//        for (int i = 0; i<memberResponseList.size(); i++ )
+//        {
+//            memberResponse = memberResponseList.get(i);
+//            String name = memberResponse.getName();
+//            Toast.makeText(EditprofActivity.this, ""+name, Toast.LENGTH_SHORT).show();
+//
+//        }
     }
+
+
+//    public void getmember(final String access_token) {
+//        try {
+//
+//            final ProgressDialog dialog;
+//            dialog = new ProgressDialog(getActivity());
+//            dialog.setMessage("Loading...");
+//            dialog.setCanceledOnTouchOutside(false);
+//            dialog.show();
+//
+//            Call<Members> membersCall = ApiHandler.getApiInterface().getlistMember("Bearer " + access_token);
+//            Log.e("Tag", "response" + membersCall.toString());
+//
+//            membersCall.enqueue(new Callback<Members>() {
+//                @Override
+//                public void onResponse(Call<Members> membersCall1, Response<Members> response) {
+//
+//                    try {
+//                        if (response.isSuccessful()) {
+//                            int status = response.body().getMeta().getStatus();
+//                            if (status == 200) {
+//                                memberResponses = response.body().getData().getResponse();
+//
+//                                Log.e("Tag", "respone" + memberResponses.toString());
+//
+//                                // setspiner(memberResponses);
+//                                //String array to store all the book names
+//                                String[] items = new String[memberResponses.size()];
+//
+//                                //Traversing through the whole list to get all the names
+//                                for (int i = 0; i < memberResponses.size(); i++) {
+//                                    //Storing names to string array
+//                                    items[i] = memberResponses.get(i).getName();
+//                                }
+//
+//                                //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+//                                ArrayAdapter<String> adapter;
+//                                adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
+//                                //setting adapter to spinner
+//                                binding.spinnerlist.setAdapter(adapter);
+//
+//
+//                                dialog.dismiss();
+//
+//
+//                                //   Toast.makeText(AddLeave.this, ""+memberResponses, Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                            binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                                @Override
+//                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                                    if (iCurrentSelection == position) {
+//                                        return;
+//                                    } else {
+//                                        Integer idd = memberResponses.get(position).getId();
+//                                        Log.e("Tag", "idd=" + idd.toString());
+//                                        sname = parent.getItemAtPosition(position).toString();
+//                                        Log.e("Tag", "member=" + sname.toString());
+//                                        GetAllAttendByID(token, idd);
+//                                        iCurrentSelection = 0;
+//
+//                                    }
+//                                    // Your code here
+//                                    iCurrentSelection = position;
+//
+//
+//                                }
+//
+//                                @Override
+//                                public void onNothingSelected(AdapterView<?> parent) {
+////                                        Toast.makeText(getActivity(), "no selected", Toast.LENGTH_SHORT).show();
+////                                        Log.e("Tag", "memberno=" + sname.toString());
+//                                    // sometimes you need nothing here
+//                                }
+//                            });
+//
+//
+//                        } else {
+//
+//                            Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                            dialog.dismiss();
+//                        }
+//
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        try {
+//                            Log.e("Tag", "error=" + e.toString());
+//
+//
+//                        } catch (Resources.NotFoundException e1) {
+//                            e1.printStackTrace();
+//                        }
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Members> call, Throwable t) {
+//                    try {
+//                        Log.e("Tag", "error" + t.toString());
+//
+//                    } catch (Resources.NotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//
+//            });
+//
+//
+//        } catch (Resources.NotFoundException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // Get all Attendacne Approval
 
@@ -236,7 +312,7 @@ public class LeaveApprovalFragment extends Fragment {
                                     binding.leaveapprrecycler.setVisibility(View.GONE);
                                 } else if (leaveApprovalList != null) {
 
-                                    approvalLeaveAdapter = new ApprovalLeaveAdapter (getActivity(), leaveApprovalList);
+                                    approvalLeaveAdapter = new ApprovalLeaveAdapter(getActivity(), leaveApprovalList);
                                     binding.leaveapprrecycler.setAdapter(approvalLeaveAdapter);
                                     binding.leaveapprrecycler.setVisibility(View.VISIBLE);
                                     binding.txtno.setVisibility(View.GONE);
@@ -251,7 +327,6 @@ public class LeaveApprovalFragment extends Fragment {
                                             //  Log.e("Tag", "work" + response1.toString());
 
                                             workFlowList = leaveApproval.getWorkFlow();
-
 
 
                                             workFlow = workFlowList.get(0);
@@ -331,7 +406,9 @@ public class LeaveApprovalFragment extends Fragment {
                                 if (leaveApprovalList.size() == 0) {
                                     dialog.dismiss();
                                     binding.leaveapprrecycler.setVisibility(View.GONE);
-                                } else if (leaveApprovalList != null) {
+                                }
+                                else if (leaveApprovalList != null)
+                                {
 
                                     approvalLeaveAdapter = new ApprovalLeaveAdapter(getActivity(), leaveApprovalList);
                                     binding.leaveapprrecycler.setAdapter(approvalLeaveAdapter);
@@ -339,7 +416,7 @@ public class LeaveApprovalFragment extends Fragment {
                                     binding.txtno.setVisibility(View.GONE);
                                     dialog.dismiss();
 
-                                    approvalLeaveAdapter.setOnItemClickListener(new ApprovalLeaveAdapter.OnItemClickListener(){
+                                    approvalLeaveAdapter.setOnItemClickListener(new ApprovalLeaveAdapter.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(View view, LeaveApproval obj, int position) {
                                             LeaveApproval leaveApproval = new LeaveApproval();
@@ -348,7 +425,6 @@ public class LeaveApprovalFragment extends Fragment {
                                             //  Log.e("Tag", "work" + response1.toString());
 
                                             workFlowList = leaveApproval.getWorkFlow();
-
 
 
                                             workFlow = workFlowList.get(0);
@@ -427,31 +503,26 @@ public class LeaveApprovalFragment extends Fragment {
         dialogLeaveapprovBinding.apprdisplyname.setText(comments);
 
 
-
         Boolean status = workFlow.getStatus();
         if (status == true) {
 
             dialogLeaveapprovBinding.approved.setVisibility(View.VISIBLE);
             dialogLeaveapprovBinding.approved.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     //  AddReq(token);
                     dialog.dismiss();
 
                 }
             });
-        }
-        else
-        {
+        } else {
 
             dialogLeaveapprovBinding.approve.setVisibility(View.VISIBLE);
             dialogLeaveapprovBinding.reject.setVisibility(View.VISIBLE);
 
             dialogLeaveapprovBinding.approve.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     //  AddReq(token);
                     Toast.makeText(getActivity(), "Please wait", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -462,8 +533,7 @@ public class LeaveApprovalFragment extends Fragment {
             dialogLeaveapprovBinding.reject.setVisibility(View.VISIBLE);
             dialogLeaveapprovBinding.reject.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     Toast.makeText(getActivity(), "Please wait ", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
 
@@ -473,17 +543,12 @@ public class LeaveApprovalFragment extends Fragment {
         }
         dialogLeaveapprovBinding.imgclose.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //  AddReq(token);
                 dialog.dismiss();
 
             }
         });
-
-
-
-
 
 
         dialog.show();

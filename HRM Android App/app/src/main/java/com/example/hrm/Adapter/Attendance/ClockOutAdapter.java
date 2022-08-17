@@ -75,7 +75,7 @@ public class ClockOutAdapter extends RecyclerView.Adapter<ClockOutAdapter.MyView
         }
         if(checkOutDetail.getType().equals("2"))
         {
-            holder.date.setTextColor(Color.parseColor("#1565C0"));
+            holder.date.setTextColor(Color.parseColor("#FF658BE6"));
             holder.date.setText("Request Check-In");
 
             holder.date.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class ClockOutAdapter extends RecyclerView.Adapter<ClockOutAdapter.MyView
         }
         if(checkOutDetail.getType().equals("4"))
         {
-            holder.date.setTextColor(Color.parseColor("#b38e34"));
+            holder.date.setTextColor(Color.parseColor("#666666"));
             holder.date.setText("Weekend");
         }
         if(checkOutDetail.getType().equals("10"))

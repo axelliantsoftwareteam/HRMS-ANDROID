@@ -44,6 +44,8 @@ public class Response {
     @SerializedName("designation")
     @Expose
     private List<Object> designation = null;
+
+
     @SerializedName("name")
     @Expose
     private String name;

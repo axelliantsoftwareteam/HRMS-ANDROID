@@ -72,6 +72,46 @@ public class RequestActivity extends AppCompatActivity {
             }
         });
 
+        binding.me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RequestActivity.this, UserProfActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.fltHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RequestActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        binding.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RequestActivity.this, More.class);
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+
+
+        binding.imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RequestActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
 
     }

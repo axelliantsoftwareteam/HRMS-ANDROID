@@ -29,7 +29,10 @@ public class GetEvaluationData {
     private String generatedBy;
     @SerializedName("details")
     @Expose
-    private List<Object> details = null;
+    private List<Detail> details = null;
+    @SerializedName("rating_sum")
+    @Expose
+    private String ratingSum;
 
     public Integer getEvaluationId() {
         return evaluationId;
@@ -79,12 +82,20 @@ public class GetEvaluationData {
         this.generatedBy = generatedBy;
     }
 
-    public List<Object> getDetails() {
+    public List<Detail> getDetails() {
         return details;
     }
 
-    public void setDetails(List<Object> details) {
+    public void setDetails(List<Detail> details) {
         this.details = details;
+    }
+
+    public String getRatingSum() {
+        return ratingSum;
+    }
+
+    public void setRatingSum(String ratingSum) {
+        this.ratingSum = ratingSum;
     }
 
 }

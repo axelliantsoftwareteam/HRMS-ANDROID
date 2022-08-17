@@ -351,4 +351,9 @@
     </style>
 
     <dimen name="headerTextSize">28sp</dimen>
+
+    <style name="ShapeAppearanceOverlay.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+        <item name="android:padding">1dp</item>
+    </style>
 </resources>

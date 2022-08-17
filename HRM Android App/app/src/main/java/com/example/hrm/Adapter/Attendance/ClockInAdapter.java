@@ -112,7 +112,7 @@ public class ClockInAdapter extends RecyclerView.Adapter<ClockInAdapter.MyViewHo
         }
         if(checkInDetail.getType().equals("2"))
         {
-            holder.date.setTextColor(Color.parseColor("#1565C0"));
+            holder.date.setTextColor(Color.parseColor("#FF658BE6"));
             holder.date.setText("Request Check-In");
 
             holder.date.setOnClickListener(new View.OnClickListener() {
@@ -133,12 +133,12 @@ public class ClockInAdapter extends RecyclerView.Adapter<ClockInAdapter.MyViewHo
         }
         if(checkInDetail.getType().equals("4"))
         {
-            holder.date.setTextColor(Color.parseColor("#b38e34"));
+            holder.date.setTextColor(Color.parseColor("#666666"));
             holder.date.setText("Weekend");
         }
         if(checkInDetail.getType().equals("10"))
         {
-            holder.date.setTextColor(Color.parseColor("#b38e34"));
+            holder.date.setTextColor(Color.parseColor("#1F87DD"));
             holder.date.setText("Request Pending");
         }
 

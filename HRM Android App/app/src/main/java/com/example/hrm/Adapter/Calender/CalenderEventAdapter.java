@@ -70,8 +70,8 @@ public class CalenderEventAdapter extends RecyclerView.Adapter<CalenderEventAdap
 
         //binding the data with the viewholder views
         holder.name.setText(getCalenderData.getTitle());
-        holder.start.setText(getCalenderData.getStart());
-        holder.end.setText(getCalenderData.getEnd());
+        holder.start.setText((CharSequence) getCalenderData.getStart());
+        holder.end.setText((CharSequence) getCalenderData.getEnd());
 
     }
 

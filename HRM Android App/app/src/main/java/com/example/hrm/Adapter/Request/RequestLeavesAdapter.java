@@ -94,6 +94,10 @@ public class RequestLeavesAdapter extends RecyclerView.Adapter<RequestLeavesAdap
         {
             holder.await.setVisibility(View.VISIBLE);
         }
+        if (staus==4)
+        {
+            holder.approv.setVisibility(View.VISIBLE);
+        }
 
 
         holder.name.setText(leaves.getName());

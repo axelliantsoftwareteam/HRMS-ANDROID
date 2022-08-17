@@ -18,14 +18,15 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.Task.AllTaskAdapter;
+import com.example.hrm.Adapter.Task.SevenTaskAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.GetAllTask.GetAllTaskData;
-import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
-import com.example.hrm.R;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltask;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltaskData;
+import com.example.hrm.Model.GetAllTask.Alltask.SevendayTask.GetSevenday;
+import com.example.hrm.Model.GetAllTask.Alltask.SevendayTask.GetSevendayData;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogTaskdetailsBinding;
 import com.example.hrm.databinding.FragmentSevendaysBinding;
-import com.example.hrm.databinding.FragmentTodayBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +39,10 @@ public class SevendaysFragment extends Fragment {
 
 
     private RecyclerView.LayoutManager mLayoutManager;
-    AllTaskAdapter allTaskAdapter;
+    SevenTaskAdapter sevenTaskAdapter;
 
 
-    List<GetAllTaskData> getAllTaskDataList = new ArrayList<>();
+    List<GetSevendayData> getAllTaskDataList = new ArrayList<>();
 
     private FragmentSevendaysBinding binding;
     private DialogTaskdetailsBinding dialogTaskdetailsBinding;
@@ -68,6 +69,8 @@ public class SevendaysFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
+
+       // Toast.makeText(getActivity(), "Sevenday", Toast.LENGTH_SHORT).show();
         GetAllTask(token);
         return view;
     }
@@ -81,10 +84,10 @@ public class SevendaysFragment extends Fragment {
             dialog.setMessage("Loading...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getSevenList("Bearer " + access_token);
-            getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>() {
+            Call<GetSevenday> getAllTaskModelCall = ApiHandler.getApiInterface().getSevenList("Bearer " + access_token);
+            getAllTaskModelCall.enqueue(new Callback<GetSevenday>() {
                 @Override
-                public void onResponse(Call<GetAllTaskModel> getAllTaskModelCall1, Response<GetAllTaskModel> response) {
+                public void onResponse(Call<GetSevenday> getAllTaskModelCall1, Response<GetSevenday> response) {
 
                     try {
                         if (response.isSuccessful()) {
@@ -101,22 +104,22 @@ public class SevendaysFragment extends Fragment {
                                 {
 
 
-                                    allTaskAdapter = new AllTaskAdapter(getActivity(), getAllTaskDataList);
-                                    binding.alltaskrecycler.setAdapter(allTaskAdapter);
+                                    sevenTaskAdapter = new SevenTaskAdapter(getActivity(), getAllTaskDataList);
+                                    binding.alltaskrecycler.setAdapter(sevenTaskAdapter);
                                     binding.alltaskrecycler.setVisibility(View.VISIBLE);
                                     binding.txtno.setVisibility(View.GONE);
                                     dialog.dismiss();
 
                                     // on item list clicked
-                                    allTaskAdapter.setOnItemClickListener(new AllTaskAdapter.OnItemClickListener() {
+                                    sevenTaskAdapter.setOnItemClickListener(new SevenTaskAdapter.OnItemClickListener() {
                                         @Override
-                                        public void onItemClick(View view, GetAllTaskData obj, int position)
+                                        public void onItemClick(View view, GetSevendayData obj, int position)
                                         {
-                                            GetAllTaskData getAllTaskData1 =new GetAllTaskData();
+                                            GetSevendayData getAllTaskData1 =new GetSevendayData();
                                             getAllTaskData1 = getAllTaskDataList.get(position);
                                             showCustomDialog(getAllTaskData1);
 
-                                            Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
+                                        //    Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -150,7 +153,7 @@ public class SevendaysFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<GetAllTaskModel> call, Throwable t) {
+                public void onFailure(Call<GetSevenday> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
                         dialog.dismiss();
@@ -169,7 +172,7 @@ public class SevendaysFragment extends Fragment {
         }
     }
 
-    private void showCustomDialog(GetAllTaskData getAllTaskData)
+    private void showCustomDialog(GetSevendayData getAllTaskData)
     {
 
         dialogTaskdetailsBinding = DialogTaskdetailsBinding.inflate(getLayoutInflater());

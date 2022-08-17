@@ -9,21 +9,25 @@ import java.util.Date;
 public class CalenderEventObjects {
     private int id;
     private String title;
-    private String message;
     private Date date;
+
+    public Date getEdate() {
+        return edate;
+    }
+
+    public void setEdate(Date edate) {
+        this.edate = edate;
+    }
+
+    private Date edate;
 
     public CalenderEventObjects() {
     }
 
-    public CalenderEventObjects(String title, String message, Date date) {
+    public CalenderEventObjects(String title, Date date,Date edate) {
         this.title = title;
-        this.message = message;
-        this.date = date;
-    }
-    public CalenderEventObjects(int id, String message, Date date) {
-        this.date = date;
-        this.message = message;
-        this.id = id;
+       this.date=date;
+        this.edate = edate;
     }
 
     public int getId() {
@@ -42,14 +46,6 @@ public class CalenderEventObjects {
         this.title = title;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -62,8 +58,8 @@ public class CalenderEventObjects {
     public String toString() {
         return "CalenderEventObjects{" +
                 "id=" + id +
-                ", message='" + message + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
+                ", edate=" + edate +
                 '}';
     }
 }

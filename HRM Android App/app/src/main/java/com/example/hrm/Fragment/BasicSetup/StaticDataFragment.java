@@ -179,18 +179,20 @@ public class StaticDataFragment extends Fragment {
                             binding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                    if (iCurrentSelection == position) {
-//                                        return;
-//                                    } else {
+                                    if (iCurrentSelection == position) {
+                                        return;
+                                    }
+                                    else
+                                    {
 
                                         sname = parent.getItemAtPosition(position).toString();
                                         Log.e("Tag", "member=" + sname.toString());
                                         GetAllAttendByID(token, sname);
                                         iCurrentSelection = 0;
 
-                                   // }
+                                    }
                                     // Your code here
-                                  //  iCurrentSelection = position;
+                                    iCurrentSelection = position;
 
 
                                 }

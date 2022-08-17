@@ -1,5 +1,7 @@
 package com.example.hrm.Fragment.AttendanceReport;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -10,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -24,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,9 +57,11 @@ import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -372,7 +378,8 @@ public class ClockInFragment extends Fragment {
 
 
         dialogEventBinding.primage.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 int requestCode = 200;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(permissions, requestCode);
@@ -1139,6 +1146,7 @@ public class ClockInFragment extends Fragment {
 
 
 
+// for image save
 
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(getActivity());
@@ -1169,10 +1177,12 @@ public class ClockInFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_CANCELED) {
+        if (resultCode == getActivity().RESULT_CANCELED)
+        {
             return;
         }
-        if (requestCode == GALLERY) {
+        if (requestCode == GALLERY)
+        {
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
@@ -1187,13 +1197,29 @@ public class ClockInFragment extends Fragment {
                 }
             }
 
-        } else if (requestCode == CAMERA) {
+        } else if (requestCode == CAMERA)
+        {
+
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             dialogEventBinding.primage.setImageBitmap(thumbnail);
+              //  final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                String encodedImage = encodeImage(thumbnail);
 
             //   String image = saveImageBitmap(thumbnail);
-            Toast.makeText(getActivity(), "Image Saved"+thumbnail, Toast.LENGTH_SHORT).show();
+
+            Log.e("Tag", "" + encodedImage.toString());
+            Toast.makeText(getActivity(), "Image Saved"+encodedImage, Toast.LENGTH_SHORT).show();
+
         }
+    }
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return encImage;
     }
 
     public boolean isStoragePermissionGranted() {
@@ -1213,6 +1239,13 @@ public class ClockInFragment extends Fragment {
             return true;
         }
     }
+
+    // complete the images save
+
+
+
+
+
 
     public void saveImageBitmap(Bitmap image_bitmap, String image_name) {
         String root = Environment.getExternalStorageDirectory().toString();

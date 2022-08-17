@@ -11,25 +11,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.GetAllTask.GetAllTaskData;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltaskData;
 import com.example.hrm.R;
 
 import java.util.List;
 
 public class AllTaskAdapter extends RecyclerView.Adapter<AllTaskAdapter.MyViewHolder> {
     Context context;
-    GetAllTaskData getAllTaskData;
-    private List<GetAllTaskData> getAllTaskDataList;
+    GetAlltaskData getAllTaskData;
+    private List<GetAlltaskData> getAllTaskDataList;
     private AllTaskAdapter.OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, GetAllTaskData obj, int position);
+        void onItemClick(View view, GetAlltaskData obj, int position);
     }
 
     public void setOnItemClickListener(final AllTaskAdapter.OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = (AllTaskAdapter.OnItemClickListener) mItemClickListener;
     }
-    public AllTaskAdapter(Context context, List<GetAllTaskData> respons) {
+    public AllTaskAdapter(Context context, List<GetAlltaskData> respons) {
         this.context = context;
         this.getAllTaskDataList = respons;
     }

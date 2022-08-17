@@ -264,9 +264,6 @@ public class EvalutionActivity extends AppCompatActivity {
 
 
 
-
-
-
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }

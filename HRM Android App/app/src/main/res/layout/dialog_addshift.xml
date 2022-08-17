@@ -144,6 +144,15 @@
                     android:textColor="@color/grey_40"
                     android:textSize="16sp" />
 
+                <com.guna.libmultispinner.MultiSelectionSpinner
+                    android:id="@+id/dialogspinnerlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:backgroundTint="@color/colorApp" />
+
+
                 <Spinner
                     android:id="@+id/weekdays"
                     android:layout_width="match_parent"
@@ -160,6 +169,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:visibility="gone"
                     android:background="@android:drawable/editbox_background"
                     android:drawableRight="@android:drawable/arrow_down_float"
                     android:drawablePadding="16dp"

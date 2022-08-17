@@ -295,7 +295,7 @@
                 android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorApp"
                 android:textColorHint="@color/grey_60" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -317,7 +317,7 @@
                 android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:textColor="@color/colorApp"
                 android:textColorHint="@color/grey_60" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -330,16 +330,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <Button
                 android:id="@+id/btn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@drawable/button_round"
                 android:clickable="true"
+                android:text="Sign In"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                app:backgroundTint="@color/colorPrimary"
-                app:fabSize="normal"
-                app:rippleColor="@color/colorApp"
-                app:srcCompat="@drawable/ic_chevron_right_black_24dp"
                 tools:ignore="VectorDrawableCompat" />
 
 
@@ -361,7 +362,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_xxlarge"
             android:height="60dp"
-            android:background="@drawable/miclogoo"
+            android:background="@drawable/microsoftteams"
             android:drawablePadding="60dp"
             android:gravity="center"
             android:textColor="#000"

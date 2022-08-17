@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.hrm.Model.BasicSetup.Skills.GetSkillsData;
 import com.example.hrm.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.MyViewHolder> {
@@ -30,6 +31,16 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.MyViewHold
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = (OnItemClickListener) mItemClickListener;
+    }
+
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<GetSkillsData> filterllist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        getSkillsDataList = filterllist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
 

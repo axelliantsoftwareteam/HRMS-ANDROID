@@ -17,38 +17,61 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hrm.Fragment.Evaluation.EvaluationFragment;
+import com.example.hrm.Interface.OnItemClick;
+import com.example.hrm.Interface.RecyclerViewDataPass;
 import com.example.hrm.Model.Evalution.Questions.GetEvalQuesData;
 import com.example.hrm.Model.Evalution.Questions.GetEvalQuestion;
+import com.example.hrm.Model.Evalution.ValueModel;
 import com.example.hrm.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder> {
+import retrofit2.Callback;
+
+
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyViewHolder>  {
     Context context;
 
     boolean status;
 
+    int ratestar;
+    String ItemName;
 
     GetEvalQuesData getEvalQuesData;
     private List<GetEvalQuesData> getEvalQuesDataList;
+//
+//    private List<ValueModel> valueModels;
+RecyclerViewDataPass recyclerViewDataPass; //here is our data pass object
 
-    private List<ValueModel> valueModels;
-    private OnItemClickListener mOnItemClickListener;
+    ArrayList<ValueModel> valueModelArrayList = new ArrayList<>();
+//    private OnItemClickListener mOnItemClickListener;
+//
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, GetEvalQuesData obj, int position);
-    }
+  //  public OnItemClick mCallback;
 
-    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
-        this.mOnItemClickListener = (OnItemClickListener) mItemClickListener;
-    }
+//    public interface OnItemClickListener
+//    {
+//        void onItemClick(View view, GetEvalQuesData obj, int position);
+//    }
+//
 
+//    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+//        this.mOnItemClickListener = (OnItemClickListener) mItemClickListener;
+//    }
+
+//
+//    OnItemClick listener
 
     public QuestionAdapter(Context context, List<GetEvalQuesData> respons) {
         this.context = context;
         this.getEvalQuesDataList = respons;
+//        this.mCallback=listener;
+
+      //  this.recyclerViewDataPass=recyclerViewDataPass; //get data pass object from activity
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -63,16 +86,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
             super(v);
             ques = v.findViewById(R.id.txtques);
             post = v.findViewById(R.id.et_post);
-            ratingBar =v.findViewById(R.id.rating_bar);
-
-
-
-
-
+            ratingBar = v.findViewById(R.id.rating_bar);
 
         }
     }
-
 
     @NonNull
     @Override
@@ -88,22 +105,23 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") int position)  {
 
         getEvalQuesData = getEvalQuesDataList.get(position);
 
-//        holder.action.setOnClickListener(new View.OnClickListener() {
+//        holder.post.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                int pos = holder.getAdapterPosition();
 //                // check if item still exists
 //                if (pos != RecyclerView.NO_POSITION)
 //                {
-//                    if (mOnItemClickListener != null) {
-//                        mOnItemClickListener.onItemClick(v, getEvalQuesDataList.get(position), position);
 //
-//                        // showCustomDialog();
-//                    }
+////                    if (mOnItemClickListener != null) {
+////                        mOnItemClickListener.onItemClick(v, getEvalQuesDataList.get(position), position);
+////
+////                        // showCustomDialog();
+////                    }
 //
 //                }
 //            }
@@ -121,29 +139,48 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.MyView
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String post =holder.post.getText().toString();
-                Toast.makeText(context, ""+post, Toast.LENGTH_SHORT).show();
+               // String post =holder.post.getText().toString();
+                 ItemName = holder.post.getText().toString();
+               // mCallback.onClick(ItemName);
+
+//                ValueModel valueModel=new ValueModel(getEvalQuesDataList.get(position).getComments());
+//                valueModel.add();
+
+               // Toast.makeText(context, ""+post, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
             }
+
+
+
+
         });
       holder.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
           @Override
           public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
           {
               final float numStars = ratingBar.getRating();
-              int ratestar =(int)numStars;
+              ratestar =(int)numStars;
+              Intent intent = new Intent("custom-message");
+              //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
+              intent.putExtra("rating",String.valueOf(ratestar));
+              intent.putExtra("comment",ItemName);
+              LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-              Toast.makeText(context, ""+ratestar+position, Toast.LENGTH_SHORT).show();
+              // mCallback.onClick(String.valueOf(ratestar));
+
+            //  Toast.makeText(context, ""+ratestar, Toast.LENGTH_SHORT).show();
 
           }
       });
+
+      //
 //      Intent intent =new Intent();
 //        Bundle args = new Bundle();
-//        args.putSerializable("comment_list",(Serializable) valueModels);
+//        args.putSerializable("comment_list",(Serializable) valueModelArrayList);
 //        intent.putExtra("BUNDLE_COMMENT",args);
 //
 //        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);

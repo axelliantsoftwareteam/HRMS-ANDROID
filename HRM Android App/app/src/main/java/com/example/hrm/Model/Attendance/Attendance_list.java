@@ -1,37 +1,33 @@
 
 package com.example.hrm.Model.Attendance;
 
-import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
 public class Attendance_list {
 
     @SerializedName("check_in")
-    @Expose
     private String checkIn;
+
     @SerializedName("check_out")
-    @Expose
     private String checkOut;
+
     @SerializedName("type")
-    @Expose
-    private Integer type;
+    private int type;
+
     @SerializedName("date")
-    @Expose
     private String date;
+
     @SerializedName("week_day")
-    @Expose
     private String weekDay;
+
     @SerializedName("status")
-    @Expose
     private String status;
+
     @SerializedName("early_out")
-    @Expose
-    private Boolean earlyOut;
+    private boolean earlyOut;
+
     @SerializedName("is_late")
-    @Expose
-    private Boolean isLate;
+    private boolean isLate;
 
     public String getCheckIn() {
         return checkIn;
@@ -49,11 +45,11 @@ public class Attendance_list {
         this.checkOut = checkOut;
     }
 
-    public Integer getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -81,20 +77,19 @@ public class Attendance_list {
         this.status = status;
     }
 
-    public Boolean getEarlyOut() {
+    public boolean isEarlyOut() {
         return earlyOut;
     }
 
-    public void setEarlyOut(Boolean earlyOut) {
+    public void setEarlyOut(boolean earlyOut) {
         this.earlyOut = earlyOut;
     }
 
-    public Boolean getIsLate() {
+    public boolean isLate() {
         return isLate;
     }
 
-    public void setIsLate(Boolean isLate) {
-        this.isLate = isLate;
+    public void setLate(boolean late) {
+        isLate = late;
     }
-
 }

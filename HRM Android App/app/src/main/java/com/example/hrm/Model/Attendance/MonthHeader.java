@@ -1,25 +1,20 @@
 
 package com.example.hrm.Model.Attendance;
 
-import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
 public class MonthHeader {
-
     @SerializedName("day")
-    @Expose
-    private Integer day;
+    private int day;
+
     @SerializedName("week_day")
-    @Expose
     private String weekDay;
 
-    public Integer getDay() {
+    public int getDay() {
         return day;
     }
 
-    public void setDay(Integer day) {
+    public void setDay(int day) {
         this.day = day;
     }
 
@@ -30,5 +25,4 @@ public class MonthHeader {
     public void setWeekDay(String weekDay) {
         this.weekDay = weekDay;
     }
-
 }

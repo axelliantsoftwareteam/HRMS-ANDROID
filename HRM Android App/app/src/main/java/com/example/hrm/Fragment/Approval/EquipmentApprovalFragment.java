@@ -226,7 +226,8 @@ public class EquipmentApprovalFragment extends Fragment {
                     try {
                         if (response.isSuccessful()) {
                             int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
+                            if (status == 200)
+                            {
 
                                 attendApprovalList = response.body().getData().getResponse();
 

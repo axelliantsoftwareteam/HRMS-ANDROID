@@ -104,9 +104,9 @@ public class ApprovalActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Toast.makeText(ApprovalActivity.this, "Home", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
+                Intent intent = new Intent(ApprovalActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
 
 
             }

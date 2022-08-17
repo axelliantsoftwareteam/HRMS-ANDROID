@@ -27,12 +27,17 @@ import com.example.hrm.Adapter.StaticData.HolidayAdapter;
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayData;
 import com.example.hrm.Model.BasicSetup.HolidayModel.GetHolidayModel;
+import com.example.hrm.Model.BasicSetup.HolidayModel.TypeHoilday.GetHoildayListData;
+import com.example.hrm.Model.BasicSetup.HolidayModel.TypeHoilday.GetHolidayList;
 import com.example.hrm.Model.BasicSetup.Skills.AddSkill.Addskill;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetStDataMemberModel;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetStaticDataModel;
+import com.example.hrm.Model.UserProfileModel.Salutation.GetSalutation;
+import com.example.hrm.Model.UserProfileModel.Salutation.GetSalutationData;
 import com.example.hrm.UI.AddLeave;
 import com.example.hrm.UI.BasicSetupActivity;
+import com.example.hrm.UI.EditprofActivity;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogAddholidayBinding;
 import com.example.hrm.databinding.DialogEditholidayBinding;
@@ -68,8 +73,13 @@ public class SystemHolidaysFragment extends Fragment {
     SessionManager sessionManager;
     String token;
     String ssdate, senddate,stype,sdecrpt;
-    List<GetMemberList> data = new ArrayList<>();
+
+    List<GetHoildayListData> memberResponses= new ArrayList<>();
+
+
     int iCurrentSelection = 0;
+
+    List<GetHoildayListData> holiy = new ArrayList<>();
 
     List<GetHolidayData> getHolidayDataList = new ArrayList<>();
 
@@ -235,7 +245,7 @@ public class SystemHolidaysFragment extends Fragment {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        getmember(token);
+        getdialogmember(token);
 
 
         dialogAddholidayBinding.etstrtdate.setOnClickListener(new View.OnClickListener() {
@@ -321,87 +331,81 @@ public class SystemHolidaysFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }
-    public void getmember(final String access_token) {
-        try {
+    public void getdialogmember(final String access_token)
+    {
+        try
+        {
 
-            final ProgressDialog dialog;
-            dialog = new ProgressDialog(getActivity());
-            dialog.setMessage("Loading...");
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
+            final ProgressDialog progressDialog;
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
 
-            Call<GetStDataMemberModel> getStDataMemberModelCall = ApiHandler.getApiInterface().getHoliday("Bearer " + access_token,"Holiday");
-            Log.e("Tag", "response" + getStDataMemberModelCall.toString());
+            Call<GetHolidayList> getHolidayListCall = ApiHandler.getApiInterface().getholiy("Bearer " + access_token);
+            Log.e("Tag", "response" + getHolidayListCall.toString());
 
-            getStDataMemberModelCall.enqueue(new Callback<GetStDataMemberModel>() {
+            getHolidayListCall.enqueue(new Callback<GetHolidayList>() {
                 @Override
-                public void onResponse(Call<GetStDataMemberModel> getStDataMemberModelCall1, Response<GetStDataMemberModel> response) {
+                public void onResponse(Call<GetHolidayList> getSalutationCall1, Response<GetHolidayList> response) {
 
                     try {
-                        if (response.isSuccessful()) {
+                        if (response.isSuccessful())
+                        {
                             int status = response.body().getMeta().getStatus();
-                            if (status == 200) {
-                                data = response.body().getData().getResponse();
+                            if (status==200)
+                            {
+                                memberResponses = response.body().getData().getResponse();
 
+                                Log.e("Tag", "respone" +memberResponses.toString());
 
-                                Log.e("Tag", "respone" + data.toString());
-
-                                // setspiner(data);
+                                // setspiner(memberResponses);
                                 //String array to store all the book names
-                                String[] items = new String[data.size()];
+                                String[] items = new String[memberResponses.size()];
 
                                 //Traversing through the whole list to get all the names
-                                for (int i = 0; i < data.size(); i++) {
+                                for(int i=0; i<memberResponses.size(); i++){
                                     //Storing names to string array
-                                    items[i] = data.get(i).toString();
+                                    items[i] = memberResponses.get(i).getValue();
                                 }
 
                                 //Spinner spinner = (Spinner) findViewById(R.id.spinner1);
                                 ArrayAdapter<String> adapter;
                                 adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, items);
                                 //setting adapter to spinner
-                                dialogAddholidayBinding.spinner.setAdapter(adapter);
+                                dialogAddholidayBinding.spinnerlist.setAdapter(adapter);
 
 
-                                dialog.dismiss();
+                                progressDialog.dismiss();
+
+                                dialogAddholidayBinding.spinnerlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                        Integer idd = memberResponses.get(position).getId();
+                                        String sname = parent.getItemAtPosition(position).toString();
+                                        Log.e("Tag", "member=" + sname.toString());
+                                        Log.e("Tag", "idd=" + idd.toString());
 
 
-                                //   Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                        // sometimes you need nothing here
+                                    }
+                                });
+                                //   Toast.makeText(AddLeave.this, ""+memberResponses, Toast.LENGTH_SHORT).show();
                             }
 
-                            dialogAddholidayBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                                    if (iCurrentSelection == position) {
-//                                        return;
-//                                    } else {
 
-                                    stype = parent.getItemAtPosition(position).toString();
-                                    Log.e("Tag", "member=" + stype.toString());
-                                   // GetAllAttendByID(token, sname);
-                                    iCurrentSelection = 0;
-
-                                    // }
-                                    // Your code here
-                                    //  iCurrentSelection = position;
-
-
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-//                                        Toast.makeText(getActivity(), "no selected", Toast.LENGTH_SHORT).show();
-//                                        Log.e("Tag", "memberno=" + sname.toString());
-                                    // sometimes you need nothing here
-                                }
-                            });
-
-
-                        } else {
+                        }
+                        else {
 
                             Toast.makeText(getActivity(), "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
 
-                            dialog.dismiss();
+                            progressDialog.dismiss();
                         }
 
 
@@ -416,22 +420,17 @@ public class SystemHolidaysFragment extends Fragment {
                         }
 
                     }
-
-
                 }
 
                 @Override
-                public void onFailure(Call<GetStDataMemberModel> call, Throwable t) {
+                public void onFailure(Call<GetHolidayList> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
-                        dialog.dismiss();
 
                     } catch (Resources.NotFoundException e) {
                         e.printStackTrace();
                     }
                 }
-
-
             });
 
 

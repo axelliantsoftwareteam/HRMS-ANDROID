@@ -10,7 +10,7 @@ public class Detail {
 
     @SerializedName("rating")
     @Expose
-    private Integer rating;
+    private String rating;
     @SerializedName("comments")
     @Expose
     private String comments;
@@ -21,11 +21,11 @@ public class Detail {
     @Expose
     private Integer questionId;
 
-    public Integer getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

@@ -38,6 +38,7 @@ public class SessionManager {
     public static final String KEY_CNIC = "nicNumber";
     public static final String KEY_Qualification = "qualification";
     public static final String KEY_DEPARTMENT = "department";
+    public static final String KEY_BUILDING = "building";
     public static final String KEY_HomeAddress = "homeAddress";
     public static final String KEY_OfficeAddress = "officeAddress";
     public static final String KEY_DOB = "dob";
@@ -175,6 +176,12 @@ public class SessionManager {
         editor.putString(KEY_DEPARTMENT, department);
         editor.commit();
     }
+    public void saveBuilding(String buliding) {
+        editor.putString(KEY_BUILDING, buliding);
+        editor.commit();
+    }
+
+
     public void saveHomeAddress(String homeAddress) {
         editor.putString(KEY_HomeAddress, homeAddress);
         editor.commit();
@@ -270,7 +277,7 @@ public class SessionManager {
     public String getEmpcode() {return pref.getString(KEY_EMPCODE, null);}
 
     public String getDepartment() {return pref.getString(KEY_DEPARTMENT, null);}
-
+    public String getBuilding() {return pref.getString(KEY_BUILDING, null);}
     public String getReportTo() {return pref.getString(KEY_REPORTTO, null);}
 
 }

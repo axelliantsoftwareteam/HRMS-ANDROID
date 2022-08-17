@@ -7,16 +7,32 @@
     android:background="@color/grey_5"
     tools:context=".Fragment.BasicSetup.SkillsFragment">
 
-    <TextView
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_round"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView">
+
+    </androidx.appcompat.widget.SearchView>
+
+
+    <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_medium"
         android:text="@string/skill"
+        android:layout_below="@+id/search_bar"
         android:textColor="@color/colorApp"
         android:textSize="@dimen/spacing_mlarge"
-        android:textStyle="bold">
+        android:textStyle="bold"
+
+        >
 
     </TextView>
 
@@ -26,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginTop="5dp"
+        android:layout_below="@+id/search_bar"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="3dp"
         android:background="@drawable/button_bg"

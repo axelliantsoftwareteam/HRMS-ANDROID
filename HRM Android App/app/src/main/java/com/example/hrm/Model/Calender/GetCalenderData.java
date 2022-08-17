@@ -1,6 +1,5 @@
 
 package com.example.hrm.Model.Calender;
-
 import java.util.List;
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;

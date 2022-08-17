@@ -90,6 +90,10 @@ public class RequestGeneralAdapter extends RecyclerView.Adapter<RequestGeneralAd
         {
             holder.approv.setVisibility(View.VISIBLE);
         }
+        if (staus==4)
+        {
+            holder.approv.setVisibility(View.VISIBLE);
+        }
         if (staus==5)
         {
             holder.await.setVisibility(View.VISIBLE);

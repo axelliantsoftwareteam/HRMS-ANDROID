@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivityMainBinding;
+import com.google.common.collect.Table;
 
 import java.io.Serializable;
 
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainActivity.this, OrganoActivity.class);
+                Intent intent = new Intent(MainActivity.this, OrganogramActivity.class);
                 startActivity(intent);
                 finish();
 

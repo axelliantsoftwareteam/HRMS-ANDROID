@@ -352,7 +352,7 @@ public class LeaveRequestFragment extends Fragment {
             progressDialog.setMessage("Loading...");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
-            Call<AllLeavesModel> allleaves = ApiHandler.getApiInterface().getAllleaves("Bearer " + access_token);
+            Call<AllLeavesModel> allleaves = ApiHandler.getApiInterface().getAllleavesreq("Bearer " + access_token);
             allleaves.enqueue(new Callback<AllLeavesModel>() {
                 @Override
                 public void onResponse(Call<AllLeavesModel> allLeavesModelCall, Response<AllLeavesModel> response) {

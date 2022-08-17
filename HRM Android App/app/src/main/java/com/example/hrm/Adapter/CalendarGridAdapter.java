@@ -12,10 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.hrm.Interface.OnCalenderDayClickListener;
+import com.example.hrm.Model.Calender.GetCalenderData;
 import com.example.hrm.Model.CalenderEventObjects;
 import com.example.hrm.R;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -79,6 +83,7 @@ public class CalendarGridAdapter extends ArrayAdapter {
         Calendar eventCalendar = Calendar.getInstance();
         CalenderEventObjects eventObjects = null;
         for (int i = 0; i < allEvents.size(); i++) {
+
             eventCalendar.setTime(allEvents.get(i).getDate());
             if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
                     && displayYear == eventCalendar.get(Calendar.YEAR)) {

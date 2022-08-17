@@ -12,6 +12,7 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:text="@string/noreqt"
+        android:visibility="gone"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold">

@@ -172,5 +172,19 @@
     <string name="tier">Tier</string>
     <string name="role">Roles</string>
     <string name="associate">Associate Screen Role</string>
-
+    <string name="employe">Employee Management</string>
+    <string name="pay">Payroll</string>
+    <string name="tax">Tax Slabs</string>
+    <string name="health">Health Slabs</string>
+    <string name="eobi">EOBI Slabs</string>
+    <string name="crtax">Create Tax Slabs</string>
+    <string name="taxdetails">Tax Slabs Details</string>
+    <string name="healthdetails">Health Slabs Details</string>
+    <string name="eobidetalis">EOBI Slab Details</string>
+    <string name="addhealth">Create Health Slabs</string>
+    <string name="addeobi">Create Eobi Slabs</string>
+    <string name="step_of">Step %1$d of %2$d</string>
+    <string name="personal">Personal Information</string>
+    <string name="lorem_ipsum">" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin         \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin "</string>
+    <string name="HIDE">Hide</string>
 </resources>

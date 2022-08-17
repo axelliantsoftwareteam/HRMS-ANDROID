@@ -20,7 +20,7 @@
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alltaskrecycler"
+        android:id="@+id/todayrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

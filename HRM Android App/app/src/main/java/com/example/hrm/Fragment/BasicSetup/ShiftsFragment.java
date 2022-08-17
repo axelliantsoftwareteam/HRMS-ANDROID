@@ -37,6 +37,7 @@ import com.example.hrm.databinding.DialogEditskillBinding;
 import com.example.hrm.databinding.FragmentShiftsBinding;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.guna.libmultispinner.MultiSelectionSpinner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,14 +54,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ShiftsFragment extends Fragment {
+public class ShiftsFragment extends Fragment implements MultiSelectionSpinner.OnMultipleItemsSelectedListener{
 
 
     // initialize variables
     TextView textView;
     boolean[] selectedLanguage;
     ArrayList<Integer> langList = new ArrayList<>();
-    String[] langArray = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
+    int position;
+
+    String[] dayArray = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
 
 
 
@@ -305,93 +308,108 @@ public class ShiftsFragment extends Fragment {
             }
         });
 
-        // initialize selected language array
-        selectedLanguage = new boolean[langArray.length];
+        dialogAddshiftBinding.dialogspinnerlist.setItems(dayArray);
+        dialogAddshiftBinding.dialogspinnerlist.setSelection(new int[]{2, 4});
+        dialogAddshiftBinding.dialogspinnerlist.setListener(this);
 
-        dialogAddshiftBinding.textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // Initialize alert dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-                // set title
-                builder.setTitle("Week Holidays");
-
-                // set dialog non cancelable
-                builder.setCancelable(false);
-
-                builder.setMultiChoiceItems(langArray, selectedLanguage, new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                        // check condition
-                        if (b) {
-                            // when checkbox selected
-                            // Add position  in lang list
-                            langList.add(i);
-                            // Sort array list
-                            Collections.sort(langList);
-                        } else {
-                            // when checkbox unselected
-                            // Remove position from langList
-                            langList.remove(Integer.valueOf(i));
-                        }
-                    }
-                });
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Initialize string builder
-                        StringBuilder stringBuilder = new StringBuilder();
-
-
-                        // use for loop
-                        for (int j = 0; j < langList.size(); j++) {
-                            // concat array value
-                            stringBuilder.append(langArray[langList.get(j)]);
-                            // check condition
-                            if (j != langList.size() - 1) {
-                                // When j value  not equal
-                                // to lang list size - 1
-                                // add comma
-                                stringBuilder.append(", ");
-                            }
-                        }
-                        // set text on textView
-                        dialogAddshiftBinding.textView.setText(stringBuilder.toString());
-
-
-                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // dismiss dialog
-                        dialogInterface.dismiss();
-                    }
-                });
-                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // use for loop
-                        for (int j = 0; j < selectedLanguage.length; j++) {
-                            // remove all selection
-                            selectedLanguage[j] = false;
-                            // clear language list
-                            langList.clear();
-                            // clear text view value
-                            dialogAddshiftBinding.textView.setText("");
-                        }
-                    }
-                });
-                // show dialog
-                builder.show();
-            }
-        });
-
+//        // initialize selected language array
+//        selectedLanguage = new boolean[dayArray.length];
+//
+//        dialogAddshiftBinding.textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                // Initialize alert dialog
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//
+//                // set title
+//                builder.setTitle("Week Holidays");
+//
+//                // set dialog non cancelable
+//                builder.setCancelable(false);
+//
+//                builder.setMultiChoiceItems(dayArray, selectedLanguage, new DialogInterface.OnMultiChoiceClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+//                        // check condition
+//                        if (b) {
+//                            // when checkbox selected
+//                            // Add position  in lang list
+//                            langList.add(i);
+//
+//                            // Sort array list
+//                            Collections.sort(langList);
+//
+//
+//                        } else {
+//                            // when checkbox unselected
+//                            // Remove position from langList
+//                            langList.remove(Integer.valueOf(i));
+//                        }
+//                    }
+//                });
+//
+//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i)
+//                    {
+//                        // Initialize string builder
+//                        StringBuilder stringBuilder = new StringBuilder();
+//
+//
+//
+//
+//                        // use for loop
+//                        for (int j = 0; j < langList.size(); j++)
+//                        {
+//
+//                            // concat array value
+//                            position=langList.get(j);
+//                            stringBuilder.append(dayArray[langList.get(j)]);
+//
+//
+//                            // check condition
+//                            if (j != langList.size() - 1) {
+//                                // When j value  not equal
+//                                // to lang list size - 1
+//                                // add comma
+//                                stringBuilder.append(", ");
+//                            }
+//                        }
+//                        // set text on textView
+//                        dialogAddshiftBinding.textView.setText(stringBuilder.toString());
+//
+//
+//                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        // dismiss dialog
+//                        dialogInterface.dismiss();
+//                    }
+//                });
+//                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        // use for loop
+//                        for (int j = 0; j < selectedLanguage.length; j++) {
+//                            // remove all selection
+//                            selectedLanguage[j] = false;
+//                            // clear language list
+//                            langList.clear();
+//                            // clear text view value
+//                            dialogAddshiftBinding.textView.setText("");
+//                        }
+//                    }
+//                });
+//                // show dialog
+//                builder.show();
+//            }
+//        });
+//
 
 
 
@@ -572,5 +590,18 @@ public class ShiftsFragment extends Fragment {
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
+    }
+
+    @Override
+    public void selectedIndices(List<Integer> indices, MultiSelectionSpinner spinner)
+    {
+        Toast.makeText(getActivity(), ""+indices, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings, MultiSelectionSpinner spinner)
+    {
+
     }
 }

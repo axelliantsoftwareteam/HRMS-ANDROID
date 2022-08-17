@@ -10,11 +10,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.hrm.Model.Calender.GetCalenderData;
 import com.example.hrm.Model.CalenderEventObjects;
 import com.example.hrm.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,10 +69,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         CalenderEventObjects events = eventList.get(position);
         holder.title.setText(events.getTitle());
-        holder.details.setText(events.getMessage());
 
-        String date = newFormat.format(events.getDate().getTime());
-        holder.date.setText(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateTime = dateFormat.format(events.getDate());
+
+
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDateTime localDateTime = LocalDateTime.parse(events.getDate());
+//        String localdate = localDateTime.format(formatter);
+
+        holder.details.setText(dateTime);
+
+//        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDateTime localDateTimes = LocalDateTime.parse(events.getStart());
+//        String localdates = localDateTimes.format(formatters);
+
+        SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-MM-dd");
+        String dateTimes = dateFormats.format(events.getEdate());
+
+        //   String date = newFormat.format(events.getDate().getTime());
+        holder.date.setText(dateTimes);
     }
 
     @Override

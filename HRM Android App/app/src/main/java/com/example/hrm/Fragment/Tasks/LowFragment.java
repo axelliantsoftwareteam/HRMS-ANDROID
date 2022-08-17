@@ -19,12 +19,10 @@ import android.widget.Toast;
 
 import com.example.hrm.Adapter.Task.AllTaskAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.GetAllTask.GetAllTaskData;
-import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
-import com.example.hrm.R;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltask;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltaskData;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogTaskdetailsBinding;
-import com.example.hrm.databinding.FragmentHighBinding;
 import com.example.hrm.databinding.FragmentLowBinding;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class LowFragment extends Fragment {
     AllTaskAdapter allTaskAdapter;
 
 
-    List<GetAllTaskData> getAllTaskDataList = new ArrayList<>();
+    List<GetAlltaskData> getAllTaskDataList = new ArrayList<>();
 
     private FragmentLowBinding binding;
     private DialogTaskdetailsBinding dialogTaskdetailsBinding;
@@ -72,7 +70,9 @@ public class LowFragment extends Fragment {
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
-        GetAllTask(token);
+
+     //   Toast.makeText(getActivity(), "Low", Toast.LENGTH_SHORT).show();
+       GetAllTask(token);
         return view;
     }
     private void GetAllTask(final String access_token) {
@@ -83,10 +83,10 @@ public class LowFragment extends Fragment {
             dialog.setMessage("Loading...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getlowList("Bearer " + access_token);
-            getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>() {
+            Call<GetAlltask> getAllTaskModelCall = ApiHandler.getApiInterface().getlowList("Bearer " + access_token);
+            getAllTaskModelCall.enqueue(new Callback<GetAlltask>() {
                 @Override
-                public void onResponse(Call<GetAllTaskModel> getAllTaskModelCall1, Response<GetAllTaskModel> response) {
+                public void onResponse(Call<GetAlltask> getAllTaskModelCall1, Response<GetAlltask> response) {
 
                     try {
                         if (response.isSuccessful()) {
@@ -112,13 +112,13 @@ public class LowFragment extends Fragment {
                                     // on item list clicked
                                     allTaskAdapter.setOnItemClickListener(new AllTaskAdapter.OnItemClickListener() {
                                         @Override
-                                        public void onItemClick(View view, GetAllTaskData obj, int position)
+                                        public void onItemClick(View view, GetAlltaskData obj, int position)
                                         {
-                                            GetAllTaskData getAllTaskData1 =new GetAllTaskData();
+                                            GetAlltaskData getAllTaskData1 =new GetAlltaskData();
                                             getAllTaskData1 = getAllTaskDataList.get(position);
                                             showCustomDialog(getAllTaskData1);
 
-                                            Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
+                                        //    Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -152,7 +152,7 @@ public class LowFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<GetAllTaskModel> call, Throwable t) {
+                public void onFailure(Call<GetAlltask> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
                         dialog.dismiss();
@@ -171,7 +171,7 @@ public class LowFragment extends Fragment {
         }
     }
 
-    private void showCustomDialog(GetAllTaskData getAllTaskData)
+    private void showCustomDialog(GetAlltaskData getAllTaskData)
     {
 
         dialogTaskdetailsBinding = DialogTaskdetailsBinding.inflate(getLayoutInflater());

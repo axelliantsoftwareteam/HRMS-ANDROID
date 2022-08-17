@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<com.otaliastudios.zoom.ZoomLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-     tools:context=".UI.OrganoActivity">
+    android:background="@color/grey_3"
+    android:scrollbars="vertical|horizontal"
+    app:zoomEnabled="true"
+    android:id="@+id/zoomLayout"
+    app:flingEnabled="true"
+    app:scrollEnabled="true"
+    app:transformation="centerInside"
+    app:transformationGravity="auto"
+    app:overScrollHorizontal="true"
+    app:overScrollVertical="true"
+    app:overPinchable="true"
+    app:horizontalPanEnabled="true"
+    app:verticalPanEnabled="true"
+    app:oneFingerScrollEnabled="true"
+    app:twoFingersScrollEnabled="true"
+    app:threeFingersScrollEnabled="true"
+    app:minZoom="15"
+    app:minZoomType="zoom"
+    app:maxZoom="100"
+    app:maxZoomType="zoom"
+    tools:context=".UI.OrganoActivity">
     <!--Below is the code for tree view-->
 
-    <WebView
-        android:id="@+id/webview"
-         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/node"
+        />
+</com.otaliastudios.zoom.ZoomLayout>

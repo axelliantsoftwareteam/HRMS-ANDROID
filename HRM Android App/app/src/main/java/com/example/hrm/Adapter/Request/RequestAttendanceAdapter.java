@@ -93,6 +93,10 @@ public class RequestAttendanceAdapter extends RecyclerView.Adapter<RequestAttend
         {
             holder.approv.setVisibility(View.VISIBLE);
         }
+        if (staus==4)
+        {
+            holder.approv.setVisibility(View.VISIBLE);
+        }
         if (staus==5)
         {
             holder.await.setVisibility(View.VISIBLE);

@@ -35,6 +35,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UI.OrganogramActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmployeeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.ResumeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.PayrollActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.EmplyManagActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.TableActivity"
             android:exported="false" />
         <activity
@@ -111,7 +126,7 @@
 
                 <data
                     android:host="com.example.hrm"
-                    android:path="/1I5EWqVH3n4ujgGjXoA9Qbea1C4="
+                    android:path="/nNO53JL2zmIp7VldfjnFgCsL5Dc="
                     android:scheme="msauth" />
             </intent-filter>
         </activity>

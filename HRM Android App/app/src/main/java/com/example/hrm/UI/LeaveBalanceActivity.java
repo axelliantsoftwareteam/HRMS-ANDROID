@@ -52,7 +52,6 @@ public class LeaveBalanceActivity extends AppCompatActivity {
     PieChart pieChart;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +75,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
         sessionManager = new SessionManager(LeaveBalanceActivity.this);
         token = sessionManager.getToken();
 
-       GetleaveBalance(token);
+        GetleaveBalance(token);
 
 
         binding.me.setOnClickListener(new View.OnClickListener() {
@@ -120,8 +119,8 @@ public class LeaveBalanceActivity extends AppCompatActivity {
             }
         });
     }
-    private void setData(List<LeaveBalanceData> leavebalance)
-    {
+
+    private void setData(List<LeaveBalanceData> leavebalance) {
 
         String[] items = new String[leavebalance.size()];
 
@@ -153,34 +152,41 @@ public class LeaveBalanceActivity extends AppCompatActivity {
             Call<Leavebalance> leaves = ApiHandler.getApiInterface().getleavebalance("Bearer " + access_token);
             leaves.enqueue(new Callback<Leavebalance>() {
                 @Override
-                public void onResponse(Call<Leavebalance> leavebalanceCall, retrofit2.Response<Leavebalance> response)
-                {
+                public void onResponse(Call<Leavebalance> leavebalanceCall, retrofit2.Response<Leavebalance> response) {
 
                     try {
                         if (response.isSuccessful()) {
                             int status = response.body().getMeta().getStatus();
-                            if (status == 200)
-                            {
+                            if (status == 200) {
 
                                 leaveBalanceDataList = response.body().getData().getResponse();
 //                                setData(leaveBalanceDataList);
                                 //Traversing through the whole list to get all the names
-                                for(int i=0; i<leaveBalanceDataList.size(); i++){
+                                for (int i = 0; i < leaveBalanceDataList.size(); i++) {
                                     //Storing names to string array
-                                    String name = leaveBalanceDataList.get(i).getName();
-                                    String used = leaveBalanceDataList.get(i).getTotal();
+
+                                    LeaveBalanceData leaveBalanceData = new LeaveBalanceData();
+
+                                    leaveBalanceData=leaveBalanceDataList.get(i);
+                                    leaveBalanceData.setName(leaveBalanceDataList.get(i).getName());
+                                    leaveBalanceData.setUsed(leaveBalanceDataList.get(i).getTotal());
 
 
-                                    pieChart.addPieSlice(new PieModel(name,Integer.parseInt(used.toString()) , Color.parseColor("#FFA726")));
+//                                    String name = leaveBalanceDataList.get(i).getName();
+//                                    String used = leaveBalanceDataList.get(i).getTotal();
+                                    String value = leaveBalanceData.getUsed();
+
+
+                                   // pieChart.addPieSlice(new PieModel("hh",Integer.parseInt(value)), Color.parseColor("#FFA726"));
+                                    pieChart.addPieSlice(new PieModel("All leaves", 8, Color.parseColor("#FFA726")));
 
                                 }
 
-                                if (leaveBalanceDataList.size()==0)
+                                if (leaveBalanceDataList.size() == 0)
                                 {
                                     dialog.dismiss();
                                     mRecyclerView.setVisibility(View.GONE);
-                                }
-                                else if (leaveBalanceDataList !=null){
+                                } else if (leaveBalanceDataList != null) {
 
                                     leavebalanceAdapter = new LeavebalanceAdapter(LeaveBalanceActivity.this, leaveBalanceDataList);
                                     mRecyclerView.setAdapter(leavebalanceAdapter);
@@ -231,6 +237,7 @@ public class LeaveBalanceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     @Override
     public void onBackPressed() {
         // do something on back.

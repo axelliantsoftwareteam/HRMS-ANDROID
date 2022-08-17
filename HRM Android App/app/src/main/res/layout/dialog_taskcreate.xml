@@ -33,8 +33,6 @@
                 android:padding="10dp">
 
 
-
-
                 <TextView
                     android:id="@+id/et_leave"
                     android:layout_width="wrap_content"
@@ -47,15 +45,15 @@
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold" />
+
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/primage"
                     android:layout_width="120dp"
                     android:layout_height="90dp"
-                    android:layout_marginTop="5dp"
                     android:layout_gravity="center"
-                    android:visibility="gone"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/photo_male"
-                    />
+                    android:visibility="gone" />
 
 
                 <TextView
@@ -85,9 +83,9 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:text="asdsdads"
-                    android:textColor="@color/colorApp"
                     android:backgroundTint="@color/colorApp"
+                    android:hint="Task Name"
+                    android:textColor="@color/colorApp"
 
                     />
 
@@ -116,8 +114,6 @@
                 </EditText>
 
 
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -126,17 +122,19 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/tag"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="5dp"
-                    android:visibility="gone"
                     android:layout_marginBottom="5dp"
-                    android:textColor="@color/colorApp"
                     android:backgroundTint="@color/colorApp"
+                    android:textColor="@color/colorApp"
+                    android:visibility="gone"
 
                     />
+
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="match_parent"
@@ -165,37 +163,53 @@
                     android:layout_marginTop="5dp"
                     android:backgroundTint="@color/colorApp"
                     android:maxLength="1000"
+                    android:hint="Enter Note"
                     android:textColor="@color/colorApp"
                     android:textStyle="bold">
 
                 </EditText>
+
                 <CheckBox
+                    android:id="@+id/selfcheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorApp"
-                    android:text="Personal Task" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Assing to"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                    android:textColor="@color/grey_40"
-                    android:textSize="16sp" />
+                    android:text="Personal Task"
+                    android:textColor="@color/colorApp" />
+
                 <LinearLayout
+                    android:id="@+id/list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable">
+                    android:visibility="gone"
+                    android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/dialogspinnerlist"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:backgroundTint="@color/colorApp" />
+                        android:text="Assing to"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_40"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/editdrawable"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/dialogspinnerlist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:backgroundTint="@color/colorApp" />
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

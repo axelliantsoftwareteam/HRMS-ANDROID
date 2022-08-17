@@ -1,30 +1,26 @@
 
 package com.example.hrm.Model.Attendance;
 
-import java.util.List;
-import javax.annotation.Generated;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
+import java.util.List;
+
 public class Attendance {
 
     @SerializedName("id")
-    @Expose
-    private Integer id;
+    private int id;
+
     @SerializedName("name")
-    @Expose
     private String name;
+
     @SerializedName("attendance_list")
-    @Expose
     private List<Attendance_list> attendanceList = null;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,5 +39,4 @@ public class Attendance {
     public void setAttendanceList(List<Attendance_list> attendanceList) {
         this.attendanceList = attendanceList;
     }
-
 }

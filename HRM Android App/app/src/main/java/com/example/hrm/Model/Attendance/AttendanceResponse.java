@@ -1,19 +1,14 @@
 
 package com.example.hrm.Model.Attendance;
 
-import javax.annotation.Generated;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
 public class AttendanceResponse {
 
     @SerializedName("data")
-    @Expose
     private Data data;
+
     @SerializedName("meta")
-    @Expose
     private Meta meta;
 
     public Data getData() {

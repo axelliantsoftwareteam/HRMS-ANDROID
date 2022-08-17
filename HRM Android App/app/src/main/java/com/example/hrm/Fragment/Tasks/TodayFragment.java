@@ -18,12 +18,14 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.hrm.Adapter.Task.AllTaskAdapter;
+import com.example.hrm.Adapter.Task.TodayAdapter;
 import com.example.hrm.Hundler.ApiHandler;
-import com.example.hrm.Model.GetAllTask.GetAllTaskData;
-import com.example.hrm.Model.GetAllTask.GetAllTaskModel;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltask;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltaskData;
+import com.example.hrm.Model.GetAllTask.Alltask.Today.GetToday;
+import com.example.hrm.Model.GetAllTask.Alltask.Today.GetTodayData;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.DialogTaskdetailsBinding;
-import com.example.hrm.databinding.FragmentAlltaskBinding;
 import com.example.hrm.databinding.FragmentTodayBinding;
 
 import java.util.ArrayList;
@@ -38,10 +40,10 @@ public class TodayFragment extends Fragment {
 
 
     private RecyclerView.LayoutManager mLayoutManager;
-    AllTaskAdapter allTaskAdapter;
+    TodayAdapter todayAdapter;
 
 
-    List<GetAllTaskData> getAllTaskDataList = new ArrayList<>();
+    List<GetTodayData> getTodayDataList = new ArrayList<>();
 
     private FragmentTodayBinding binding;
     private DialogTaskdetailsBinding dialogTaskdetailsBinding;
@@ -60,16 +62,16 @@ public class TodayFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentTodayBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        binding.alltaskrecycler.setHasFixedSize(true);
+        binding.todayrecycler.setHasFixedSize(true);
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.alltaskrecycler.setLayoutManager(mLayoutManager);
+        binding.todayrecycler.setLayoutManager(mLayoutManager);
 
         sessionManager = new SessionManager(getActivity());
         token = sessionManager.getToken();
-
+       // Toast.makeText(getActivity(), "Today", Toast.LENGTH_SHORT).show();
         GetAllTask(token);
         return view;
     }
@@ -82,42 +84,42 @@ public class TodayFragment extends Fragment {
             dialog.setMessage("Loading...");
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            Call<GetAllTaskModel> getAllTaskModelCall = ApiHandler.getApiInterface().getAllTodayList("Bearer " + access_token);
-            getAllTaskModelCall.enqueue(new Callback<GetAllTaskModel>() {
+            Call<GetToday> getTodayCall = ApiHandler.getApiInterface().getAllTodayList("Bearer " + access_token);
+            getTodayCall.enqueue(new Callback<GetToday>() {
                 @Override
-                public void onResponse(Call<GetAllTaskModel> getAllTaskModelCall1, Response<GetAllTaskModel> response) {
+                public void onResponse(Call<GetToday> getTodayCall1, Response<GetToday> response) {
 
                     try {
                         if (response.isSuccessful()) {
                             int status = response.body().getMeta().getStatus();
                             if (status == 200)
                             {
-                                getAllTaskDataList = response.body().getData().getResponse();
-                                if (getAllTaskDataList.size()==0)
+                                getTodayDataList = response.body().getData().getResponse();
+                                if (getTodayDataList.size()==0)
                                 {
                                     dialog.dismiss();
-                                    binding.alltaskrecycler.setVisibility(View.GONE);
+                                    binding.todayrecycler.setVisibility(View.GONE);
                                 }
-                                else if (getAllTaskDataList !=null)
+                                else if (getTodayDataList !=null)
                                 {
 
 
-                                    allTaskAdapter = new AllTaskAdapter(getActivity(), getAllTaskDataList);
-                                    binding.alltaskrecycler.setAdapter(allTaskAdapter);
-                                    binding.alltaskrecycler.setVisibility(View.VISIBLE);
+                                    todayAdapter = new TodayAdapter(getActivity(), getTodayDataList);
+                                    binding.todayrecycler.setAdapter(todayAdapter);
+                                    binding.todayrecycler.setVisibility(View.VISIBLE);
                                     binding.txtno.setVisibility(View.GONE);
                                     dialog.dismiss();
 
                                     // on item list clicked
-                                    allTaskAdapter.setOnItemClickListener(new AllTaskAdapter.OnItemClickListener() {
+                                    todayAdapter.setOnItemClickListener(new TodayAdapter.OnItemClickListener() {
                                         @Override
-                                        public void onItemClick(View view, GetAllTaskData obj, int position)
+                                        public void onItemClick(View view, GetTodayData obj, int position)
                                         {
-                                            GetAllTaskData getAllTaskData1 =new GetAllTaskData();
-                                            getAllTaskData1 = getAllTaskDataList.get(position);
-                                            showCustomDialog(getAllTaskData1);
+                                            GetTodayData getTodayData =new GetTodayData();
+                                            getTodayData = getTodayDataList.get(position);
+                                            showCustomDialog(getTodayData);
 
-                                            Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
+                                          //  Toast.makeText(getActivity(), "details", Toast.LENGTH_SHORT).show();
 
                                         }
                                     });
@@ -151,7 +153,7 @@ public class TodayFragment extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<GetAllTaskModel> call, Throwable t) {
+                public void onFailure(Call<GetToday> call, Throwable t) {
                     try {
                         Log.e("Tag", "error" + t.toString());
                         dialog.dismiss();
@@ -170,7 +172,7 @@ public class TodayFragment extends Fragment {
         }
     }
 
-    private void showCustomDialog(GetAllTaskData getAllTaskData)
+    private void showCustomDialog(GetTodayData getTodayData)
     {
 
         dialogTaskdetailsBinding = DialogTaskdetailsBinding.inflate(getLayoutInflater());
@@ -186,11 +188,11 @@ public class TodayFragment extends Fragment {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        String name= getAllTaskData.getName();
-        String notes= getAllTaskData.getNotes();
-        String duedate= getAllTaskData.getDueDate();
+        String name= getTodayData.getName();
+        String notes= getTodayData.getNotes();
+        String duedate= getTodayData.getDueDate();
 
-        int status= getAllTaskData.getStatus();
+        int status= getTodayData.getStatus();
         if (status==1)
         {
 
@@ -200,7 +202,7 @@ public class TodayFragment extends Fragment {
             dialogTaskdetailsBinding.btnPend.setVisibility(View.VISIBLE);
         }
 
-        int tag= getAllTaskData.getTag();
+        int tag= getTodayData.getTag();
         if (tag==1)
         {
 
@@ -260,48 +262,6 @@ public class TodayFragment extends Fragment {
 //                AddReq(token);
 //                dialog.dismiss();
 //
-//            }
-//        });
-
-
-
-
-//        final Button spn_from_date = (Button) dialog.findViewById(R.id.spn_from_date);
-//        final Button spn_from_time = (Button) dialog.findViewById(R.id.spn_from_time);
-//        final Button spn_to_date = (Button) dialog.findViewById(R.id.spn_to_date);
-//        final Button spn_to_time = (Button) dialog.findViewById(R.id.spn_to_time);
-//        final TextView tv_email = (TextView) dialog.findViewById(R.id.tv_email);
-//        final EditText et_name = (EditText) dialog.findViewById(R.id.et_name);
-//        final EditText et_location = (EditText) dialog.findViewById(R.id.et_location);
-//        final AppCompatCheckBox cb_allday = (AppCompatCheckBox) dialog.findViewById(R.id.cb_allday);
-//        final AppCompatSpinner spn_timezone = (AppCompatSpinner) dialog.findViewById(R.id.spn_timezone);
-//
-//        String[] timezones = getResources().getStringArray(R.array.timezone);
-//        ArrayAdapter<String> array = new ArrayAdapter<>(this, R.layout.simple_spinner_item, timezones);
-//        array.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-//        spn_timezone.setAdapter(array);
-//        spn_timezone.setSelection(0);
-//
-//        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//        ((Button) dialog.findViewById(R.id.bt_save)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Event event = new Event();
-//                event.email = tv_email.getText().toString();
-//                event.name = et_name.getText().toString();
-//                event.location = et_location.getText().toString();
-//                event.from = spn_from_date.getText().toString() + " (" + spn_from_time.getText().toString() + ")";
-//                event.to = spn_to_date.getText().toString() + " (" + spn_to_time.getText().toString() + ")";
-//                event.is_allday = cb_allday.isChecked();
-//                event.timezone = spn_timezone.getSelectedItem().toString();
-//                displayDataResult(event);
-
-//                dialog.dismiss();
 //            }
 //        });
 

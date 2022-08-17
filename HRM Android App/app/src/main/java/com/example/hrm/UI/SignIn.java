@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -16,6 +17,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
@@ -24,17 +26,33 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Model.BasicSetup.StaticDataModel.GetDataMember.GetMemberList;
+import com.example.hrm.Model.GetAllTask.Alltask.GetAlltaskData;
 import com.example.hrm.Model.LoginModel.UserModel;
+import com.example.hrm.Model.Memberlist.MemberResponse;
+import com.example.hrm.Model.Memberlist.Members;
 import com.example.hrm.Model.MicLogin.TokenModel;
+import com.example.hrm.Model.SideMenu.Getsidemenu;
+import com.example.hrm.Model.SideMenu.Menu;
+import com.example.hrm.Model.UserProfileModel.Buildings.GetBuildingDataList;
+import com.example.hrm.Model.UserProfileModel.Buildings.GetBuildingList;
+import com.example.hrm.Model.UserProfileModel.Gender.GetGender;
+import com.example.hrm.Model.UserProfileModel.Gender.GetGenderData;
 import com.example.hrm.Model.UserProfileModel.ReportingTo;
+import com.example.hrm.Model.UserProfileModel.Salutation.GetSalutation;
+import com.example.hrm.Model.UserProfileModel.Salutation.GetSalutationData;
+import com.example.hrm.Model.UserProfileModel.UserData.GetUser;
+import com.example.hrm.Model.UserProfileModel.UserData.GetUserData;
 import com.example.hrm.Model.UserProfileModel.UserDataModel;
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivitySigninBinding;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -81,6 +99,15 @@ public class SignIn extends AppCompatActivity  {
     private ActivitySigninBinding binding;
 
     ReportingTo reportingTo;
+
+    List<Object> designation = new ArrayList<>();
+
+    List<MemberResponse> memberResponses= new ArrayList<>();
+    List<Menu> getscreenlist = new ArrayList<>();
+    List<GetSalutationData> getSalutationDataList= new ArrayList<>();
+    List<GetGenderData> getGenderDataList= new ArrayList<>();
+    List<GetBuildingDataList> getBuildingDataListList= new ArrayList<>();
+    GetUserData getUserData =new GetUserData();
 
     Pattern pattern_pwd = Pattern.compile("^[a-zA-Z0-9]+$");
     String mictoken;
@@ -147,10 +174,10 @@ public class SignIn extends AppCompatActivity  {
                         }
                     } else {
 //                        Snackbar.make(rl_pwd, "Enter the Valid Password", Snackbar.LENGTH_SHORT).show();
-                        Toast.makeText(SignIn.this, "Invalid Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignIn.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SignIn.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignIn.this, "Your entered email pattern are not match!", Toast.LENGTH_SHORT).show();
                     //  Snackbar.make(ll_lay, "Enter the Valid Email", Snackbar.LENGTH_SHORT).show();
                 }
 
@@ -158,6 +185,8 @@ public class SignIn extends AppCompatActivity  {
         });
 
        printHashKey(SignIn.this);
+
+
       //  transparentStatusAndNavigation();
 
 //        binding.signmic.setOnClickListener(new View.OnClickListener() {
@@ -358,34 +387,6 @@ public class SignIn extends AppCompatActivity  {
 
 
 
-//    private void transparentStatusAndNavigation() {
-//        //make full transparent statusBar
-//        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
-//            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
-//        }
-//        if (Build.VERSION.SDK_INT >= 19) {
-//            getWindow().getDecorView().setSystemUiVisibility(
-//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//            );
-//        }
-//        if (Build.VERSION.SDK_INT >= 21) {
-//            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);
-//        }
-//    }
-
-//    private void setWindowFlag(final int bits, boolean on) {
-//        Window win = getWindow();
-//        WindowManager.LayoutParams winParams = win.getAttributes();
-//        if (on) {
-//            winParams.flags |= bits;
-//        } else {
-//            winParams.flags &= ~bits;
-//        }
-//        win.setAttributes(winParams);
-//    }
-
 
 
     private void UserLogin() {
@@ -415,8 +416,9 @@ public class SignIn extends AppCompatActivity  {
                                    session.createLoginSession(access_token);
                                    session.saveToken(access_token);
                                     GetProfile(access_token);
+
                                     String msg = response.body().getMeta().getMessage();
-                                    Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
+                                //    Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
 
                                 }
 
@@ -425,6 +427,8 @@ public class SignIn extends AppCompatActivity  {
 
                             else
                             {
+                                Toast.makeText(SignIn.this, ""+response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
                                 dialog.dismiss();
 
 
@@ -435,8 +439,8 @@ public class SignIn extends AppCompatActivity  {
                             e.printStackTrace();
                             try {
                                 Log.e("Tag", "error=" + e.toString());
-
-                                dialog.dismiss();
+//                                Toast.makeText(SignIn.this, "Internal Server Error", Toast.LENGTH_SHORT).show();
+//                                dialog.dismiss();
                             } catch (Resources.NotFoundException e1) {
                                 e1.printStackTrace();
                             }
@@ -449,6 +453,7 @@ public class SignIn extends AppCompatActivity  {
                     {
                         try {
                             Log.e("Tag", "error" + t.toString());
+                            Toast.makeText(SignIn.this, "Internal Server Error", Toast.LENGTH_SHORT).show();
 
                             dialog.dismiss();
                         } catch (Resources.NotFoundException e) {
@@ -466,6 +471,8 @@ public class SignIn extends AppCompatActivity  {
             e.printStackTrace();
         }
     }
+
+
 
     private void gettoken() {
         try {
@@ -488,6 +495,7 @@ public class SignIn extends AppCompatActivity  {
                                 session.createLoginSession(access_token);
                                 session.saveToken(access_token);
                                 GetProfile(access_token);
+
 
                             }
 
@@ -560,6 +568,11 @@ public class SignIn extends AppCompatActivity  {
                             {
 
                                 reportingTo=response.body().getData().getResponse().getReportingTo();
+//                                designation= response.body().getData().getResponse().getDesignation();
+//
+//                                String desg=designation.get(0).toString();
+//
+
                                 String name = response.body().getData().getResponse().getName();
                                 String cnic = response.body().getData().getResponse().getCnic();
                                 String email = response.body().getData().getResponse().getEmail();
@@ -569,7 +582,6 @@ public class SignIn extends AppCompatActivity  {
                                 String reportto = response.body().getData().getResponse().getReportingTo().getName();
                                 String profimg = response.body().getData().getResponse().getProfilePicture();
                                 String empcode = response.body().getData().getResponse().getEmployeeCode();
-
 
                                 session.saveFirstName(name);
                                 session.saveCnicNumber(cnic);
@@ -582,18 +594,30 @@ public class SignIn extends AppCompatActivity  {
                                 session.saveEmpcode(empcode);
 
 
+                                getmember(access_token);
+                                getsidemenu(access_token);
+                                getgender(access_token);
+                                getbulid(access_token);
+                                getUser(access_token);
+                                getsalutation(access_token);
 
                                 Intent i = new Intent(SignIn.this, MainActivity.class);
-                              //  i.putExtra("bundle", userDataModel.getData().getResponse().getName());
+                                //  i.putExtra("bundle", userDataModel.getData().getResponse().getName());
                                 startActivity(i);
                                 finish();
-                                String msg = response.body().getMeta().getMessage();
-                                Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
+
+
+
+
+//                                String msg = response.body().getMeta().getMessage();
+//                                Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
 
                             }
 
 
-                        } else {
+                        }
+                        else
+                        {
 
                             Toast.makeText(SignIn.this, "Invalid Token or Id", Toast.LENGTH_SHORT).show();
 
@@ -629,6 +653,9 @@ public class SignIn extends AppCompatActivity  {
             e.printStackTrace();
         }
     }
+
+   
+
     private JsonObject ApiJson() {
 
         JsonObject gsonObject = new JsonObject();
@@ -727,6 +754,468 @@ public class SignIn extends AppCompatActivity  {
             Log.e("key", "printHashKey()", e);
         } catch (Exception e) {
             Log.e("key", "printHashKey()", e);
+        }
+    }
+
+
+    public void getmember(final String access_token) {
+        try {
+
+//            final ProgressDialog dialog;
+//            dialog = new ProgressDialog(SignIn.this);
+//            dialog.setMessage("Loading...");
+//            dialog.setCanceledOnTouchOutside(false);
+//            dialog.show();
+
+            Call<Members> membersCall = ApiHandler.getApiInterface().getlistMember("Bearer " + access_token);
+            Log.e("Tag", "response" + membersCall.toString());
+
+            membersCall.enqueue(new Callback<Members>() {
+                @Override
+                public void onResponse(Call<Members> membersCall1, Response<Members> response) {
+
+                    try {
+                        if (response.isSuccessful())
+                        {
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                memberResponses = response.body().getData().getResponse();
+
+                                Log.e("Tag", "respone" +memberResponses.toString());
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                Gson gson = new Gson();
+                                String json = gson.toJson(memberResponses);
+                                editor.putString("member", json);
+                                editor.apply();
+                               // Toast.makeText(SignIn.this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+
+                                //  dialog.dismiss();
+                            }
+
+
+                        }
+                        else {
+
+                            Toast.makeText(SignIn.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            //dialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Members> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getsidemenu(final String access_token)
+    {
+        try {
+
+//            final ProgressDialog dialog;
+//            dialog = new ProgressDialog(SignIn.this);
+//            dialog.setMessage("Loading...");
+//            dialog.setCanceledOnTouchOutside(false);
+//            dialog.show();
+
+            Call<Getsidemenu> getsidemenuCall = ApiHandler.getApiInterface().getsidemenu("Bearer " + access_token);
+            Log.e("Tag", "response" + getsidemenuCall.toString());
+
+            getsidemenuCall.enqueue(new Callback<Getsidemenu>() {
+                @Override
+                public void onResponse(Call<Getsidemenu> getsidemenuCall1, Response<Getsidemenu> response) {
+
+                    try {
+                        if (response.isSuccessful())
+                        {
+                            int status = response.body().getMeta().getStatus();
+                            if (status==200)
+                            {
+                                getscreenlist = response.body().getData().getMenu();
+
+                                Log.e("Tag", "respone" +getscreenlist.toString());
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                Gson gson = new Gson();
+                                String json = gson.toJson(getscreenlist);
+                                editor.putString("sidemenu", json);
+                                editor.apply();
+                                // Toast.makeText(SignIn.this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+
+                                //  dialog.dismiss();
+                            }
+
+
+                        }
+                        else {
+
+                            Toast.makeText(SignIn.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            //dialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Getsidemenu> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void getsalutation(final String access_token) {
+        try {
+
+//            final ProgressDialog progressDialog;
+//            progressDialog = new ProgressDialog(SignIn.this);
+//            progressDialog.setMessage("Loading...");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+
+            Call<GetSalutation> getSalutationCall = ApiHandler.getApiInterface().getSalu("Bearer " + access_token);
+            Log.e("Tag", "response" + getSalutationCall.toString());
+
+            getSalutationCall.enqueue(new Callback<GetSalutation>() {
+                @Override
+                public void onResponse(Call<GetSalutation> getSalutationCall1, Response<GetSalutation> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200) 
+                            {
+                                if (status==200)
+                                {
+                                    getSalutationDataList = response.body().getData().getResponse();
+
+                                    Log.e("Tag", "respone" +getSalutationDataList.toString());
+
+                                    SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    Gson gson = new Gson();
+                                    String json = gson.toJson(getSalutationDataList);
+                                    editor.putString("salutation", json);
+                                    editor.apply();
+                                   // Toast.makeText(SignIn.this, "Saved Array List to Shared preferences. ", Toast.LENGTH_SHORT).show();
+
+                                    //  dialog.dismiss();
+
+
+                                }
+                            }
+
+
+                        } else {
+
+                            Toast.makeText(SignIn.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+//                            progressDialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetSalutation> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getgender(final String access_token)
+    {
+        try {
+
+//            final ProgressDialog progressDialog;
+//            progressDialog = new ProgressDialog(SignIn.this);
+//            progressDialog.setMessage("Loading...");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+
+            Call<GetGender> getGenderCall = ApiHandler.getApiInterface().getGender("Bearer " + access_token);
+            Log.e("Tag", "response" + getGenderCall.toString());
+
+            getGenderCall.enqueue(new Callback<GetGender>() {
+                @Override
+                public void onResponse(Call<GetGender> getGenderCall1, Response<GetGender> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200)
+                            {
+
+                                getGenderDataList = response.body().getData().getResponse();
+
+                                Log.e("Tag", "respone" +getGenderDataList.toString());
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                Gson gson = new Gson();
+                                String json = gson.toJson(getGenderDataList);
+                                editor.putString("gender", json);
+                                editor.apply();
+
+                            }
+
+
+                        } else {
+
+                            Toast.makeText(SignIn.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                           // progressDialog.dismiss();
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetGender> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void getbulid(final String access_token)
+    {
+        try {
+
+            Call<GetBuildingList> getBuildingListCall = ApiHandler.getApiInterface().getbuilding("Bearer " + access_token);
+           // Log.e("Tag", "response" + getBuildingListCall.toString());
+
+            getBuildingListCall.enqueue(new Callback<GetBuildingList>() {
+                @Override
+                public void onResponse(Call<GetBuildingList> getBuildingListCall1, Response<GetBuildingList> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200)
+                            {
+
+                                getBuildingDataListList = response.body().getData().getResponse();
+
+                                Log.e("Tag", "respone" +getBuildingDataListList.toString());
+
+                                SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                Gson gson = new Gson();
+                                String json = gson.toJson(getBuildingDataListList);
+                                editor.putString("bulid", json);
+                                editor.apply();
+
+                            }
+
+
+                        }
+                        else
+                        {
+
+                            Toast.makeText(SignIn.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetBuildingList> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void getUser(String access_token)
+    {
+        try {
+
+            Call<GetUser> getUserCall = ApiHandler.getApiInterface().getuser("Bearer " + access_token);
+            Log.e("Tag", "response" + getUserCall.toString());
+
+            getUserCall.enqueue(new Callback<GetUser>() {
+                @Override
+                public void onResponse(Call<GetUser> getUserCall1, Response<GetUser> response) {
+
+                    try {
+                        if (response.isSuccessful()) {
+                            int status = response.body().getMeta().getStatus();
+                            if (status == 200)
+                            {
+
+                                getUserData =response.body().getData().getResponse();
+
+//                                getUserDataList = response.body().getData().getResponse();
+
+                                //    Log.e("Tag", "respone" +getUserDataList.toString());
+
+
+//                                SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+//                                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                                Gson gson = new Gson();
+//                                String json = gson.toJson(getUserData);
+//                                Toast.makeText(SignIn.this, ""+json, Toast.LENGTH_SHORT).show();
+//                                editor.putString("user", json);
+//                                editor.apply();
+//                                Toast.makeText(SignIn.this, "data add", Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences mPrefs = getSharedPreferences("shared preferences",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                                Gson gson = new Gson();
+                                String json = gson.toJson(getUserData);
+                                prefsEditor.putString("userprof", json);
+                                prefsEditor.commit();
+
+                            }
+
+
+                        } else {
+
+                            Toast.makeText(SignIn.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        try {
+                            Log.e("Tag", "error=" + e.toString());
+
+
+                        } catch (Resources.NotFoundException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetUser> call, Throwable t) {
+                    try {
+                        Log.e("Tag", "error" + t.toString());
+
+                    } catch (Resources.NotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
         }
     }
 

@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.example.hrm.Adapter.CalendarGridAdapter;
 import com.example.hrm.Interface.OnCalenderDayClickListener;
+import com.example.hrm.Model.Calender.GetCalenderData;
 import com.example.hrm.Model.CalenderEventObjects;
 import com.example.hrm.R;
 
@@ -44,6 +45,8 @@ public class CalendarCustomView extends LinearLayout {
     private CalendarGridAdapter mAdapter;
     private List<CalenderEventObjects> mEvents;
     private OnCalenderDayClickListener listener;
+
+
     public void loadCalender(List<CalenderEventObjects> mEvents, OnCalenderDayClickListener listener) {
         this.mEvents = mEvents;
         this.listener = listener;

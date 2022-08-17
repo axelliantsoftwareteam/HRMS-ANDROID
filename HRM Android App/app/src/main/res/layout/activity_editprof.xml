@@ -59,7 +59,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/proimage"
+                android:id="@+id/primage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/thumbnail"
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="1123"
+                    android:text=""
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorApp" />
 
@@ -120,8 +120,10 @@
                     android:background="@drawable/editdrawable"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:text="arslan.umar@khazanapk.com"
-                    android:textColor="@color/colorApp"></EditText>
+                    android:hint="arslan.umar@khazanapk.com"
+                    android:textColor="@color/colorApp">
+
+                </EditText>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,7 +143,7 @@
                     android:background="@drawable/editdrawable"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:text="35202-03664889-5"
+                    android:hint="35202-03664889-5"
                     android:textColor="@color/colorApp">
 
                 </EditText>
@@ -166,7 +168,7 @@
                     android:background="@drawable/editdrawable"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:text="arslan.umar@khazana.pk"
+                    android:hint="arslan.umar@khazana.pk"
                     android:textColor="@color/colorApp">
 
                 </EditText>
@@ -191,7 +193,7 @@
                     android:background="@drawable/editdrawable"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:text="2011-90-201"
+                    android:hint="2011-90-201"
                     android:textColor="@color/colorApp"></EditText>
 
                 <TextView
@@ -238,17 +240,21 @@
                 <Spinner
                     android:id="@+id/sp_gender"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="@dimen/spacing_small"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:backgroundTint="@color/colorApp" />
+
                 </LinearLayout>
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:text="Designation"
                     android:textAlignment="center"
+                    android:visibility="gone"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
                     android:layout_marginLeft="@dimen/spacing_medium"
@@ -257,14 +263,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:background="@drawable/editdrawable">
 
                 <Spinner
                     android:id="@+id/sp_desig"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_small"
                     android:backgroundTint="@color/colorApp" />
 
                 </LinearLayout>
@@ -287,7 +294,7 @@
                     android:background="@drawable/editdrawable"
                     android:inputType="textPassword"
                     android:padding="@dimen/spacing_middle"
-                    android:text="12345678"
+                    android:text=""
                     android:textColor="@color/colorApp"></EditText>
 
                 <TextView
@@ -295,14 +302,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="Old Password"
+                    android:text="Confirm Password"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/etoldpasswd"
+                    android:id="@+id/etconfirmpasswd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -329,13 +336,16 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/editdrawable">
 
-                <Spinner
+                <TextView
                     android:id="@+id/sp_directrept"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="@color/colorApp" />
+                    android:background="@drawable/editdrawable"
+                    android:inputType="text"
+                    android:padding="@dimen/spacing_middle"
+
+                    android:textColor="@color/colorApp" />
             </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
@@ -353,13 +363,14 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/editdrawable">
 
-                <Spinner
-                    android:id="@+id/sp_building"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="@color/colorApp" />
+
+                    <Spinner
+                        android:id="@+id/spbuild"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:backgroundTint="@color/colorApp" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
@@ -378,13 +389,16 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/editdrawable">
 
-                <Spinner
+                <TextView
                     android:id="@+id/sp_deprt"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="@color/colorApp" />
+                    android:background="@drawable/editdrawable"
+                    android:inputType="text"
+                    android:padding="@dimen/spacing_middle"
+                    android:hint="IT"
+                    android:textColor="@color/colorApp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"

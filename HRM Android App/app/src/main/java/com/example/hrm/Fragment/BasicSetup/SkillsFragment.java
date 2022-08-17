@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +54,12 @@ public class SkillsFragment extends Fragment {
     private DialogAddskillBinding dialogAddskillBinding;
     private DialogEditskillBinding dialogEditskillBinding;
 
+    private static final int PAGE_START = 0;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int TOTAL_PAGES = 3; //your total page
+    private int currentPage = PAGE_START;
+
 
 
     private RecyclerView.LayoutManager mLayoutManager;
@@ -80,6 +88,23 @@ public class SkillsFragment extends Fragment {
 
         binding.skillsrecycler.setHasFixedSize(true);
 
+
+        binding.searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText)
+            {
+                filter(newText);
+                return false;
+            }
+        });
+
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         binding.skillsrecycler.setLayoutManager(mLayoutManager);
@@ -101,8 +126,36 @@ public class SkillsFragment extends Fragment {
             }
         });
 
+
+
+
+
         return view;
 
+    }
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<GetSkillsData> filteredlist = new ArrayList<>();
+
+        // running a for loop to compare elements.
+        for (GetSkillsData item : getSkillsDataList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(getActivity(), "No Data Found", Toast.LENGTH_SHORT).show();
+
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            skillsAdapter.filterList(filteredlist);
+        }
     }
 
     private void getskill(final String access_token) {

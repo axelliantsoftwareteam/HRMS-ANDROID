@@ -27,29 +27,20 @@ import android.widget.Toast;
 
 import com.example.hrm.Adapter.Calender.CalenderEventAdapter;
 import com.example.hrm.Adapter.CustomAdapter;
-import com.example.hrm.Adapter.Leaves.ApprovLeavesAdapter;
-import com.example.hrm.Fragment.Tasks.AlltaskFragment;
-import com.example.hrm.Fragment.Tasks.CompletedFragment;
-import com.example.hrm.Fragment.Tasks.PendingFragment;
-import com.example.hrm.Fragment.Tasks.SevendaysFragment;
-import com.example.hrm.Fragment.Tasks.TodayFragment;
 import com.example.hrm.Hundler.ApiHandler;
 import com.example.hrm.Interface.OnCalenderDayClickListener;
 import com.example.hrm.Model.Calender.GetCalender;
 import com.example.hrm.Model.Calender.GetCalenderData;
 import com.example.hrm.Model.CalenderEventObjects;
-import com.example.hrm.Model.LeavesModel.AllLeavesModel;
-import com.example.hrm.Model.LeavesModel.Leaves;
 import com.example.hrm.R;
 import com.example.hrm.Utility.SessionManager;
 import com.example.hrm.databinding.ActivityCalendarBinding;
-import com.example.hrm.databinding.DialogAdddispmemberstdtBinding;
-import com.example.hrm.databinding.DialogAddnewvaluestdtBinding;
 import com.example.hrm.databinding.DialogCalendercreateBinding;
 import com.example.hrm.widget.CalendarCustomView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,7 +53,7 @@ import retrofit2.Response;
 public class CalendarActivity extends AppCompatActivity implements OnCalenderDayClickListener {
 
 
-    List<CalenderEventObjects> mEvents;
+    List<CalenderEventObjects> msEvents;
     RecyclerView eventsView;
     CustomAdapter mAdapter;
 
@@ -75,13 +66,13 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
 
     TextView noleave;
 
-    List<GetCalenderData> getCalenderDataList= new ArrayList<>();
+    List<GetCalenderData> mEvents= new ArrayList<>();
 
 
     private static final String[] eventtype = {"Task", "Event"};
 
     String stime,etime,descrpt,eventname, selected_val;
-
+    CalendarCustomView mView;
 
     private ActivityCalendarBinding binding;
 
@@ -106,52 +97,43 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
 //        mLayoutManager = new LinearLayoutManager(CalendarActivity.this);
 //        mRecyclerView.setLayoutManager(mLayoutManager);
 //
-//        sessionManager = new SessionManager(CalendarActivity.this);
-//        token = sessionManager.getToken();
-//
-//        getcalender(token);
+        sessionManager = new SessionManager(CalendarActivity.this);
+        token = sessionManager.getToken();
+
+        getcalender(token);
 
 
         CalendarCustomView mView = (CalendarCustomView) findViewById(R.id.custom_calendar);
 
-        mEvents = new ArrayList<>();
+        msEvents = new ArrayList<>();
         mAdapter = new CustomAdapter(this);
         eventsView = findViewById(R.id.eventsView);
         eventsView.setHasFixedSize(true);
         eventsView.setLayoutManager(new LinearLayoutManager(this));
         eventsView.setAdapter(mAdapter);
 
-       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-       try {
-            String dtStart = "2022-07-15";
-            String dtStart1 = "2022-07-17";
-           String dtStart2 = "2022-06-17";
-           String dtStart3 = "2022-07-1";
-           String dtStart4 = "2022-08-4";
-           Date date = format.parse(dtStart);
-           Date date1 = format.parse(dtStart1);
-          Date date2 = format.parse(dtStart2);
-           Date date3 = format.parse(dtStart3);
-            Date date4 = format.parse(dtStart4);
+//       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//       try {
+//            String dtStart = "2022-08-15";
+//            String dtStart1 = "2022-08-17";
+//
+//           Date date = format.parse(dtStart);
+//           Date date1 = format.parse(dtStart1);
 
-           CalenderEventObjects event1 = new CalenderEventObjects("Test", "test", date);
-           CalenderEventObjects event2 = new CalenderEventObjects("Meeting", "test", date1);
-           CalenderEventObjects event3 = new CalenderEventObjects("Meeting", "test", date2);
-           CalenderEventObjects event4 = new CalenderEventObjects("Meeting", "test", date3);
-           CalenderEventObjects event5 = new CalenderEventObjects("Meeting", "test", date4);
-            mEvents.add(event1);
-           mEvents.add(event2);
-           mEvents.add(event3);
-           mEvents.add(event4);
-           mEvents.add(event5);
+//
+//           mEven  CalenderEventObjects event1 = new CalenderEventObjects("Test", date, date);
+////           CalenderEventObjects event2 = new CalenderEventObjects("Meeting", date, date1);ts.add(event1);
+//           mEvents.add(mEvents);
 
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
 
-        mView.loadCalender(mEvents,this);
+//        }
+//        catch (ParseException e)
+//        {
+//            e.printStackTrace();
+//        }
+     //   getcalender();
+
+        mView.loadCalender(msEvents,this);
 
 
         binding.me.setOnClickListener(new View.OnClickListener() {
@@ -220,35 +202,74 @@ public class CalendarActivity extends AppCompatActivity implements OnCalenderDay
             dialog.show();
 
             Call<GetCalender> getCalenderCall = ApiHandler.getApiInterface().getCalenderinfo("Bearer " + access_token);
-            getCalenderCall.enqueue(new Callback<GetCalender>() {
+            getCalenderCall.enqueue(new Callback<GetCalender>()
+            {
+
                 @Override
-                public void onResponse(Call<GetCalender> getCalenderCall1, Response<GetCalender> response) {
+                public void onResponse(Call<GetCalender> getCalenderCall1, Response<GetCalender> response)
+                {
 
                     try {
-                        if (response.isSuccessful()) {
+                        Log.e("Tag", "event=" + getCalenderCall.toString());
+                        if (response.isSuccessful())
+                        {
+
                             int status = response.body().getMeta().getStatus();
                             if (status == 200)
                             {
 
-                                getCalenderDataList = response.body().getData().getResponse();
-                                if (getCalenderDataList.size()==0)
-                                {
-                                    dialog.dismiss();
-                                    mRecyclerView.setVisibility(View.GONE);
-                                }
-                                else if (getCalenderDataList!=null){
+                                mEvents = response.body().getData().getResponse();
+                                Log.e("Tag", "event=" + mEvents.toString());
 
-                                    calenderEventAdapter = new CalenderEventAdapter(CalendarActivity.this, getCalenderDataList);
-                                    mRecyclerView.setAdapter(calenderEventAdapter);
-                                    mRecyclerView.setVisibility(View.VISIBLE);
-                                    noleave.setVisibility(View.GONE);
-                                    dialog.dismiss();
+
+//                                GetCalenderData getCalenderData = new GetCalenderData();
+                                CalenderEventObjects calenderEventObjects = new CalenderEventObjects();
+                                for (int i=0 ;i<mEvents.size();i++)
+                                {
+                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                    LocalDateTime localDateTime = LocalDateTime.parse(mEvents.get(i).getStart());
+                                    String localdate = localDateTime.format(formatter);
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date end = dateFormat.parse(localdate);
+
+                                    DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                    LocalDateTime localDateTimes = LocalDateTime.parse(mEvents.get(i).getEnd());
+                                    String enddate = localDateTimes.format(formatters);
+                                    SimpleDateFormat dateeFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date d = dateeFormat.parse(enddate);
+
+                                    String title =mEvents.get(i).getTitle();
+                                    calenderEventObjects.setTitle(title);
+                                    calenderEventObjects.setDate(end);
+                                    calenderEventObjects.setEdate(d);
+
+
+//                                    CalenderEventObjects calenderEventObjects = new CalenderEventObjects(title,d,end);
+
                                 }
+
+
+
+//                                if (mEvents.size()==0)
+//                                {
+//                                    dialog.dismiss();
+//                                    mRecyclerView.setVisibility(View.GONE);
+//                                }
+//                                else if (getCalenderDataList!=null){
+//
+//                                    calenderEventAdapter = new CalenderEventAdapter(CalendarActivity.this, getCalenderDataList);
+//                                    mRecyclerView.setAdapter(calenderEventAdapter);
+//                                    mRecyclerView.setVisibility(View.VISIBLE);
+//                                    noleave.setVisibility(View.GONE);
+//                                    dialog.dismiss();
+//                                }
+
+
 
                             }
 
+
                         } else {
-                            noleave.setVisibility(View.VISIBLE);
                             Toast.makeText(CalendarActivity.this, "" + response.body().getMeta().getMessage(), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }

@@ -10,13 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.GetAllTask.CountsInfo;
+import com.example.hrm.Model.GetAllTask.Alltask.CountsInfo;
 import com.example.hrm.R;
 
 import java.util.List;
 
 public class AllTagsAdapter extends RecyclerView.Adapter<AllTagsAdapter.MyViewHolder> {
     Context context;
+
 
 
     CountsInfo countsInfo;

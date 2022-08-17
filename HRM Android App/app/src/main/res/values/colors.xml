@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-    <color name="colorApp">#b38e34</color>
-    <color name="colorPrimary">#b38e34</color>
-    <color name="colorPrimaryDark">#b38e34</color>
+    #345ab3
+    <color name="colorApp">#345ab3</color>
+<!--    <color name="colorPrimary">#1F87DD</color>-->
+    <color name="colorPrimary">#345ab3</color>
+    <color name="colorPrimaryDark">#345ab3</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorRow">#E5E6EC</color>
+
+    <color name="tab_layout">#1976D2</color>
 
 
 
@@ -39,10 +42,10 @@
 
 
 
-    <!--    dark-->
+    <!--    dark-->b38e34
     <color name="bottomNavigationTextColor">#B2B2B2</color>
     <color name="bottomNavigationTintColor">#B2B2B2</color>
-    <color name="bottomNavigationSelectedColor">#b38e34</color>
+    <color name="bottomNavigationSelectedColor">#262939</color>
     <color name="statusBarColor">#000</color>
     <color name="whiteBodyColor">#FCFCFC</color>
     <color name="darkTextColor">#020000</color>
@@ -70,8 +73,8 @@
 
 
 <!--    <color name="colorPrimaryLight">#1E88E5</color>-->
-    <color name="colorAccentDark">#b38e34</color>
-    <color name="colorAccentLight">#b38e34</color>
+    <color name="colorAccentDark">#345ab3</color>
+    <color name="colorAccentLight">#345ab3</color>
 
     <!--    <color name="colorPrimaryLight">#1E88E5</color>-->
     <!--    <color name="colorAccent">#FF4081</color>-->

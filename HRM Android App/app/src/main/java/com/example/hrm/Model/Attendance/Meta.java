@@ -1,24 +1,19 @@
 
 package com.example.hrm.Model.Attendance;
 
-import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("jsonschema2pojo")
 public class Meta {
-
     @SerializedName("message")
-    @Expose
     private String message;
+
     @SerializedName("status")
-    @Expose
-    private Integer status;
+    private int status;
+
     @SerializedName("success")
-    @Expose
-    private Boolean success;
+    private boolean success;
+
     @SerializedName("messageTypeId")
-    @Expose
     private String messageTypeId;
 
     public String getMessage() {
@@ -29,19 +24,19 @@ public class Meta {
         this.message = message;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public Boolean getSuccess() {
+    public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 
@@ -52,5 +47,4 @@ public class Meta {
     public void setMessageTypeId(String messageTypeId) {
         this.messageTypeId = messageTypeId;
     }
-
 }

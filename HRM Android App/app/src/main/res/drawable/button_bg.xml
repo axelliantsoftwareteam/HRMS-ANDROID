@@ -18,7 +18,7 @@
     <item android:state_pressed="false" >
         <shape>
             <solid
-                android:color="@color/colorApp" />
+                android:color="@color/tab_layout" />
             <stroke
                 android:width="5px"
                 android:color="#ffff" />
