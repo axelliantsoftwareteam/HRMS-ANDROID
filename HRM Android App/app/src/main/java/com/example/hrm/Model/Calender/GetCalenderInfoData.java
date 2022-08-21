@@ -1,10 +1,12 @@
 
-package com.example.hrm.Model.CalenderInfo;
+package com.example.hrm.Model.Calender;
 
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
 public class GetCalenderInfoData {
@@ -20,10 +22,10 @@ public class GetCalenderInfoData {
     private String meta;
     @SerializedName("start")
     @Expose
-    private String start;
+    private Start start;
     @SerializedName("end")
     @Expose
-    private String end;
+    private End end;
 
     public String getTitle() {
         return title;
@@ -49,19 +51,19 @@ public class GetCalenderInfoData {
         this.meta = meta;
     }
 
-    public String getStart() {
+    public Start getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    public void setStart(Start start) {
         this.start = start;
     }
 
-    public String getEnd() {
+    public End getEnd() {
         return end;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(End end) {
         this.end = end;
     }
 

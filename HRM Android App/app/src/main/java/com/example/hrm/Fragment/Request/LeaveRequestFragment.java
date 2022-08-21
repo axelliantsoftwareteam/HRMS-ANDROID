@@ -379,7 +379,6 @@ public class LeaveRequestFragment extends Fragment {
                                     binding.allreqleavesRecycler.setVisibility(View.VISIBLE);
                                     binding.txtNo.setVisibility(View.GONE);
 
-
                                     progressDialog.dismiss();
                                 }
 

@@ -9,8 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiHandler
 {
-  //public static final String PRODUCTION_URL = "https://devhris.khazanapk.com/api/";
-   public static final String LIVE_URL = "https://hris.khazanapk.com/api/";
+  public static final String PRODUCTION_URL = "https://devhris.khazanapk.com/api/";
+  // public static final String LIVE_URL = "https://hris.khazanapk.com/api/";
     private static ApiInterface apiInterface;
 
     public static ApiInterface getApiInterface() {
@@ -21,7 +21,7 @@ public class ApiHandler
                     .setLenient()
                     .create();
             Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create(gson))
-                    .baseUrl(LIVE_URL)
+                    .baseUrl(PRODUCTION_URL)
                     .build();
 
             apiInterface = retrofit.create(ApiInterface.class);

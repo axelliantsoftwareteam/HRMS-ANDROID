@@ -9,29 +9,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hrm.Model.Calender.GetCalenderData;
-import com.example.hrm.Model.LeavesModel.Leaves;
-import com.example.hrm.Model.LeavesModel.WorkFlow;
+import com.example.hrm.Model.Calender.GetCalenderInfoData;
 import com.example.hrm.R;
 
 import java.util.List;
 
-import javax.ws.rs.GET;
-
-public class CalenderEventAdapter extends RecyclerView.Adapter<CalenderEventAdapter.MyViewHolder> {
+public class CalenderEventAdapter extends RecyclerView.Adapter<CalenderEventAdapter.MyViewHolder>
+{
     Context context;
-    GetCalenderData getCalenderData;
+    GetCalenderInfoData getCalenderData;
 
-    private List<GetCalenderData> getCalenderDataList;
+    private List<GetCalenderInfoData> getCalenderDataList;
 
 
-    public CalenderEventAdapter(Context context, List<GetCalenderData> getCalenderData) {
+    public CalenderEventAdapter(Context context, List<GetCalenderInfoData> getCalenderData) {
         this.context = context;
         this.getCalenderDataList= getCalenderData;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-//        // each data item is just a string in this case
+        //        // each data item is just a string in this case
         public TextView name;
         public TextView start;
         public TextView end;
@@ -70,8 +67,8 @@ public class CalenderEventAdapter extends RecyclerView.Adapter<CalenderEventAdap
 
         //binding the data with the viewholder views
         holder.name.setText(getCalenderData.getTitle());
-        holder.start.setText((CharSequence) getCalenderData.getStart());
-        holder.end.setText((CharSequence) getCalenderData.getEnd());
+        holder.start.setText(getCalenderData.getStart().getDate());
+        holder.end.setText(getCalenderData.getEnd().getDate());
 
     }
 
@@ -83,7 +80,7 @@ public class CalenderEventAdapter extends RecyclerView.Adapter<CalenderEventAdap
     @Override
     public int getItemCount() {
         return getCalenderDataList.size();
-       // return leavesList.size();
+        // return leavesList.size();
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.hrm.Interface;
 
 
+import com.example.hrm.Model.Calender.GetCalenderInfoData;
 import com.example.hrm.Model.CalenderEventObjects;
 
 /**
@@ -8,5 +9,5 @@ import com.example.hrm.Model.CalenderEventObjects;
  */
 
 public interface OnCalenderDayClickListener {
-    void onDayClick(int position, String date, CalenderEventObjects eventObjects);
+    void onDayClick(int position, String date, GetCalenderInfoData eventObjects);
 }

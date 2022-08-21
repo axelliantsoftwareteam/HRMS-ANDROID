@@ -195,7 +195,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="5dp"
-                        android:text="+91-8129999999" />
+                        android:text="" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -484,9 +484,9 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/colorApp"
                     app:srcCompat="@drawable/ic_person_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat"
+                    app:tint="@color/colorApp" />
 
             </LinearLayout>
 
@@ -506,9 +506,9 @@
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/colorApp"
                     app:srcCompat="@drawable/ic_more_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat"
+                    app:tint="@color/colorApp" />
 
             </LinearLayout>
 

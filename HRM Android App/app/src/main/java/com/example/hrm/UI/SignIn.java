@@ -421,6 +421,14 @@ public class SignIn extends AppCompatActivity  {
                                 //    Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
 
                                 }
+                                else if (status==400)
+                                {
+                                    Toast.makeText(SignIn.this, "Server is not responding at that time", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+
+                                }
+
 
 
                             }
@@ -583,6 +591,9 @@ public class SignIn extends AppCompatActivity  {
                                 String profimg = response.body().getData().getResponse().getProfilePicture();
                                 String empcode = response.body().getData().getResponse().getEmployeeCode();
 
+
+                                String phone =response.body().getData().getResponse().getUserContacts().get(0).getPhoneNumber();
+
                                 session.saveFirstName(name);
                                 session.saveCnicNumber(cnic);
                                 session.saveUserEmail(email);
@@ -592,6 +603,7 @@ public class SignIn extends AppCompatActivity  {
                                 session.saveReprtTo(reportto);
                                 session.saveProfImage(profimg);
                                 session.saveEmpcode(empcode);
+                                session.saveUserPhoneNumber(phone);
 
 
                                 getmember(access_token);

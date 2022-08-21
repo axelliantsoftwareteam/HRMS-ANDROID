@@ -7,21 +7,21 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
-public class Status {
+public class Start {
 
-    @SerializedName("response")
+    @SerializedName("date")
     @Expose
-    private String response;
+    private String date;
     @SerializedName("time")
     @Expose
     private String time;
 
-    public String getResponse() {
-        return response;
+    public String getDate() {
+        return date;
     }
 
-    public void setResponse(String response) {
-        this.response = response;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTime() {

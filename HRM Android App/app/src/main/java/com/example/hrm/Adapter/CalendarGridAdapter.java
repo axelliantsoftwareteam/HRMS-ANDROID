@@ -12,14 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.hrm.Interface.OnCalenderDayClickListener;
-import com.example.hrm.Model.Calender.GetCalenderData;
+import com.example.hrm.Model.Calender.Attendee;
+import com.example.hrm.Model.Calender.GetCalenderInfoData;
 import com.example.hrm.Model.CalenderEventObjects;
 import com.example.hrm.R;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,15 +27,19 @@ import java.util.List;
  * Created by akumar1 on 11/22/2017.
  */
 
-public class CalendarGridAdapter extends ArrayAdapter {
+public class CalendarGridAdapter extends ArrayAdapter
+{
     private static final String TAG = CalendarGridAdapter.class.getSimpleName();
     private LayoutInflater mInflater;
     private List<Date> monthlyDates;
     private Calendar currentDate;
-    private List<CalenderEventObjects> allEvents;
+    private List<GetCalenderInfoData> allEvents;
+    private List<Attendee> attendeeList;
     private OnCalenderDayClickListener listener;
-    SimpleDateFormat format = new SimpleDateFormat("MMM dd,yyyy");
-    public CalendarGridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, List<CalenderEventObjects> allEvents, OnCalenderDayClickListener listener) {
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    Date d ;
+
+    public CalendarGridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, List<GetCalenderInfoData> allEvents, OnCalenderDayClickListener listener) {
         super(context, R.layout.calendar_single_cell_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
@@ -76,25 +79,35 @@ public class CalendarGridAdapter extends ArrayAdapter {
         Calendar currentData = Calendar.getInstance();
         if (dayValue == currentData.get(Calendar.DAY_OF_MONTH) && displayMonth == currentData.get(Calendar.MONTH) + 1 && displayYear == currentData.get(Calendar.YEAR)) {
             cellNumber.setBackgroundResource(R.drawable.button_nothanks_bg);
-            cellNumber.setTextColor(Color.parseColor("#000000"));
+            cellNumber.setTextColor(Color.parseColor("#345ab3"));
         }
         //Add events to the calendar
         TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
         Calendar eventCalendar = Calendar.getInstance();
-        CalenderEventObjects eventObjects = null;
-        for (int i = 0; i < allEvents.size(); i++) {
+        GetCalenderInfoData eventObjects = null;
+        for (int i = 0; i < allEvents.size(); i++)
+        {
 
-            eventCalendar.setTime(allEvents.get(i).getDate());
-            if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
-                    && displayYear == eventCalendar.get(Calendar.YEAR)) {
-                eventIndicator.setBackgroundColor(Color.parseColor("#FF4081"));
-                cellNumber.setTextColor(Color.parseColor("#FFFFFF"));
-                cellNumber.setBackgroundResource(R.drawable.button_bg);
-                eventObjects = allEvents.get(i);
+
+            String date =allEvents.get(i).getStart().getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date end = dateFormat.parse(date);
+                eventCalendar.setTime(end);
+                if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
+                        && displayYear == eventCalendar.get(Calendar.YEAR)) {
+                    eventIndicator.setBackgroundColor(Color.parseColor("#FF4081"));
+                    cellNumber.setTextColor(Color.parseColor("#FFFFFF"));
+                    cellNumber.setBackgroundResource(R.drawable.button_bg);
+                    eventObjects = allEvents.get(i);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+
         }
 
-        final CalenderEventObjects finalEventObjects = eventObjects;
+        final GetCalenderInfoData finalEventObjects = eventObjects;
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

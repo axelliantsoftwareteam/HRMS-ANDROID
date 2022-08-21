@@ -20,7 +20,9 @@ import com.example.hrm.Model.BasicSetup.StaticDataModel.AddStatic.Addstatic;
 import com.example.hrm.Model.Building.AddBuild.AddBuild;
 import com.example.hrm.Model.Building.GetBuilding;
 import com.example.hrm.Model.Building.TaskAdded.TaskAddedModel;
-import com.example.hrm.Model.Calender.GetCalender;
+import com.example.hrm.Model.Calender.AddEvent.AddCalender;
+import com.example.hrm.Model.Calender.AddEvent.AddEventCalender;
+import com.example.hrm.Model.Calender.GetCalenderInfo;
 import com.example.hrm.Model.CheckIn.CheckInModel;
 import com.example.hrm.Model.EmployeeManagement.WorkFlow.GetWorkFlow;
 import com.example.hrm.Model.EquipementRequestModel.EquipmentListModel;
@@ -195,9 +197,13 @@ public interface ApiInterface
 
 
 
-    // Get all Designation
+    // Get all calender
     @GET("admin/get_calendar_info_for_mobile_phone")
-    Call<GetCalender>getCalenderinfo(@Header("Authorization") String auth);
+    Call<GetCalenderInfo> getCalenderinfo(@Header("Authorization") String auth);
+    //    submit  all events
+    @Headers("Content-Type: application/json")
+    @POST("admin/add_calendar_event")
+    Call<AddCalender>addeventcal(@Header("Authorization") String auth, @Body AddEventCalender jsonBody);
 
 
     // Get all Designation

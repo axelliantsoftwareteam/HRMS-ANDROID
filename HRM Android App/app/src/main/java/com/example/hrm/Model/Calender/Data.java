@@ -1,24 +1,26 @@
 
 package com.example.hrm.Model.Calender;
 
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
 public class Data {
 
     @SerializedName("Response")
     @Expose
-    private List<GetCalenderData> getCalenderData = null;
+    private List<GetCalenderInfoData> getCalenderInfoData = null;
 
-    public List<GetCalenderData> getResponse() {
-        return getCalenderData;
+    public List<GetCalenderInfoData> getResponse() {
+        return getCalenderInfoData;
     }
 
-    public void setResponse(List<GetCalenderData> getCalenderData) {
-        this.getCalenderData = getCalenderData;
+    public void setResponse(List<GetCalenderInfoData> getCalenderInfoData) {
+        this.getCalenderInfoData = getCalenderInfoData;
     }
 
 }

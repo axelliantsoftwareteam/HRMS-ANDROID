@@ -35,6 +35,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UI.MicCalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".UI.OrganogramActivity"
             android:exported="false" />
         <activity

@@ -17,8 +17,7 @@ import androidx.annotation.Nullable;
 
 import com.example.hrm.Adapter.CalendarGridAdapter;
 import com.example.hrm.Interface.OnCalenderDayClickListener;
-import com.example.hrm.Model.Calender.GetCalenderData;
-import com.example.hrm.Model.CalenderEventObjects;
+import com.example.hrm.Model.Calender.GetCalenderInfoData;
 import com.example.hrm.R;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +31,8 @@ import java.util.Locale;
  * Created by akumar1 on 11/22/2017.
  */
 
-public class CalendarCustomView extends LinearLayout {
+public class CalendarCustomView extends LinearLayout
+{
     private static final String TAG = CalendarCustomView.class.getSimpleName();
     private ImageView previousButton, nextButton;
     private TextView currentDate;
@@ -43,11 +43,10 @@ public class CalendarCustomView extends LinearLayout {
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private CalendarGridAdapter mAdapter;
-    private List<CalenderEventObjects> mEvents;
+    private List<GetCalenderInfoData> mEvents;
     private OnCalenderDayClickListener listener;
 
-
-    public void loadCalender(List<CalenderEventObjects> mEvents, OnCalenderDayClickListener listener) {
+    public void loadCalender(List<GetCalenderInfoData> mEvents, OnCalenderDayClickListener listener) {
         this.mEvents = mEvents;
         this.listener = listener;
         setUpCalendarAdapter();
@@ -130,3 +129,4 @@ public class CalendarCustomView extends LinearLayout {
 
 
 }
+

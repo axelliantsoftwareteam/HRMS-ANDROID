@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         binding.lyAward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                Intent intent = new Intent(MainActivity.this, MicCalendarActivity.class);
                 startActivity(intent);
                 finish();
             }

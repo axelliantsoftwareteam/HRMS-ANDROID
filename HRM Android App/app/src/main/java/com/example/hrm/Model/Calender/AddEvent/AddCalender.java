@@ -1,13 +1,13 @@
 
-package com.example.hrm.Model.Calender;
-
-import javax.annotation.Generated;
+package com.example.hrm.Model.Calender.AddEvent;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
+
 @Generated("jsonschema2pojo")
-public class GetCalender {
+public class AddCalender {
 
     @SerializedName("data")
     @Expose

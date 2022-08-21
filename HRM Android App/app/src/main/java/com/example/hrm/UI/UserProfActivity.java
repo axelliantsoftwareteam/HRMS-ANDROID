@@ -26,7 +26,7 @@ public class UserProfActivity extends AppCompatActivity {
 
     private ActivityUserProfBinding binding;
     SessionManager sessionManager;
-    String name,email,dob,cnic,profimage,depart,urdatejoin,reprtto;
+    String name,email,dob,cnic,profimage,depart,urdatejoin,reprtto,phonno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +66,9 @@ public class UserProfActivity extends AppCompatActivity {
 
         cnic = sessionManager.getCinic();
         binding.txtCnic.setText(cnic);
+
+        phonno = sessionManager.getUserPhonenumber();
+        binding.txtPhone.setText(phonno);
 
 
         depart = sessionManager.getDepartment();
