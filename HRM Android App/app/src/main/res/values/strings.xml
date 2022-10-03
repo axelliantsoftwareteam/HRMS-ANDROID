@@ -63,7 +63,7 @@
     <string name="gps_network_not_enabled">GPS Network Not Enabled</string>
     <string name="open_location_settings">Open Location Settings</string>
     <string name="cancel">Cancel</string>
-    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_user_profile">Profile</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -187,4 +187,13 @@
     <string name="personal">Personal Information</string>
     <string name="lorem_ipsum">" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin         \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin "</string>
     <string name="HIDE">Hide</string>
+    <string name="username">Name:</string>
+    <string name="institute">Institution:</string>
+    <string name="graduation">Graduation Year:</string>
+    <string name="company">Khazana</string>
+    <string name="year">2022</string>
+    <string name="apprreq">Approve Request</string>
+    <string name="comment">Comment*</string>
+    <string name="me">Me</string>
+
 </resources>

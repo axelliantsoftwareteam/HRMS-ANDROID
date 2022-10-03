@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".UI.More">
+
+    tools:context="com.khazana.hrm.UI.More">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/linear"
-        >
+        android:background="@color/grey_10">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorApp"
+                android:background="@color/colorAppDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
                 <!--        android:layout_height="?attr/actionBarSize"-->
                 <RelativeLayout
@@ -54,7 +54,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/flt_home"
+                android:layout_above="@+id/flthome"
                 android:layout_below="@+id/toolbar"
                 android:orientation="vertical"
                 android:padding="10dp"
@@ -386,7 +386,7 @@
                 android:id="@+id/todayrecycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/grey_10"
                 android:orientation="horizontal">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -394,260 +394,254 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/white"
-                >
+                android:background="@color/grey_10"
+                android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/txtedit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/colorApp"
-                app:strokeWidth="100dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/txtedit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:visibility="visible"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/colorApp"
+                    app:strokeWidth="100dp">
 
-                    <ImageView
-                        android:id="@+id/img_editpro"
-                        android:layout_width="50dp"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_marginLeft="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:src="@drawable/more_edprofile"
-
-                        />
-
-                    <TextView
-
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_weight="1"
-                        android:padding="@dimen/spacing_medium"
-                        android:text="Edit Profile"
-                        android:textColor="@color/colorApp"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                        android:orientation="horizontal">
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/txtedit"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="15dp"-->
-                <!--                    android:drawableLeft="@drawable/more_edprofile"-->
-                <!--                    android:drawablePadding="10dp"-->
-                <!--                    android:text="Edit Profile"-->
-                <!--                    android:textColor="@color/grey_60"-->
-                <!--                    android:textSize="14sp" />-->
+                        <ImageView
+                            android:id="@+id/img_editpro"
+                            android:layout_width="50dp"
+                            android:layout_height="@dimen/spacing_mlarge"
+                            android:layout_marginLeft="@dimen/spacing_medium"
+                            android:layout_marginTop="@dimen/spacing_mlarge"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:src="@drawable/more_edprofile"
+                            app:tint="#345ab3" />
 
-            </androidx.cardview.widget.CardView>
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:layout_weight="1"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="Edit Profile"
+                            android:textColor="@color/colorAppDark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!--                <TextView-->
+                    <!--                    android:id="@+id/txtedit"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_margin="15dp"-->
+                    <!--                    android:drawableLeft="@drawable/more_edprofile"-->
+                    <!--                    android:drawablePadding="10dp"-->
+                    <!--                    android:text="Edit Profile"-->
+                    <!--                    android:textColor="@color/grey_60"-->
+                    <!--                    android:textSize="14sp" />-->
+
+                </androidx.cardview.widget.CardView>
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/txtresume"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/colorApp"
-                app:strokeWidth="100dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/txtresume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:visibility="visible"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/colorApp"
+                    app:strokeWidth="100dp">
 
-                    <ImageView
-                        android:id="@+id/img_resume"
-                        android:layout_width="50dp"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_marginLeft="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:src="@drawable/more_edprofile"
-
-                        />
-
-                    <TextView
-
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_weight="1"
-                        android:padding="@dimen/spacing_medium"
+                        android:orientation="horizontal">
 
-                        android:text="@string/personal"
-                        android:textColor="@color/colorApp"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/img_resume"
+                            android:layout_width="50dp"
+                            android:layout_height="@dimen/spacing_mlarge"
+                            android:layout_marginLeft="@dimen/spacing_medium"
+                            android:layout_marginTop="@dimen/spacing_mlarge"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:src="@drawable/more_edprofile"
+                            app:tint="#345ab3" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:layout_weight="1"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="@string/personal"
+                            android:textColor="@color/colorAppDark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/txtresume"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="15dp"-->
-                <!--                    android:drawableLeft="@drawable/more_edprofile"-->
-                <!--                    android:drawablePadding="10dp"-->
-                <!--                    android:text="@string/resume"-->
-                <!--                    android:textColor="@color/grey_60"-->
-                <!--                    android:textSize="14sp" />-->
-                <!--                -->
+                    <!--                <TextView-->
+                    <!--                    android:id="@+id/txtresume"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_margin="15dp"-->
+                    <!--                    android:drawableLeft="@drawable/more_edprofile"-->
+                    <!--                    android:drawablePadding="10dp"-->
+                    <!--                    android:text="@string/resume"-->
+                    <!--                    android:textColor="@color/grey_60"-->
+                    <!--                    android:textSize="14sp" />-->
+                    <!--                -->
 
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="About Leaves"
-                android:textColor="@color/colorApp"
-                android:textSize="16sp"
-                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="About Leaves"
+                    android:textColor="@color/colorAppDark"
+                    android:textSize="16sp"
+                    android:visibility="gone">
 
-            </TextView>
+                </TextView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/leaveBalnce"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/colorApp"
-                app:strokeWidth="100dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/leaveBalnce"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:visibility="visible"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/colorApp"
+                    app:strokeWidth="100dp">
 
-                    <ImageView
-                        android:id="@+id/sideimagea"
-                        android:layout_width="50dp"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_marginLeft="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:src="@drawable/ic_view_carousel_black_24dp"
-
-                        />
-
-                    <TextView
-
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_weight="1"
-                        android:padding="@dimen/spacing_medium"
-                        android:text="@string/leavebal"
-                        android:textColor="@color/colorApp"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <!--                <TextView-->
-                <!--                    android:id="@+id/leaveBalnce"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="15dp"-->
-                <!--                    android:layout_marginTop="15dp"-->
-                <!--                    android:layout_marginEnd="15dp"-->
-                <!--                    android:layout_marginBottom="15dp"-->
-                <!--                    android:drawableLeft="@drawable/ic_view_carousel_black_24dp"-->
-                <!--                    android:drawablePadding="10dp"-->
-                <!--                    android:text="Leave Balance"-->
-                <!--                    android:textColor="@color/grey_60"-->
-                <!--                    android:textSize="14sp" />-->
-            </androidx.cardview.widget.CardView>
+                        android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_small"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_small"
-                android:layout_marginBottom="@dimen/spacing_large"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/colorApp"
-                app:strokeWidth="100dp">
+                        <ImageView
+                            android:id="@+id/sideimagea"
+                            android:layout_width="50dp"
+                            android:layout_height="@dimen/spacing_mlarge"
+                            android:layout_marginLeft="@dimen/spacing_medium"
+                            android:layout_marginTop="@dimen/spacing_mlarge"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:src="@drawable/ic_view_carousel_black_24dp"
+                            app:tint="#345ab3" />
 
-                <LinearLayout
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:layout_weight="1"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="@string/leavebal"
+                            android:textColor="@color/colorAppDark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    <!--                <TextView-->
+                    <!--                    android:id="@+id/leaveBalnce"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_marginStart="15dp"-->
+                    <!--                    android:layout_marginTop="15dp"-->
+                    <!--                    android:layout_marginEnd="15dp"-->
+                    <!--                    android:layout_marginBottom="15dp"-->
+                    <!--                    android:drawableLeft="@drawable/ic_view_carousel_black_24dp"-->
+                    <!--                    android:drawablePadding="10dp"-->
+                    <!--                    android:text="Leave Balance"-->
+                    <!--                    android:textColor="@color/grey_60"-->
+                    <!--                    android:textSize="14sp" />-->
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginRight="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:visibility="visible"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/colorApp"
+                    app:strokeWidth="100dp">
 
-                    <ImageView
-                        android:id="@+id/sideimage"
-                        android:layout_width="50dp"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_marginLeft="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:src="@drawable/ic_call_missed_outgoing_black_24dp"
-
-                        />
-
-                    <TextView
-                        android:id="@+id/txt_logout"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:layout_weight="1"
-                        android:padding="@dimen/spacing_medium"
-                        android:text="@string/logout_title"
-                        android:textColor="@color/colorApp"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <!--                <TextView-->
-                <!--                    android:id="@+id/leaveBalnce"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="15dp"-->
-                <!--                    android:layout_marginTop="15dp"-->
-                <!--                    android:layout_marginEnd="15dp"-->
-                <!--                    android:layout_marginBottom="15dp"-->
-                <!--                    android:drawableLeft="@drawable/ic_view_carousel_black_24dp"-->
-                <!--                    android:drawablePadding="10dp"-->
-                <!--                    android:text="Leave Balance"-->
-                <!--                    android:textColor="@color/grey_60"-->
-                <!--                    android:textSize="14sp" />-->
-            </androidx.cardview.widget.CardView>
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/sideimage"
+                            android:layout_width="50dp"
+                            android:layout_height="@dimen/spacing_mlarge"
+                            android:layout_marginLeft="@dimen/spacing_medium"
+                            android:layout_marginTop="@dimen/spacing_mlarge"
+                            android:layout_marginBottom="@dimen/spacing_large"
+                            android:src="@drawable/ic_call_missed_outgoing_black_24dp"
+                            app:tint="#345ab3" />
+
+                        <TextView
+                            android:id="@+id/txt_logout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:layout_weight="1"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="@string/logout_title"
+                            android:textColor="@color/colorAppDark"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                    <!--                <TextView-->
+                    <!--                    android:id="@+id/leaveBalnce"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:layout_marginStart="15dp"-->
+                    <!--                    android:layout_marginTop="15dp"-->
+                    <!--                    android:layout_marginEnd="15dp"-->
+                    <!--                    android:layout_marginBottom="15dp"-->
+                    <!--                    android:drawableLeft="@drawable/ic_view_carousel_black_24dp"-->
+                    <!--                    android:drawablePadding="10dp"-->
+                    <!--                    android:text="Leave Balance"-->
+                    <!--                    android:textColor="@color/grey_60"-->
+                    <!--                    android:textSize="14sp" />-->
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
 
             <!--            <androidx.cardview.widget.CardView-->
@@ -776,59 +770,80 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/grey_10"
         android:orientation="vertical"
         tools:ignore="DuplicateIds">
 
-        <View
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="4dp"-->
+<!--            android:background="@drawable/bg_gradient_soft" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="@dimen/spacing_medium">-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/me"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    app:srcCompat="@drawable/ic_person_black_24dp"-->
+<!--                    tools:ignore="VectorDrawableCompat" />-->
+<!--                <ImageButton-->
+<!--                    android:id="@+id/ic_me"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    app:srcCompat="@drawable/ic_person_grey"-->
+<!--                    tools:ignore="VectorDrawableCompat" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="?attr/actionBarSize"-->
+<!--                android:layout_height="6dp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="@dimen/spacing_medium">-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/more"-->
+<!--                    android:layout_width="?attr/actionBarSize"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    app:srcCompat="@drawable/ic_more_black_24dp"-->
+<!--                    tools:ignore="VectorDrawableCompat" />-->
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+        <com.akshay.library.CurveBottomBar
+            android:id="@+id/nav_view"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/bg_gradient_soft" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            app:curveRadius="25dp"
+            app:itemIconTint="@color/botnav_color_state"
+            app:itemTextColor="@color/botnav_color_state"
+            app:menu="@menu/bottom_nav_menu" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/spacing_medium">
-
-                <ImageButton
-                    android:id="@+id/me"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_person_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="0dp" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/spacing_medium">
-
-                <ImageButton
-                    android:id="@+id/more"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_more_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -838,12 +853,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/colorApp"
-        android:tint="@android:color/white"
-        app:elevation="2dp"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_home"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/khazanalogo"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:maxImageSize="40dp"
         tools:ignore="VectorDrawableCompat" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/ic_flthome"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        app:backgroundTint="@color/grey_40"-->
+<!--        app:elevation="2dp"-->
+<!--        app:fabSize="normal"-->
+<!--        app:srcCompat="@drawable/ic_home_black_24dp"-->
+<!--        tools:ignore="VectorDrawableCompat" />-->
+
 
 </RelativeLayout>
