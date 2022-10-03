@@ -26,7 +26,7 @@
     app:minZoomType="zoom"
     app:maxZoom="100"
     app:maxZoomType="zoom"
-    tools:context=".UI.OrganoActivity">
+    tools:context="com.khazana.hrm.UI.OrganoActivity">
     <!--Below is the code for tree view-->
 
     <androidx.recyclerview.widget.RecyclerView
