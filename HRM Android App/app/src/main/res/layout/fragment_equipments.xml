@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Request.EquipmentsFragment">
-
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.Request.EquipmentsFragment">
 
 
     <TextView
@@ -15,7 +15,8 @@
         android:gravity="center_horizontal"
         android:text="@string/noreqt"
         android:textColor="@color/colorApp"
-        android:visibility="gone">
+        android:textStyle="bold"
+        >
 
     </TextView>
 
@@ -42,8 +43,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnaddleave"
+        android:visibility="gone"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
