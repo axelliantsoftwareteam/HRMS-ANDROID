@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.UserProfActivity">
+    android:background="@color/grey_3"
+    tools:context="com.khazana.hrm.UI.UserProfActivity">
 
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -28,9 +29,12 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/image"
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_baseline_account_circle_24" />
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:src="@drawable/ic_baseline_account_circle_24"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                />
 
             <TextView
                 android:id="@+id/txt_name"
@@ -62,11 +66,12 @@
 
 
             <RelativeLayout
+                android:id="@+id/ly_back"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginTop="10dp"
-                android:background="@color/profileBackground"
+                android:background="@color/grey_3"
                 android:gravity="center">
 
                 <View
@@ -92,7 +97,8 @@
         android:layout_above="@+id/linear"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="10dp"
-        android:background="@color/grey_3">
+        android:layout_marginBottom="20dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -250,7 +256,7 @@
                     android:id="@+id/addressImageView"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_address"
+                    android:src="@drawable/ic_card"
                     app:tint="@color/colorApp" />
 
                 <LinearLayout
@@ -292,8 +298,7 @@
                     android:id="@+id/img_deprt"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_address"
-                    app:tint="@color/colorApp" />
+                    android:src="@drawable/ic_baseline_business_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -334,8 +339,7 @@
                     android:id="@+id/img_join"
                     android:layout_width="50dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_address"
-                    app:tint="@color/colorApp" />
+                    android:src="@drawable/ic_date" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -458,61 +462,79 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
         android:orientation="vertical"
         tools:ignore="DuplicateIds">
 
-        <View
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="4dp"-->
+<!--            android:background="@drawable/bg_gradient_soft" />-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="@dimen/spacing_medium">-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/me"-->
+<!--                    android:layout_width="?attr/actionBarSize"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    app:srcCompat="@drawable/ic_person_black_24dp"-->
+<!--                    tools:ignore="VectorDrawableCompat"-->
+<!--                    app:tint="@color/colorApp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="?attr/actionBarSize"-->
+<!--                android:layout_height="0dp" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="@dimen/spacing_medium">-->
+
+<!--                <ImageButton-->
+<!--                    android:id="@+id/more"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    app:srcCompat="@drawable/ic_more_black_24dp"-->
+<!--                    tools:ignore="VectorDrawableCompat" />-->
+<!--                <ImageButton-->
+<!--                    android:id="@+id/ic_more"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                    app:srcCompat="@drawable/ic_more"-->
+<!--                    tools:ignore="VectorDrawableCompat" />-->
+
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+        <com.akshay.library.CurveBottomBar
+            android:id="@+id/nav_view"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/bg_gradient_soft" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            app:curveRadius="25dp"
+            app:itemIconTint="@color/botnav_color_state"
+            app:itemTextColor="@color/botnav_color_state"
+            app:menu="@menu/bottom_nav_menu" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/spacing_medium">
-
-                <ImageButton
-                    android:id="@+id/me"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_person_black_24dp"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/colorApp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="0dp" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/spacing_medium">
-
-                <ImageButton
-                    android:id="@+id/more"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:srcCompat="@drawable/ic_more_black_24dp"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/colorApp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -520,14 +542,30 @@
         android:id="@+id/flt_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/khazanalogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="15dp"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/colorApp"
-        app:elevation="2dp"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_home_black_24dp"
+        app:backgroundTint="@color/white"
+        app:maxImageSize="40dp"
         tools:ignore="VectorDrawableCompat" />
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/ic_flthome"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/khazanalogo"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="parent"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        app:backgroundTint="@color/white"-->
+<!--        app:maxImageSize="40dp"-->
+<!--        tools:ignore="VectorDrawableCompat" />-->
 
 </RelativeLayout>
