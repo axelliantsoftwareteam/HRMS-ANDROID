@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.BasicSetup.DepartmentFragment">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.BasicSetup.DepartmentFragment">
 
     <TextView
 
