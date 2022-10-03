@@ -3,20 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Request.LeaveRequestFragment">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.Request.LeaveRequestFragment">
 
-
-    <TextView
-        android:id="@+id/txt_no"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:text="@string/noreqt"
-
-        android:visibility="gone">
-
-    </TextView>
 
     <Button
         android:id="@+id/btnaddleave"
@@ -44,8 +33,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        >
+        android:layout_marginBottom="10dp">
+
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
@@ -55,6 +44,7 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:text="@string/noreqt"
+
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold">
