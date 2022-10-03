@@ -1,14 +1,14 @@
 {
-  "client_id" : "72d71038-f580-4ea3-93a1-535f29394adf",
-  "authorization_user_agent" : "DEFAULT",
-  "redirect_uri" : "msauth://com.example.hrm/nNO53JL2zmIp7VldfjnFgCsL5Dc%3D",
+  "client_id": "72d71038-f580-4ea3-93a1-535f29394adf",
+  "authorization_user_agent": "DEFAULT",
+  "redirect_uri" : "msauth://com.khazana.hrm/EO7i7Iy3H866OCSFDWGYuwE1WJE%3D",
   "account_mode" : "SINGLE",
   "broker_redirect_uri_registered": true,
-  "authorities" : [
+  "authorities": [
     {
       "type": "AAD",
       "audience": {
-        "type": "AzureADandPersonalMicrosoftAccount",
+        "type": "AzureADMyOrg",
         "tenant_id": "9654e7d5-ab87-49c7-bc3b-d14d24c2c0b7"
       }
     }

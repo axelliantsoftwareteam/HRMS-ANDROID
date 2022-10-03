@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rely"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    android:orientation="vertical"
-    android:background="@color/grey_3"
-    tools:context=".UI.SignIn">
-
+    android:background="@drawable/loginbg"
+    tools:context="com.khazana.hrm.UI.SignIn">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -214,17 +211,18 @@
 
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/spacing_mxlarge">
 
         <View
             android:layout_width="0dp"
-            android:layout_height="100dp" />
+            android:layout_height="120dp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -249,80 +247,129 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/spacing_medium"
             android:fontFamily="sans-serif-light"
-            android:text="Hope you enjoy the stay"
+            android:text="WELCOME TO KHAZANA HRIS"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
+            android:textColor="@color/logocolor"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/spacing_middle"
-            android:text="SignIn"
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
 
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorPrimary"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+        <!--            android:text="SignIn"-->
+        <!--            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
+        <!--            android:textColor="@color/colorPrimary"-->
+        <!--            android:textSize="25sp"-->
+        <!--            android:textStyle="bold" />-->
 
-        <View
-            android:layout_width="60dp"
-            android:layout_height="3dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
-            android:background="@color/colorPrimary" />
+        <!--        <View-->
+        <!--            android:layout_width="60dp"-->
+        <!--            android:layout_height="3dp"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:layout_marginBottom="15dp"-->
+        <!--            android:background="@color/colorPrimary" />-->
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/EditText.MainColor">
 
             <EditText
                 android:id="@+id/etemail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_xxlarge"
                 android:background="@drawable/edit_text_round"
-                android:hint="mail@someone.com"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawablePadding="10dip"
                 android:inputType="textEmailAddress"
                 android:maxLength="50"
+                android:hint="Email"
                 android:maxLines="1"
-                android:paddingLeft="15dp"
+                android:paddingLeft="10dp"
                 android:singleLine="true"
                 android:textColor="@color/colorApp"
-                android:textColorHint="@color/grey_60" />
+                android:textColorHint="@color/colorApp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.05" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:theme="@style/EditText.MainColor">
 
-            <EditText
-                android:id="@+id/etpassword"
+<!--            <EditText-->
+<!--                android:id="@+id/etpassword"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/spacing_xxlarge"-->
+<!--                android:background="@drawable/edit_text_round"-->
+<!--                android:drawableLeft="@drawable/ic_baseline_lock"-->
+<!--                android:drawableRight="@drawable/ic_eye"-->
+<!--                android:drawablePadding="10dip"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:maxLength="50"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:singleLine="true"-->
+<!--                android:textColor="@color/colorApp"-->
+<!--                android:textColorHint="@color/grey_60"-->
+
+<!--                />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/laypass"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_xxlarge"
-                android:background="@drawable/edit_text_round"
-                android:hint="@string/Passward"
-                android:inputType="textPassword"
-                android:maxLength="50"
-                android:maxLines="1"
-                android:paddingLeft="15dp"
-                android:singleLine="true"
-                android:textColor="@color/colorApp"
-                android:textColorHint="@color/grey_60" />
+                app:layout_constraintEnd_toEndOf="@+id/editText3"
+                app:layout_constraintStart_toStartOf="@+id/editText3"
+                app:layout_constraintTop_toBottomOf="@+id/editText3">
+
+                <EditText
+                    android:id="@+id/etpassword"
+                    android:theme="@style/EditText.MainColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_round"
+                    android:drawableLeft="@drawable/ic_baseline_lock"
+                    android:drawablePadding="10dip"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/colorApp"
+                    android:textColorHint="@color/colorApp"
+                    android:textCursorDrawable="@null"
+                    />
+
+                <ImageView
+                    android:id="@+id/show_pass_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:alpha=".5"
+                    android:onClick="ShowHidePass"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_visibility"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/laypass"
+                    app:layout_constraintTop_toTopOf="@+id/edit_password"
+                    tools:ignore="UnknownId" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
 
 
         <RelativeLayout
@@ -353,6 +400,7 @@
             <!--                android:visibility="gone" />-->
 
         </RelativeLayout>
+
         <View
             android:layout_width="0dp"
             android:layout_height="@dimen/spacing_mxlarge" />
@@ -556,4 +604,4 @@
 
     <!--    </RelativeLayout>-->
 
-</LinearLayout>
+</RelativeLayout>

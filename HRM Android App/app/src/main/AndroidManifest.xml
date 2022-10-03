@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.hrm">
+    package="com.khazana.hrm">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -35,73 +35,73 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".UI.MicCalendarActivity"
+            android:name="com.khazana.hrm.UI.MicCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.OrganogramActivity"
+            android:name="com.khazana.hrm.UI.OrganogramActivity"
             android:exported="false" />
         <activity
-            android:name=".EmployeeActivity"
+            android:name="com.khazana.hrm.EmployeeActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.ResumeActivity"
+            android:name="com.khazana.hrm.UI.ResumeActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.PayrollActivity"
+            android:name="com.khazana.hrm.UI.PayrollActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.EmplyManagActivity"
+            android:name="com.khazana.hrm.UI.EmplyManagActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TableActivity"
+            android:name="com.khazana.hrm.UI.TableActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.EvalutionActivity"
+            android:name="com.khazana.hrm.UI.EvalutionActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.ApprovalActivity"
+            android:name="com.khazana.hrm.UI.ApprovalActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.BasicSetupActivity"
+            android:name="com.khazana.hrm.UI.BasicSetupActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.RequestActivity"
+            android:name="com.khazana.hrm.UI.RequestActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.EditprofActivity"
+            android:name="com.khazana.hrm.UI.EditprofActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.LeaveBalanceActivity"
+            android:name="com.khazana.hrm.UI.LeaveBalanceActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.AttendanceActivity"
+            android:name="com.khazana.hrm.UI.AttendanceActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.CalendarActivity"
+            android:name="com.khazana.hrm.UI.CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.OrganoActivity"
+            android:name="com.khazana.hrm.UI.OrganoActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.CheckRequest"
+            android:name="com.khazana.hrm.UI.CheckRequest"
             android:exported="false" />
         <activity
-            android:name=".UI.UserProfActivity"
+            android:name="com.khazana.hrm.UI.UserProfActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.TasksActivity"
+            android:name="com.khazana.hrm.UI.TasksActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.AddLeave"
+            android:name="com.khazana.hrm.UI.AddLeave"
             android:exported="false" />
         <activity
-            android:name=".UI.LeavesActivity"
+            android:name="com.khazana.hrm.UI.LeavesActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.More"
+            android:name="com.khazana.hrm.UI.More"
             android:exported="false" />
         <activity
-            android:name=".UI.SplashScreen"
+            android:name="com.khazana.hrm.UI.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -110,13 +110,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.MainActivity"
+            android:name="com.khazana.hrm.UI.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.AppIntro"
+            android:name="com.khazana.hrm.UI.AppIntro"
             android:exported="false" />
         <activity
-            android:name=".UI.SignIn"
+            android:name="com.khazana.hrm.UI.SignIn"
             android:exported="false" />
         <activity
             android:name="com.microsoft.identity.client.BrowserTabActivity"
@@ -128,8 +128,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="com.example.hrm"
-                    android:path="/nNO53JL2zmIp7VldfjnFgCsL5Dc="
+                    android:host="com.khazana.hrm"
+                    android:path="/EO7i7Iy3H866OCSFDWGYuwE1WJE="
                     android:scheme="msauth" />
             </intent-filter>
         </activity>
