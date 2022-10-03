@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UI.CalendarActivity">
+    tools:context="com.khazana.hrm.UI.CalendarActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.example.hrm.widget.CalendarCustomView
+    <com.khazana.hrm.widget.CalendarCustomView
         android:id="@+id/custom_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
