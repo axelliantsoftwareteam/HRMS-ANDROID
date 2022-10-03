@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.LeaveBalanceActivity">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.UI.LeaveBalanceActivity">
+
     <RelativeLayout
         android:id="@+id/toolbar"
-        android:background="@color/colorApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorApp"
         android:padding="@dimen/spacing_large"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -17,8 +19,7 @@
             android:id="@+id/rely"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
+            android:layout_centerInParent="true">
 
             <ImageView
                 android:id="@+id/imgback"
@@ -47,213 +48,242 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
-        android:visibility="gone"
         android:text="@string/nodata"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:visibility="gone">
 
     </TextView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewGraph"
+
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/flt_home"
         android:layout_below="@+id/toolbar"
-        android:layout_height="200dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp">
+        android:background="@color/grey_10"
+        android:orientation="vertical">
 
+        <!--Pie chart to display the data-->
 
+        <!--            <org.eazegraph.lib.charts.PieChart-->
+        <!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--                android:id="@+id/piechart"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:padding="6dp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:layout_marginTop="15dp"-->
+        <!--                android:layout_marginLeft="15dp"-->
+        <!--                android:layout_marginBottom="15dp"-->
+
+        <!--                />-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <!--Pie chart to display the data-->
-
-            <org.eazegraph.lib.charts.PieChart
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/piechart"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:padding="6dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="15dp"
-
-                />
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical">
-
-                    <!--View to display the yellow color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/green_500"/>
-
-                    <!--Text view to display R -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:paddingLeft="10dp"
-                        android:text="All leaves" />
-
-                </LinearLayout>
-
-                <!--Linear layout to display Python-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <!--View to display the green color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/red_50"/>
-
-                    <!--Text view to display python text -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Causal Leaves"
-                        android:paddingLeft="10dp"/>
-
-                </LinearLayout>
-
-                <!--Linear layout to display C++-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <!--View to display the red color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/red_400"/>
-
-                    <!--Text view to display C++ text -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sick Leave"
-                        android:paddingLeft="10dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/orange_300"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Marriage Leave"
-                        android:paddingLeft="10dp"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/purple_500"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Breavement Leave"
-                        android:paddingLeft="10dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_below="@+id/cardViewGraph"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
-        android:id="@+id/details">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:background="@color/grey_10"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/leavesbalnce_recycler"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewGraph"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:scrollbars="vertical">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp">
+
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/activity_main_piechart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!--            <LinearLayout-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:layout_weight="1"-->
+                <!--                android:layout_marginLeft="20dp"-->
+                <!--                android:orientation="vertical"-->
+                <!--                android:gravity="center_vertical"-->
+                <!--                >-->
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="15dp"-->
+                <!--                    android:layout_gravity="center_vertical">-->
+
+                <!--                    &lt;!&ndash;View to display the yellow color icon&ndash;&gt;-->
+                <!--                    <View-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:background="@color/green_500"/>-->
+
+                <!--                    &lt;!&ndash;Text view to display R &ndash;&gt;-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="28dp"-->
+                <!--                        android:paddingLeft="10dp"-->
+                <!--                        android:text="All leaves" />-->
+
+                <!--                </LinearLayout>-->
+
+                <!--                &lt;!&ndash;Linear layout to display Python&ndash;&gt;-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="15dp"-->
+                <!--                    android:layout_gravity="center_vertical"-->
+                <!--                    android:layout_marginTop="5dp">-->
+
+                <!--                    &lt;!&ndash;View to display the green color icon&ndash;&gt;-->
+                <!--                    <View-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:background="@color/red_50"/>-->
+
+                <!--                    &lt;!&ndash;Text view to display python text &ndash;&gt;-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="Causal Leaves"-->
+                <!--                        android:paddingLeft="10dp"/>-->
+
+                <!--                </LinearLayout>-->
+
+                <!--                &lt;!&ndash;Linear layout to display C++&ndash;&gt;-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="15dp"-->
+                <!--                    android:layout_gravity="center_vertical"-->
+                <!--                    android:layout_marginTop="5dp">-->
+
+                <!--                    &lt;!&ndash;View to display the red color icon&ndash;&gt;-->
+                <!--                    <View-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:background="@color/red_400"/>-->
+
+                <!--                    &lt;!&ndash;Text view to display C++ text &ndash;&gt;-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="Sick Leave"-->
+                <!--                        android:paddingLeft="10dp"/>-->
+
+                <!--                </LinearLayout>-->
+
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="15dp"-->
+                <!--                    android:layout_gravity="center_vertical"-->
+                <!--                    android:layout_marginTop="5dp">-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:background="@color/orange_300"/>-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="Marriage Leave"-->
+                <!--                        android:paddingLeft="10dp"/>-->
+
+                <!--                </LinearLayout>-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="15dp"-->
+                <!--                    android:layout_gravity="center_vertical"-->
+                <!--                    android:layout_marginTop="5dp">-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="15dp"-->
+                <!--                        android:layout_height="match_parent"-->
+                <!--                        android:background="@color/purple_500"/>-->
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:text="Breavement Leave"-->
+                <!--                        android:paddingLeft="10dp"/>-->
+
+                <!--                </LinearLayout>-->
+
+                <!--&lt;!&ndash;            </LinearLayout>&ndash;&gt;-->
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5"
+            android:background="@color/grey_10"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/cardViewGraph"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/leavesbalnce_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/grey_10"
         android:orientation="vertical"
         tools:ignore="DuplicateIds">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/bg_gradient_soft" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="4dp"-->
+<!--            android:background="@drawable/bg_gradient_soft" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -265,12 +295,21 @@
 
                 <ImageButton
                     android:id="@+id/me"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:visibility="gone"
                     app:srcCompat="@drawable/ic_person_black_24dp"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/colorApp" />
+                    tools:ignore="VectorDrawableCompat" />
+
+                <ImageButton
+                    android:id="@+id/ic_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_person_grey"
+                    tools:ignore="VectorDrawableCompat" />
+
 
             </LinearLayout>
 
@@ -291,12 +330,28 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/ic_more_black_24dp"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/colorApp" />
+                    app:tint="@color/colorApp"
+                    tools:ignore="VectorDrawableCompat" />
 
             </LinearLayout>
 
         </LinearLayout>
+
+
+        <com.akshay.library.CurveBottomBar
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:itemIconTint="@drawable/color_state_white_1"
+            app:itemTextColor="@drawable/color_state_white_1"
+            app:menu="@menu/bottom_nav_menu"
+            app:curveRadius="25dp"/>
 
     </LinearLayout>
 
@@ -304,14 +359,30 @@
         android:id="@+id/flt_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/khazanalogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        app:backgroundTint="@color/white"
+        app:maxImageSize="40dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ic_flthome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="15dp"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/colorApp"
+        app:backgroundTint="@color/grey_40"
         app:elevation="2dp"
+        android:visibility="gone"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_home_black_24dp"
         tools:ignore="VectorDrawableCompat" />
+
 
 </RelativeLayout>
