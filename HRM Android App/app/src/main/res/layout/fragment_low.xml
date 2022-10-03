@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Tasks.LowFragment">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.Tasks.LowFragment">
 
     <TextView
         android:id="@+id/txtno"
@@ -22,6 +23,7 @@
         android:id="@+id/alltaskrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="horizontal">
 
     </androidx.recyclerview.widget.RecyclerView>

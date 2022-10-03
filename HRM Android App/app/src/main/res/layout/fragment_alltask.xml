@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.Tasks.AlltaskFragment">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.Tasks.AlltaskFragment">
 
     <TextView
         android:id="@+id/txtno"
@@ -12,7 +13,6 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:text="@string/noreqt"
-        android:visibility="gone"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold">
@@ -23,6 +23,7 @@
         android:id="@+id/alltaskrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="horizontal">
 
     </androidx.recyclerview.widget.RecyclerView>

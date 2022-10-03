@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    #345ab3
-    <color name="colorApp">#345ab3</color>
+<!--    <color name="colorApp">#345ab3</color>-->
+    <color name="colorApp">#121c4f</color>
+    <color name="colorAppDark">#121c4f</color>
 <!--    <color name="colorPrimary">#1F87DD</color>-->
-    <color name="colorPrimary">#345ab3</color>
-    <color name="colorPrimaryDark">#345ab3</color>
+    <color name="colorPrimary">#121c4f</color>
+    <color name="colorPrimaryDark">#121c4f</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorRow">#E5E6EC</color>
 
+    <color name="logocolor">#b38f34</color>
     <color name="tab_layout">#1976D2</color>
 
-
+    <color name="card1">#fff4df</color>
+    <color name="card2">#fce1da</color>
+    <color name="card3">#e5f4ed</color>
+    <color name="card4">#dbf3f7</color>
+    <color name="card5">#e9e0e8</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -73,8 +79,8 @@
 
 
 <!--    <color name="colorPrimaryLight">#1E88E5</color>-->
-    <color name="colorAccentDark">#345ab3</color>
-    <color name="colorAccentLight">#345ab3</color>
+    <color name="colorAccentDark">#121c4f</color>
+    <color name="colorAccentLight">#121c4f</color>
 
     <!--    <color name="colorPrimaryLight">#1E88E5</color>-->
     <!--    <color name="colorAccent">#FF4081</color>-->
