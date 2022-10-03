@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:weightSum="4"
+                android:weightSum="3"
                 android:background="@color/colorApp"
                 android:orientation="horizontal"
                 android:padding="5dp">
@@ -121,6 +121,7 @@
                     android:background="@color/colorApp"
                     android:gravity="center"
                     android:text="Hours"
+                    android:visibility="gone"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="14sp" />
@@ -130,7 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="5dp"
-                android:weightSum="4"
+                android:weightSum="3"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -171,6 +172,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:text="00:00:00"
                     android:textColor="@color/black"
                     android:textSize="14sp" />

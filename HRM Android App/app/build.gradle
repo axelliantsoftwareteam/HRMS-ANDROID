@@ -27,11 +27,11 @@ android {
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.example.hrm"
+        applicationId "com.khazana.hrm"
         minSdkVersion 26
         targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.2"
 //        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,11 +53,16 @@ android {
         packagingOptions {
             pickFirst  'META-INF/*'
         }
+        lintOptions {
+            baseline file("lint-baseline.xml")
+        }
     }
 
 //    buildFeatures {
 //        viewBinding true
 //    }
+
+
     buildFeatures {
         viewBinding true
         dataBinding = true
@@ -136,7 +141,13 @@ dependencies {
     implementation 'com.haibin:calendarview:3.7.1'
 
     implementation 'com.hootsuite.android:nachos:1.1.1'                // material chips
+    implementation 'com.auth0.android:jwtdecode:2.0.1'
+    implementation "com.splitwise:tokenautocomplete:3.0.1@aar"
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 
+    implementation 'com.github.Akshay-Katariya:CurveBottomBar:1.0'
 }
 
