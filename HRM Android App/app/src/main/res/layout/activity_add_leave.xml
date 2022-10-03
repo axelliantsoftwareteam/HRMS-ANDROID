@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_5"
-    tools:context=".UI.AddLeave">
+    tools:context="com.khazana.hrm.UI.AddLeave">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
