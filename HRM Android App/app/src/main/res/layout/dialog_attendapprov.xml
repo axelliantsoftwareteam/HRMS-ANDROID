@@ -7,24 +7,13 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!--    <View-->
-        <!--        android:id="@+id/view"-->
-        <!--        android:layout_width="0dp"-->
-        <!--        android:layout_height="@dimen/spacing_xlarge"-->
-        <!--        android:layout_below="@+id/toolbar" />-->
-
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="@dimen/spacing_middle"
             app:cardElevation="5dp">
+
             <ImageView
                 android:id="@+id/imgclose"
                 android:layout_width="wrap_content"
@@ -39,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:padding="10dp">
+                android:padding="@dimen/spacing_middle">
 
 
 
@@ -52,8 +41,8 @@
                     android:padding="@dimen/spacing_small"
                     android:text="Process Flow"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:textColor="@color/colorAppDark"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -65,43 +54,57 @@
 
                     <TextView
                         android:id="@+id/apprtask"
-                        android:layout_width="match_parent"
-                        android:padding="@dimen/spacing_middle"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/spacing_medium"
                         android:text="muhammad arslan"
                         android:gravity="center"
-                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:textColor="@android:color/black"
                         android:textColorHint="@color/grey_3" />
                     <TextView
                         android:id="@+id/apprproname"
-                        android:layout_width="match_parent"
-                        android:padding="@dimen/spacing_middle"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/spacing_medium"
                         android:text="muhammad arslan"
                         android:gravity="center"
-                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:visibility="gone"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/grey_3" />
+                    <TextView
+                        android:id="@+id/apprprodate"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/spacing_medium"
+                        android:text=""
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/black"
                         android:textColorHint="@color/grey_3" />
 
                     <TextView
                         android:id="@+id/apprdisplyname"
-                        android:layout_width="match_parent"
-                        android:padding="@dimen/spacing_middle"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/spacing_medium"
                         android:text="muhammad arslan"
                         android:gravity="center"
-                        android:layout_height="@dimen/spacing_xxlarge"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
                         android:textColor="@android:color/black"
                         android:textColorHint="@color/grey_3" />
 
 
                     <TextView
                         android:id="@+id/apprdate"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/spacing_middle"
+                        android:padding="@dimen/spacing_medium"
                         android:text="complcompletedcompletedcomplet"
                         android:textSize="@dimen/spacing_large"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:background="@drawable/ly_start"
                         android:textColor="@android:color/black"
                         android:textColorHint="@color/grey_3" />
@@ -112,65 +115,94 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="@dimen/spacing_large">
+                        android:gravity="center">
 
                         <Button
                             android:id="@+id/approved"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
-                            android:background="@drawable/button_normal"
-                            android:padding="10dp"
-                            android:visibility="gone"
+                            android:background="@drawable/button_roundaccepted"
+                            android:padding="@dimen/spacing_middle"
                             android:text="@string/approved"
+                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                         <Button
-                            android:id="@+id/approve"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/rejected"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
-                            android:background="@drawable/button_normal"
-                            android:padding="10dp"
+                            android:background="@drawable/button_roundrejected"
+                            android:text="@string/rejected"
+                            android:padding="@dimen/spacing_middle"
                             android:visibility="gone"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_middle"
+                            android:layout_marginBottom="@dimen/spacing_middle"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                >
+
+
+                        <Button
+                            android:id="@+id/approve"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/button_roundaccepted"
                             android:text="@string/approve"
+                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
-                        <Button
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+
+                                >
+                            <Button
                             android:id="@+id/reject"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="4dp"
-                            android:layout_marginRight="4dp"
-                            android:background="@drawable/button_accepted"
-                            android:padding="10dp"
+                            android:background="@drawable/button_roundrejected"
+                            android:text="Reject"
                             android:visibility="gone"
-                            android:text="@string/rejected"
                             android:textAllCaps="false"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
-
-
                 </LinearLayout>
 
 
 
+    </androidx.cardview.widget.CardView>
 
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_5"
+    android:background="@color/grey_10"
     tools:context="com.khazana.hrm.Fragment.Approval.GeneralApprovalFragment">
 
     <LinearLayout

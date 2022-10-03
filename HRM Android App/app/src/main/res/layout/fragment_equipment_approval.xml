@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_5"
-    tools:context=".Fragment.Approval.EquipmentApprovalFragment">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.Approval.EquipmentApprovalFragment">
 
     <LinearLayout
         android:id="@+id/line1"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Assing to"
+            android:text="Select Employee*"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             android:textColor="@color/colorApp"
@@ -34,7 +34,7 @@
             <Spinner
                 android:id="@+id/spinnerlist"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/colorApp" />
