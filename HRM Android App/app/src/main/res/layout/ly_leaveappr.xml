@@ -70,28 +70,32 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_large"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:padding="5dp"
                         android:text="Leave Type:"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorApp"
+                        android:textColor="@color/colorAppDark"
                         android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_leavetype"
+                        android:background="@drawable/button_normaldark"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:padding="5dp"
-                        android:text="Annual"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_40"
-                        android:textSize="12sp" />
+                        android:text="Leave Type:"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:paddingTop="@dimen/spacing_medium"
+                        android:paddingBottom="@dimen/spacing_medium"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -106,7 +110,7 @@
                         android:padding="5dp"
                         android:text="Name:"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorApp"
+                        android:textColor="@color/colorAppDark"
                         android:textSize="16sp" />
 
                     <TextView
@@ -121,7 +125,21 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <LinearLayout
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -133,7 +151,7 @@
                         android:padding="5dp"
                         android:text="Start Date:"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorApp"
+                        android:textColor="@color/colorAppDark"
                         android:textSize="16sp" />
 
                     <TextView
@@ -148,6 +166,13 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -160,7 +185,7 @@
                         android:padding="5dp"
                         android:text="End Date:"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorApp"
+                        android:textColor="@color/colorAppDark"
                         android:textSize="16sp" />
 
                     <TextView
@@ -175,6 +200,9 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
+            </LinearLayout>
+            </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,7 +215,7 @@
                         android:padding="5dp"
                         android:text="Comment:"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/colorApp"
+                        android:textColor="@color/colorAppDark"
                         android:textSize="16sp" />
 
                     <TextView
@@ -220,7 +248,7 @@
                     android:layout_gravity="end"
                     android:text="@string/viewdetails"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/colorApp"
+                    android:textColor="@color/colorAppDark"
                     android:textSize="13sp">
 
                 </TextView>
