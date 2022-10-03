@@ -12,278 +12,312 @@
         android:layout_marginBottom="@dimen/spacing_middle"
         android:visibility="visible"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:strokeColor="@color/colorApp"
-        app:strokeWidth="100dp">
+        app:cardElevation="5dp"
+        app:strokeWidth="5dp">
 
         <LinearLayout
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_layout"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="Leave Type:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorApp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txt_leavetype"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="20/10/2020"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_40"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="Name:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorApp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txt_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="arslan"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_40"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="Start:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorApp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txt_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="20/10/2020"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_40"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="End:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorApp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txt_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="20/10/2020"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_40"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="Reason:"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorApp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/txt_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:text="Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/grey_40"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/spacing_middle"
-                android:background="@color/grey_100" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Leaves Type:"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorAppDark"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_leavetype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/button_normaldark"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingTop="5dp"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:paddingBottom="5dp"
+                        android:text="Check"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+
+                        />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="Name:"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorAppDark"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="arslan"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:padding="5dp"
+                                android:text="Start:"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:textColor="@color/colorAppDark"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/txt_start"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:padding="5dp"
+                                android:text="20/10/2020"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_40"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:padding="5dp"
+                                android:text="End:"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                                android:textColor="@color/colorAppDark"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/txt_end"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:padding="5dp"
+                                android:text="20/10/2020"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_40"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="Reason:"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@color/colorAppDark"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txt_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:text="Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!Fever Leave!"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/grey_40"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ly_status"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center"
-                >
+                android:orientation="vertical">
 
 
-
-            <LinearLayout
-                android:id="@+id/ly_await"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:visibility="gone"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="@dimen/spacing_medium">
-
-                <TextView
-                    android:id="@+id/txt_pending"
+                <LinearLayout
+                    android:id="@+id/ly_await"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_pending"
-                    android:drawableLeft="@drawable/ic_find_replace_black_24dp"
-                    android:drawablePadding="5dp"
-                    android:padding="10dp"
-                    android:text="@string/Awaitappr"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:layout_gravity="center_horizontal"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_medium"
+                    android:visibility="gone">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/txt_pending"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_pending"
+                        android:drawableLeft="@drawable/ic_find_replace_black_24dp"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="@string/Awaitappr"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-            <LinearLayout
-                android:id="@+id/ly_pend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:gravity="center"
-                android:visibility="gone"
-                android:orientation="horizontal"
-                android:padding="@dimen/spacing_medium">
+                </LinearLayout>
 
-
-                <TextView
-                    android:layout_width="120dp"
+                <LinearLayout
+                    android:id="@+id/ly_pend"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:visibility="gone"
                     android:background="@drawable/button_pend"
-                    android:clickable="false"
-                    android:drawableLeft="@drawable/ic_pending"
-                    android:drawablePadding="5dp"
-                    android:padding="10dp"
-                    android:text="@string/pending"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ly_reject"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:visibility="gone"
-                android:layout_gravity="center"
-                android:padding="@dimen/spacing_medium">
+                    android:orientation="horizontal"
+                    >
 
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:drawableLeft="@drawable/ic_pending"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="@string/pending"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
 
-                <TextView
-                    android:layout_width="120dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ly_reject"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_close"
-                    android:drawablePadding="5dp"
-                    android:text="@string/rejected"
-                    android:padding="10dp"
-                    android:clickable="false"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
                     android:background="@drawable/button_rejected"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ly_appr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:visibility="gone"
-                android:layout_gravity="center"
-                android:padding="@dimen/spacing_medium">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_medium">
 
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:drawableLeft="@drawable/ic_close"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="@string/rejected"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/approved"
-                    android:layout_width="120dp"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ly_appr"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_done_black_24dp"
-                    android:drawablePadding="5dp"
-                    android:text="Approved"
-                    android:padding="10dp"
-                    android:clickable="false"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
                     android:background="@drawable/button_accepted"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:layout_gravity="center"
+                    android:padding="@dimen/spacing_medium">
 
-            </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/approved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_accepted"
+                        android:clickable="false"
+                        android:drawableLeft="@drawable/ic_done_black_24dp"
+                        android:drawablePadding="5dp"
+                        android:padding="10dp"
+                        android:text="Approved"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

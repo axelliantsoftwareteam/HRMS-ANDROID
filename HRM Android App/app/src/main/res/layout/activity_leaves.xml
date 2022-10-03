@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_5"
-    tools:context=".UI.LeavesActivity">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.UI.LeavesActivity">
 
 
 
@@ -91,18 +91,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
         android:orientation="vertical"
         tools:ignore="DuplicateIds">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@drawable/bg_gradient_soft" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="4dp"-->
+<!--            android:background="@drawable/bg_gradient_soft" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -114,13 +114,20 @@
 
                 <ImageButton
                     android:id="@+id/me"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/ic_person_black_24dp"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/colorApp" />
+                    tools:ignore="VectorDrawableCompat" />
 
+                <ImageButton
+                    android:id="@+id/ic_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_person_grey"
+                    tools:ignore="VectorDrawableCompat" />
             </LinearLayout>
 
             <View
@@ -136,16 +143,37 @@
 
                 <ImageButton
                     android:id="@+id/more"
-                    android:layout_width="?attr/actionBarSize"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/ic_more_black_24dp"
-                    tools:ignore="VectorDrawableCompat"
-                    app:tint="@color/colorApp" />
-
+                    tools:ignore="VectorDrawableCompat" />
+                <ImageButton
+                    android:id="@+id/ic_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_more"
+                    tools:ignore="VectorDrawableCompat" />
             </LinearLayout>
 
         </LinearLayout>
+
+        <com.akshay.library.CurveBottomBar
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:itemIconTint="@color/botnav_color_state"
+            app:itemTextColor="@color/botnav_color_state"
+            app:menu="@menu/bottom_nav_menu"
+            app:curveRadius="25dp"/>
 
     </LinearLayout>
 
@@ -153,14 +181,16 @@
         android:id="@+id/flt_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/khazanalogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="15dp"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/colorApp"
-        app:elevation="2dp"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_home_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
+        app:backgroundTint="@color/white"
+        app:maxImageSize="40dp"
+        tools:ignore="VectorDrawableCompat"
+        />
 
 </RelativeLayout>
