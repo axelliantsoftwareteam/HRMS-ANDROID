@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/grey_5"
-    tools:context=".UI.EditprofActivity">
+    tools:context="com.khazana.hrm.UI.EditprofActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -43,13 +43,12 @@
         android:id="@+id/nested_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="@dimen/spacing_large"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:scrollbars="none"
-        android:layout_marginBottom="@dimen/spacing_large"
-        android:scrollingCache="true"
         android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing_middle"
+        android:scrollbars="none"
+        android:scrollingCache="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -79,8 +78,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:text="Employee Code:"
+                    android:textSize="16sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/grey_90" />
+                    android:textColor="@color/colorAppDark" />
 
                 <TextView
                     android:id="@+id/empcode"
@@ -89,19 +89,38 @@
                     android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:text=""
+                    android:textSize="14sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorApp" />
+                    android:textColor="@color/colorAppDark" />
 
             </LinearLayout>
+            <LinearLayout
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_small"
+
+                    >
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp">
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -112,18 +131,42 @@
                     android:textColor="@color/grey_40"
                     android:textSize="14sp" />
 
+
                 <EditText
                     android:id="@+id/etname"
+                    android:background="@drawable/ly_start"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
+                    android:hint="Username"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:hint="arslan.umar@khazanapk.com"
-                    android:textColor="@color/colorApp">
+                    android:textColor="@color/colorApp"
+                    android:textSize="14sp"
+                    />
 
-                </EditText>
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="@dimen/spacing_medium"-->
+<!--                    android:text="Name*"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"-->
+<!--                    android:textColor="@color/grey_40"-->
+<!--                    android:textSize="14sp" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/etname"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:hint="arslan.umar@khazanapk.com"-->
+<!--                    android:inputType="text"-->
+<!--                    android:padding="@dimen/spacing_middle"-->
+<!--                    android:textColor="@color/colorApp">-->
+
+<!--                </EditText>-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -140,10 +183,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
+                    android:background="@drawable/ly_start"
+                    android:hint="35202-03664889-5"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:hint="35202-03664889-5"
+                    android:textSize="14sp"
                     android:textColor="@color/colorApp">
 
                 </EditText>
@@ -165,10 +209,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
+                    android:background="@drawable/ly_start"
+                    android:hint="arslan.umar@khazana.pk"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:hint="arslan.umar@khazana.pk"
+                    android:textSize="14sp"
                     android:textColor="@color/colorApp">
 
                 </EditText>
@@ -176,12 +221,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:text="DOB"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
-                    android:layout_marginLeft="@dimen/spacing_medium"
                     android:textSize="14sp" />
 
 
@@ -190,10 +235,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
+                    android:background="@drawable/ly_start"
+                    android:hint="2011-90-201"
                     android:inputType="text"
                     android:padding="@dimen/spacing_middle"
-                    android:hint="2011-90-201"
+                    android:textSize="14sp"
                     android:textColor="@color/colorApp"></EditText>
 
                 <TextView
@@ -210,14 +256,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/editdrawable">
+                    android:background="@drawable/ly_start">
 
                     <Spinner
                         android:id="@+id/sp_salu"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="@dimen/spacing_small"
-                        android:layout_marginBottom="5dp"
+
                         android:backgroundTint="@color/colorApp" />
                 </LinearLayout>
 
@@ -235,15 +281,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/editdrawable">
+                    android:background="@drawable/ly_start">
 
-                <Spinner
-                    android:id="@+id/sp_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/spacing_small"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    android:backgroundTint="@color/colorApp" />
+                    <Spinner
+                        android:id="@+id/sp_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:backgroundTint="@color/colorApp" />
 
                 </LinearLayout>
 
@@ -251,30 +297,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:text="Designation"
                     android:textAlignment="center"
-                    android:visibility="gone"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
-                    android:layout_marginLeft="@dimen/spacing_medium"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:background="@drawable/editdrawable">
+                    android:background="@drawable/editdrawable"
+                    android:visibility="gone">
 
-                <Spinner
-                    android:id="@+id/sp_desig"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/spacing_small"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    android:backgroundTint="@color/colorApp" />
+                    <Spinner
+                        android:id="@+id/sp_desig"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:backgroundTint="@color/colorApp" />
 
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -291,10 +338,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
+                    android:background="@drawable/ly_start"
                     android:inputType="textPassword"
                     android:padding="@dimen/spacing_middle"
                     android:text=""
+                    android:textSize="14sp"
                     android:textColor="@color/colorApp"></EditText>
 
                 <TextView
@@ -313,17 +361,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
+                    android:background="@drawable/ly_start"
                     android:inputType="textPassword"
                     android:padding="@dimen/spacing_middle"
                     android:text=""
+                    android:textSize="14sp"
                     android:textColor="@color/colorApp"></EditText>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
                     android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium"
                     android:text="Direct Reporting to*"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
@@ -333,20 +382,20 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/editdrawable">
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/sp_directrept"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
-                    android:inputType="text"
-                    android:padding="@dimen/spacing_middle"
+                    <TextView
+                        android:id="@+id/sp_directrept"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:inputType="text"
+                        android:padding="@dimen/spacing_middle"
+                        android:textSize="14sp"
+                        android:background="@drawable/ly_start"
+                        android:textColor="@color/colorApp" />
+                </LinearLayout>
 
-                    android:textColor="@color/colorApp" />
-            </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -361,17 +410,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/editdrawable">
+                    android:background="@drawable/ly_start">
 
 
                     <Spinner
                         android:id="@+id/spbuild"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:layout_marginBottom="@dimen/spacing_small"
                         android:backgroundTint="@color/colorApp" />
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -387,19 +437,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/editdrawable">
+                    >
 
-                <TextView
-                    android:id="@+id/sp_deprt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/editdrawable"
-                    android:inputType="text"
-                    android:padding="@dimen/spacing_middle"
-                    android:hint="IT"
-                    android:textColor="@color/colorApp" />
+                    <TextView
+                        android:id="@+id/sp_deprt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="IT"
+                        android:inputType="text"
+                        android:padding="@dimen/spacing_middle"
+                        android:background="@drawable/ly_start"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorApp" />
                 </LinearLayout>
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -411,12 +464,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_medium"
                         android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_marginTop="@dimen/spacing_medium"
                         android:text="@string/reportto"
-                        android:textSize="16dp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/grey_90" />
+                        android:textColor="@color/grey_90"
+                        android:textSize="16dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -428,11 +481,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/spacing_medium"
+
                             android:padding="@dimen/spacing_medium"
                             android:text="Muzammil Hussain"
-                            android:textSize="14dp"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="14dp" />
                     </LinearLayout>
                 </LinearLayout>
 
