@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Fragment.AttendanceReport.ClockInFragment">
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.AttendanceReport.ClockInFragment">
 
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:background="@color/white">
+        android:background="@color/grey_10">
 
 
     <LinearLayout
