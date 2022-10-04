@@ -2,44 +2,53 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/liye"
+    android:id="@+id/ly_details"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_large"
-    app:cardBackgroundColor="@color/tab_layout"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
+    android:visibility="visible"
+    app:cardCornerRadius="35dp"
+    android:layout_margin="@dimen/spacing_middle"
+    app:cardBackgroundColor="@color/card1"
+    tools:ignore="MissingConstraints"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_margin="@dimen/spacing_middle"
         android:padding="@dimen/spacing_middle">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/card_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_calendar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/colorAppDark"
+                    android:textSize="14sp" />
+            </RelativeLayout>
 
 
 
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/card_logo"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:scaleType="centerCrop"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_calendar" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textSize="12sp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_10" />
-        </RelativeLayout>
         <TextView
             android:id="@+id/tv.title"
             android:layout_width="wrap_content"
@@ -48,19 +57,21 @@
             android:text="Anderson Thomas"
             android:textSize="@dimen/spacing_large"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/colorAppDark" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="@dimen/spacing_medium" />
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Descrption"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textSize="12sp"
-            android:textColor="@color/grey_10" />
+            android:textSize="14sp"
+            android:textColor="@color/colorAppDark" />
 
         <TextView
             android:id="@+id/tv.details"
@@ -70,217 +81,217 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             android:text="Anderson Thomas"
             android:textSize="@dimen/spacing_large"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/colorAppDark" />
 
     </LinearLayout>
 
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:layout_marginBottom="5dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        -->
-<!--        android:background="@color/colorPrimary" />-->
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="1dp"-->
+    <!--        android:layout_marginBottom="5dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        -->
+    <!--        android:background="@color/colorPrimary" />-->
 
 
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:padding="@dimen/spacing_large">-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:padding="@dimen/spacing_large">-->
 
-<!--            <RelativeLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-
-
+    <!--            <RelativeLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content">-->
 
 
-<!--            <ImageView-->
-<!--                android:id="@+id/card_logo"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:scaleType="centerCrop"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:src="@drawable/ic_calendar" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Title"-->
-<!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
-<!--                android:textColor="@color/grey_10" />-->
-<!--            </RelativeLayout>-->
-<!--            <TextView-->
-<!--                android:id="@+id/tv.title"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="monospace"-->
-<!--                android:text="Anderson Thomas"-->
-<!--                android:textSize="@dimen/spacing_large"-->
-<!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-<!--                android:textColor="@android:color/white" />-->
-
-<!--            <View-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="@dimen/spacing_medium" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Descrption"-->
-<!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
-
-<!--                android:textColor="@color/grey_10" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv.details"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="monospace"-->
-<!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-<!--                android:text="Anderson Thomas"-->
-<!--                android:textSize="@dimen/spacing_large"-->
-<!--                android:textColor="@android:color/white" />-->
 
 
-<!--            <View-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="@dimen/spacing_middle" />-->
+    <!--            <ImageView-->
+    <!--                android:id="@+id/card_logo"-->
+    <!--                android:layout_width="30dp"-->
+    <!--                android:layout_height="30dp"-->
+    <!--                android:scaleType="centerCrop"-->
+    <!--                android:layout_alignParentRight="true"-->
+    <!--                android:src="@drawable/ic_calendar" />-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                >-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Title"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
+    <!--                android:textColor="@color/grey_10" />-->
+    <!--            </RelativeLayout>-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/tv.title"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="monospace"-->
+    <!--                android:text="Anderson Thomas"-->
+    <!--                android:textSize="@dimen/spacing_large"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                android:textColor="@android:color/white" />-->
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal">-->
+    <!--            <View-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="@dimen/spacing_medium" />-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical">-->
+    <!--            <TextView-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Descrption"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
 
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Start Date"-->
-<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-<!--                        android:textColor="@color/grey_10" />-->
+    <!--                android:textColor="@color/grey_10" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tv.date"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="monospace"-->
-<!--                        android:text="05 / 24"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:textSize="@dimen/spacing_xmiddle"-->
-<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
-<!--                        android:textColor="@android:color/white" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/tv.details"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:fontFamily="monospace"-->
+    <!--                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                android:text="Anderson Thomas"-->
+    <!--                android:textSize="@dimen/spacing_large"-->
+    <!--                android:textColor="@android:color/white" />-->
 
-<!--                </LinearLayout>-->
 
-<!--                <View-->
-<!--                    android:layout_width="@dimen/spacing_large"-->
-<!--                    android:layout_height="0dp" />-->
+    <!--            <View-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="@dimen/spacing_middle" />-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical">-->
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal"-->
+    <!--                >-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/cvv"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="End Date"-->
-<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-<!--                        android:textColor="@color/grey_10" />-->
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:orientation="horizontal">-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/txt_end"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:fontFamily="monospace"-->
-<!--                        android:text="0"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:textSize="@dimen/spacing_xmiddle"-->
-<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
-<!--                        android:textColor="@android:color/white" />-->
-<!--                </LinearLayout>-->
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:orientation="vertical">-->
 
-<!--            </LinearLayout>-->
-<!--                <View-->
-<!--                    android:layout_width="@dimen/spacing_xlarge"-->
-<!--                    android:layout_height="0dp" />-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal">-->
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="Start Date"-->
+    <!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                        android:textColor="@color/grey_10" />-->
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical">-->
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/tv.date"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:fontFamily="monospace"-->
+    <!--                        android:text="05 / 24"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:textSize="@dimen/spacing_xmiddle"-->
+    <!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
+    <!--                        android:textColor="@android:color/white" />-->
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Start Time"-->
-<!--                            android:textSize="@dimen/spacing_large"-->
-<!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-<!--                            android:textColor="@color/grey_10" />-->
+    <!--                </LinearLayout>-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/tv_stime"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:fontFamily="monospace"-->
-<!--                            android:text="0"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:textSize="@dimen/spacing_xmiddle"-->
-<!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
-<!--                            android:textColor="@android:color/white" />-->
+    <!--                <View-->
+    <!--                    android:layout_width="@dimen/spacing_large"-->
+    <!--                    android:layout_height="0dp" />-->
 
-<!--                    </LinearLayout>-->
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:orientation="vertical">-->
 
-<!--                    <View-->
-<!--                        android:layout_width="@dimen/spacing_large"-->
-<!--                        android:layout_height="0dp" />-->
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/cvv"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:text="End Date"-->
+    <!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                        android:textColor="@color/grey_10" />-->
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical">-->
+    <!--                    <TextView-->
+    <!--                        android:id="@+id/txt_end"-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:fontFamily="monospace"-->
+    <!--                        android:text="0"-->
+    <!--                        android:layout_gravity="center"-->
+    <!--                        android:textSize="@dimen/spacing_xmiddle"-->
+    <!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
+    <!--                        android:textColor="@android:color/white" />-->
+    <!--                </LinearLayout>-->
 
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="End Time"-->
-<!--                            android:textSize="@dimen/spacing_large"-->
-<!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
-<!--                            android:textColor="@color/grey_10" />-->
+    <!--            </LinearLayout>-->
+    <!--                <View-->
+    <!--                    android:layout_width="@dimen/spacing_xlarge"-->
+    <!--                    android:layout_height="0dp" />-->
+    <!--                <LinearLayout-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:orientation="horizontal">-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/txt_etime"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:fontFamily="monospace"-->
-<!--                            android:text="0"-->
-<!--                            android:textSize="@dimen/spacing_xmiddle"-->
-<!--                            android:layout_gravity="center"-->
-<!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
-<!--                            android:textColor="@android:color/white" />-->
-<!--                    </LinearLayout>-->
+    <!--                    <LinearLayout-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical">-->
 
-<!--                </LinearLayout>-->
+    <!--                        <TextView-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:text="Start Time"-->
+    <!--                            android:textSize="@dimen/spacing_large"-->
+    <!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                            android:textColor="@color/grey_10" />-->
 
-<!--            </LinearLayout>-->
-<!--        </LinearLayout>-->
+    <!--                        <TextView-->
+    <!--                            android:id="@+id/tv_stime"-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:fontFamily="monospace"-->
+    <!--                            android:text="0"-->
+    <!--                            android:layout_gravity="center"-->
+    <!--                            android:textSize="@dimen/spacing_xmiddle"-->
+    <!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
+    <!--                            android:textColor="@android:color/white" />-->
+
+    <!--                    </LinearLayout>-->
+
+    <!--                    <View-->
+    <!--                        android:layout_width="@dimen/spacing_large"-->
+    <!--                        android:layout_height="0dp" />-->
+
+    <!--                    <LinearLayout-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:orientation="vertical">-->
+
+    <!--                        <TextView-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:text="End Time"-->
+    <!--                            android:textSize="@dimen/spacing_large"-->
+    <!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+    <!--                            android:textColor="@color/grey_10" />-->
+
+    <!--                        <TextView-->
+    <!--                            android:id="@+id/txt_etime"-->
+    <!--                            android:layout_width="wrap_content"-->
+    <!--                            android:layout_height="wrap_content"-->
+    <!--                            android:fontFamily="monospace"-->
+    <!--                            android:text="0"-->
+    <!--                            android:textSize="@dimen/spacing_xmiddle"-->
+    <!--                            android:layout_gravity="center"-->
+    <!--                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"-->
+    <!--                            android:textColor="@android:color/white" />-->
+    <!--                    </LinearLayout>-->
+
+    <!--                </LinearLayout>-->
+
+    <!--            </LinearLayout>-->
+    <!--        </LinearLayout>-->
 
 </androidx.cardview.widget.CardView>

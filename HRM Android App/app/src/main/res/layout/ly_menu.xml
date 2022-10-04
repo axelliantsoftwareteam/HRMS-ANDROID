@@ -61,7 +61,6 @@
                             android:layout_marginTop="@dimen/spacing_mlarge"
                             android:layout_marginBottom="@dimen/spacing_large"
                             android:src="@drawable/earlyout"
-
                             />
 
                         <TextView
