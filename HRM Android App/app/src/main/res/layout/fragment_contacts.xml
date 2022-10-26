@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey_10"
+    tools:context="com.khazana.hrm.Fragment.Personalinfo.ContactsFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing_middle"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/text"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:padding="@dimen/spacing_medium"-->
+            <!--                android:text="Experience"-->
+            <!--                android:textColor="@color/colorApp"-->
+            <!--                android:textSize="@dimen/spacing_mlarge"-->
+            <!--                android:textStyle="bold">-->
+
+            <!--            </TextView>-->
+
+
+            <LinearLayout
+                android:id="@+id/liner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <!--        <TextView-->
+                <!--            android:id="@+id/et_leave"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:layout_marginTop="5dp"-->
+                <!--            android:layout_marginBottom="@dimen/spacing_middle"-->
+                <!--            android:padding="@dimen/spacing_small"-->
+                <!--            android:text="Qualification"-->
+                <!--            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"-->
+                <!--            android:textColor="@color/colorApp"-->
+                <!--            android:textSize="22sp"-->
+                <!--            android:textStyle="bold" />-->
+
+                <LinearLayout
+                    android:id="@+id/ly_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:text="Job Description*"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_40"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/etjobdescrpt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/editdrawable"
+                        android:hint="Job Description"
+                        android:inputType="text"
+                        android:padding="@dimen/spacing_middle"
+                        android:textColor="@color/colorApp"
+                        android:textSize="16sp">
+
+                    </EditText>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_small"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_medium"
+                                android:text="Resign Date"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/etresign"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/editdrawable"
+                                android:hint="Resign Date"
+                                android:inputType="text"
+                                android:padding="@dimen/spacing_middle"
+                                android:textColor="@color/colorApp"
+                                android:textSize="16sp">
+
+                            </EditText>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_small"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/spacing_medium"
+                                android:text="Last Salary*"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/etsalary"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/editdrawable"
+                                android:hint="Last Salary"
+                                android:inputType="number"
+                                android:padding="@dimen/spacing_middle"
+                                android:textColor="@color/colorApp"
+                                android:textSize="16sp">
+
+                            </EditText>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:text="Designation*"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_40"
+                        android:textSize="14sp"
+
+                        />
+
+                    <EditText
+                        android:id="@+id/etdesign"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/editdrawable"
+                        android:hint="Designation"
+                        android:inputType="text"
+                        android:padding="@dimen/spacing_middle"
+                        android:textColor="@color/colorApp"
+                        android:textSize="16sp">
+
+                    </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:text="Company*"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_40"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/etcompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/editdrawable"
+                        android:hint="Company"
+                        android:inputType="text"
+                        android:padding="@dimen/spacing_middle"
+                        android:textColor="@color/colorApp"
+                        android:textSize="16sp">
+
+                    </EditText>
+
+
+                    <Button
+                        android:id="@+id/btnAddleave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/button_bg"
+                        android:padding="10dp"
+                        android:text="@string/save"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/spacing_large"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:background="@drawable/edit_text_round"
+                    android:icon="@android:drawable/ic_menu_search"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search"
+                    android:visibility="gone"
+                    app:actionViewClass="androidx.appcompat.widget.SearchView"
+                    app:showAsAction="ifRoom|collapseActionView">
+
+                </androidx.appcompat.widget.SearchView>
+
+
+                <!--        <View-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="@dimen/spacing_large" />-->
+
+            </LinearLayout>
+
+            <!--    <Button-->
+            <!--        android:id="@+id/btnaddskill"-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_below="@+id/search_bar"-->
+            <!--        android:layout_alignParentRight="true"-->
+            <!--        android:layout_marginTop="5dp"-->
+            <!--        android:layout_marginRight="10dp"-->
+            <!--        android:layout_marginBottom="3dp"-->
+            <!--        android:background="@drawable/button_bg"-->
+            <!--        android:drawableLeft="@drawable/ic_add_black_24dp"-->
+            <!--        android:drawablePadding="2dp"-->
+            <!--        android:padding="10dp"-->
+            <!--        android:text="@string/create"-->
+            <!--        android:textAllCaps="true"-->
+            <!--        android:textColor="@android:color/white"-->
+            <!--        android:textSize="13sp"-->
+            <!--        android:textStyle="bold" />-->
+
+            <LinearLayout
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/liner"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle">
+
+
+                <!--        <LinearLayout-->
+                <!--            android:id="@+id/lymember"-->
+                <!--            android:layout_width="match_parent"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:layout_marginTop="@dimen/spacing_medium"-->
+                <!--            android:orientation="vertical">-->
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/exprrecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_small">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <!--        </LinearLayout>-->
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/txtno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="@string/noreqt"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_bg"
+        android:padding="10dp"
+        app:backgroundTint="@color/colorApp"
+        app:elevation="2dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+</RelativeLayout>

@@ -15,7 +15,7 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:textColor="@color/black"
+            android:textColor="@color/colorAppDark"
             android:textSize="12sp"
             tools:text="Ali Din" />
 

@@ -6,15 +6,22 @@
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_accepted.xml" value="0.197" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/button_normal.xml" value="0.197" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable-v24/color_state_white_1.xml" value="0.1" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_complet.xml" value="0.1495" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_high.xml" value="0.1495" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_normaldark.xml" value="0.197" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_pend.xml" value="0.197" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_pending.xml" value="0.197" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_pendtask.xml" value="0.1495" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_rejected.xml" value="0.197" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_roundaccepted.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/button_roundrejected.xml" value="0.1" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_baseline_business_24.xml" value="0.1495" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_card.xml" value="0.1495" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_date.xml" value="0.1495" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_more.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ic_person_grey.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/drawable/ly_start.xml" value="0.1" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_app_intro.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_approval.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_attendance.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_basic_setup.xml" value="0.19343065693430658" />
@@ -31,13 +38,17 @@
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_payroll.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_request.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_resume.xml" value="0.22826086956521738" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_signin.xml" value="0.1" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_tasks.xml" value="0.25416666666666665" />
-        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_user_prof.xml" value="0.12" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/activity_user_prof.xml" value="0.264" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/custom_progress.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_addexpr.xml" value="0.22826086956521738" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_addleaves.xml" value="0.25416666666666665" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_addshift.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attend.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attendapprov.xml" value="0.2" />
-        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attendenance_status.xml" value="0.12" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_attendenance_status.xml" value="0.176" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_event.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_leaveapprov.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_reqattend.xml" value="0.1" />
@@ -46,7 +57,7 @@
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/dialog_savegeneral.xml" value="0.264" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/events_items_listview.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_all_leaves.xml" value="0.25416666666666665" />
-        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_alltask.xml" value="0.1" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_alltask.xml" value="0.2" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_approvedleaves.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_attendance.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_attendance_approval.xml" value="0.1" />
@@ -90,6 +101,9 @@
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_today.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_user_skills.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/fragment_work_flow.xml" value="0.1" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/item_attendance.xml" value="0.25416666666666665" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/item_day_date.xml" value="0.25416666666666665" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/item_name.xml" value="0.12135416666666667" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_allleaves.xml" value="0.176" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_apprleaves.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_attendreq.xml" value="0.16" />
@@ -99,11 +113,13 @@
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_pendleaves.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/lay_rejectleaves.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_attendappr.xml" value="0.25416666666666665" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_days.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_equiptappr.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_eventcal.xml" value="0.1" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_generalappr.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_leaveappr.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/layout/ly_tasks.xml" value="0.25416666666666665" />
         <entry key="..\:/backcode/26082022/new235pm/new30082022216pm/backup(05092022)/HRMS-ANDROID/HRM Android App/app/src/main/res/menu/bottom_nav_menu.xml" value="0.16" />
       </map>
     </option>

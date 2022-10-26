@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:id="@+id/nested_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginTop="@dimen/spacing_medium"-->
+<!--        android:layout_marginBottom="@dimen/spacing_large"-->
+<!--        android:clipToPadding="false"-->
+<!--        android:padding="@dimen/spacing_middle"-->
+<!--        android:scrollbars="none"-->
+<!--        android:scrollingCache="true"-->
+<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:visibility="visible"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:strokeColor="@color/colorApp"
+            app:strokeWidth="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/spacing_middle"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/et_leave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/spacing_middle"
+                android:padding="@dimen/spacing_small"
+                android:text="Contacts"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorApp"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/ly_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:text="Address*"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etaddr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/editdrawable"
+                    android:hint="Khazana"
+                    android:inputType="text"
+                    android:padding="@dimen/spacing_middle"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorApp">
+
+                </EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:text="Phone No*"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:textColor="@color/grey_40"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/etphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/editdrawable"
+                    android:hint="123456789"
+                    android:inputType="number"
+                    android:padding="@dimen/spacing_middle"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorApp">
+
+                </EditText>
+
+                <Button
+                    android:id="@+id/btnAddleave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/button_bg"
+                    android:padding="10dp"
+                    android:text="@string/savechange"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/spacing_large"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+        </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+
+</LinearLayout>
