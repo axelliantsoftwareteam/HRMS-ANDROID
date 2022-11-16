@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_below="@+id/toolbar"
-        android:background="@color/tab_layout"
+        android:background="@color/colorApp"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorHeight="3dp"

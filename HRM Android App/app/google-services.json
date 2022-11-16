@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "372752750979",
+    "project_id": "hris-7461f",
+    "storage_bucket": "hris-7461f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372752750979:android:4f117eb20d257208d4feb6",
+        "android_client_info": {
+          "package_name": "com.khazana.hrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372752750979-hms6m2qbnea1ueeuqe10l9klufajjlna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiSU-VzpwPH7XnfZyB2bU1kenszXsCvf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372752750979-hms6m2qbnea1ueeuqe10l9klufajjlna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

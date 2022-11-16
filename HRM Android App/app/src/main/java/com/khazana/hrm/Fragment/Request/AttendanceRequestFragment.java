@@ -242,6 +242,7 @@ public class AttendanceRequestFragment extends Fragment {
                     dialogReqattendBinding.etStartdate.setError("The item cannot be empty ");
                     //  Toast.makeText(getActivity(), "Please enter the value", Toast.LENGTH_SHORT).show();
                 }
+
                 if (dialogReqattendBinding.ettime.getText().toString().isEmpty()) {
                     // editText is empty
                     dialogReqattendBinding.ettime.setError("The item cannot be empty ");
@@ -253,7 +254,9 @@ public class AttendanceRequestFragment extends Fragment {
                     // editText is empty
                     dialogReqattendBinding.msg.setError("The item cannot be empty ");
                     //  Toast.makeText(getActivity(), "Please enter the value", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else
+                {
                     msg = dialogReqattendBinding.msg.getText().toString();
                     // editText is not empty
 

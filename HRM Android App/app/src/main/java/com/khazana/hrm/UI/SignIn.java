@@ -92,6 +92,8 @@ public class SignIn extends AppCompatActivity  {
     List<Object> designation = new ArrayList<>();
 
     List<MemberResponse> memberResponses= new ArrayList<>();
+
+
     List<Menu> getscreenlist = new ArrayList<>();
     List<GetSalutationData> getSalutationDataList= new ArrayList<>();
     List<GetGenderData> getGenderDataList= new ArrayList<>();
@@ -126,6 +128,8 @@ public class SignIn extends AppCompatActivity  {
 //        setContentView(R.layout.activity_signin);
 
         isNetworkConnectionAvailable();
+
+        transparentStatusAndNavigation();
 
 
         initializeUI();
@@ -396,7 +400,7 @@ public class SignIn extends AppCompatActivity  {
         }
     }
     private void displayError(@NonNull final Exception exception) {
-        Toast.makeText(this, "Something Wrong Happend", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+exception.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     private void performOperationOnSignOut() {
@@ -419,7 +423,6 @@ public class SignIn extends AppCompatActivity  {
             dialog.show();
 
                 Call<UserModel> userModelCall = ApiHandler.getApiInterface().getUser(ApiMapJson());
-
            // Call<UserModel> registerCall = ApiHandler.getApiInterface().getUser(ApiMapJson());
             userModelCall.enqueue(new Callback<UserModel>() {
                     @Override
@@ -431,6 +434,7 @@ public class SignIn extends AppCompatActivity  {
                             {
                                 dialog.dismiss();
                                 int status = response.body().getMeta().getStatus();
+                                String msg =response.body().getMeta().getMessage();
                                 if (status==200)
                                 {
                                    access_token = response.body().getData().getAccessToken();
@@ -438,13 +442,12 @@ public class SignIn extends AppCompatActivity  {
                                    session.saveToken(access_token);
                                     GetProfile(access_token);
 
-                                    String msg = response.body().getMeta().getMessage();
                                     Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
                                 }
                                 else if (status==400)
                                 {
 
-                                    Toast.makeText(SignIn.this, "Given Parameters are not Invalid!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignIn.this, ""+msg, Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
 
 
@@ -489,7 +492,7 @@ public class SignIn extends AppCompatActivity  {
                     {
                         try {
                             Log.e("Tag", "error" + t.toString());
-                            Toast.makeText(SignIn.this, "Internal Server Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, ""+t, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         } catch (Resources.NotFoundException e) {
                             e.printStackTrace();
@@ -1442,4 +1445,33 @@ public class SignIn extends AppCompatActivity  {
             }
         }
     }
+
+    private void transparentStatusAndNavigation() {
+        //make full transparent statusBar
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            );
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    private void setWindowFlag(final int bits, boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
+
 }

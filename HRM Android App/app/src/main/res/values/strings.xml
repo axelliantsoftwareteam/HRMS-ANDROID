@@ -144,7 +144,7 @@
     <string name="low">Low</string>
     <string name="viewdetails">View Details</string>
     <string name="title_activity_approval">ApprovalActivity</string>
-    <string name="approval">Approval</string>
+    <string name="approval">Approvals</string>
     <string name="approve">Approve</string>
     <string name="approved">Approved</string>
     <string name="basicsetup">Basic Setup</string>
@@ -195,5 +195,5 @@
     <string name="apprreq">Approve Request</string>
     <string name="comment">Comment*</string>
     <string name="me">Me</string>
-
+    <string name="mailid">Enter your mail ID</string>
 </resources>

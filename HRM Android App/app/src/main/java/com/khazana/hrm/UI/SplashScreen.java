@@ -7,20 +7,26 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.khazana.hrm.R;
 import com.khazana.hrm.Utility.SessionManager;
 import com.khazana.hrm.Utility.Utility;
+import com.khazana.hrm.databinding.ActivitySigninBinding;
+import com.khazana.hrm.databinding.ActivitySplashScreenBinding;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,19 +34,120 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private static int SPLASH_TIMEOUT = 3000;
+    private static int SPLASH_TIMEOUT = 5000;
+
+    private ActivitySplashScreenBinding binding;
 
     SessionManager sessionManager;
     String expdate, exprietime, currentdate=null;
 
+    private int animationCounter = 1;
+    private Handler imageSwitcherHandler;
+
+    // Declare globally
+    private int position = -1;
+
+    private int imageArray[] = {
+            R.drawable.sp_bg,
+            R.drawable.logo_bgonen,
+            R.drawable.logo_bgtwo,
+            R.drawable.lo_bg
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        binding = binding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+//        setContentView(R.layout.activity_splash_screen);
+        transparentStatusAndNavigation();
         isNetworkConnectionAvailable();
+
+
+//        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_anim);
+//        binding.spLogo.startAnimation(animation);
+
+
+        AnimationDrawable animationDrawable = (AnimationDrawable) binding.spLogo.getDrawable();
+        animationDrawable.setOneShot(true);
+        animationDrawable.start();
+
+        Animation animation = AnimationUtils.loadAnimation(SplashScreen.this, android.R.anim.fade_in);
+
+        binding.spLogo.setAnimation(animation);
+        animation.start();
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Animation fadeOut = AnimationUtils.loadAnimation(SplashScreen.this, android.R.anim.fade_out);
+                binding.spLogo.startAnimation(fadeOut);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+/**
+ * This timer will call each of the seconds.
+ */
+//        Timer mTimer = new Timer();
+//        mTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                // As timer is not a Main/UI thread need to do all UI task on runOnUiThread
+//                SplashScreen.this.runOnUiThread(new Runnable()
+//                {
+//                    @Override
+//                    public void run()
+//                    {
+//                        // increase your position so new image will show
+//                        position++;
+//                        // check whether position increased to length then set it to 0
+//                        // so it will show images in circuler
+//                        if (position >= imageArray.length) {
+//                            position = 0;
+//                            // Set Image
+//
+//                        }
+//                        binding.spLogo.setImageResource(imageArray[position]);
+//
+//                    }
+//                });
+//
+//            }
+//        }, 0, 1500);
+
+
+//        imageSwitcherHandler = new Handler(Looper.getMainLooper());
+//        imageSwitcherHandler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                switch (animationCounter++) {
+//                    case 1:
+//                        binding.spLogo.setImageResource(R.drawable.img_one);
+//                        break;
+//                    case 2:
+//                        binding.spLogo.setImageResource(R.drawable.imge_two);
+//                        break;
+//                    case 3:
+//                        binding.spLogo.setImageResource(R.drawable.khaz_logo);
+//                        break;
+//                }
+//                animationCounter %= 4;
+//                if(animationCounter == 0 ) animationCounter = 1;
+//
+//                imageSwitcherHandler.postDelayed(this, 3000);
+//            }
+//        });
+
 //        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 //        android.net.NetworkInfo wifi = cm
 //                .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -68,10 +175,12 @@ public class SplashScreen extends AppCompatActivity {
 //        {
 
             sessionManager = new SessionManager(SplashScreen.this);
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (sessionManager.checkLogin()) {
+                    if (sessionManager.checkLogin())
+                    {
                         if (Utility.checkInternetConnection(SplashScreen.this)) {
                             Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                             startActivity(intent);
@@ -124,6 +233,33 @@ public class SplashScreen extends AppCompatActivity {
 
 
     }
+    private void transparentStatusAndNavigation() {
+        //make full transparent statusBar
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            );
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    private void setWindowFlag(final int bits, boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
 
 
 
@@ -174,6 +310,8 @@ public class SplashScreen extends AppCompatActivity {
             decor.setSystemUiVisibility(flags);
         }
     }
+
+
 //    private void transparentStatusAndNavigation() {
 //        //make full transparent statusBar
 //        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {

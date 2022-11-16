@@ -4,6 +4,7 @@
 <!--    <color name="colorApp">#345ab3</color>-->
     <color name="colorApp">#121c4f</color>
     <color name="colorAppDark">#121c4f</color>
+    <color name="log_bg">#FCFCFC</color>
 <!--    <color name="colorPrimary">#1F87DD</color>-->
     <color name="colorPrimary">#121c4f</color>
     <color name="colorPrimaryDark">#121c4f</color>

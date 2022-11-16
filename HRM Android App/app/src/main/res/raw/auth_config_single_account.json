@@ -1,9 +1,10 @@
+
 {
   "client_id": "72d71038-f580-4ea3-93a1-535f29394adf",
   "authorization_user_agent": "DEFAULT",
-  "redirect_uri" : "msauth://com.khazana.hrm/EO7i7Iy3H866OCSFDWGYuwE1WJE%3D",
+  "redirect_uri" : "msauth://com.khazana.hrm/dM46ldTiJEQZrQ4DkHDP%2FABQXaQ%3D",
   "account_mode" : "SINGLE",
-  "broker_redirect_uri_registered": true,
+  "broker_redirect_uri_registered": false,
   "authorities": [
     {
       "type": "AAD",

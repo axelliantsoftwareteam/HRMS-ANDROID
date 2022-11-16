@@ -34,8 +34,8 @@ import androidx.core.widget.NestedScrollView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.google.android.gms.maps.GoogleMap;
 import com.khazana.hrm.R;
-import com.google.android.libraries.maps.GoogleMap;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
